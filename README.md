@@ -6,7 +6,7 @@
 ## Local setup
 Fetch files from platform git.
 
-    platform get [project_id]
+    platform get [project_id] htdocs
 
 Change git remote to track our github repo.
 
