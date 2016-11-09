@@ -6,20 +6,15 @@
 ## Local setup
 Fetch files from platform git.
 
-´´´
-platform get [project_id]
-´´´
+    platform get [project_id]
 
 Change git remote to track our github repo.
 
-´´´
-Som git magic here
-´´´
+    Som git magic here
+
 
 Fetch files through composer
 
-´´´
-composer install
-´´´
+    composer install
 
 Sync DB
