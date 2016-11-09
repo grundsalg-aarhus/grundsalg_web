@@ -19,4 +19,4 @@ web/sites/simpletest
 web/sites/default/settings.php
 
 # Ignore db dumps
-#db-dumps/*
+db-dumps/*
