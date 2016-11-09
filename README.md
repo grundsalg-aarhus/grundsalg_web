@@ -4,15 +4,22 @@
 - For the local setup to work you need to have a user account on platform.sh and have it take part in the grundsalgweb project.
 
 ## Local setup
-Fetch files from github
+Fetch files from platform git.
+
 ´´´
-git clone git@github.com:grundsalg-aarhus/grundsalg_web.git htdocs
+platform get [project_id]
+´´´
+
+Change git remote to track our github repo.
+
+´´´
+Som git magic here
 ´´´
 
 Fetch files through composer
+
 ´´´
 composer install
 ´´´
 
-
-- Sync DB
+Sync DB
