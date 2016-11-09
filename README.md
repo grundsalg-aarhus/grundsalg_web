@@ -5,6 +5,12 @@
 
 ## Local setup
 
+### I don't care whats going on just give me the scripts!!!
+- site-install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
+- scripts/site-setup.sh: Sets up dataabase for Grundsalg Aarhus web. (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
+
+
+### I want to setup my local environment manually!
 Fetch files from platform git.
 
     platform get [project_id] htdocs -y
@@ -49,5 +55,14 @@ You should now have all required files for your drupal 8 setup with nothing to c
 
 
 ### DB setup
+From document root run site setup (This will create a new drupal database for your local setup.)
+    drush --yes site-install itkore --db-url='mysql://root:vagrant@localhost/grundsalg'
 
-    drush site-install itkore
+
+
+### Pushing to platform.sh
+To add your changes to platforms development site from origin/develop
+
+    git push platform develop
+
+
