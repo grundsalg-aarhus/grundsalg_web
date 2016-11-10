@@ -6,10 +6,10 @@
 ## Local setup
 
 ### I don't care whats going on just give me the scripts!!!
-// Run these scripts
-- site-install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
-- scripts/site-setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
-- scripts/site-sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
+Run these scripts
+- site_install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
+- scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
+- scripts/site_sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
 
 
 ### I want to setup my local environment manually!
