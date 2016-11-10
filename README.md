@@ -21,7 +21,7 @@ Fetch files through composer
 
 ### Is everything now as it should be?
 
-- Git status
+#### Git status
 
     git status
 
@@ -36,11 +36,11 @@ Should show something like this:
     platform	XYZ@git.eu.platform.sh:XYZ.git (fetch)
     platform	XYZ@git.eu.platform.sh:XYZ.git (push)
 
-- Drupal status
- - web/profiles/contrib should hold the itkore install profile
- - web/modules/contrib should hold modules fetched by composer
- - web/themes/contrib should hold modules fetched bu composer
+#### Drupal status
+- web/profiles/contrib should hold the itkore install profile
+- web/modules/contrib should hold modules fetched by composer
+- web/themes/contrib should hold modules fetched bu composer
 
-- Site
+#### Site
  - An empty drupal 8 installation should be available @ http://grundsalg-web.vm
 You should now have all required files for your drupal 8 setup with nothing to commit.
