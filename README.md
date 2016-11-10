@@ -36,7 +36,7 @@ Should show something like this:
     platform	XYZ@git.eu.platform.sh:XYZ.git (push)
 
 - Drupal status
--- test
+ - test
 
 
 You should now have all required files for your drupal 8 setup with nothing to commit.
