@@ -40,7 +40,10 @@ Should show something like this:
 - web/profiles/contrib should hold the itkore install profile
 - web/modules/contrib should hold modules fetched by composer
 - web/themes/contrib should hold modules fetched bu composer
+- A web/core folder should be available
 
 #### Site
  - An empty drupal 8 installation should be available @ http://grundsalg-web.vm
+
+ 
 You should now have all required files for your drupal 8 setup with nothing to commit.
