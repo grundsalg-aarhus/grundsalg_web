@@ -45,5 +45,5 @@ Should show something like this:
 #### Site
  - An empty drupal 8 installation should be available @ http://grundsalg-web.vm
 
- 
-You should now have all required files for your drupal 8 setup with nothing to commit.
+
+#### You should now have all required files for your drupal 8 setup with nothing to commit.
