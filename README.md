@@ -58,7 +58,8 @@ You should now have all required files for your drupal 8 setup with nothing to c
 From document root run site setup (This will create a new drupal database for your local setup.)
     drush --yes site-install itkore --db-url='mysql://root:vagrant@localhost/grundsalg'
 
-
+Fetch db from platform sh and save it into db-dumps folder
+    platform environment:sql-dump --file="db-dumps/grundsalg" -t
 
 ### Pushing to platform.sh
 To add your changes to platforms development site from origin/develop

@@ -17,6 +17,3 @@ web/sites/simpletest
 
 # Ignore sites/default/settings.php
 web/sites/default/settings.php
-
-# Ignore db dumps
-db-dumps/*
