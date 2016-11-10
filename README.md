@@ -19,4 +19,24 @@ Fetch files through composer
 
     composer install
 
-Sync DB
+### Is everything now as it should be?
+
+- Git status
+
+    git status
+
+Should tell you: Your branch is up-to-date with 'origin/master'
+
+    git remote -v
+
+Should show something like this:
+    origin	git@github.com:XYZ/XYZ.git (fetch)
+    origin	git@github.com:XYZ/XYZ.git (push)
+    platform	XYZ@git.eu.platform.sh:XYZ.git (fetch)
+    platform	XYZ@git.eu.platform.sh:XYZ.git (push)
+
+- Drupal status
+-- test
+
+
+You should now have all required files for your drupal 8 setup with nothing to commit.
