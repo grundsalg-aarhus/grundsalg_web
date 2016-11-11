@@ -1,0 +1,13 @@
+uuid: afe3df67-bc58-4389-8137-d1976b782a1d
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Godkendt bruger'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'view the administration theme'

@@ -1,0 +1,21 @@
+uuid: e3e586f8-5b81-4157-ad67-a89cbe61c51f
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_page_teaser
+    - node.type.page
+_core:
+  default_config_hash: wqvkE_zKl8_9fDTd2UImj8c7aOKix4XCXCAyY51C8oI
+id: node.page.field_related_page_teaser
+field_name: field_related_page_teaser
+entity_type: node
+bundle: page
+label: 'Related Page Teaser'
+description: 'Text displayed when using related pages.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,12 @@
+uuid: c5d5bcd4-7ddc-4f61-a6a3-13c19ae17bf6
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: tUDVS7wla3DY9XI6vT5npqsI2LG5rkNmdElUMXtnTqU
+id: node.related_pages
+label: 'Related Pages'
+targetEntityType: node
+cache: true

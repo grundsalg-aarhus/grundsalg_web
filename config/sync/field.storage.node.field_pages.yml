@@ -1,0 +1,21 @@
+uuid: d45093c7-d56f-4d40-bbdd-db45eef877e7
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: O7WwbSgHkQ4tARwjSVoxBe2wA5y7R3DidJ-26p-s664
+id: node.field_pages
+field_name: field_pages
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

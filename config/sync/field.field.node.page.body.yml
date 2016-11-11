@@ -1,0 +1,24 @@
+uuid: 2bca0316-5b54-40f5-86d5-977c8d44f51b
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.page
+  module:
+    - text
+_core:
+  default_config_hash: yOSGyHZnwjBmBIECuZSMQoCs95epPhCPBkqEWMopzq8
+id: node.page.body
+field_name: body
+entity_type: node
+bundle: page
+label: Brødtekst
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

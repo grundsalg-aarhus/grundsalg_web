@@ -1,0 +1,29 @@
+uuid: 58caa37a-46e1-4629-be39-6cf12a15e264
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_file
+    - paragraphs.paragraphs_type.itk_internal_link
+  module:
+    - file
+_core:
+  default_config_hash: ngICXgon5WccnswDri1uLplTpjuH3ecdUgiXEZHUmGM
+id: paragraph.itk_internal_link.field_file
+field_name: field_file
+entity_type: paragraph
+bundle: itk_internal_link
+label: Fil
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: uploads
+  file_extensions: 'txt pdf jpeg jpg png rar zip'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
