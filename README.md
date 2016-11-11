@@ -5,8 +5,9 @@
 
 ## Local setup
 
-### I don't care whats going on just give me the scripts!!!
-Setup the grundsalg platform in your htdocs folder
+#### I don't care whats going on just give me the scripts!!!
+Setup the grundsalg platform in your htdocs folder.
+
     platform get [platform_project_id] htdocs -y
 
 Run these scripts
@@ -15,7 +16,7 @@ Run these scripts
 - scripts/site_sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
 
 
-### I want to setup my local environment manually!
+#### I want to setup my local environment manually!
 Fetch files from platform git.
 
     platform get [project_id] htdocs -y
