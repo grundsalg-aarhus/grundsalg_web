@@ -3,11 +3,9 @@
  * @file
  * Platform.sh settings.
  */
-
 // Configure the database.
 if (isset($_ENV['PLATFORM_RELATIONSHIPS'])) {
   $relationships = json_decode(base64_decode($_ENV['PLATFORM_RELATIONSHIPS']), TRUE);
-
   if (empty($databases['default']['default']) && !empty($relationships['database'])) {
     foreach ($relationships['database'] as $endpoint) {
       $database = [
