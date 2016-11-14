@@ -6,14 +6,9 @@
 ## Local setup
 
 #### I don't care whats going on just give me the scripts!!!
-Setup the grundsalg platform in your htdocs folder.
-
-    platform get [platform_project_id] htdocs -y
-
 Run these scripts
 - site_install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
 - scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
-- scripts/site_sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
 
 
 #### I want to setup my local environment manually!
@@ -68,9 +63,10 @@ From document root run site setup (This will create a new drupal database for yo
 Fetch db and files from platform.sh
     drush pull-prod
 
+or
+- scripts/site_sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
+
 ## Pushing to platform.sh
 To add your changes to platforms development site from origin/develop
 
     git push platform develop
-
-
