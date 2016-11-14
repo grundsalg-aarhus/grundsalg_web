@@ -17,7 +17,7 @@ To add your changes to platforms development site from origin/develop
 This will create a new build on develop branch.
 
 ## Syncing local site from master
-- scripts/site_sync: Fetches db and files from platform master. (This needs to be run within your vagrant)
+- scripts/site_sync.sh: Fetches db and files from platform master. (This needs to be run within your vagrant)
 
 ## Composer A-Z
 Useful composer commands
