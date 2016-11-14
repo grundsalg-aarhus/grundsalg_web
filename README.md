@@ -11,62 +11,34 @@ Run these scripts
 - scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
 
 
-#### I want to setup my local environment manually!
-Fetch files from platform git.
-
-    platform get [project_id] htdocs -y
-
-Change git remote to track our github repo.
-
-    git remote set-url origin git@github.com:grundsalg-aarhus/grundsalg_web.git
-    git fetch origin
-    git branch master --set-upstream-to origin/master
-    git checkout -b develop origin/develop
-
-Fetch files through composer
-
-    composer install
-
-### Is everything now as it should be?
-
-#### Git status
-
-    git status
-
-Should tell you: Your branch is up-to-date with 'origin/master'
-
-    git remote -v
-
-Should show something like this:
-
-    origin	git@github.com:XYZ/XYZ.git (fetch)
-    origin	git@github.com:XYZ/XYZ.git (push)
-    platform	XYZ@git.eu.platform.sh:XYZ.git (fetch)
-    platform	XYZ@git.eu.platform.sh:XYZ.git (push)
-
-#### Drupal status
-- web/profiles/contrib should hold the itkore install profile
-- web/modules/contrib should hold modules fetched by composer
-- web/themes/contrib should hold modules fetched bu composer
-- A web/core folder should be available
-
-#### Site
- - An empty drupal 8 installation should be available @ http://grundsalg-web.vm
-
-You should now have all required files for your drupal 8 setup with nothing to commit.
-
-
-### DB setup
-From document root run site setup (This will create a new drupal database for your local setup.)
-    drush --yes site-install itkore --db-url='mysql://root:vagrant@localhost/grundsalg'
-
-Fetch db and files from platform.sh
-    drush pull-prod
-
-or
-- scripts/site_sync.sh: Fetches files and db from platform.sh (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
-
 ## Pushing to platform.sh
 To add your changes to platforms development site from origin/develop
 
     git push platform develop
+
+This will create a new build on develop branch.
+
+## Syncing local site from master
+- scripts/site_sync: Fetches db and files from platform master. (This needs to be run within your vagrant)
+
+## Composer A-Z
+Useful composer commands
+
+- Composer install
+
+    composer install
+
+Builds a new site from composer.lock file if one exist, builds a site from composer.json if no lock file exist.
+
+- Composer update
+
+    composer update
+
+Builds a site from composer json and adds/updates composer.lock with composer.json changes.
+
+- Composer require
+
+   composer require drupal/[module]
+
+Installs a module and adds the requirement of the module to the composer.json and composer.lock files
+
