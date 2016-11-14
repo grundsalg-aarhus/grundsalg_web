@@ -38,7 +38,7 @@ Builds a site from composer json and adds/updates composer.lock with composer.js
 
 Composer require
 
-   composer require drupal/[module]
+    composer require drupal/[module]
 
 Installs a module and adds the requirement of the module to the composer.json and composer.lock files
 
