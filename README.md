@@ -8,7 +8,7 @@
 #### I don't care whats going on just give me the scripts!!!
 Run these scripts
 - site_install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
-- scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant in the document root (/vagrant/htdocs/web)
+- scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
 
 
 #### I want to setup my local environment manually!
