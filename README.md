@@ -5,8 +5,14 @@
 
 ## Local setup
 Run these scripts
-- site_install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
-- scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
+
+    site_install.sh
+
+Fetches all files needed to build a site for Grundsalg Aarhus web
+
+    scripts/site_setup.sh
+
+Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
 
 
 ## Pushing to platform.sh
