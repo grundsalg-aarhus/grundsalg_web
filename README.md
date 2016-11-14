@@ -4,8 +4,6 @@
 - For the local setup to work you need to have a user account on platform.sh and have it take part in the grundsalgweb project.
 
 ## Local setup
-
-#### I don't care whats going on just give me the scripts!!!
 Run these scripts
 - site_install.sh: Fetches all files needed to build a site for Grundsalg Aarhus web
 - scripts/site_setup.sh: Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
