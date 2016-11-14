@@ -29,6 +29,7 @@ module:
   itkore_footer: 0
   itkore_frontpage_header: 0
   itkore_user_roles: 0
+  itkore_user_theme: 0
   language: 0
   link: 0
   locale: 0
