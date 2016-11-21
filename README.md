@@ -46,3 +46,12 @@ Composer require
 
 Installs a module and adds the requirement of the module to the composer.json and composer.lock files
 
+
+## Useful git commands
+See your current remote branch setup:
+
+    git remote -v
+
+Push your changes to platform for platform to rebuild
+
+    git push platform develop
