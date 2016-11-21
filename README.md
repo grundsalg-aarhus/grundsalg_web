@@ -28,19 +28,19 @@ This will create a new build on develop branch.
 ## Composer A-Z
 Useful composer commands
 
-Composer install
+####Composer install
 
     composer install
 
 Builds a new site from composer.lock file if one exist, builds a site from composer.json if no lock file exist.
 
-Composer update
+####Composer update
 
     composer update
 
 Builds a site from composer json and adds/updates composer.lock with composer.json changes.
 
-Composer require
+####Composer require
 
     composer require drupal/[module]
 
