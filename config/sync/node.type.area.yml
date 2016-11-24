@@ -1,0 +1,17 @@
+uuid: dc8c6dd4-ffd0-4faf-851d-f5b587c096db
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Område
+type: area
+description: 'An area containing neighbourhoods'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

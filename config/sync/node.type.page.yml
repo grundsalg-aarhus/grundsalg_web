@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 _core:
   default_config_hash: fK07PHOwyAVzgM33JrFRLxMNWk15uIB3okUHjEhcDrU
-name: Side
+name: Page
 type: page
 description: ''
 help: ''

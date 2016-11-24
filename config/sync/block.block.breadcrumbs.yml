@@ -1,15 +1,13 @@
-uuid: 2b8f12c5-f38c-494a-81c9-4a60aa084276
+uuid: 43195db3-72fb-41c5-9a13-3be8e06ae313
 langcode: da
 status: true
 dependencies:
   module:
     - system
   theme:
-    - adminimal_theme
-_core:
-  default_config_hash: 8by5KRsb7ZpmjHj0ms1d7xAG_xH54AWsOX6spDLJ59U
-id: adminimal_theme_breadcrumbs
-theme: adminimal_theme
+    - grundsalg
+id: breadcrumbs
+theme: grundsalg
 region: breadcrumb
 weight: 0
 provider: null

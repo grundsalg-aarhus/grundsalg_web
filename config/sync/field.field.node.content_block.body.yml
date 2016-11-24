@@ -1,19 +1,17 @@
-uuid: bac0e7fa-cb85-41dc-a633-813209e7d7fe
+uuid: 2e1ab95a-b0aa-40ec-acae-bb38191487b0
 langcode: da
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.overview_page
+    - node.type.content_block
   module:
     - text
-_core:
-  default_config_hash: mxPAL6447Yti8gQC8vwPkVpNpVea4BWWBvStzC1vRK8
-id: node.overview_page.body
+id: node.content_block.body
 field_name: body
 entity_type: node
-bundle: overview_page
-label: Brødtekst
+bundle: content_block
+label: Body
 description: ''
 required: false
 translatable: true

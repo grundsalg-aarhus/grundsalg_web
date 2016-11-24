@@ -1,15 +1,15 @@
-uuid: f381e83a-91ca-4c97-8b04-1929791540ab
+uuid: ce19cc88-249b-41c0-bb20-3da7d51f7b2a
 langcode: da
 status: false
 dependencies:
   module:
     - system
   theme:
-    - itkore_base
+    - grundsalg
 _core:
   default_config_hash: 20RmvGPY4UHWTvHkJ9Iu-iNl9I2ThGe2CsfvHNhwjG4
-id: itkore_base_messages
-theme: itkore_base
+id: grundsalg_messages
+theme: grundsalg
 region: '-1'
 weight: 0
 provider: null

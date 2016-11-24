@@ -1,0 +1,8 @@
+uuid: fee56229-2fdd-486e-a6d2-789360161465
+langcode: da
+status: true
+dependencies: {  }
+id: footer-practical
+label: Praktisk
+description: 'Praktisk menu i footer'
+locked: false

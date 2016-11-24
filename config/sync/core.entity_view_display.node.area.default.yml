@@ -1,0 +1,25 @@
+uuid: 59fcc44d-63dd-4bc2-a189-beffbd533793
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.area.body
+    - node.type.area
+  module:
+    - text
+    - user
+id: node.area.default
+targetEntityType: node
+bundle: area
+mode: default
+content:
+  body:
+    weight: 101
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  links:
+    weight: 100
+hidden:
+  langcode: true
