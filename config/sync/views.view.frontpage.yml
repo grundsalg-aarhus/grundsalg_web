@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - entityqueue.entity_queue.frontpage
   module:
-    - null
     - entityqueue
     - node
     - user
