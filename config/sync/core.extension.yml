@@ -19,6 +19,7 @@ module:
   file: 0
   filter: 0
   grundsalg_front: 0
+  grundsalg_setup: 0
   help: 0
   image: 0
   imce: 0
