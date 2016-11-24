@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Display of footer
+ *
+ * Available variables:
+ * - footer_text: Rendered html of the footer.
+ * - menus: An array containing rendered menus.
+ * - contact_text: Text for displaying contact information
+ */
+#}
+<div class="footer">
+  {% if menus %}
+    <div class="footer--content">
+      <div class="footer--col">
+        <div class="footer--col-inner">
+          <h3 class="footer--title">Kontakt</h3>
+          {{ contact_text }}
+        </div>
+      </div>
+      {% for item in menus %}
+        {% if item %}
+          <div class="footer--col">
+            <div class="footer--col-inner">
+              {{ item }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="footer--quick-links">
+    {{ footer_text }}
+  </div>
+</div>

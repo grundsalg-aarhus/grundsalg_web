@@ -1,0 +1,8 @@
+# --- Administration pages routing --- #
+grundsalg_front.settings:
+  path: '/admin/site-setup/front'
+  defaults:
+    _form: '\Drupal\grundsalg_front\Form\GrundsalgFrontSettingsForm'
+    _title: 'Front'
+  requirements:
+    _permission: 'access itkore settings'

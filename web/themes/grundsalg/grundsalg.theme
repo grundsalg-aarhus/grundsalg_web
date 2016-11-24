@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Implements hook_preprocess_node().
+ *
+ * Calls node type specific preprocess functions, e.g. "dokk_preprocess_node_event" for nodes of type event.
+ *
+ */
+function grundsalg_preprocess_menu(&$variables) {
+  $variables['hamburger_menu'] = FALSE;
+  $current_path = \Drupal::request()->getRequestUri();
+  if ($variables['menu_name'] == 'main') {
+    // The only way to identify which region is rendering the menu block is to check for expanded (Main nav does not have any children and neither of the parents are expanded.)
+    // This won't work if for some reason none of the menu items have any children,
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['attributes']['class'][] = 'nav--link';
+      if ($item['is_expanded'] == TRUE) {
+        $variables['hamburger_menu'] = TRUE;
+      }
+      $url = $item['url']->toString();
+      if ($item['url']->toString() == $current_path) {
+        switch ($current_path) {
+          case '/villagrund' :
+            $variables['items'][$key]['attributes']->addClass('is-villa');
+            $variables['items'][$key]['type'] = 'villa';
+            break;
+          case '/erhvervsgrund' :
+            $variables['items'][$key]['attributes']->addClass('is-erhverv');
+            break;
+          case '/storparcel' :
+            $variables['items'][$key]['attributes']->addClass('is-storparcel');
+            break;
+        }
+      }
+    }
+  }
+}
