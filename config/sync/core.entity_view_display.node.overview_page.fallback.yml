@@ -1,0 +1,44 @@
+uuid: f62a410e-263a-4aac-9965-9fc6d7ad812a
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.fallback
+    - field.field.node.overview_page.field_body
+    - field.field.node.overview_page.field_main_image
+    - field.field.node.overview_page.field_plot_type
+    - field.field.node.overview_page.field_teaser
+    - node.type.overview_page
+  module:
+    - image
+    - user
+id: node.overview_page.fallback
+targetEntityType: node
+bundle: overview_page
+mode: fallback
+content:
+  field_main_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_plot_type:
+    type: entity_reference_label
+    weight: 2
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_teaser:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_body: true
+  langcode: true
+  links: true

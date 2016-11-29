@@ -1,0 +1,36 @@
+uuid: 30c1cc80-2735-4c01-abdb-f703f6606351
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.shown_on_frontpage
+    - field.field.node.area.field_body
+    - field.field.node.area.field_main_image
+    - field.field.node.area.field_plot_type
+    - field.field.node.area.field_teaser
+    - node.type.area
+  module:
+    - user
+id: node.area.shown_on_frontpage
+targetEntityType: node
+bundle: area
+mode: shown_on_frontpage
+content:
+  field_plot_type:
+    type: entity_reference_label
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_teaser:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_body: true
+  field_main_image: true
+  langcode: true
+  links: true

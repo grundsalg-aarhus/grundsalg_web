@@ -20,7 +20,7 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: images
+  file_directory: content-images
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

@@ -11,10 +11,10 @@ third_party_settings:
     parent: 'main:'
 _core:
   default_config_hash: fK07PHOwyAVzgM33JrFRLxMNWk15uIB3okUHjEhcDrU
-name: Page
+name: 'Statisk side'
 type: page
-description: ''
+description: 'A static page of content'
 help: ''
 new_revision: false
-preview_mode: 1
+preview_mode: 0
 display_submitted: false

@@ -10,7 +10,7 @@ field_name: field_teaser
 entity_type: node
 bundle: page
 label: Teaser
-description: 'The display of this content when referenced'
+description: 'The text of this content when referenced'
 required: true
 translatable: false
 default_value: {  }

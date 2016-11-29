@@ -3,8 +3,8 @@ langcode: da
 status: true
 dependencies:
   config:
-    - field.field.node.page.body
     - field.field.node.page.field_block_reference
+    - field.field.node.page.field_body
     - field.field.node.page.field_main_image
     - field.field.node.page.field_teaser
     - image.style.main_content
@@ -20,12 +20,6 @@ targetEntityType: node
 bundle: page
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
   field_block_reference:
     weight: 2
     label: hidden
@@ -34,6 +28,12 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
+  field_body:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
   field_main_image:
     type: image
     weight: 0

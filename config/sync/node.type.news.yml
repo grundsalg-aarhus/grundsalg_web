@@ -6,15 +6,14 @@ dependencies:
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus:
-      - main
-    parent: 'main:'
+    available_menus: {  }
+    parent: ''
 _core:
   default_config_hash: dpXg2bDua7pZJT2dc1czxP-OU2S2_psXPnwuvGAY_Eo
-name: News
+name: Nyhed
 type: news
-description: ''
+description: 'News for the site'
 help: ''
 new_revision: false
-preview_mode: 1
+preview_mode: 0
 display_submitted: false

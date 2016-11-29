@@ -3,9 +3,13 @@ langcode: da
 status: true
 dependencies:
   config:
-    - field.field.node.area.body
+    - field.field.node.area.field_body
+    - field.field.node.area.field_main_image
+    - field.field.node.area.field_plot_type
+    - field.field.node.area.field_teaser
     - node.type.area
   module:
+    - image
     - text
     - user
 id: node.area.default
@@ -13,13 +17,22 @@ targetEntityType: node
 bundle: area
 mode: default
 content:
-  body:
-    weight: 101
-    label: above
+  field_body:
+    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
-  links:
-    weight: 100
+  field_main_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
 hidden:
+  field_plot_type: true
+  field_teaser: true
   langcode: true
+  links: true

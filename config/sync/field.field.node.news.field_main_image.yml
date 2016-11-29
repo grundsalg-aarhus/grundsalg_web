@@ -1,4 +1,4 @@
-uuid: 2c7dca19-cbf7-4cb6-a4ed-914e46288fdb
+uuid: 9c4435cf-9dc3-4cca-ab5b-f5f9d2a85c65
 langcode: da
 status: true
 dependencies:
@@ -7,26 +7,24 @@ dependencies:
     - node.type.news
   module:
     - image
-_core:
-  default_config_hash: 0E-X6aFR1UsBrWs1wcjMeAW7axW_8P_aNYhasJ8Eirk
 id: node.news.field_main_image
 field_name: field_main_image
 entity_type: node
 bundle: news
 label: 'Main Image'
-description: ''
-required: false
+description: 'An image representing this content'
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: images
+  file_directory: content-images
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
   alt_field: true
-  alt_field_required: false
+  alt_field_required: true
   title_field: false
   title_field_required: false
   default_image:

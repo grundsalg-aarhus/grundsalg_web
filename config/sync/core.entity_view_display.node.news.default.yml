@@ -3,16 +3,13 @@ langcode: da
 status: true
 dependencies:
   config:
-    - field.field.node.news.body
-    - field.field.node.news.field_lead
+    - field.field.node.news.field_body
     - field.field.node.news.field_main_image
-    - field.field.node.news.field_pages
-    - field.field.node.news.field_paragraphs
-    - field.field.node.news.field_related_page_image
-    - field.field.node.news.field_related_page_teaser
+    - field.field.node.news.field_plot_type
+    - field.field.node.news.field_teaser
     - node.type.news
   module:
-    - entity_reference_revisions
+    - image
     - text
     - user
 _core:
@@ -22,38 +19,22 @@ targetEntityType: node
 bundle: news
 mode: default
 content:
-  body:
+  field_body:
+    weight: 0
     label: hidden
-    type: text_default
-    weight: 2
     settings: {  }
     third_party_settings: {  }
-  field_lead:
+    type: text_default
+  field_main_image:
     weight: 1
     label: hidden
     settings:
-      link_to_entity: false
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: string
-  field_pages:
-    type: entity_reference_entity_view
-    weight: 3
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-  field_paragraphs:
-    weight: 4
-    label: hidden
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    type: image
 hidden:
-  field_main_image: true
-  field_related_page_image: true
-  field_related_page_teaser: true
+  field_plot_type: true
+  field_teaser: true
   langcode: true
   links: true

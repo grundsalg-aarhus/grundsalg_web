@@ -1,0 +1,10 @@
+uuid: 95431c91-bdda-45c0-8a52-3b647a84aef7
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.shown_on_frontpage
+label: 'Shown on frontpage'
+targetEntityType: node
+cache: true

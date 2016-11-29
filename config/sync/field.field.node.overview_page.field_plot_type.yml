@@ -1,0 +1,28 @@
+uuid: 52734334-5f2d-4530-bdaa-c841125dca0c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_plot_type
+    - node.type.overview_page
+    - taxonomy.vocabulary.plot_type
+id: node.overview_page.field_plot_type
+field_name: field_plot_type
+entity_type: node
+bundle: overview_page
+label: Type
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      plot_type: plot_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

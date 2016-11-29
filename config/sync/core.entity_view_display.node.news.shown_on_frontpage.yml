@@ -1,0 +1,38 @@
+uuid: bcf4270c-32e3-4d9c-942f-49adb5f28f80
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.shown_on_frontpage
+    - field.field.node.news.field_body
+    - field.field.node.news.field_main_image
+    - field.field.node.news.field_plot_type
+    - field.field.node.news.field_teaser
+    - node.type.news
+  module:
+    - user
+_core:
+  default_config_hash: EUxDABe7vu_ckMHYgUPnshb1UPgEfvFFSjTvx3BNE0U
+id: node.news.shown_on_frontpage
+targetEntityType: node
+bundle: news
+mode: shown_on_frontpage
+content:
+  field_plot_type:
+    type: entity_reference_label
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_teaser:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_body: true
+  field_main_image: true
+  langcode: true
+  links: true

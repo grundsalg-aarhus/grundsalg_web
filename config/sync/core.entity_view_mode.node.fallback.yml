@@ -1,0 +1,10 @@
+uuid: f303a374-7bcd-4310-9989-686ebc99ab6b
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.fallback
+label: Fallback
+targetEntityType: node
+cache: true

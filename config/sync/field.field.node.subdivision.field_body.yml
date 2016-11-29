@@ -1,0 +1,21 @@
+uuid: 19132abf-4da6-44b2-b950-6f100abdb5e5
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body
+    - node.type.subdivision
+  module:
+    - text
+id: node.subdivision.field_body
+field_name: field_body
+entity_type: node
+bundle: subdivision
+label: Body
+description: 'The main content area'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

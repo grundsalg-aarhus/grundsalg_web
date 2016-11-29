@@ -1,10 +1,9 @@
 <?php
 
+use Drupal\taxonomy\Entity\Term;
+
 /**
- * Implements hook_preprocess_node().
- *
- * Calls node type specific preprocess functions, e.g. "dokk_preprocess_node_event" for nodes of type event.
- *
+ * Implements hook_preprocess_menu().
  */
 function grundsalg_preprocess_menu(&$variables) {
   $variables['hamburger_menu'] = FALSE;
@@ -17,7 +16,7 @@ function grundsalg_preprocess_menu(&$variables) {
       if ($item['is_expanded'] == TRUE) {
         $variables['hamburger_menu'] = TRUE;
       }
-      $url = $item['url']->toString();
+      // Look for  certain paths and add additional classes.
       if ($item['url']->toString() == $current_path) {
         switch ($current_path) {
           case '/villagrund' :
@@ -33,5 +32,33 @@ function grundsalg_preprocess_menu(&$variables) {
         }
       }
     }
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function grundsalg_preprocess_node(&$variables) {
+  $a = 2;
+  switch ($variables['view_mode']) {
+    case 'shown_on_frontpage' :
+      if ($variables['node']->hasField('field_plot_type')) {
+        $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+      }
+      break;
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function grundsalg_preprocess_field(&$variables) {
+  switch ($variables['element']['#field_name']) {
+    case 'field_file' :
+      $type = $variables['element'][0]['#file']->getMimeType();
+      $filename = $variables['element'][0]['#file']->getFilename();
+      break;
   }
 }

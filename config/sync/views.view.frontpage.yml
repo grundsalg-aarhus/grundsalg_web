@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.shown_on_frontpage
     - entityqueue.entity_queue.frontpage
   module:
     - entityqueue
@@ -155,7 +155,8 @@ display:
       row:
         type: 'entity:node'
         options:
-          view_mode: teaser
+          relationship: none
+          view_mode: shown_on_frontpage
       sorts:
         entityqueue_relationship:
           id: entityqueue_relationship
@@ -205,7 +206,10 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       max-age: -1
-      tags: {  }
+      tags:
+        - 'config:entityqueue.entity_queue.frontpage'
+        - entity_field_info
+        - views_data
   page_1:
     display_options:
       path: node
@@ -221,4 +225,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       max-age: -1
-      tags: {  }
+      tags:
+        - 'config:entityqueue.entity_queue.frontpage'
+        - entity_field_info
+        - views_data
