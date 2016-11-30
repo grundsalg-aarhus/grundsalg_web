@@ -40,7 +40,7 @@ function grundsalg_preprocess_menu(&$variables) {
  */
 function grundsalg_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
-    if ($variables['node']->hasField('field_plot_type')) {
+    if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
       $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
     }
   }
@@ -50,7 +50,7 @@ function grundsalg_preprocess_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function grundsalg_preprocess_node(&$variables) {
-  if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->hasField('field_plot_type'))) {
+  if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
     $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
   }
 }
