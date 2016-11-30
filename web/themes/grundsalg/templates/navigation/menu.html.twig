@@ -44,6 +44,12 @@
           {% if item.type == 'villa' %}
             {% set item_classes = item_classes|merge(['is-villa']) %}
           {% endif %}
+          {% if item.type == 'erhverv' %}
+            {% set item_classes = item_classes|merge(['is-erhverv']) %}
+          {% endif %}
+          {% if item.type == 'storparcel' %}
+            {% set item_classes = item_classes|merge(['is-storparcel']) %}
+          {% endif %}
           {{ link(item.title, item.url, { 'class': item_classes }) }}
         {% endif %}
       {% endfor %}

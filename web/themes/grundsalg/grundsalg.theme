@@ -20,14 +20,13 @@ function grundsalg_preprocess_menu(&$variables) {
       if ($item['url']->toString() == $current_path) {
         switch ($current_path) {
           case '/villagrund' :
-            $variables['items'][$key]['attributes']->addClass('is-villa');
             $variables['items'][$key]['type'] = 'villa';
             break;
           case '/erhvervsgrund' :
-            $variables['items'][$key]['attributes']->addClass('is-erhverv');
+            $variables['items'][$key]['type'] = 'erhverv';
             break;
           case '/storparcel' :
-            $variables['items'][$key]['attributes']->addClass('is-storparcel');
+            $variables['items'][$key]['type'] = 'storparcel';
             break;
         }
       }
