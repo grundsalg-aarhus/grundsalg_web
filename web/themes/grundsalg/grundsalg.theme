@@ -12,7 +12,7 @@ function grundsalg_preprocess_menu(&$variables) {
     // The only way to identify which region is rendering the menu block is to check for expanded (Main nav does not have any children and neither of the parents are expanded.)
     // This won't work if for some reason none of the menu items have any children,
     foreach ($variables['items'] as $key => $item) {
-      $variables['items'][$key]['attributes']['class'][] = 'nav--link';
+      $variables['items'][$key]['attributes']->addClass('nav--link');
       if ($item['is_expanded'] == TRUE) {
         $variables['hamburger_menu'] = TRUE;
       }
@@ -50,7 +50,7 @@ function grundsalg_preprocess_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function grundsalg_preprocess_node(&$variables) {
-  if ($variables['node']->hasField('field_plot_type')) {
+  if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->hasField('field_plot_type'))) {
     $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
   }
 }
