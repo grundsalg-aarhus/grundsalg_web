@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.subdivision.field_main_image
     - field.field.node.subdivision.field_plot_type
     - field.field.node.subdivision.field_teaser
+    - image.style.main_content
     - node.type.subdivision
   module:
     - image
@@ -27,7 +28,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: ''
+      image_style: main_content
       image_link: ''
     third_party_settings: {  }
     type: image

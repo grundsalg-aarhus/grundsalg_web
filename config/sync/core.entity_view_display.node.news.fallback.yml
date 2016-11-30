@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.fallback
     - field.field.node.news.field_body
     - field.field.node.news.field_main_image
+    - field.field.node.news.field_plot_type
     - field.field.node.news.field_teaser
+    - image.style.fallback_display_image
     - node.type.news
   module:
     - image
@@ -23,7 +25,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: fallback_display_image
       image_link: ''
     third_party_settings: {  }
   field_teaser:
@@ -34,5 +36,6 @@ content:
     type: basic_string
 hidden:
   field_body: true
+  field_plot_type: true
   langcode: true
   links: true

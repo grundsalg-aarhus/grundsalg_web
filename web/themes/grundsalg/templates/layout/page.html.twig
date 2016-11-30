@@ -52,15 +52,26 @@
     <div class="header-subpage--inner">
       <div class="header-subpage--info">
         {{ page.breadcrumb }}
-        {% if node %}
-          <h1 class="header-subpage--title">
-            {{ node.label }}
-          </h1>
-        {% endif %}
+        <h1 class="header-subpage--title">
+          {{ node.label }}
+        </h1>
       </div>
     </div>
   </header>
-  {{ page.content }}
+  <div class="content-boxes">
+    <div class="content-boxes--inner contextual-region">
+      <div class="content-box is-alpha">
+        <div class="content-box--inner">
+          {{ title_prefix }}
+          {{ title_suffix }}
+          <div class="content-box--content has-spacing">
+            {{ page.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% if page.footer %}
   {{ page.footer }}

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.overview_page.field_main_image
     - field.field.node.overview_page.field_plot_type
     - field.field.node.overview_page.field_teaser
+    - image.style.fallback_display_image
     - node.type.overview_page
   module:
     - image
@@ -21,7 +22,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: fallback_display_image
       image_link: ''
     third_party_settings: {  }
     type: image

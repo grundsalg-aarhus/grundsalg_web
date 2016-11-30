@@ -35,18 +35,23 @@ function grundsalg_preprocess_menu(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_page().
+ */
+function grundsalg_preprocess_page(&$variables) {
+  if (isset($variables['node'])) {
+    if ($variables['node']->hasField('field_plot_type')) {
+      $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+    }
+  }
+}
 
 /**
  * Implements hook_preprocess_node().
  */
 function grundsalg_preprocess_node(&$variables) {
-  $a = 2;
-  switch ($variables['view_mode']) {
-    case 'shown_on_frontpage' :
-      if ($variables['node']->hasField('field_plot_type')) {
-        $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
-      }
-      break;
+  if ($variables['node']->hasField('field_plot_type')) {
+    $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
   }
 }
 

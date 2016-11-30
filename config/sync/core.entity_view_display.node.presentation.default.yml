@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.presentation.field_body
     - field.field.node.presentation.field_main_image
     - field.field.node.presentation.field_teaser
+    - image.style.main_content
     - node.type.presentation
   module:
     - image
@@ -26,7 +27,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: ''
+      image_style: main_content
       image_link: ''
     third_party_settings: {  }
     type: image

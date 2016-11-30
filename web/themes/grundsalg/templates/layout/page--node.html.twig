@@ -45,18 +45,37 @@
  * @ingroup themeable
  */
 #}
+
+{% if plot_type == 'Villa' %}
+  {% set classes = 'is-villa' %}
+{% endif %}
+
+{% if plot_type == 'Erhverv' %}
+  {% set classes = 'is-erhverv' %}
+{% endif %}
+
+{% if plot_type == 'Storparcel' %}
+  {% set classes = 'is-storparcel' %}
+{% endif %}
+
 {{ page.hamburger }}
 {{ page.header }}
-<div class="layout-container">
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>
-    <div class="layout-content contextual-region">
-      {{ title_prefix }}
-      {{ title_suffix }}
-      {{ page.content }}
+<div id="content" {{ (angular is defined) ? 'data-ng-app="grundsalgTabs"' : '' }}>
+  <header class="header-subpage {{ classes }}">
+    <div class="header-subpage--inner {{ classes }}">
+      <div class="header-subpage--info">
+        {{ page.breadcrumb }}
+        <h1 class="header-subpage--title {{ classes }}">
+          {{ node.label }}
+        </h1>
+      </div>
+      {% if display_tabs is defined %}
+        {% include '@grundsalg_tabs/grundsalg-tabs.html.twig' %}
+      {% endif %}
     </div>
-  </main>
-  {% if page.footer %}
-    {{ page.footer }}
-  {% endif %}
+  </header>
+  {{ page.content }}
 </div>
+{% if page.footer %}
+  {{ page.footer }}
+{% endif %}

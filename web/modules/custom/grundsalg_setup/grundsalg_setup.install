@@ -12,3 +12,14 @@ function grundsalg_setup_update_8001() {
   );
   \Drupal::service('module_installer')->install($module_list);
 }
+
+/**
+ * Enable grundsalg_tabs module
+ */
+function grundsalg_setup_update_8002() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_tabs'
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}

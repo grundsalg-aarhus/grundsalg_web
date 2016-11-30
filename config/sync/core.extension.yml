@@ -20,6 +20,7 @@ module:
   filter: 0
   grundsalg_front: 0
   grundsalg_setup: 0
+  grundsalg_tabs: 0
   help: 0
   image: 0
   imce: 0
@@ -40,7 +41,6 @@ module:
   menu_ui: 0
   metatag: 0
   node: 0
-  outside_in: 0
   page_cache: 0
   paragraphs: 0
   path: 0

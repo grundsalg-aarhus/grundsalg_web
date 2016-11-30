@@ -73,12 +73,15 @@
  */
 #}
 
-
-<div class="content-image">
-  <div class="content-image--inner">
-    {{ content.field_main_image }}
+{% if display_tabs is defined %}
+  {% include '@grundsalg_tabs/grundsalg-tabs-display.html.twig' %}
+{% else %}
+  <div class="content-image">
+    <div class="content-image--inner">
+      {{ content.field_main_image }}
+    </div>
   </div>
-</div>
+{% endif %}
 
 <div class="content-boxes">
   <div class="content-boxes--inner contextual-region">
