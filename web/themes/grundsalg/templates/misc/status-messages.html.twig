@@ -20,28 +20,46 @@
  * - attributes: HTML attributes for the element, including:
  *   - class: HTML classes.
  *
+ * @see template_preprocess_status_messages()
+ *
  * @ingroup themeable
  */
 #}
+
+
+{# Create string for state classes. #}
+{% set state_classes = '' %}
+
 {% for type, messages in message_list %}
-  <div role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes|without('role', 'aria-label') }}>
-    {% if type == 'error' %}
-      <div role="alert">
-    {% endif %}
-      {% if status_headings[type] %}
-        <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+
+  {# State class for messages. #}
+  {% if type == 'error' %}
+    {% set state_classes = state_classes ~ ' is-error' %}
+  {% elseif type == 'warning' %}
+    {% set state_classes = state_classes ~ ' is-warning' %}
+  {% elseif type == 'status' %}
+    {% set state_classes = state_classes ~ ' is-info' %}
+  {% endif %}
+  <div class="itk-message">
+    <div class="itk-message--inner{{ state_classes }}" role="contentinfo" aria-label="{{ status_headings[type] }}">
+      {% if type == 'error' %}
+        <div role="alert">
       {% endif %}
-      {% if messages|length > 1 %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        {{ messages|first }}
+        {% if status_headings[type] %}
+          <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+        {% endif %}
+        {% if messages|length > 1 %}
+          <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ messages|first }}
+        {% endif %}
+      {% if type == 'error' %}
+        </div>
       {% endif %}
-    {% if type == 'error' %}
-      </div>
-    {% endif %}
+    </div>
   </div>
 {% endfor %}
