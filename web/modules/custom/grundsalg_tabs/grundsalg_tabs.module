@@ -26,11 +26,12 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       $variables['display_tabs'] = TRUE;
 
       // Add image urls to js.
-      $variables['#attached']['drupalSettings']['variables']['images'][] = array(
-        'url' => ImageStyle::load('main_content')->buildUrl(File::load($variables['node']->get('field_main_image')->target_id)->getFileUri()),
-        'alt' => $variables['node']->get('field_main_image')->alt,
-      );
-
+      if (!empty($variables['node']->get('field_main_image')->target_id)) {
+        $variables['#attached']['drupalSettings']['variables']['images'][] = array(
+          'url' => ImageStyle::load('main_content')->buildUrl(File::load($variables['node']->get('field_main_image')->target_id)->getFileUri()),
+          'alt' => $variables['node']->get('field_main_image')->alt,
+        );
+      }
     }
   }
 }
