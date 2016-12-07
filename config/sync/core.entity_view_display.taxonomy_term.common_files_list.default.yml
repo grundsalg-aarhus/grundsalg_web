@@ -1,0 +1,29 @@
+uuid: 4349dc60-9399-4ba6-afea-5e071445ef87
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.common_files_list.field_file
+    - taxonomy.vocabulary.common_files_list
+  module:
+    - file
+    - text
+id: taxonomy_term.common_files_list.default
+targetEntityType: taxonomy_term
+bundle: common_files_list
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_file:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+hidden:
+  langcode: true

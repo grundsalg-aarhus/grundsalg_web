@@ -1,0 +1,6 @@
+grundsalg-styling:
+  version: VERSION
+  css:
+    theme:
+      css/styles.css: { media: screen }
+      fonts/Open_Sans/open_sans.css: { media: screen }

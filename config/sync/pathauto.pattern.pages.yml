@@ -1,0 +1,25 @@
+uuid: aa3c70f0-3ca4-4dac-9572-ce932d4be35a
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: 1C1UtTbreYjCP5eUuJOX6irET8zIXmdnZqXuhl5hSCQ
+id: pages
+label: Sider
+type: 'canonical_entities:node'
+pattern: '[node:menu-link:parent]/[node:title]'
+selection_criteria:
+  ca5277fc-df87-4150-8b88-d16a5384c924:
+    id: node_type
+    bundles:
+      overview_page: overview_page
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: ca5277fc-df87-4150-8b88-d16a5384c924
+selection_logic: and
+weight: -5
+relationships: {  }

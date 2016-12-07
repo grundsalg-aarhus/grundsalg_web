@@ -1,0 +1,11 @@
+uuid: 8f84d316-68d7-491f-bfb1-718dea361cc3
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.common_files_list
+id: taxonomy_term.common_files_list
+target_entity_type_id: taxonomy_term
+target_bundle: common_files_list
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,22 @@
+uuid: aeac0b33-2ce0-4036-a523-e33a830c4e63
+langcode: da
+status: true
+dependencies:
+  module:
+    - itk_hamburger_menu
+  theme:
+    - grundsalg
+id: itkhamburgermenu
+theme: grundsalg
+region: hamburger
+weight: -2
+provider: null
+plugin: itk_hamburger_menu
+settings:
+  id: itk_hamburger_menu
+  label: 'ITK Hamburger menu'
+  provider: itk_hamburger_menu
+  label_display: '0'
+  itk_hamburger_menu: main
+  itk_hamburger_menu_depth: '2'
+visibility: {  }

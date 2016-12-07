@@ -1,0 +1,4 @@
+grundsalg_front.admin:
+  title: 'Frontpage settings'
+  route_name: grundsalg_front.settings
+  base_route: itkore_admin.settings

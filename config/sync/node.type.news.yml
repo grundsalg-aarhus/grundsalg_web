@@ -1,0 +1,19 @@
+uuid: 5212a3df-9d20-48dd-a275-c451ef3ae59d
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+_core:
+  default_config_hash: dpXg2bDua7pZJT2dc1czxP-OU2S2_psXPnwuvGAY_Eo
+name: Nyhed
+type: news
+description: 'News for the site'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

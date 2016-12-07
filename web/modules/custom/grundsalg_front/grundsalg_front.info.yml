@@ -1,0 +1,8 @@
+name: Grundsalg frontpage
+type: module
+description: 'Adds config page and block for frontpage'
+package: Grundsalg
+dependencies:
+  - itkore_admin
+version: '8.x-1.0'
+core: '8.x'

@@ -1,0 +1,22 @@
+uuid: 36c21c76-f986-4fe7-ba7e-6e0fde2b02b2
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.subdivision
+id: node.subdivision.promote
+field_name: promote
+entity_type: node
+bundle: subdivision
+label: 'Forfremmet til forside'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

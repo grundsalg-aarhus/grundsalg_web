@@ -1,0 +1,24 @@
+uuid: ce19cc88-249b-41c0-bb20-3da7d51f7b2a
+langcode: da
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - grundsalg
+_core:
+  default_config_hash: 20RmvGPY4UHWTvHkJ9Iu-iNl9I2ThGe2CsfvHNhwjG4
+id: grundsalg_messages
+theme: grundsalg
+region: '-1'
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+  cache:
+    max_age: -1
+visibility: {  }

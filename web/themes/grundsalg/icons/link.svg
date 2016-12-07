@@ -1,0 +1,12 @@
+<svg viewBox="0 0 36 40" xmlns="http://www.w3.org/2000/svg">
+  <title>
+    Icons/Link
+  </title>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M23.27 1H6.46C5.654 1 5 1.654 5 2.462v35.076C5 38.346 5.654 39 6.462 39H32.77c.807 0 1.46-.654 1.46-1.462V9.768M34.23 9.77L25.463 1" stroke="#000" stroke-width="2"/>
+    <path d="M25.462 1v5.846c0 1.614 1.308 2.923 2.923 2.923h5.846" stroke="#000" stroke-width="2"/>
+    <g stroke-width="1.5" stroke="#1A1918">
+      <path d="M23.41 25.78l.247-6.488-6.484.24M15.255 27.594l8.325-8.324"/>
+    </g>
+  </g>
+</svg>

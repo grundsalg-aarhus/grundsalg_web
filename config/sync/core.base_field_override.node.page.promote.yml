@@ -1,0 +1,24 @@
+uuid: 7f899776-3c2e-41ea-ad41-4b20791b416f
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.page
+_core:
+  default_config_hash: rC6DNobJaO6EsmKSiG_iBg6JYtxZ887HXqUtXAmZfl0
+id: node.page.promote
+field_name: promote
+entity_type: node
+bundle: page
+label: 'Forfremmet til forside'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

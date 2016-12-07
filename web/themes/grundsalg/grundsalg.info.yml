@@ -1,0 +1,17 @@
+name: Grundsalg
+type: theme
+description: 'The Grundsalg theme'
+package: Grundsalg
+
+libraries:
+  - grundsalg/grundsalg-styling
+
+regions:
+  hamburger: 'Hamburger menu'
+  header: 'Header'
+  breadcrumb: 'Breadcrumb'
+  content: 'Content'
+  footer: 'Footer'
+
+version: '1.0.0'
+core: '8.x'

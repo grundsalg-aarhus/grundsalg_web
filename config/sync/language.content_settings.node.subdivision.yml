@@ -1,0 +1,11 @@
+uuid: 7a65dc3b-7c81-4d4d-bbfb-fd9564dc33ce
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.subdivision
+id: node.subdivision
+target_entity_type_id: node
+target_bundle: subdivision
+default_langcode: site_default
+language_alterable: false

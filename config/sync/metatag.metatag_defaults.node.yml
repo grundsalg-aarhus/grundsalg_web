@@ -1,0 +1,11 @@
+uuid: 6ce68fe8-1b4e-425f-be96-3e5e30ac66f6
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ydpmSCtxLjO9xqkBxObkeYx0Bf2dkW-d8bB_6Q1Ggjs
+id: node
+label: Indhold
+tags:
+  title: '[node:title]'
+  description: '[node:summary]'

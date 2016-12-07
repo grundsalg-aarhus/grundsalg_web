@@ -1,0 +1,20 @@
+uuid: 7ee98992-cbfc-4f74-af37-cf19e60ad479
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: fK07PHOwyAVzgM33JrFRLxMNWk15uIB3okUHjEhcDrU
+name: 'Statisk side'
+type: page
+description: 'A static page of content'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

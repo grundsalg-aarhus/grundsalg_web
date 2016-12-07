@@ -1,0 +1,28 @@
+uuid: 3b1f685f-6db3-41e7-864e-c9700221fbc9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_plot_type
+    - node.type.news
+    - taxonomy.vocabulary.plot_type
+id: node.news.field_plot_type
+field_name: field_plot_type
+entity_type: node
+bundle: news
+label: Type
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      plot_type: plot_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

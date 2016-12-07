@@ -1,0 +1,35 @@
+uuid: 8a62e49b-6b67-43d9-8020-258912d8b8f4
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.content_block.field_body
+    - node.type.content_block
+  module:
+    - text
+id: node.content_block.default
+targetEntityType: node
+bundle: content_block
+mode: default
+content:
+  field_body:
+    weight: 26
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

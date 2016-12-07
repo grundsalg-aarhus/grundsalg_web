@@ -1,0 +1,21 @@
+uuid: d7c8a5b7-2dc7-462f-b240-2d72b08de9ee
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body
+    - node.type.overview_page
+  module:
+    - text
+id: node.overview_page.field_body
+field_name: field_body
+entity_type: node
+bundle: overview_page
+label: Body
+description: 'The main content area'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

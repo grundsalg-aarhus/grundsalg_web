@@ -1,0 +1,68 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function grundsalg_preprocess_menu(&$variables) {
+  $variables['hamburger_menu'] = FALSE;
+  $current_path = \Drupal::request()->getRequestUri();
+  if ($variables['menu_name'] == 'main') {
+    // The only way to identify which region is rendering the menu block is to check for expanded (Main nav does not have any children and neither of the parents are expanded.)
+    // This won't work if for some reason none of the menu items have any children,
+    foreach ($variables['items'] as $key => $item) {
+      $variables['items'][$key]['attributes']->addClass('nav--link');
+      if ($item['is_expanded'] == TRUE) {
+        $variables['hamburger_menu'] = TRUE;
+      }
+      // Look for  certain paths and add additional classes.
+      if ($item['url']->toString() == $current_path) {
+        switch ($current_path) {
+          case '/villagrund' :
+            $variables['items'][$key]['type'] = 'villa';
+            break;
+          case '/erhvervsgrund' :
+            $variables['items'][$key]['type'] = 'erhverv';
+            break;
+          case '/storparcel' :
+            $variables['items'][$key]['type'] = 'storparcel';
+            break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function grundsalg_preprocess_page(&$variables) {
+  if (isset($variables['node'])) {
+    if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
+      $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function grundsalg_preprocess_node(&$variables) {
+  if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
+    $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function grundsalg_preprocess_field(&$variables) {
+  switch ($variables['element']['#field_name']) {
+    case 'field_file' :
+      $type = $variables['element'][0]['#file']->getMimeType();
+      $filename = $variables['element'][0]['#file']->getFilename();
+      break;
+  }
+}

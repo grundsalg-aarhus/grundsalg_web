@@ -1,0 +1,18 @@
+uuid: c69edc91-ead6-4710-9e3a-f8becf95e733
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Overview page'
+type: overview_page
+description: 'An overview page representing a section of the site.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

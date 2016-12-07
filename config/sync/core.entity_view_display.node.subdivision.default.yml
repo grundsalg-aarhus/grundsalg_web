@@ -1,0 +1,39 @@
+uuid: 26d86270-0e72-40e8-bd8e-9287e44dd5b4
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.subdivision.field_body
+    - field.field.node.subdivision.field_main_image
+    - field.field.node.subdivision.field_plot_type
+    - field.field.node.subdivision.field_teaser
+    - image.style.main_content
+    - node.type.subdivision
+  module:
+    - image
+    - text
+    - user
+id: node.subdivision.default
+targetEntityType: node
+bundle: subdivision
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_main_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: main_content
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  field_plot_type: true
+  field_teaser: true
+  langcode: true
+  links: true

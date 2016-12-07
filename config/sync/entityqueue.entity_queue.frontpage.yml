@@ -1,0 +1,26 @@
+uuid: f836d861-c797-4a23-af80-bb134a1438b0
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: frontpage
+label: Frontpage
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      news: news
+      area: area
+      page: page
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: area
+queue_settings:
+  min_size: 6
+  max_size: 6
+  act_as_queue: false

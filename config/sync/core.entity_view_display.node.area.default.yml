@@ -1,0 +1,39 @@
+uuid: 59fcc44d-63dd-4bc2-a189-beffbd533793
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.area.field_body
+    - field.field.node.area.field_main_image
+    - field.field.node.area.field_plot_type
+    - field.field.node.area.field_teaser
+    - image.style.main_content
+    - node.type.area
+  module:
+    - image
+    - text
+    - user
+id: node.area.default
+targetEntityType: node
+bundle: area
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_main_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: main_content
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  field_plot_type: true
+  field_teaser: true
+  langcode: true
+  links: true
