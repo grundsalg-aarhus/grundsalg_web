@@ -1,16 +1,19 @@
-uuid: 8057cbb8-a896-441d-9d6a-cc18227cecd9
+uuid: be2eb5bd-2a23-426e-88e8-cf383338b208
 langcode: da
 status: true
 dependencies:
+  enforced:
+    module:
+      - itk_media_entity
   module:
     - file
     - image
-    - node
+    - media_entity
 _core:
-  default_config_hash: l2rBrAi6myc9Chhm7PeCh1GwAhbW5l6q3FgxkSvUn4Y
-id: node.field_main_image
-field_name: field_main_image
-entity_type: node
+  default_config_hash: na3o8XsN9NKEW4rjTzcTucdlv9XSk4Fn8BRLyGCdr44
+id: media.field_itk_media_image_upload
+field_name: field_itk_media_image_upload
+entity_type: media
 type: image
 settings:
   uri_scheme: public

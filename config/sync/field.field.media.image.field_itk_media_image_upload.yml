@@ -1,24 +1,29 @@
-uuid: f1d95ec9-6dd7-47ac-bb57-e280ec00b6f7
+uuid: 49b493ea-3c9b-4d7b-bd05-16e374cde577
 langcode: da
 status: true
 dependencies:
   config:
-    - field.storage.node.field_main_image
-    - node.type.subdivision
+    - field.storage.media.field_itk_media_image_upload
+    - media_entity.bundle.image
+  enforced:
+    module:
+      - itk_media_entity
   module:
     - image
-id: node.subdivision.field_main_image
-field_name: field_main_image
-entity_type: node
-bundle: subdivision
-label: 'Main Image'
-description: content-images
-required: false
-translatable: true
+_core:
+  default_config_hash: wxOZ7zPkfoz3yQmi9sF-TLsmo10jX8av2ktW21k5mjk
+id: media.image.field_itk_media_image_upload
+field_name: field_itk_media_image_upload
+entity_type: media
+bundle: image
+label: 'Image upload'
+description: ''
+required: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: images
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

@@ -1,0 +1,11 @@
+uuid: 0c4df6be-37b9-460e-8183-252ea0818b0e
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: XOSrVCwfPc9DOPr45oEUWQavAFAxt4HH5XxlPOTnNKw
+name: 'Media library'
+vid: media_library
+description: 'A taxonomy to structure your media library'
+hierarchy: 0
+weight: 0

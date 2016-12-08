@@ -1987,16 +1987,16 @@
         },
         {
             "name": "drupal/itk_media_entity",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aakb/itk-media-entity.git",
-                "reference": "0958afce96e8661b8f77fd5ab329a2f640a27575"
+                "reference": "73c8c979109b49a6e8806bab84b027fa249b898d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aakb/itk-media-entity/zipball/0958afce96e8661b8f77fd5ab329a2f640a27575",
-                "reference": "0958afce96e8661b8f77fd5ab329a2f640a27575",
+                "url": "https://api.github.com/repos/aakb/itk-media-entity/zipball/73c8c979109b49a6e8806bab84b027fa249b898d",
+                "reference": "73c8c979109b49a6e8806bab84b027fa249b898d",
                 "shasum": ""
             },
             "require": {
@@ -2017,7 +2017,7 @@
             "keywords": [
                 "Drupal"
             ],
-            "time": "2016-12-07 13:10:46"
+            "time": "2016-12-07 14:46:53"
         },
         {
             "name": "drupal/itkore",

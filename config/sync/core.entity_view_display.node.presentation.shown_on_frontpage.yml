@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.shown_on_frontpage
     - field.field.node.presentation.field_body
-    - field.field.node.presentation.field_main_image
     - field.field.node.presentation.field_teaser
     - node.type.presentation
   module:
@@ -23,6 +22,5 @@ content:
     type: basic_string
 hidden:
   field_body: true
-  field_main_image: true
   langcode: true
   links: true

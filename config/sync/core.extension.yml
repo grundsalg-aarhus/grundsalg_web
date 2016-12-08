@@ -10,6 +10,9 @@ module:
   dblog: 0
   dynamic_page_cache: 0
   editor: 0
+  entity: 0
+  entity_browser: 0
+  entity_browser_entity_form: 0
   entity_reference: 0
   entity_reference_revisions: 0
   entityqueue: 0
@@ -24,9 +27,11 @@ module:
   help: 0
   image: 0
   imce: 0
+  inline_entity_form: 0
   itk_admin_links: 0
   itk_cookie_message: 0
   itk_hamburger_menu: 0
+  itk_media_entity: 0
   itk_paragraph: 0
   itkore_admin: 0
   itkore_content_types: 0
@@ -38,6 +43,9 @@ module:
   link: 0
   locale: 0
   maxlength: 0
+  media_entity: 0
+  media_entity_document: 0
+  media_entity_image: 0
   menu_ui: 0
   metatag: 0
   node: 0

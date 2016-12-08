@@ -5,14 +5,10 @@ dependencies:
   config:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
-    - field.field.node.page.field_main_image
     - field.field.node.page.field_teaser
-    - image.style.thumbnail
     - node.type.page
   module:
     - field_group
-    - image
-    - imce
     - text
 third_party_settings:
   field_group:
@@ -47,15 +43,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
-  field_main_image:
-    weight: 3
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings:
-      imce:
-        enabled: true
-    type: image_image
   field_teaser:
     weight: 1
     settings:

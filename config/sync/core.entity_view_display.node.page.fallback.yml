@@ -6,12 +6,9 @@ dependencies:
     - core.entity_view_mode.node.fallback
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
-    - field.field.node.page.field_main_image
     - field.field.node.page.field_teaser
-    - image.style.fallback_display_image
     - node.type.page
   module:
-    - image
     - user
 _core:
   default_config_hash: 0OMwscRy-FptZzG3Qevpw24ln4QvUSo2pSqovfH0Xjw
@@ -20,14 +17,6 @@ targetEntityType: node
 bundle: page
 mode: fallback
 content:
-  field_main_image:
-    type: image
-    weight: 0
-    label: hidden
-    settings:
-      image_style: fallback_display_image
-      image_link: ''
-    third_party_settings: {  }
   field_teaser:
     type: basic_string
     weight: 1

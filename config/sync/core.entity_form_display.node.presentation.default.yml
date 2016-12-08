@@ -4,13 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.node.presentation.field_body
-    - field.field.node.presentation.field_main_image
     - field.field.node.presentation.field_teaser
-    - image.style.thumbnail
     - node.type.presentation
   module:
     - field_group
-    - image
     - text
 third_party_settings:
   field_group:
@@ -38,13 +35,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
-  field_main_image:
-    weight: 3
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
   field_teaser:
     weight: 2
     settings:

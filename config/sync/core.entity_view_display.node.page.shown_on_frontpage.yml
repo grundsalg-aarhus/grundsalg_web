@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.shown_on_frontpage
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
-    - field.field.node.page.field_main_image
     - field.field.node.page.field_teaser
     - node.type.page
   module:
@@ -27,6 +26,5 @@ content:
 hidden:
   field_block_reference: true
   field_body: true
-  field_main_image: true
   langcode: true
   links: true
