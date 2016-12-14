@@ -1,0 +1,28 @@
+uuid: 1c3c0fe4-c1a4-4ab0-8cc3-266c51b34606
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_image
+    - media_entity.bundle.image
+    - node.type.area
+id: node.area.field_media_image
+field_name: field_media_image
+entity_type: node
+bundle: area
+label: 'Main image'
+description: 'Ved tilføjelse af flere billeder vil de blive vist som slideshow på siden'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

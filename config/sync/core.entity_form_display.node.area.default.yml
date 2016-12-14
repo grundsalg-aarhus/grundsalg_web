@@ -3,13 +3,20 @@ langcode: da
 status: true
 dependencies:
   config:
+    - entity_browser.browser.itk_image_browser
     - field.field.node.area.field_body
+    - field.field.node.area.field_media_image
+    - field.field.node.area.field_parent
     - field.field.node.area.field_plot_type
+    - field.field.node.area.field_streetview_coordinates
     - field.field.node.area.field_teaser
+    - field.field.node.area.field_youtube
     - node.type.area
   module:
+    - entity_browser
     - field_group
     - text
+    - youtube
 third_party_settings:
   field_group:
     group_teaser:
@@ -30,17 +37,45 @@ bundle: area
 mode: default
 content:
   field_body:
-    weight: 2
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+  field_media_image:
+    weight: 2
+    settings:
+      entity_browser: itk_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: form_display_when_referenced
+      field_widget_edit: false
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+  field_parent:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
   field_plot_type:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+  field_streetview_coordinates:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
   field_teaser:
     type: string_textarea
     weight: 4
@@ -53,6 +88,11 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: false
         maxlength_js_truncate_html: false
+  field_youtube:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: youtube
   title:
     type: string_textfield
     weight: 0

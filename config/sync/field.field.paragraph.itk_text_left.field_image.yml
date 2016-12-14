@@ -13,7 +13,7 @@ id: paragraph.itk_text_left.field_image
 field_name: field_image
 entity_type: paragraph
 bundle: itk_text_left
-label: Billede
+label: Image
 description: 'The image will scale to 500 pixel width and scale the height accordingly to maintain the original height/width ratio'
 required: false
 translatable: true

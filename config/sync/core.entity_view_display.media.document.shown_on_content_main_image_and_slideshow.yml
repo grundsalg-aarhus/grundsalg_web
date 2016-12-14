@@ -1,0 +1,79 @@
+uuid: 203d11a4-6376-4976-b5f0-d742b4440b68
+langcode: da
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.media.shown_on_content_main_image_and_slideshow
+    - field.field.media.document.field_itk_media_file_upload
+    - field.field.media.document.field_itk_media_mime_type
+    - field.field.media.document.field_itk_media_size
+    - field.field.media.document.field_itk_media_tag
+    - image.style.thumbnail
+    - media_entity.bundle.document
+  enforced:
+    module:
+      - itk_media_entity
+  module:
+    - file
+    - image
+_core:
+  default_config_hash: suvSYUIkOwkrkiNtKoeMAhd7sQb3ctQ9XfivOc54eLE
+id: media.document.shown_on_content_main_image_and_slideshow
+targetEntityType: media
+bundle: document
+mode: shown_on_content_main_image_and_slideshow
+content:
+  created:
+    type: timestamp
+    weight: 1
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  field_itk_media_file_upload:
+    type: file_default
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_itk_media_mime_type:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_itk_media_size:
+    weight: 4
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_itk_media_tag:
+    weight: 6
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  thumbnail:
+    type: image
+    weight: 2
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  uid: true

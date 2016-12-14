@@ -1,0 +1,28 @@
+uuid: 462b43ce-037b-4721-9ac4-ac6414b6a5d5
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_parent
+    - node.type.area
+    - node.type.overview_page
+id: node.area.field_parent
+field_name: field_parent
+entity_type: node
+bundle: area
+label: Parent
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      overview_page: overview_page
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

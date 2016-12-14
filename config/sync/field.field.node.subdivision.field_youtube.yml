@@ -1,0 +1,21 @@
+uuid: ff88f849-b302-446b-809b-1d40c9e40619
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_youtube
+    - node.type.subdivision
+  module:
+    - youtube
+id: node.subdivision.field_youtube
+field_name: field_youtube
+entity_type: node
+bundle: subdivision
+label: Youtube
+description: 'A link from youtube'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: youtube

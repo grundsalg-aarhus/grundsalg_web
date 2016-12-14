@@ -43,8 +43,8 @@ display:
           tags:
             previous: '‹ Previous'
             next: 'Next ›'
-            first: '« Første'
-            last: 'Sidste »'
+            first: '« First'
+            last: 'Last »'
       style:
         type: table
         options:
@@ -247,7 +247,7 @@ display:
           table: users_field_data
           field: name
           relationship: uid
-          label: Forfatter
+          label: Author
           exclude: false
           alter:
             alter_text: false
@@ -401,11 +401,11 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Udgivet
+                title: Published
                 operator: '='
                 value: '1'
               2:
-                title: 'Ikke udgivet'
+                title: Unpublished
                 operator: '='
                 value: '0'
           plugin_id: boolean
@@ -505,7 +505,7 @@ display:
           exposed: true
           expose:
             operator_id: langcode_op
-            label: Sprog
+            label: Language
             description: ''
             use_operator: false
             operator: langcode_op
@@ -541,7 +541,7 @@ display:
           table: views
           field: area_text_custom
           empty: true
-          content: 'Der er intet indhold at vise.'
+          content: 'No content available.'
           plugin_id: text_custom
       arguments: {  }
       relationships:
