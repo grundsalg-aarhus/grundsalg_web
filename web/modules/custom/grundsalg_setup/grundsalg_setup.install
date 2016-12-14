@@ -23,3 +23,16 @@ function grundsalg_setup_update_8002() {
   );
   \Drupal::service('module_installer')->install($module_list);
 }
+
+/**
+ * Enable several modules
+ */
+function grundsalg_setup_update_8003() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_slideshow',
+    'itk_media_entity',
+    'grundsalg_angular'
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}

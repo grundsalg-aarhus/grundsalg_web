@@ -60,7 +60,7 @@
 
 {{ page.hamburger }}
 {{ page.header }}
-<div id="content" {{ (angular is defined) ? 'data-ng-app="grundsalgTabs"' : '' }}>
+<div id="content" {{ attributes }}>
   <header class="header-subpage {{ classes }}">
     <div class="header-subpage--inner {{ classes }}">
       <div class="header-subpage--info">

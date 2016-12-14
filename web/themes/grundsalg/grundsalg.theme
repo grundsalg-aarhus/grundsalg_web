@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_preprocess_menu().
@@ -60,9 +62,23 @@ function grundsalg_preprocess_node(&$variables) {
  */
 function grundsalg_preprocess_field(&$variables) {
   switch ($variables['element']['#field_name']) {
-    case 'field_file' :
-      $type = $variables['element'][0]['#file']->getMimeType();
-      $filename = $variables['element'][0]['#file']->getFilename();
+    case 'field_itk_media_mime_type' :
+      $variables['mime_type'] = $variables['element']['0']['#context']['value'];
       break;
   }
+}
+
+/**
+ * Implements hook_preprocess_file_link().
+ */
+function grundsalg_preprocess_file_link(&$variables) {
+  if (empty($variables['description'])) {
+    $link_text = $variables['file']->getFilename();
+  }
+  else {
+    $link_text = $variables['description'];
+  }
+  $options['attributes']['class'] = 'content-box--link-with-icon-text';
+  $url = file_create_url($variables['file']->getFileUri());
+  $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
 }

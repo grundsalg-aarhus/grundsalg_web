@@ -1,7 +1,9 @@
 <?php
 
+use Drupal\media_entity\Entity;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+
 
 /**
  * Implements hook_proprocess_page().
@@ -11,26 +13,57 @@ function grundsalg_tabs_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
     if (($type == 'subdivision' || $type == 'area')) {
+      $variables['attributes']['data-ng-app'] = 'grundsalgTabs';
+      $variables['map'] = TRUE;
+      $variables['images'] = TRUE;
+      $variables['video'] = TRUE;
+      $variables['coordinates'] = TRUE;
       $variables['#attached']['library'][] = 'grundsalg_tabs/angular';
       $variables['#attached']['library'][] = 'grundsalg_tabs/leaflet';
-      $variables['#attached']['library'][] = 'grundsalg_tabs/leaflet-drupal';
+      $variables['#attached']['library'][] = 'grundsalg_tabs/googlemaps-api';
       $variables['#attached']['drupalSettings'] = array(
         'variables' => array(
           'app_dir' => '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js',
         ),
       );
-      // Enable angular (See page--node.html.twig)
-      $variables['angular'] = TRUE;
 
       // Enable tabs (See page--node.html.twig)
       $variables['display_tabs'] = TRUE;
 
       // Add image urls to js.
-      if (!empty($variables['node']->get('field_main_image')->target_id)) {
-        $variables['#attached']['drupalSettings']['variables']['images'][] = array(
-          'url' => ImageStyle::load('main_content')->buildUrl(File::load($variables['node']->get('field_main_image')->target_id)->getFileUri()),
-          'alt' => $variables['node']->get('field_main_image')->alt,
-        );
+      if (isset($variables['node']->field_media_image->target_id)) {
+        foreach ($variables['node']->get('field_media_image') as $key => $item) {
+          $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
+          
+          $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
+            'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
+            'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
+          );
+        }
+      }
+      else {
+        $variables['images'] = FALSE;
+        $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
+      }
+
+      // Add youtube link to js.
+      if (isset($variables['node']->field_youtube->video_id)) {
+        $variables['#attached']['drupalSettings']['variables']['video'] = $variables['node']->field_youtube->video_id;
+      }
+      else {
+        $variables['video'] = FALSE;
+        $variables['#attached']['drupalSettings']['variables']['video'] = FALSE;
+      }
+
+      // Add coordinates to js.
+      if (isset($variables['node']->field_streetview_coordinates->value)) {
+        $coordinates = explode(',', str_replace (' ', '', $variables['node']->field_streetview_coordinates->value));
+        $variables['#attached']['drupalSettings']['variables']['coordinates']['lat'] = $coordinates['0'];
+        $variables['#attached']['drupalSettings']['variables']['coordinates']['lon'] = $coordinates['1'];
+      }
+      else {
+        $variables['coordinates'] = FALSE;
+        $variables['#attached']['drupalSettings']['variables']['coordinates'] = FALSE;
       }
     }
   }

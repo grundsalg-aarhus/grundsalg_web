@@ -1,0 +1,14 @@
+angular:
+  js:
+    js/slideshow.js: {}
+    js/controllers/slideshowController.js: {}
+
+  header: TRUE
+  dependencies:
+    - grundsalg_angular/angular
+    - core/jquery
+    - core/jquery.once
+    - core/jquery.ui
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings

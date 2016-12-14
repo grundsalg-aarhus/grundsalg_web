@@ -1,7 +1,5 @@
-<div ng-controller="VideoController">
-  <div class="map">
-    <div class="map--inner">
-      <iframe width="1960" height="1103" src="https://www.youtube.com/embed/udcHDYnaaMQ" frameborder="0" allowfullscreen></iframe>
-    </div>
+<div ng-controller="VideoController" ng-if="video">
+  <div class="video">
+    <div ng-bind-html="youtube"></div>
   </div>
 </div>
