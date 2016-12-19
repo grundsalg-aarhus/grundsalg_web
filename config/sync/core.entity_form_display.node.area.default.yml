@@ -56,14 +56,6 @@ content:
       open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
-  field_parent:
-    weight: 26
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
   field_plot_type:
     weight: 1
     settings: {  }
@@ -102,6 +94,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_parent: true
   langcode: true
   path: true
   promote: true

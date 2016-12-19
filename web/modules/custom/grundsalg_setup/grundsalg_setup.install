@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\taxonomy\Entity\Term;
+
 /**
  * Enable required modules
  */
@@ -33,6 +35,18 @@ function grundsalg_setup_update_8003() {
     'grundsalg_slideshow',
     'itk_media_entity',
     'grundsalg_angular'
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+
+/**
+ * Add reference tree module.
+ */
+function grundsalg_setup_update_8004() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_reference_tree',
   );
   \Drupal::service('module_installer')->install($module_list);
 }

@@ -1,0 +1,23 @@
+uuid: fba43ec1-7ca4-44e0-b890-ef9b438ce6eb
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.cities.field_postalcode
+    - taxonomy.vocabulary.cities
+id: taxonomy_term.cities.default
+targetEntityType: taxonomy_term
+bundle: cities
+mode: default
+content:
+  field_postalcode:
+    weight: 0
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+hidden:
+  description: true
+  langcode: true
