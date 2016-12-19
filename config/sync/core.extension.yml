@@ -22,7 +22,6 @@ module:
   file: 0
   filter: 0
   grundsalg_angular: 0
-  grundsalg_db_bridge: 0
   grundsalg_front: 0
   grundsalg_reference_tree: 0
   grundsalg_setup: 0
