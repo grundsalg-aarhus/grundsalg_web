@@ -38,11 +38,11 @@ class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
     // Do not adjust the breadcrumbs on admin paths.
     if ($route && !$route->getOption('_admin_route') && $route->getPath() ==  '/node/{node}') {
       $node = $request->get('node');
-      if ($node->hasField('field_parent')) {
+      if ($node->hasField('field_parent') && !empty($node->get('field_parent')->target_id)) {
         $area_id = $node->get('field_parent')->target_id;
         $area = Node::load($area_id);
 
-        if ($area->hasField('field_parent')) {
+        if ($area->hasField('field_parent') && !empty($area->get('field_parent')->target_id)) {
           $overview_id = $area->get('field_parent')->target_id;
           $overview = Node::load($overview_id);
           $breadcrumbs->addLink(Link::fromTextAndUrl($overview->getTitle(), Url::fromUri('entity:node/' . $overview_id)));
