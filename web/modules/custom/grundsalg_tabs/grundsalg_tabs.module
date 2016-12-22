@@ -56,8 +56,11 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       }
 
       // Add coordinates to js.
-      if (isset($variables['node']->field_streetview_coordinates->value)) {
-        $coordinates = explode(',', str_replace (' ', '', $variables['node']->field_streetview_coordinates->value));
+      if (isset($variables['node']->field_city_reference->target_id)) {
+        $term = \Drupal\taxonomy\Entity\Term::load($variables['node']->field_city_reference->target_id);
+        $coordinates_str = getCoordinates($term->field_postalcode->value . ' ' . $term->getName() . ', Danmark');
+        $coordinates = explode(',', str_replace (' ', '', $coordinates_str));
+        $variables['#attached']['drupalSettings']['variables']['coordinates']['full'] = $coordinates_str;
         $variables['#attached']['drupalSettings']['variables']['coordinates']['lat'] = $coordinates['0'];
         $variables['#attached']['drupalSettings']['variables']['coordinates']['lon'] = $coordinates['1'];
       }
@@ -80,4 +83,17 @@ function grundsalg_tabs_preprocess_node(&$variables) {
     $variables['display_tabs'] = TRUE;
     $variables['app_dir'] = drupal_get_path('module', 'grundsalg_tabs') . '/js';
   }
+}
+
+/**
+ * Calculate coordiantes.
+ * @param $address
+ * @return string
+ */
+function getCoordinates($address){
+  $address = str_replace(" ", "+", $address); // replace all the white space with "+" sign to match with google search pattern
+  $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address";
+  $response = file_get_contents($url);
+  $json = json_decode($response,TRUE); //generate array object from the response from the web
+  return ($json['results'][0]['geometry']['location']['lat'].",".$json['results'][0]['geometry']['location']['lng']);
 }

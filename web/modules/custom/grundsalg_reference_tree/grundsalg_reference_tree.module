@@ -5,8 +5,9 @@
  */
 
 function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterface $node){
+  $reference_is_set = FALSE;
   // If content type is area and it's the first save of the node.
-  if ($node->getType() == 'area' && is_null($node->original)) {
+  if ($node->getType() == 'area') {
 
     // Get plot type
     $term_id = $node->get('field_plot_type')->target_id;
@@ -20,7 +21,40 @@ function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterfac
       if ($overview_page_node->get('field_plot_type')->target_id == $term_id) {
         // Set reference to an overview page with the same tag. (There should be only one)
         $node->set('field_parent', $overview_page_node->id());
+        $reference_is_set = TRUE;
       }
+    }
+
+    if (!$reference_is_set) {
+      drupal_set_message('No overview page found matching plot type. No parent reference has been created. Create an overview page matching the type and save this node again');
+    }
+  }
+
+  if ($node->getType() == 'subdivision') {
+
+    // Get plot type
+    $term_id = $node->get('field_plot_type')->target_id;
+
+    // Get city
+    $city_term_id = $node->get('field_city_reference')->target_id;
+
+
+    // Get all area pages (We might want to not load them all)
+    $nids = \Drupal::entityQuery('node')->condition('type', 'area')->execute();
+    $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+
+    // Look for overview pages with the same tag as our saved node.
+    foreach ($nodes as $area_page_node) {
+      if ($area_page_node->get('field_plot_type')->target_id == $term_id && $area_page_node->get('field_city_reference')->target_id == $city_term_id) {
+        // Set reference to an overview page with the same tag. (There should be only one)
+        $node->set('field_parent', $area_page_node->id());
+        $reference_is_set = TRUE;
+      }
+    }
+    if (!$reference_is_set) {
+      drupal_set_message('No area found matching plot type and location(city). No parent reference has been created. Create an area matching the specs and save this node again');
     }
   }
 }
+
+

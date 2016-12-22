@@ -48,14 +48,17 @@
 
 {% if plot_type == 'Villagrund' %}
   {% set classes = 'is-villa' %}
+  {% set related_content_title = 'Villagrunde' %}
 {% endif %}
 
 {% if plot_type == 'Erhvervsgrund' %}
   {% set classes = 'is-erhverv' %}
+  {% set related_content_title = 'Erhvervsgrunde' %}
 {% endif %}
 
 {% if plot_type == 'Storparcel' %}
   {% set classes = 'is-storparcel' %}
+  {% set related_content_title = 'Storparcelgrunde' %}
 {% endif %}
 
 {{ page.hamburger }}

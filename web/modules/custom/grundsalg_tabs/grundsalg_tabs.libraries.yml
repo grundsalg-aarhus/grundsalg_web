@@ -7,7 +7,6 @@ angular:
     js/controllers/StreetviewController.js: {}
     js/leaflet.drupal.js: {}
 
-  header: TRUE
   dependencies:
     - grundsalg_angular/angular
     - core/jquery
@@ -32,5 +31,6 @@ leaflet:
       //unpkg.com/leaflet@1.0.2/dist/leaflet.css: {}
 
 googlemaps-api:
+  header: TRUE
   js:
-    //maps.googleapis.com/maps/api/js?key=AIzaSyD7hGZqMrdpmOX6gIMqVyDkz3JoOQtKtI0: {type: external, attributes: { defer: true } }
+    //maps.googleapis.com/maps/api/js?key=AIzaSyD7hGZqMrdpmOX6gIMqVyDkz3JoOQtKtI0: {type: external}

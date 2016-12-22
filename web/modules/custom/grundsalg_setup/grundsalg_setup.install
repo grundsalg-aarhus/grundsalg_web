@@ -39,7 +39,6 @@ function grundsalg_setup_update_8003() {
   \Drupal::service('module_installer')->install($module_list);
 }
 
-
 /**
  * Add reference tree module.
  */
@@ -47,6 +46,17 @@ function grundsalg_setup_update_8004() {
   // Enable modules.
   $module_list = array(
     'grundsalg_reference_tree',
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Add db client module.
+ */
+function grundsalg_setup_update_8005() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_db_client',
   );
   \Drupal::service('module_installer')->install($module_list);
 }
