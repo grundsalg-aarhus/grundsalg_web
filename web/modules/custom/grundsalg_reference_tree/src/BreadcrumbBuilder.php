@@ -41,17 +41,19 @@ class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
       if ($node->hasField('field_parent') && !empty($node->get('field_parent')->target_id)) {
         $area_id = $node->get('field_parent')->target_id;
         $area = Node::load($area_id);
+        print $area->id();
 
         if ($area->hasField('field_parent') && !empty($area->get('field_parent')->target_id)) {
           $overview_id = $area->get('field_parent')->target_id;
           $overview = Node::load($overview_id);
           $breadcrumbs->addLink(Link::fromTextAndUrl($overview->getTitle(), Url::fromUri('entity:node/' . $overview_id)));
+          print $overview->id();
         }
 
         $breadcrumbs->addLink(Link::fromTextAndUrl($area->getTitle(), Url::fromUri('entity:node/' . $area_id)));
       }
     }
-    
+
     return $breadcrumbs;
   }
 }
