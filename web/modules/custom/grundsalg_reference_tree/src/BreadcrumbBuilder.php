@@ -34,9 +34,20 @@ class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
 
     $request = \Drupal::request();
     $route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT);
+    if ($route) {
+      print '000';
+
+      if (!$route->getOption('_admin_route')) {
+        print 'AAA';
+      }
+
+      if ($route->getPath() == '/node/{node}') {
+        print 'BBB';
+      }
+    }
 
     // Do not adjust the breadcrumbs on admin paths.
-    if ($route && !$route->getOption('_admin_route') && $route->getPath() ==  '/node/{node}') {
+    if ($route && !$route->getOption('_admin_route') && $route->getPath() == '/node/{node}') {
       print '123';
       $node = $request->get('node');
       if ($node->hasField('field_parent') && !empty($node->get('field_parent')->target_id)) {
