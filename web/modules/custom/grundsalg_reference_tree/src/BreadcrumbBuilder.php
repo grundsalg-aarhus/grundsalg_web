@@ -31,36 +31,17 @@ class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
    */
   public function build(RouteMatchInterface $route_match) {
     $breadcrumbs = parent::build($route_match);
+    $node = \Drupal::routeMatch()->getParameter('node');
 
-    $request = \Drupal::request();
-    $route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT);
-    if ($route) {
-      print '000';
-
-      if (!$route->getOption('_admin_route')) {
-        print 'AAA';
-      }
-
-      if ($route->getPath() == '/node/{node}') {
-        print 'BBB';
-      }
-    }
-
-    // Do not adjust the breadcrumbs on admin paths.
-    if ($route && !$route->getOption('_admin_route') && $route->getPath() == '/node/{node}') {
-      print '123';
-      $node = $request->get('node');
+    if ($node instanceof \Drupal\node\NodeInterface) {
       if ($node->hasField('field_parent') && !empty($node->get('field_parent')->target_id)) {
-        print '456';
         $area_id = $node->get('field_parent')->target_id;
         $area = Node::load($area_id);
-        print $area->id();
 
         if ($area->hasField('field_parent') && !empty($area->get('field_parent')->target_id)) {
           $overview_id = $area->get('field_parent')->target_id;
           $overview = Node::load($overview_id);
           $breadcrumbs->addLink(Link::fromTextAndUrl($overview->getTitle(), Url::fromUri('entity:node/' . $overview_id)));
-          print $overview->id();
         }
 
         $breadcrumbs->addLink(Link::fromTextAndUrl($area->getTitle(), Url::fromUri('entity:node/' . $area_id)));
