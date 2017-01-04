@@ -1,0 +1,20 @@
+uuid: 5eae44b4-d3c9-4400-889e-ff4355649b00
+langcode: da
+status: true
+dependencies:
+  module:
+    - itkore_footer
+  theme:
+    - grundsalg
+id: itkorefooter
+theme: grundsalg
+region: footer
+weight: 0
+provider: null
+plugin: itkore_footer
+settings:
+  id: itkore_footer
+  label: 'ITKore footer'
+  provider: itkore_footer
+  label_display: '0'
+visibility: {  }

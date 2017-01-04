@@ -22,6 +22,7 @@ module:
   filter: 0
   grundsalg_angular: 0
   grundsalg_db_client: 0
+  grundsalg_front: 0
   grundsalg_plots: 0
   grundsalg_reference_tree: 0
   grundsalg_setup: 0
@@ -31,8 +32,11 @@ module:
   image: 0
   inline_entity_form: 0
   itk_admin_links: 0
+  itk_cookie_message: 0
   itk_hamburger_menu: 0
   itk_media_entity: 0
+  itkore_admin: 0
+  itkore_footer: 0
   itkore_user_roles: 0
   itkore_user_theme: 0
   language: 0

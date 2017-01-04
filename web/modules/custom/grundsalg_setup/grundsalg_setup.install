@@ -93,3 +93,33 @@ function grundsalg_setup_update_8007() {
 
   \Drupal::service('module_installer')->uninstall($uninstall_module_list);
 }
+
+
+
+/**
+ * Enable frontpage
+ */
+function grundsalg_setup_update_8008() {
+  // Uninstall modules.
+  $module_list = array(
+    'grundsalg_front',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+
+/**
+ * Cleanup dependency mess that disabled several modules.
+ */
+function grundsalg_setup_update_8009() {
+  // Uninstall modules.
+  $module_list = array(
+    'grundsalg_front',
+    'itk_cookie_message',
+    'itkore_admin',
+    'itkore_footer',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+}
