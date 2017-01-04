@@ -45,6 +45,7 @@ function grundsalg_plots_preprocess_node(&$variables) {
               'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
               'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
               'use_dummy' => \Drupal::config('grundsalg_db_client.settings')->get('use_example_data'),
+              'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
             )
           )
         )

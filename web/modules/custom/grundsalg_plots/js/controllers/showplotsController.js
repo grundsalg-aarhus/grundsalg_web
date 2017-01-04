@@ -1,5 +1,5 @@
 angular.module('grundsalg').controller('showplotsController', ['$scope', '$http', function($scope, $http) {
-  var url = 'http://grundsalg.vm/api/postbies';
+  var url = drupalSettings.variables;
   $scope.displaylimit = 6;
 
   if (drupalSettings.variables.use_dummy > 0) {
