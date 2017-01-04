@@ -13,7 +13,6 @@ dependencies:
   module:
     - file
     - image
-    - imce
     - text
 _core:
   default_config_hash: x8KG1HP96_CZl-eX0YoaP3kecHPBSzXUeyVd2kXfuvU
@@ -26,18 +25,14 @@ content:
     weight: 3
     settings:
       progress_indicator: throbber
-    third_party_settings:
-      imce:
-        enabled: true
+    third_party_settings: {  }
     type: file_generic
   field_image:
     weight: 0
     settings:
       preview_image_style: thumbnail
       progress_indicator: throbber
-    third_party_settings:
-      imce:
-        enabled: true
+    third_party_settings: {  }
     type: image_image
   field_link_text:
     weight: 4

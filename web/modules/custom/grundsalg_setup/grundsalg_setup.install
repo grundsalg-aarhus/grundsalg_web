@@ -80,3 +80,16 @@ function grundsalg_setup_update_8006() {
   \Drupal::service('module_installer')->install($module_list);
   \Drupal::service('module_installer')->uninstall($uninstall_module_list);
 }
+
+
+/**
+ * Disable contextual links
+ */
+function grundsalg_setup_update_8007() {
+  // Uninstall modules.
+  $uninstall_module_list = array(
+    'contextual',
+  );
+
+  \Drupal::service('module_installer')->uninstall($uninstall_module_list);
+}

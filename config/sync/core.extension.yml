@@ -4,7 +4,6 @@ module:
   ckeditor: 0
   config: 0
   config_translation: 0
-  contextual: 0
   ctools: 0
   datetime: 0
   dblog: 0
@@ -23,7 +22,6 @@ module:
   filter: 0
   grundsalg_angular: 0
   grundsalg_db_client: 0
-  grundsalg_front: 0
   grundsalg_plots: 0
   grundsalg_reference_tree: 0
   grundsalg_setup: 0
@@ -31,17 +29,10 @@ module:
   grundsalg_tabs: 0
   help: 0
   image: 0
-  imce: 0
   inline_entity_form: 0
   itk_admin_links: 0
-  itk_cookie_message: 0
   itk_hamburger_menu: 0
   itk_media_entity: 0
-  itk_paragraph: 0
-  itkore_admin: 0
-  itkore_content_types: 0
-  itkore_fields: 0
-  itkore_footer: 0
   itkore_user_roles: 0
   itkore_user_theme: 0
   language: 0
