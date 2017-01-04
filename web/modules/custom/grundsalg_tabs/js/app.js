@@ -1,6 +1,6 @@
-var app = angular.module('grundsalgTabs', ['ngRoute', 'ngAnimate']);
+angular.module('grundsalg', ['ngRoute', 'ngAnimate']);
 
-app.directive('slider', function() {
+angular.module('grundsalg').directive('slider', function() {
   return {
     restrict: 'AE',
     replace: true,
@@ -30,7 +30,7 @@ app.directive('slider', function() {
   };
 });
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('grundsalg').config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider
     .when('/map', {

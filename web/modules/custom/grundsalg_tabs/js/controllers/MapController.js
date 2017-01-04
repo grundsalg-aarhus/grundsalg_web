@@ -1,3 +1,3 @@
-angular.module('grundsalgTabs').controller('MapController', ['$scope', function($scope) {
+angular.module('grundsalg').controller('MapController', ['$scope', function($scope) {
 
 }]);

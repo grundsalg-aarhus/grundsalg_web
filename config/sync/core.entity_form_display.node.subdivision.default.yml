@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.subdivision.field_parent
     - field.field.node.subdivision.field_plot_type
     - field.field.node.subdivision.field_streetview_coordinates
+    - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_youtube
     - node.type.subdivision
@@ -86,6 +87,13 @@ content:
     third_party_settings: {  }
   field_streetview_coordinates:
     weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_subdivision_id:
+    weight: 26
     settings:
       size: 60
       placeholder: ''

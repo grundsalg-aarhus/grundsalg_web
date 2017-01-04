@@ -6,6 +6,10 @@
 function grundsalg_angular_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
-    $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
+    $type = $variables['node']->bundle();
+    if (($type == 'subdivision' || $type == 'area')) {
+      $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
+      $variables['attributes']['data-ng-app'] = 'grundsalg';
+    }
   }
 }

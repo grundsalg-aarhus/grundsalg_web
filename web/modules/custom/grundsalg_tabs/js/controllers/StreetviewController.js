@@ -1,4 +1,4 @@
-angular.module('grundsalgTabs').controller('StreetviewController', ['$scope', function($scope) {
+angular.module('grundsalg').controller('StreetviewController', ['$scope', function($scope) {
   'use strict';
 
   function initialize() {

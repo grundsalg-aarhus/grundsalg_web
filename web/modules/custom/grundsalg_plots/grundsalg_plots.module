@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function grundsalg_plots_theme($existing, $type, $theme, $path) {
+  return array(
+    'grundsalg_plots' => array(
+      'template' => 'grundsalg-plots',
+      'variables' => ['variables' => NULL],
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_proprocess_node().
+ */
+function grundsalg_plots_preprocess_node(&$variables) {
+  // Add plots to subdivision.
+  if ($variables['view_mode'] == 'full' && $variables['node']->getType() == 'subdivision') {
+    // Fetch plots.
+    try {
+      $client = grundsalg_db_client_create_connection();
+      $plots = $client->getPlots();
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('grundsalg_db_client')->error($e->getMessage());
+    }
+
+    // Render plots
+    if (isset($plots)) {
+      $variables['content']['plots'] = array(
+        '#theme' => 'grundsalg_plots',
+        '#type' => 'markup',
+        '#cache' => array(
+          'max-age' => 0,
+        ),
+        '#attached' => array(
+          'library' => array(
+            'grundsalg_plots/show_plots'
+          ),
+          'drupalSettings' => array(
+            'variables' => array(
+              'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
+              'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
+              'use_dummy' => \Drupal::config('grundsalg_db_client.settings')->get('use_example_data'),
+            )
+          )
+        )
+      );
+    }
+  }
+}

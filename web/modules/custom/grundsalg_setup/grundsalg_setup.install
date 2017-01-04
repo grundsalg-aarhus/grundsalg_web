@@ -60,3 +60,23 @@ function grundsalg_setup_update_8005() {
   );
   \Drupal::service('module_installer')->install($module_list);
 }
+
+
+/**
+ * Add grundsalg plots module.
+ * Uninstall Imce module.
+ */
+function grundsalg_setup_update_8006() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_plots',
+  );
+
+  // Uninstall modules.
+  $uninstall_module_list = array(
+    'imce',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+  \Drupal::service('module_installer')->uninstall($uninstall_module_list);
+}

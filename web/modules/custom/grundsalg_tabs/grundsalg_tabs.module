@@ -13,7 +13,6 @@ function grundsalg_tabs_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
     if (($type == 'subdivision' || $type == 'area')) {
-      $variables['attributes']['data-ng-app'] = 'grundsalgTabs';
       $variables['map'] = TRUE;
       $variables['images'] = TRUE;
       $variables['video'] = TRUE;

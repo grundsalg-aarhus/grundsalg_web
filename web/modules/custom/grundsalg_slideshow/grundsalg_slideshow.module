@@ -13,7 +13,6 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
     $type = $variables['node']->bundle();
 
     // Add slideshow app to page.
-    $variables['attributes']['data-ng-app'] = 'grundsalgSlideshow';
     if (($type != 'subdivision' && $type != 'area')) {
 
       // Provide module path to js.

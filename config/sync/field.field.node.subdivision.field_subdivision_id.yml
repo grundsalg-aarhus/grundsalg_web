@@ -1,0 +1,19 @@
+uuid: a9173e12-dad9-48b6-8145-a64eea2e0ee5
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subdivision_id
+    - node.type.subdivision
+id: node.subdivision.field_subdivision_id
+field_name: field_subdivision_id
+entity_type: node
+bundle: subdivision
+label: 'Subdivision specialist system id'
+description: 'The id of the subdivision in the specialist system'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
