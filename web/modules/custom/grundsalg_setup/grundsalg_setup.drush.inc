@@ -20,8 +20,6 @@ function grundsalg_setup_drush_command() {
  * Callback for the drush-import-cities command
  */
 function drush_grundsalg_setup_grundsalg_import_cities() {
-  $host = \Drupal::request()->getHost();
-
   // Create array from csv file.
   $aarhus_elements = array();
   $file_path = __DIR__. '/city-postal.csv';

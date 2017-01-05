@@ -21,7 +21,7 @@ class Collection {
         $this->items[] = new $memberClassName($item);
       }
     } else {
-      $this->items = $this->data['hydra:member'];
+      $this->items = $this->data;
     }
   }
 

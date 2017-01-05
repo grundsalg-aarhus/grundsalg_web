@@ -19,7 +19,7 @@ class Dummy {
    * 
    * @return \Grundsalg\Dummy
    */
-  public function getPlots() {
+  public function getPlots(array $query = null) {
     $string = file_get_contents(__DIR__ . "/../example_data/example-subdivision-plots.json");
     $json = json_decode($string, true);
     $dummy = new Dummy($json);

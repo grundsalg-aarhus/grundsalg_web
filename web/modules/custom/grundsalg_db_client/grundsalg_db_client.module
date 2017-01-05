@@ -24,15 +24,13 @@ function grundsalg_db_client_create_connection() {
   else {
     // Setup client.
     $db_url = \Drupal::config('grundsalg_db')->get('url');
-    $db_name = \Drupal::config('grundsalg_db')->get('name');
-    $db_pass = \Drupal::config('grundsalg_db')->get('pass');
 
     // Missing variables.
-    if (empty($db_url) || empty($db_name) || empty($db_pass)) {
-      throw new Exception('No db connection');
+    if (empty($db_url)) {
+      throw new Exception('No db connection is configured');
     }
     else {
-      $client = new Client($db_url, $db_name, $db_pass);
+      $client = new Client($db_url);
     }
   }
 
