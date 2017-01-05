@@ -71,14 +71,6 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
     unset($form['field_subdivision_id']);
     $form['plots_wrapper']['field_subdivision_id']['#weight'] = 0;
 
-    // Add fetch button.
-    $form['plots_wrapper']['fetch'] = array(
-      '#type' => 'submit',
-      '#value' => t('Fetch plots'),
-      '#weight' => 1,
-      '#submit' => array('_grundsalg_plots_fetch_submit')
-    );
-
     // Prepare angular tempate.
     $plots = array(
       '#theme' => 'grundsalg_plots_form',
@@ -96,7 +88,6 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
             'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
             'use_dummy' => \Drupal::config('grundsalg_db_client.settings')->get('use_example_data'),
             'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
-            'subdivision_id' => 'abc',
             'form_template' => 1,
           )
         )
@@ -110,8 +101,4 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
       '#weight' => 3,
     );
   }
-}
-
-function _grundsalg_plots_fetch_submit($form, FormStateInterface $form_state) {
-  $a = 2;
 }

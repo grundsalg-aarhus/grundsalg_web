@@ -2,7 +2,7 @@
   <div class="content-box--content">
     <div class="boxes">
       <div class="boxes--inner">
-        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displayLimit" data-ng-class="{'is-offering' : plot.status === 'Udbud','is-sold' : plot.status === 'Solgt','is-available' : plot.status === 'Ledig'}">
+        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displayLimit" data-ng-class="{'is-offering' : plot.status === 'Udbud','is-sold' : plot.status === 'Auktion slut','is-available' : plot.status === 'Ledig'}">
           <div class="boxes--box-inner">
             <h3 class="boxes--box-plot-title">{{ plot.address }}</h3>
             <div class="boxes--box-plot-infos">

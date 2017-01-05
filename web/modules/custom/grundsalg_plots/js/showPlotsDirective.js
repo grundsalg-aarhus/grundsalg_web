@@ -18,7 +18,8 @@ angular.module('grundsalg').directive('plots', function() {
     replace: true,
     scope: {
       plots: '=',
-      displayLimit: '='
+      displayLimit: '=',
+      fetchPlots: '='
     },
     link: function(scope) {
       scope.modulepath = drupalSettings.variables.plots_module_dir + "/..";

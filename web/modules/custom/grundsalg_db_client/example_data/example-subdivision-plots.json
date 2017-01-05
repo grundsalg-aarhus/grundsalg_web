@@ -1,71 +1,74 @@
-[
+{
+  "count": 8,
+  "grunde": [
     {
-      "id":"1",
-      "address":"Krekærtoften 102",
-      "status":"Udbud",
-      "area_m2":"879",
-      "minimum_price":"792500",
-      "sale_price":"792500",
-      "pdf_link":"http://google.com"
+      "id": "1",
+      "address": "Krekærtoften 102",
+      "status": "Udbud",
+      "area_m2": "879",
+      "minimum_price": "792500",
+      "sale_price": "792500",
+      "pdf_link": "http://google.com"
     },
     {
-      "id":"2",
-      "address":"Krekærtoften 104",
-      "status":"Udbud",
-      "area_m2":"879",
-      "minimum_price":"792500",
-      "sale_price":"792500"
+      "id": "2",
+      "address": "Krekærtoften 104",
+      "status": "Udbud",
+      "area_m2": "879",
+      "minimum_price": "792500",
+      "sale_price": "792500"
     },
     {
-      "id":"3",
-      "address":"Krekærtoften 110",
-      "status":"Ledig",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500"
+      "id": "3",
+      "address": "Krekærtoften 110",
+      "status": "Ledig",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500"
     },
     {
-      "id":"4",
-      "address":"Krekærtoften 108",
-      "status":"Ledig",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500",
-      "pdf_link":"http://google.com"
+      "id": "4",
+      "address": "Krekærtoften 108",
+      "status": "Ledig",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500",
+      "pdf_link": "http://google.com"
     },
     {
-      "id":"5",
-      "address":"Krekærtoften 116",
-      "status":"Ledig",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500",
-      "pdf_link":"http://google.com"
+      "id": "5",
+      "address": "Krekærtoften 116",
+      "status": "Ledig",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500",
+      "pdf_link": "http://google.com"
     },
     {
-      "id":"6",
-      "address":"Krekærtoften 112",
-      "status":"Ledig",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500",
-      "pdf_link":"http://google.com"
+      "id": "6",
+      "address": "Krekærtoften 112",
+      "status": "Ledig",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500",
+      "pdf_link": "http://google.com"
     },
     {
-      "id":"7",
-      "address":"Lorem ipsum",
-      "status":"Ledig",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500",
-      "pdf_link":"http://google.com"
+      "id": "7",
+      "address": "Lorem ipsum",
+      "status": "Ledig",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500",
+      "pdf_link": "http://google.com"
     },
     {
-      "id":"8",
-      "address":"Ipsum lorem",
-      "status":"Solgt",
-      "area_m2":"879",
-      "minimum_price":"787500",
-      "sale_price":"787500"
+      "id": "8",
+      "address": "Ipsum lorem",
+      "status": "Auktion slut",
+      "area_m2": "879",
+      "minimum_price": "787500",
+      "sale_price": "787500"
     }
-]
+  ]
+}

@@ -93,7 +93,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
   field_subdivision_id:
-    weight: 26
+    weight: 9
     settings:
       size: 60
       placeholder: ''
