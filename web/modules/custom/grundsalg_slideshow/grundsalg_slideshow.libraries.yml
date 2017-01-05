@@ -1,7 +1,6 @@
 angular:
   js:
-    js/slideshow.js: {}
-    js/controllers/slideshowController.js: {}
+    js/slideshowDirective.js: {}
 
   header: TRUE
   dependencies:

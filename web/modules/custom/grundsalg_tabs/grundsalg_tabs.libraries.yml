@@ -1,14 +1,15 @@
 angular:
   js:
-    js/app.js: {}
-    js/controllers/MapController.js: {}
-    js/controllers/ImagesController.js: {}
-    js/controllers/VideoController.js: {}
-    js/controllers/StreetviewController.js: {}
-    js/leaflet.drupal.js: {}
+    js/routing.js: {}
+    js/MapController.js: {}
+    js/ImagesController.js: {}
+    js/VideoController.js: {}
+    js/StreetviewController.js: {}
+    js/lib/leaflet.drupal.js: {}
 
   dependencies:
     - grundsalg_angular/angular
+    - grundsalg_slideshow/angular
     - core/jquery
     - core/jquery.once
     - core/jquery.ui
