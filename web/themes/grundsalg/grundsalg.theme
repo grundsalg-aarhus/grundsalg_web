@@ -1,6 +1,9 @@
 <?php
 
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 /**
  * Implements hook_preprocess_menu().
@@ -51,6 +54,7 @@ function grundsalg_preprocess_page(&$variables) {
 function grundsalg_preprocess_node(&$variables) {
   if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
     $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+    $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $variables['node']->id());
   }
 }
 
@@ -60,9 +64,41 @@ function grundsalg_preprocess_node(&$variables) {
  */
 function grundsalg_preprocess_field(&$variables) {
   switch ($variables['element']['#field_name']) {
-    case 'field_file' :
-      $type = $variables['element'][0]['#file']->getMimeType();
-      $filename = $variables['element'][0]['#file']->getFilename();
+    case 'field_itk_media_mime_type' :
+      $variables['mime_type'] = $variables['element']['0']['#context']['value'];
       break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_file_link().
+ */
+function grundsalg_preprocess_file_link(&$variables) {
+  if (empty($variables['description'])) {
+    $link_text = $variables['file']->getFilename();
+  }
+  else {
+    $link_text = $variables['description'];
+  }
+  $options['attributes']['class'] = 'content-box--link-with-icon-text';
+  $url = file_create_url($variables['file']->getFileUri());
+  $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
+}
+
+
+/**
+ * @param $variables
+ */
+function grundsalg_preprocess_breadcrumb(&$variables) {
+  $request = \Drupal::request();
+  $route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT);
+  if ($route->getPath() ==  '/node/{node}') {
+    $node = $request->get('node');
+    if ($node->hasField('field_plot_type')) {
+      $variables['plot_type'] = Term::load($node->get('field_plot_type')->target_id)->getName();
+
+      // Set the cache context to depend on url.
+      $variables['#cache']['contexts'][] = 'url';
+    }
   }
 }

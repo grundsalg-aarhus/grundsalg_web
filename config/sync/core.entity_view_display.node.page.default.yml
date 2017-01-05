@@ -5,12 +5,9 @@ dependencies:
   config:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
-    - field.field.node.page.field_main_image
     - field.field.node.page.field_teaser
-    - image.style.main_content
     - node.type.page
   module:
-    - image
     - text
     - user
 _core:
@@ -34,14 +31,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
-  field_main_image:
-    type: image
-    weight: 0
-    label: hidden
-    settings:
-      image_style: main_content
-      image_link: ''
-    third_party_settings: {  }
 hidden:
   field_teaser: true
   langcode: true

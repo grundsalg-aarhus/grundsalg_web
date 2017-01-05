@@ -1,0 +1,44 @@
+uuid: 44cb4f16-2846-4658-af6a-db61c7677bed
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.shown_in_file_list
+    - field.field.media.document.field_itk_media_file_upload
+    - field.field.media.document.field_itk_media_mime_type
+    - field.field.media.document.field_itk_media_size
+    - field.field.media.document.field_itk_media_tag
+    - media_entity.bundle.document
+  enforced:
+    module:
+      - itk_media_entity
+  module:
+    - file
+_core:
+  default_config_hash: suvSYUIkOwkrkiNtKoeMAhd7sQb3ctQ9XfivOc54eLE
+id: media.document.shown_in_file_list
+targetEntityType: media
+bundle: document
+mode: shown_in_file_list
+content:
+  field_itk_media_file_upload:
+    type: file_default
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_itk_media_mime_type:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  created: true
+  field_itk_media_size: true
+  field_itk_media_tag: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

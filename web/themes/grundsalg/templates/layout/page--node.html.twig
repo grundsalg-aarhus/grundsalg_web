@@ -48,19 +48,22 @@
 
 {% if plot_type == 'Villagrund' %}
   {% set classes = 'is-villa' %}
+  {% set related_content_title = 'Villagrunde' %}
 {% endif %}
 
 {% if plot_type == 'Erhvervsgrund' %}
   {% set classes = 'is-erhverv' %}
+  {% set related_content_title = 'Erhvervsgrunde' %}
 {% endif %}
 
 {% if plot_type == 'Storparcel' %}
   {% set classes = 'is-storparcel' %}
+  {% set related_content_title = 'Storparcelgrunde' %}
 {% endif %}
 
 {{ page.hamburger }}
 {{ page.header }}
-<div id="content" {{ (angular is defined) ? 'data-ng-app="grundsalgTabs"' : '' }}>
+<div id="content" {{ attributes }}>
   <header class="header-subpage {{ classes }}">
     <div class="header-subpage--inner {{ classes }}">
       <div class="header-subpage--info">

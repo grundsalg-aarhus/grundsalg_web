@@ -1,0 +1,20 @@
+uuid: 7ad816b9-5fab-445c-9415-19e478c6c651
+langcode: da
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_postalcode
+field_name: field_postalcode
+entity_type: taxonomy_term
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

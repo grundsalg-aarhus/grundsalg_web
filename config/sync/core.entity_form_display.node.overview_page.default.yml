@@ -4,14 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.overview_page.field_body
-    - field.field.node.overview_page.field_main_image
     - field.field.node.overview_page.field_plot_type
     - field.field.node.overview_page.field_teaser
-    - image.style.thumbnail
     - node.type.overview_page
   module:
     - field_group
-    - image
     - text
 third_party_settings:
   field_group:
@@ -39,13 +36,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
-  field_main_image:
-    weight: 3
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
-    type: image_image
   field_plot_type:
     type: options_buttons
     weight: 1

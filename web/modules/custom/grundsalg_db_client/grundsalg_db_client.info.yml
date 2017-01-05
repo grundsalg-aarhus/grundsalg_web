@@ -1,0 +1,6 @@
+name: Grundsalg db client
+type: module
+description: 'Provide connection to fag system'
+package: Grundsalg
+version: '8.x-1.0'
+core: '8.x'

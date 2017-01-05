@@ -1,22 +1,7 @@
 <div ng-controller="StreetviewController">
-  <div class="map">
-    <div class="map--inner">
-      <div id="street-view" style="width:1960px; height:477px;"></div>
+  <div class="streetview">
+    <div class="streetview--inner">
+      <div id="street-view" style="width:100%; height:100%;"></div>
     </div>
   </div>
 </div>
-<script>
-  var panorama;
-  function initialize() {
-    panorama = new google.maps.StreetViewPanorama(
-      document.getElementById('street-view'),
-      {
-        position: {lat: 37.869260, lng: -122.254811},
-        pov: {heading: 165, pitch: 0},
-        zoom: 1
-      });
-  }
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7hGZqMrdpmOX6gIMqVyDkz3JoOQtKtI0&callback=initialize">
-</script>

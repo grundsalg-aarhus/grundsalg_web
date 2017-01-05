@@ -10,7 +10,6 @@ dependencies:
     - paragraphs.paragraphs_type.itk_text_left
   module:
     - image
-    - imce
     - text
 _core:
   default_config_hash: uOUAB7KNiaL-synTcsloKn0hvaxQUXx60xMojsuAGzI
@@ -24,9 +23,7 @@ content:
     settings:
       preview_image_style: thumbnail
       progress_indicator: throbber
-    third_party_settings:
-      imce:
-        enabled: true
+    third_party_settings: {  }
     type: image_image
   field_text:
     weight: 2

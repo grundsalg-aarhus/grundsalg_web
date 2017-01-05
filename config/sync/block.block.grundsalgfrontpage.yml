@@ -1,4 +1,4 @@
-uuid: 3121f7c9-fa19-41a8-9e04-137ed6c187c8
+uuid: 62558011-ed29-41df-a2f9-e8200bcd84e2
 langcode: da
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
 id: grundsalgfrontpage
 theme: grundsalg
 region: content
-weight: 0
+weight: -3
 provider: null
 plugin: grundsalg_front
 settings:

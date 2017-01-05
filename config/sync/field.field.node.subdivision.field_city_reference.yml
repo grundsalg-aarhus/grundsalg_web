@@ -1,0 +1,28 @@
+uuid: 77fafe0c-d999-44a4-a05b-8e7044558642
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_city_reference
+    - node.type.subdivision
+    - taxonomy.vocabulary.cities
+id: node.subdivision.field_city_reference
+field_name: field_city_reference
+entity_type: node
+bundle: subdivision
+label: Postnr
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      cities: cities
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

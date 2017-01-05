@@ -76,11 +76,7 @@
 {% if display_tabs is defined %}
   {% include '@grundsalg_tabs/grundsalg-tabs-display.html.twig' %}
 {% else %}
-  <div class="content-image">
-    <div class="content-image--inner">
-      {{ content.field_main_image }}
-    </div>
-  </div>
+  {% include '@grundsalg_slideshow/grundsalg-slideshow.html' %}
 {% endif %}
 
 <div class="content-boxes">
