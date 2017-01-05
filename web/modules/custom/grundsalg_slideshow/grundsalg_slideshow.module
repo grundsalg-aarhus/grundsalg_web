@@ -1,6 +1,5 @@
 <?php
 
-use Drupal\media_entity\Entity;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 
@@ -18,7 +17,7 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
       // Provide module path to js.
       $variables['#attached']['drupalSettings'] = array(
         'variables' => array(
-          'app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js',
+          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
         ),
       );
 

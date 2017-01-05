@@ -1,9 +1,7 @@
 <?php
 
-use Drupal\media_entity\Entity;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-
 
 /**
  * Implements hook_proprocess_page().
@@ -23,6 +21,7 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       $variables['#attached']['drupalSettings'] = array(
         'variables' => array(
           'app_dir' => '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js',
+          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
         ),
       );
 

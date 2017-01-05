@@ -2,7 +2,7 @@
   <div class="content-box--content">
     <div class="boxes">
       <div class="boxes--inner">
-        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displaylimit" data-ng-class="{'is-offering' : plot.status == 'Udbud','is-sold' : plot.status == 'Solgt','is-available' : plot.status == 'Ledig'}">
+        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displayLimit" data-ng-class="{'is-offering' : plot.status === 'Udbud','is-sold' : plot.status === 'Solgt','is-available' : plot.status === 'Ledig'}">
           <div class="boxes--box-inner">
             <h3 class="boxes--box-plot-title">{{ plot.address }}</h3>
             <div class="boxes--box-plot-infos">
@@ -41,10 +41,10 @@
     </div>
   </div>
   <div class="content-box--show-more">
-    <h3 class="content-box--show-more-title" data-ng-click="displaylimit = 1000">
+    <h3 class="content-box--show-more-title" data-ng-click="displayLimit = null">
       <a href="">Vis alle grunde</a>
     </h3>
-    <div class="content-box--show-more-arrow" data-ng-click="displaylimit = 1000">
+    <div class="content-box--show-more-arrow" data-ng-click="displayLimit = null">
       <svg viewBox="0 0 27 33" xmlns="http://www.w3.org/2000/svg">
         <g class="arrow-link--svg" transform="translate(13.500000, 16.500000) rotate(90.000000) translate(-13.500000, -16.500000) translate(-3.000000, 3.000000)" fill="#1A1918">
           <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>

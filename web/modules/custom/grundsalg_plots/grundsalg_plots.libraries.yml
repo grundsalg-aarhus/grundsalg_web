@@ -1,7 +1,7 @@
 show_plots:
   js:
-    js/show_plots.js: {}
-    js/controllers/showplotsController.js: {}
+    js/showPlotsDirective.js: {}
+    js/showPlotsController.js: {}
 
   header: TRUE
   dependencies:

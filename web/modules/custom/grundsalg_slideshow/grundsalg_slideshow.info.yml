@@ -1,6 +1,6 @@
 name: Grundsalg slideshow
 type: module
-description: 'Sets slideshow from image media field'
+description: 'Creates slideshow from image media field'
 package: Grundsalg
 dependencies:
   - grundsalg_angular
