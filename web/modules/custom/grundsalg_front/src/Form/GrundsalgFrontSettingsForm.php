@@ -39,7 +39,6 @@ class GrundsalgFrontSettingsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->getBaseConfig();
 
-
     $form['villa'] = array(
       '#type' => 'details',
       '#title' => $this->t('Villa'),

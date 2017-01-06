@@ -23,10 +23,8 @@ class Client {
    * @param $username The API username.
    * @param $password The API password.
    */
-  public function __construct($url, $username, $password) {
+  public function __construct($url) {
     $this->url = rtrim($url, '/') . '/';
-    $this->username = $username;
-    $this->password = $password;
   }
 
 
@@ -37,7 +35,7 @@ class Client {
    * @return \Grundsalg\Collection
    */
   public function getPlots(array $query = null) {
-    $url = $this->getUrl('postbies', $query);
+    $url = $this->getUrl('grunde', $query);
     $res = $this->request('GET', $url);
     $json = json_decode($res->getBody(), true);
     $collection = new Collection($json);
