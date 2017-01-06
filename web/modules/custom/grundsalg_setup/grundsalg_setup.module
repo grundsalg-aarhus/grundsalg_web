@@ -26,3 +26,14 @@ function _grundsalg_setup_form_submit_handler($form, \Drupal\Core\Form\FormState
   // Set the contact settings as part of submit.
   \Drupal::getContainer()->get('itkore_admin.itkore_config')->set('contact_text', $form_state->getValue('contact_text')['value']);
 }
+
+
+/**
+ * Implements hook_preprocess_itkore_footer_block().
+ *
+ * @param $variables
+ */
+function grundsalg_preprocess_itkore_footer_block(&$variables) {
+  $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+  $variables['contact_text'] = check_markup($config->get('contact_text'), 'filtered_html');
+}
