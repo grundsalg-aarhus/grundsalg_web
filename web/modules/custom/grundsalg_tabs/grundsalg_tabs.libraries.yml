@@ -2,7 +2,6 @@ angular:
   js:
     js/routing.js: {}
     js/MapController.js: {}
-    js/ImagesController.js: {}
     js/VideoController.js: {}
     js/StreetviewController.js: {}
     js/lib/leaflet.drupal.js: {}
