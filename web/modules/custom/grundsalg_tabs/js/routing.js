@@ -16,8 +16,8 @@ angular.module('grundsalg').config([
         controller: 'MapController'
       })
       .when('/images', {
-        templateUrl: drupalSettings.variables.app_dir + '/templates/images.html',
-        controller: 'ImagesController'
+        templateUrl: drupalSettings.variables.grundsalg_slideshow_module_path + '/js/templates/slideshow.html',
+        controller: 'SlideshowController'
       })
       .when('/video', {
         templateUrl: drupalSettings.variables.app_dir + '/templates/video.html',
