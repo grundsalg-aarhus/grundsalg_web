@@ -3,7 +3,7 @@
  * Contains the Images Controller.
  */
 
-angular.module('grundsalg').controller('ImagesController', [
+angular.module('grundsalg').controller('SlideshowController', [
     '$scope',
     function ($scope) {
       // Bind images to scope.

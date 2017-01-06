@@ -1,5 +1,6 @@
 angular:
   js:
+    js/slideshowController.js: {}
     js/slideshowDirective.js: {}
 
   header: TRUE
