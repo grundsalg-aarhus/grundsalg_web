@@ -78,7 +78,7 @@ function create_area_node($postal_code, $plot_type) {
 
 
 /**
- * Creates an area from the given parameters.
+ * Creates subdivision from the given parameters.
  *
  * @param $postal_code
  * @param $plot_type
