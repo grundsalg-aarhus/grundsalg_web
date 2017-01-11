@@ -26,17 +26,21 @@ class ApiController extends ControllerBase {
     $client = new Client();
 
     try {
-      $res = $client->get('http://192.168.50.118/public/api/udstykning/' . $id);
+      $res = $client->request('GET', 'http://192.168.50.118/public/api/udstykning/' . $id);
 
       $contentCreationService = \Drupal::service('grundsalg.content_creation');
 
-      $body = $res->getBody();
+      $body = $res->getBody()->getContents();
+      $body = \GuzzleHttp\json_decode($body);
 
-      $contentCreationService->updateSubdivision($id, 'Fisk', 'Villagrund', 9999, 'Mørket!');
+      $contentCreationService->updateSubdivision($id, $body->title, $body->type, $body->postalCode, $body->city);
 
-      return new JsonResponse();
+      return new JsonResponse([
+        'message' => 'Subdivision updated/created!',
+        'body' => $body,
+      ]);
     } catch (RequestException $e) {
-      return($this->t('Error'));
+      throw $e;
     }
   }
 }
