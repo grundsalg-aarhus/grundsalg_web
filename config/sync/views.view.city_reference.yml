@@ -308,7 +308,9 @@ display:
         type: entity_reference_revisions
         options:
           default_field_elements: true
-          inline: {  }
+          inline:
+            field_postalcode: field_postalcode
+            name: name
           separator: ' : '
           hide_empty: false
       pager:

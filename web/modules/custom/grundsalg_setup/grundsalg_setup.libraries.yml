@@ -1,0 +1,5 @@
+form_styles:
+  version: VERSION
+  css:
+    theme:
+      css/grundsalg_node_forms.css: { media: screen }

@@ -26,13 +26,13 @@ content:
   name:
     label: hidden
     type: string
-    weight: 0
+    weight: 1
     settings:
       link_to_entity: false
     third_party_settings: {  }
   thumbnail:
     type: image
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       image_style: thumbnail

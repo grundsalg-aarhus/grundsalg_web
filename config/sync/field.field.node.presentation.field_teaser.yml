@@ -11,7 +11,7 @@ entity_type: node
 bundle: presentation
 label: Teaser
 description: 'The text of this content when referenced'
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

@@ -61,7 +61,7 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
     $form['plots_wrapper'] = array(
       '#type' => 'details',
       '#title' => t('Plots'),
-      '#open' => TRUE,
+      '#open' => FALSE,
       '#weight' => 100,
       '#attributes' => array('data-ng-app' => 'grundsalg'),
     );
