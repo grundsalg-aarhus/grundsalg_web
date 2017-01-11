@@ -4,3 +4,8 @@ description: 'Containts global functionality for grundsalg'
 package: Grundsalg
 version: '8.x-1.0'
 core: '8.x'
+dependencies:
+  - itkore_admin
+  - itkore_footer
+  - grundsalg_reference_tree
+  - grundsalg_db_client

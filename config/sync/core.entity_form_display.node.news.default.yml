@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.news.field_media_image
     - field.field.node.news.field_plot_type
     - field.field.node.news.field_teaser
+    - field.field.node.news.field_teaser_image
     - node.type.news
   module:
     - entity_browser
@@ -17,16 +18,44 @@ third_party_settings:
   field_group:
     group_teaser:
       children:
+        - field_teaser_image
         - field_teaser
       parent_name: ''
-      weight: 4
+      weight: 3
       label: Teaser
       format_type: details
       format_settings:
-        open: false
-        required_fields: true
-        classes: ''
+        label: Teaser
         id: ''
+        classes: ''
+        open: false
+        required_fields: false
+    group_base_content:
+      children:
+        - title
+        - field_body
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: true
+        required_fields: false
+      label: 'Base content'
+    group_type:
+      children:
+        - field_plot_type
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: ''
 _core:
   default_config_hash: SzF7cFNDbSYTho3NPoIrI1Y0Yiw3JO2_5wQ85vFUIck
 id: node.news.default
@@ -35,7 +64,7 @@ bundle: news
 mode: default
 content:
   field_body:
-    weight: 3
+    weight: 2
     settings:
       rows: 5
       placeholder: ''
@@ -55,12 +84,12 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
   field_plot_type:
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
   field_teaser:
-    weight: 4
+    weight: 27
     settings:
       rows: 5
       placeholder: ''
@@ -71,9 +100,22 @@ content:
         maxlength_js_enforce: false
         maxlength_js_truncate_html: false
     type: string_textarea
+  field_teaser_image:
+    weight: 26
+    settings:
+      entity_browser: itk_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: form_display_when_referenced
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
   title:
     type: string_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''

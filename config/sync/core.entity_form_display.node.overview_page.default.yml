@@ -16,7 +16,7 @@ third_party_settings:
       children:
         - field_teaser
       parent_name: ''
-      weight: 4
+      weight: 3
       label: Teaser
       format_type: details
       format_settings:
@@ -24,6 +24,32 @@ third_party_settings:
         required_fields: true
         classes: ''
         id: ''
+    group_main:
+      children:
+        - title
+        - field_body
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: true
+        required_fields: false
+      label: 'Main content'
+    group_type:
+      children:
+        - field_plot_type
+      parent_name: ''
+      weight: 2
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: ''
 id: node.overview_page.default
 targetEntityType: node
 bundle: overview_page
@@ -38,7 +64,7 @@ content:
     type: text_textarea
   field_plot_type:
     type: options_buttons
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
   field_teaser:
@@ -55,7 +81,7 @@ content:
     type: string_textarea
   title:
     type: string_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''

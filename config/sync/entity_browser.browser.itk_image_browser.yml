@@ -16,7 +16,7 @@ display: modal
 display_configuration:
   width: ''
   height: ''
-  link_text: 'Select entities'
+  link_text: 'Select images'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
