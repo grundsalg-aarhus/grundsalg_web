@@ -21,13 +21,13 @@ angular.module('grundsalg').controller('StreetviewController', [
 
           sv.getPanorama({
             location: location,
-            radius: 500
+            radius: 1500
           }, function processSVData(data, status) {
             if (status === 'OK') {
               var panorama = new google.maps.StreetViewPanorama(document.getElementById('street-view'));
               panorama.setPano(data.location.pano);
               panorama.setPov({
-                heading: 150,
+                heading: 0,
                 pitch: 0
               });
               panorama.setVisible(true);
