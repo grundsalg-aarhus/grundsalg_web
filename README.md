@@ -1,57 +1,73 @@
 # Grundsalg Aarhus web
+* See readme in ITK vagrant repo about setting up or syncing a grundsalg web site.
+* Changelog located in root folder.
 
-## Currently runs on platform.sh
-- For the local setup to work you need to have a user account on platform.sh and have it take part in the grundsalgweb project.
+## Uses composer
+Use composer commands to add/remove/update contrib modules/profiles/themes.
 
-## Local setup
-Run these scripts
+## Structure
 
-    site_install.sh
+### Follows platform.sh d8 example structure
+* Uses the recommended drupal structure for composer projects
+https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal
+* See
+https://github.com/platformsh/platformsh-example-drupal8 for further information.
+* Config sync folder located in root folder.
 
-Fetches all files needed to build a site for Grundsalg Aarhus web
+#### Module folder divided into contrib and custom.
+Contrib modules added and managed by composer and not included in the github repo.
 
-    scripts/site_setup.sh
-
-Sets up database for Grundsalg Aarhus web. (This needs to be run within your vagrant)
-
-
-## Pushing to platform.sh
-To add your changes to platforms development site from origin/develop
-
-    git push platform develop
-
-This will create a new build on develop branch.
-
-## Syncing local site from master
-- scripts/site_sync.sh: Fetches db and files from platform master. (This needs to be run within your vagrant)
-
-## Composer A-Z
-Useful composer commands
-
-####Composer install
-
-    composer install
-
-Builds a new site from composer.lock file if one exist, builds a site from composer.json if no lock file exist.
-
-####Composer update
-
-    composer update
-
-Builds a site from composer json and adds/updates composer.lock with composer.json changes.
-
-####Composer require
-
-    composer require drupal/[module]
-
-Installs a module and adds the requirement of the module to the composer.json and composer.lock files
+Custom modules manually maintained and added to github.
 
 
-## Useful git commands
-See your current remote branch setup:
+#### Profiles folder containing the itkore profile
+ITKore profile is used as a base profile and contains a list of custom modules described within the install profile. https://github.com/aakb/itkore-profile
 
-    git remote -v
+The profile is detached from github and maintained through composer. Changes to the profile should only happen through a new release of the profile. The profile has it's own release cycle and changelog.
 
-Push your changes to platform for platform to rebuild
+ITKore profile depends on a list of contrib modules added to the grundsalg modules/contrib folder.
 
-    git push platform develop
+
+#### Themes folder holding three themes
+Contrib themes are added and managed by composer.
+* Adminimal theme used as a base theme (Contrib)
+* Grundsalg used as the main theme. (Custom)
+* Itkore theme - Unused (Contrib)
+
+## Custom modules
+
+### Grundsalg angular
+* Provides angular library and adds the angular modules used across the site.
+* Initiates the grundsalg angular app used across the site.
+
+### Grundsalg db client
+* Provides connection to the fagsystem database.
+* Provides the client used to talk to the fagsystem API.
+* Provides example data json file which can be enabled/disabled from a provided config page.
+* Requires a link to the remote database (For further information see module readme file).
+
+### Grundsalg front
+* Provides config page for changing frontpage
+* Hooks into itkore_admin module (From itkore profile) to add a frontpage config tab on site settings page
+
+### Grundsalg plots
+* Provides plots to subdivision content type
+* Uses angular grundsalg app to fetch plots
+
+### Grundsalg reference tree
+* Provides a breadcrumb builder depending on field_parent node reference field.
+* Populates field_parent on node save based on the supplied city info and type. (e.g Villa, Malling)
+
+## Grundsalg setup
+* A "Catch all" kind of module to perform simple stuff that doesn't want a seperate module.
+* Used for new update hooks when adding new modules to the project.
+* Provides a comprehensive modification of the node type forms.
+* Expands on the itkore_footer module. (Adds a new field for contact information)
+
+### Grundsalg slideshow
+* Angular app for turning images provided on content into slideshow.
+
+### Grundsalg tabs
+* Angular app for providing tabs on area and subdivision content types.
+* Provides controllers for streetview and video display.
+* Provides paths for each tab.

@@ -4,3 +4,5 @@ description: 'Provides plots display for subdivisions'
 package: Grundsalg
 version: '8.x-1.0'
 core: '8.x'
+dependencies:
+  - grundsalg_angular
