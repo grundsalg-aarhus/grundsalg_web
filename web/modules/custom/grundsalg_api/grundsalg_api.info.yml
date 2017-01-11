@@ -1,0 +1,6 @@
+name: Grundsalg API
+type: module
+description: 'Adds API'
+package: Grundsalg
+version: '8.x-1.0'
+core: '8.x'

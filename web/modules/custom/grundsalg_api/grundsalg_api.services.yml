@@ -1,0 +1,3 @@
+services:
+  grundsalg.content_creation:
+    class: Drupal\grundsalg_api\Service\ContentCreationService

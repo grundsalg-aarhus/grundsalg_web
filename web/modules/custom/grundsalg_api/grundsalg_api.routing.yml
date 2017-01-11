@@ -1,0 +1,7 @@
+grundsalg.api.update_udstykning:
+  path: '/api/udstykning/{id}/updated'
+  defaults:
+    _controller: '\Drupal\grundsalg_api\Controller\ApiController::udstykningUpdated'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST|GET'
