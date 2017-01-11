@@ -32,7 +32,7 @@ class ApiController extends ControllerBase {
 
       $body = $res->getBody();
 
-      $contentCreationService->updateSubdivision($id, 'Fisk', 'Villagrund', 8320, 'Mårslet');
+      $contentCreationService->updateSubdivision($id, 'Fisk', 'Villagrund', 9999, 'Mørket!');
 
       return new JsonResponse();
     } catch (RequestException $e) {

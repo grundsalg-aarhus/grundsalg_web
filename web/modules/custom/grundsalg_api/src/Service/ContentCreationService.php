@@ -7,6 +7,7 @@
 namespace Drupal\grundsalg_api\Service;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Class ContentCreationService
@@ -48,12 +49,53 @@ class ContentCreationService {
 
     // If it does not exist, create it.
     if (!isset($area)) {
+      // Make sure plot_type term exists with $type, else throw exception.
+      $query = \Drupal::entityQuery('taxonomy_term')
+        ->condition('vid', 'plot_type')
+        ->condition('name', $type);
+      $nids = $query->execute();
+
+      // Load the plot_type term.
+      $plotTypeTerm = Term::load(current($nids));
+
+      // If plot_type does not exist, throw exception.
+      if (!isset($plotTypeTerm)) {
+        throw new NotFoundHttpException('Plot type not found with type = ' . $type);
+      }
+
+      // Make sure cities term exists with postalCode, else create it.
+      $query = \Drupal::entityQuery('taxonomy_term')
+        ->condition('vid', 'cities')
+        ->condition('field_postalcode', $postalCode);
+      $nids = $query->execute();
+
+      // Load the cities term.
+      $cityTerm = Term::load(current($nids));
+
+      // If cities term does not exist, create it.
+      if (!isset($cityTerm)) {
+        $cityTerm = Term::create([
+          'name' => $cityName,
+          'vid' => 'cities',
+          'field_postalcode' => $postalCode,
+        ]);
+
+        $cityTerm->save();
+      }
+
       $area = Node::create([
         'type' => 'area',
         'title' => $cityName,
-        'field_plot_type' => $type,
-        'field_city_reference' => null,
+        'field_parent' => $overview->id(),
+        'field_plot_type' => $plotTypeTerm->id(),
+        'field_city_reference' => $cityTerm->id(),
       ]);
+
+      $area->save();
+    }
+    else {
+      $cityTerm = $area->get('field_city_reference')->entity;
+      $plotTypeTerm = $area->get('field_plot_type')->entity;
     }
 
     // Find subdivision with $subdivisionId.
@@ -71,7 +113,9 @@ class ContentCreationService {
         'type'        => 'subdivision',
         'title'       =>  $subdivisionTitle,
         'field_subdivision_id' => $subdivisionId,
-        'field_parent' => $area,
+        'field_parent' => $area->id(),
+        'field_plot_type' => $plotTypeTerm->id(),
+        'field_city_reference' => $cityTerm->id(),
       ]);
     }
     else {
