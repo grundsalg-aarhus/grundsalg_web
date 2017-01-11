@@ -11,7 +11,7 @@ field_name: field_media_image
 entity_type: node
 bundle: area
 label: 'Main image'
-description: 'Ved tilføjelse af flere billeder vil de blive vist som slideshow på siden'
+description: "Angiv de billeder der skal vises på dette område.\r\nVed tilføjelse af flere billeder vil de blive vist som slideshow på siden."
 required: false
 translatable: true
 default_value: {  }

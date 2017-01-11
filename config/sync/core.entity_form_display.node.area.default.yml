@@ -11,11 +11,11 @@ dependencies:
     - field.field.node.area.field_plot_type
     - field.field.node.area.field_streetview_coordinates
     - field.field.node.area.field_teaser
+    - field.field.node.area.field_teaser_image
     - field.field.node.area.field_youtube
     - node.type.area
   module:
     - entity_browser
-    - entity_browser_entity_form
     - field_group
     - text
     - youtube
@@ -23,9 +23,10 @@ third_party_settings:
   field_group:
     group_teaser:
       children:
+        - field_teaser_image
         - field_teaser
       parent_name: ''
-      weight: 5
+      weight: 3
       label: Teaser
       format_type: details
       format_settings:
@@ -33,30 +34,91 @@ third_party_settings:
         required_fields: true
         classes: ''
         id: ''
+    group_main_content:
+      children:
+        - title
+        - field_body
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: true
+        required_fields: false
+      label: 'Main content'
+    group_postalcode:
+      children:
+        - field_city_reference
+      parent_name: ''
+      weight: 5
+      format_type: details
+      format_settings:
+        label: City
+        open: true
+        id: ''
+        classes: ''
+        required_fields: false
+      label: City
+    group_type:
+      children:
+        - field_plot_type
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: ''
+    group_streetview:
+      children:
+        - field_streetview_coordinates
+      parent_name: ''
+      weight: 6
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: false
+      label: Streetview
+    group_youtube:
+      children:
+        - field_youtube
+      parent_name: ''
+      weight: 7
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: false
+      label: Youtube
 id: node.area.default
 targetEntityType: node
 bundle: area
 mode: default
 content:
   field_body:
-    weight: 4
+    weight: 2
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
   field_city_reference:
-    weight: 2
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: ''
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
+      placeholder: 'Postal code or city'
+    third_party_settings: {  }
     type: entity_reference_autocomplete_tags
   field_media_image:
-    weight: 3
+    weight: 2
     settings:
       entity_browser: itk_image_browser
       field_widget_display: rendered_entity
@@ -69,7 +131,7 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
   field_plot_type:
-    weight: 1
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -82,7 +144,7 @@ content:
     type: string_textfield
   field_teaser:
     type: string_textarea
-    weight: 4
+    weight: 27
     settings:
       rows: 5
       placeholder: ''
@@ -92,6 +154,19 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: false
         maxlength_js_truncate_html: false
+  field_teaser_image:
+    weight: 26
+    settings:
+      entity_browser: itk_image_browser
+      field_widget_display: rendered_entity
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: form_display_when_referenced
+      field_widget_edit: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
   field_youtube:
     weight: 7
     settings: {  }
@@ -99,7 +174,7 @@ content:
     type: youtube
   title:
     type: string_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''

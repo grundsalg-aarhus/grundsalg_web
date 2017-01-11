@@ -16,7 +16,7 @@ third_party_settings:
       children:
         - field_teaser
       parent_name: ''
-      weight: 6
+      weight: 2
       label: Teaser
       format_type: details
       format_settings:
@@ -24,6 +24,31 @@ third_party_settings:
         required_fields: true
         classes: ''
         id: ''
+    group_main:
+      children:
+        - title
+        - field_body
+      parent_name: ''
+      weight: 0
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: true
+        required_fields: false
+      label: 'Main content'
+    group_block_reference:
+      children:
+        - field_block_reference
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: false
+      label: 'Block reference'
 _core:
   default_config_hash: tT301fI1PUepYWhzNMNq9tR_Pk203i4yH-gWE0ZOno4
 id: node.page.default
@@ -32,7 +57,7 @@ bundle: page
 mode: default
 content:
   field_block_reference:
-    weight: 4
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -57,7 +82,7 @@ content:
     type: string_textarea
   title:
     type: string_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''

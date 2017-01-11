@@ -42,6 +42,7 @@ hidden:
   field_parent: true
   field_plot_type: true
   field_streetview_coordinates: true
+  field_subdivision_id: true
   field_youtube: true
   langcode: true
   links: true

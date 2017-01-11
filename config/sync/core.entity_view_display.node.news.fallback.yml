@@ -25,6 +25,7 @@ content:
     type: basic_string
 hidden:
   field_body: true
+  field_media_image: true
   field_plot_type: true
   langcode: true
   links: true
