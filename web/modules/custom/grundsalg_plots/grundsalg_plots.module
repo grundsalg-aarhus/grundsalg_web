@@ -23,9 +23,10 @@ function grundsalg_plots_theme($existing, $type, $theme, $path) {
  * Implements hook_proprocess_node().
  */
 function grundsalg_plots_preprocess_node(&$variables) {
+  $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
   // Add plots to subdivision.
-  if ($variables['view_mode'] == 'full' && $variables['node']->getType() == 'subdivision') {
-    if (isset($variables['node']->get('field_subdivision_id')->value)) {
+  if (($variables['view_mode'] == 'full' && $variables['node']->getType() == 'subdivision')) {
+    if (isset($variables['node']->get('field_subdivision_id')->value) || $use_dummy) {
       $variables['content']['plots'] = array(
         '#theme' => 'grundsalg_plots',
         '#type' => 'markup',
@@ -40,9 +41,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
             'variables' => array(
               'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
               'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
-              'use_dummy' => \Drupal::config('grundsalg_db_client.settings')->get('use_example_data'),
+              'use_dummy' => $use_dummy,
               'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
-              'subdivision_id' => $variables['node']->get('field_subdivision_id')->value,
+              'subdivision_id' => (isset($variables['node']->get('field_subdivision_id')->value) ? $variables['node']->get('field_subdivision_id')->value : 0 ),
               'form_template' => 0,
             )
           )
@@ -57,7 +58,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
  * Implements hook_form_alter()
  */
 function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (isset($form['field_subdivision_id'])) {
+  $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
+
+  if (isset($form['field_subdivision_id']) || $use_dummy) {
     $form['plots_wrapper'] = array(
       '#type' => 'details',
       '#title' => t('Plots'),
@@ -86,14 +89,13 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
           'variables' => array(
             'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
             'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
-            'use_dummy' => \Drupal::config('grundsalg_db_client.settings')->get('use_example_data'),
+            'use_dummy' => $use_dummy,
             'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
             'form_template' => 1,
           )
         )
       )
     );
-
     // Add angular wrapper
     $form['plots_wrapper']['plots'] = array(
       '#type' => 'item',
