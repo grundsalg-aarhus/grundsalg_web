@@ -14,13 +14,13 @@ https://www.drupal.org/docs/develop/using-composer/using-composer-with-drupal
 https://github.com/platformsh/platformsh-example-drupal8 for further information.
 * Config sync folder located in root folder.
 
-#### Module folder divided into contrib and custom.
+### Module folder divided into contrib and custom.
 Contrib modules added and managed by composer and not included in the github repo.
 
 Custom modules manually maintained and added to github.
 
 
-#### Profiles folder containing the itkore profile
+### Profiles folder containing the itkore profile
 ITKore profile is used as a base profile and contains a list of custom modules described within the install profile. https://github.com/aakb/itkore-profile
 
 The profile is detached from github and maintained through composer. Changes to the profile should only happen through a new release of the profile. The profile has it's own release cycle and changelog.
@@ -28,7 +28,7 @@ The profile is detached from github and maintained through composer. Changes to 
 ITKore profile depends on a list of contrib modules added to the grundsalg modules/contrib folder.
 
 
-#### Themes folder holding three themes
+### Themes folder holding three themes
 Contrib themes are added and managed by composer.
 * Adminimal theme used as a base theme (Contrib)
 * Grundsalg used as the main theme. (Custom)
