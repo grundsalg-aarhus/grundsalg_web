@@ -14,43 +14,64 @@ use Drupal\taxonomy\Entity\Term;
  * @package Drupal\grundsalg_api\Service
  */
 class ContentCreationService {
+  private $entityQueryService;
+  private $entityTypeManager;
+
   /**
    * Constructor.
    */
-  public function __construct() {}
+  public function __construct($entityQueryService, $entityTypeManager) {
+    $this->entityQueryService = $entityQueryService;
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
+   * Update Subdivision.
    *
+   * Checks if the overview_page the subdivision should be placed under exists, else returns.
+   * Checks if the area exists, else creates it (This also creates plot_type and cities taxonomy terms).
+   * Checks if the subdivision exists (then updates it), else creates it.
+   *
+   * @param $subdivisionId
+   *  The subdivision id supplied from Grundsalg Fagsystem.
+   * @param $subdivisionTitle
+   *  The title of the subdivision.
+   * @param $type
+   *  The type of the subdivision: Villagrund, Storparcel, Erhvervsgrund
+   * @param $postalCode
+   *  The postal code of the area to place the subdivision in.
+   * @param $cityName
+   *  The name of the city the postal code relates to.
    */
   public function updateSubdivision($subdivisionId, $subdivisionTitle, $type, $postalCode, $cityName) {
     // Make sure an overview with the $type exists.
-    $query = \Drupal::entityQuery('node')
+    $query = $this->entityQueryService->get('node', 'AND')
       ->condition('type', 'overview_page')
       ->condition('status', 1)
       ->condition('field_plot_type.entity.name', $type);
     $nids = $query->execute();
 
     // Load the overview.
-    $overview = \Drupal::entityTypeManager()->getStorage('node')->load(current($nids));
+    $overview = $this->entityTypeManager->getStorage('node')->load(current($nids));
 
     if (!isset($overview)) {
       throw new NotFoundHttpException('Overview not found with type = ' . $type);
     }
 
     // Make sure an area with $postalCode exists.
-    $query = \Drupal::entityQuery('node')
+    $query =  $this->entityQueryService->get('node', 'AND')
       ->condition('type', 'area')
       ->condition('field_plot_type.entity.name', $type)
       ->condition('field_city_reference.entity.field_postalcode', $postalCode);
     $nids = $query->execute();
 
     // Load the area.
-    $area = \Drupal::entityTypeManager()->getStorage('node')->load(current($nids));
+    $area = $this->entityTypeManager->getStorage('node')->load(current($nids));
 
     // If it does not exist, create it.
     if (!isset($area)) {
       // Make sure plot_type term exists with $type, else throw exception.
-      $query = \Drupal::entityQuery('taxonomy_term')
+      $query =  $this->entityQueryService->get('taxonomy_term', 'AND')
         ->condition('vid', 'plot_type')
         ->condition('name', $type);
       $nids = $query->execute();
@@ -64,7 +85,7 @@ class ContentCreationService {
       }
 
       // Make sure cities term exists with postalCode, else create it.
-      $query = \Drupal::entityQuery('taxonomy_term')
+      $query = $this->entityQueryService->get('taxonomy_term', 'AND')
         ->condition('vid', 'cities')
         ->condition('field_postalcode', $postalCode);
       $nids = $query->execute();
@@ -98,14 +119,14 @@ class ContentCreationService {
       $plotTypeTerm = $area->get('field_plot_type')->entity;
     }
 
-    // Find subdivision with $subdivisionId.
-    $query = \Drupal::entityQuery('node')
+    // Does the subdivision already exist?
+    $query =  $this->entityQueryService->get('node', 'AND')
       ->condition('type', 'subdivision')
       ->condition('field_subdivision_id', $subdivisionId);
     $nids = $query->execute();
 
     // Load the subdivision.
-    $subdivision = \Drupal::entityTypeManager()->getStorage('node')->load(current($nids));
+    $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
 
     // If the subdivision does not exist, create it.
     if (!isset($subdivision)) {
@@ -119,8 +140,11 @@ class ContentCreationService {
       ]);
     }
     else {
-      // Update subdivision.title with $subdivisionTitle.
       $subdivision->set('title', $subdivisionTitle);
+      $subdivision->set('field_subdivision_id', $subdivisionId);
+      $subdivision->set('field_parent', $area->id());
+      $subdivision->set('field_plot_type', $plotTypeTerm->id());
+      $subdivision->set('field_city_reference', $cityTerm->id());
     }
     $subdivision->save();
   }
