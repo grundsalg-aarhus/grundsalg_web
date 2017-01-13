@@ -1,0 +1,14 @@
+uuid: 78a48879-7821-45c5-aa02-15c7a5e8ae0b
+langcode: da
+status: true
+dependencies:
+  config:
+    - user.role.editor
+  module:
+    - user
+id: user_add_role_action.editor
+label: 'Tilføj rollen Editor til de valgte brugere'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: editor

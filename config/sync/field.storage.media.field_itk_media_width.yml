@@ -1,0 +1,26 @@
+uuid: cef75d6f-566b-4d21-bfda-3f8369646936
+langcode: da
+status: true
+dependencies:
+  enforced:
+    module:
+      - itk_media_entity
+  module:
+    - media_entity
+_core:
+  default_config_hash: PLAdi0Ib05P3U2Lb9GHOcORmeBLD5GlYeUXOZ2-d-r8
+id: media.field_itk_media_width
+field_name: field_itk_media_width
+entity_type: media
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

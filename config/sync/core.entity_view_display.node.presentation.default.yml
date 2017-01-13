@@ -1,0 +1,26 @@
+uuid: 473b7175-217d-44ee-aedf-1c231970e41a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.presentation.field_body
+    - field.field.node.presentation.field_teaser
+    - node.type.presentation
+  module:
+    - text
+    - user
+id: node.presentation.default
+targetEntityType: node
+bundle: presentation
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  field_teaser: true
+  langcode: true
+  links: true

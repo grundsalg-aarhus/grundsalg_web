@@ -1,0 +1,125 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Enable required modules
+ */
+function grundsalg_setup_update_8001() {
+  // Enable modules.
+  $module_list = array(
+    'entityqueue',
+    'maxlength',
+    'grundsalg_front',
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Enable grundsalg_tabs module
+ */
+function grundsalg_setup_update_8002() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_tabs'
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Enable several modules
+ */
+function grundsalg_setup_update_8003() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_slideshow',
+    'itk_media_entity',
+    'grundsalg_angular'
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Add reference tree module.
+ */
+function grundsalg_setup_update_8004() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_reference_tree',
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Add db client module.
+ */
+function grundsalg_setup_update_8005() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_db_client',
+  );
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+
+/**
+ * Add grundsalg plots module.
+ * Uninstall Imce module.
+ */
+function grundsalg_setup_update_8006() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_plots',
+  );
+
+  // Uninstall modules.
+  $uninstall_module_list = array(
+    'imce',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+  \Drupal::service('module_installer')->uninstall($uninstall_module_list);
+}
+
+
+/**
+ * Disable contextual links
+ */
+function grundsalg_setup_update_8007() {
+  // Uninstall modules.
+  $uninstall_module_list = array(
+    'contextual',
+  );
+
+  \Drupal::service('module_installer')->uninstall($uninstall_module_list);
+}
+
+
+
+/**
+ * Enable frontpage
+ */
+function grundsalg_setup_update_8008() {
+  // Uninstall modules.
+  $module_list = array(
+    'grundsalg_front',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+
+/**
+ * Cleanup dependency mess that disabled several modules.
+ */
+function grundsalg_setup_update_8009() {
+  // Uninstall modules.
+  $module_list = array(
+    'grundsalg_front',
+    'itk_cookie_message',
+    'itkore_admin',
+    'itkore_footer',
+  );
+
+  \Drupal::service('module_installer')->install($module_list);
+}

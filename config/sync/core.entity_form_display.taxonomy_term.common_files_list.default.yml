@@ -1,0 +1,31 @@
+uuid: 1efbe4d8-2e1b-4135-9b69-d01366a013c1
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.common_files_list.field_file
+    - taxonomy.vocabulary.common_files_list
+  module:
+    - file
+id: taxonomy_term.common_files_list.default
+targetEntityType: taxonomy_term
+bundle: common_files_list
+mode: default
+content:
+  field_file:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true

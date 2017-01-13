@@ -1,0 +1,30 @@
+uuid: a0043c81-2ce9-41bd-936c-5e59beb60bb8
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.fallback
+    - field.field.node.page.field_block_reference
+    - field.field.node.page.field_body
+    - field.field.node.page.field_teaser
+    - node.type.page
+  module:
+    - user
+_core:
+  default_config_hash: 0OMwscRy-FptZzG3Qevpw24ln4QvUSo2pSqovfH0Xjw
+id: node.page.fallback
+targetEntityType: node
+bundle: page
+mode: fallback
+content:
+  field_teaser:
+    type: basic_string
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_block_reference: true
+  field_body: true
+  langcode: true
+  links: true

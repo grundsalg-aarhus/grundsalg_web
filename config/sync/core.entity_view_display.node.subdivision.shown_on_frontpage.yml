@@ -1,0 +1,41 @@
+uuid: 3e3a595e-f0ad-48e5-a899-e6bed6a63bf8
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.shown_on_frontpage
+    - field.field.node.subdivision.field_body
+    - field.field.node.subdivision.field_plot_type
+    - field.field.node.subdivision.field_teaser
+    - node.type.subdivision
+  module:
+    - user
+id: node.subdivision.shown_on_frontpage
+targetEntityType: node
+bundle: subdivision
+mode: shown_on_frontpage
+content:
+  field_plot_type:
+    type: entity_reference_label
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_teaser:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_body: true
+  field_city_reference: true
+  field_media_document: true
+  field_media_image: true
+  field_parent: true
+  field_streetview_coordinates: true
+  field_subdivision_id: true
+  field_youtube: true
+  langcode: true
+  links: true

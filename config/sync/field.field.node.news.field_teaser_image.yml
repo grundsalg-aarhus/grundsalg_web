@@ -1,0 +1,28 @@
+uuid: 5c0a7dc6-c53e-44b3-980c-2d8ab46f2a9a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_image
+    - media_entity.bundle.image
+    - node.type.news
+id: node.news.field_teaser_image
+field_name: field_teaser_image
+entity_type: node
+bundle: news
+label: 'Teaser image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

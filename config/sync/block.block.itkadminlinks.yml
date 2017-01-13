@@ -1,0 +1,28 @@
+uuid: 5a73bbc2-49f2-435a-a37e-efe70abb6479
+langcode: da
+status: true
+dependencies:
+  module:
+    - itk_admin_links
+    - user
+  theme:
+    - grundsalg
+id: itkadminlinks
+theme: grundsalg
+region: content
+weight: -2
+provider: null
+plugin: itk_admin_links
+settings:
+  id: itk_admin_links
+  label: 'ITK Admin links'
+  provider: itk_admin_links
+  label_display: '0'
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      editor: editor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

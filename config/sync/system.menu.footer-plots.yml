@@ -1,0 +1,8 @@
+uuid: 910499b5-f349-4938-9c3d-cbe17fd7469f
+langcode: da
+status: true
+dependencies: {  }
+id: footer-plots
+label: Grunde
+description: 'Grunde menu i footer'
+locked: false

@@ -1,0 +1,10 @@
+uuid: 03ede60b-1d9a-4934-8f90-1581d967a936
+langcode: da
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.form_display_when_referenced
+label: 'Form display when referenced'
+targetEntityType: media
+cache: true

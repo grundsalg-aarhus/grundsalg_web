@@ -1,0 +1,14 @@
+uuid: 784fe800-05a7-4853-8af1-bea2a461166d
+langcode: da
+status: true
+dependencies: {  }
+name: fallback_display_image
+label: 'Fallback display image'
+effects:
+  f716e194-df21-422a-bb6c-072c8be00a6e:
+    uuid: f716e194-df21-422a-bb6c-072c8be00a6e
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1000
+      height: 356

@@ -1,0 +1,9 @@
+name: Grundsalg tabs
+type: module
+description: 'Sets up content tabs'
+package: Grundsalg
+dependencies:
+  - grundsalg_slideshow
+  - grundsalg_angular
+version: '8.x-1.0'
+core: '8.x'

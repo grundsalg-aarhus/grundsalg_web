@@ -1,0 +1,24 @@
+uuid: c26429ac-4e1c-42fa-ab58-6211c7c3440b
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.news
+_core:
+  default_config_hash: 3zgOWTr-4O0_aqtnpQhjXsMY-WbxI7B_UMAaH-eFuf4
+id: node.news.promote
+field_name: promote
+entity_type: node
+bundle: news
+label: 'Forfremmet til forside'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

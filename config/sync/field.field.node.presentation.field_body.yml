@@ -1,0 +1,21 @@
+uuid: 499be9f2-1866-498c-a32a-c0191c676576
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body
+    - node.type.presentation
+  module:
+    - text
+id: node.presentation.field_body
+field_name: field_body
+entity_type: node
+bundle: presentation
+label: Body
+description: 'The main content area'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

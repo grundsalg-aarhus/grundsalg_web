@@ -1,0 +1,25 @@
+uuid: d955a093-7df5-4d3f-91ff-37868949d21a
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.fallback
+    - field.field.node.content_block.field_body
+    - node.type.content_block
+  module:
+    - text
+    - user
+id: node.content_block.fallback
+targetEntityType: node
+bundle: content_block
+mode: fallback
+content:
+  field_body:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  langcode: true
+  links: true

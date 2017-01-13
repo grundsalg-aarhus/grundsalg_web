@@ -1,0 +1,9 @@
+name: Grundsalg slideshow
+type: module
+description: 'Creates slideshow from image media field'
+package: Grundsalg
+dependencies:
+  - grundsalg_angular
+  - itk_media_entity
+version: '8.x-1.0'
+core: '8.x'

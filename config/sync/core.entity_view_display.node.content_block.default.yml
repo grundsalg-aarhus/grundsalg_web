@@ -1,0 +1,24 @@
+uuid: 79ae09ad-90ff-4aa0-86de-27947923d44b
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.content_block.field_body
+    - node.type.content_block
+  module:
+    - text
+    - user
+id: node.content_block.default
+targetEntityType: node
+bundle: content_block
+mode: default
+content:
+  field_body:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  langcode: true
+  links: true

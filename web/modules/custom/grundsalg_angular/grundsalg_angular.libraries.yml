@@ -1,0 +1,12 @@
+angular:
+  js:
+    js/angular.min.js: {}
+    js/angular-animate.min.js: {}
+    js/angular-route.min.js: {}
+    js/app.js: {}
+
+  header: TRUE
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/jquery.ui

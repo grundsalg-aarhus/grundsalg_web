@@ -1,0 +1,38 @@
+<?php
+require_once __DIR__ . '/src/Client.php';
+require_once __DIR__ . '/src/Dummy.php';
+require_once __DIR__ . '/src/Collection.php';
+require_once __DIR__ . '/src/Item/Item.php';
+
+use Grundsalg\Client;
+use Grundsalg\Dummy;
+
+/**
+ * Create a connection to the remote db.
+ *
+ * @return \Grundsalg\Client|\Grundsalg\Dummy
+ * @throws \Exception
+ */
+
+function grundsalg_db_client_create_connection() {
+  $dummy_enabled = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
+
+  // If we are running dummy data.
+  if ($dummy_enabled) {
+    $client = new Dummy(array());
+  }
+  else {
+    // Setup client.
+    $db_url = \Drupal::config('grundsalg_db')->get('url');
+
+    // Missing variables.
+    if (empty($db_url)) {
+      throw new Exception('No db connection is configured');
+    }
+    else {
+      $client = new Client($db_url);
+    }
+  }
+
+  return $client;
+}

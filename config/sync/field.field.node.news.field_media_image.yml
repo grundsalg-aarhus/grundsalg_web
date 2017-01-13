@@ -1,0 +1,28 @@
+uuid: 8a7390ee-4aab-4e4b-b606-fd99df363634
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_image
+    - media_entity.bundle.image
+    - node.type.news
+id: node.news.field_media_image
+field_name: field_media_image
+entity_type: node
+bundle: news
+label: 'Main image'
+description: "Angiv de billeder der skal vises på denne nyhed.\r\nVed tilføjelse af flere billeder vil de blive vist som slideshow på siden."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

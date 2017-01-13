@@ -1,0 +1,48 @@
+uuid: f169a6ad-652a-4b5a-9408-abb64d093626
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.fallback
+    - field.field.node.subdivision.field_body
+    - field.field.node.subdivision.field_city_reference
+    - field.field.node.subdivision.field_media_document
+    - field.field.node.subdivision.field_media_image
+    - field.field.node.subdivision.field_parent
+    - field.field.node.subdivision.field_plot_type
+    - field.field.node.subdivision.field_streetview_coordinates
+    - field.field.node.subdivision.field_teaser
+    - field.field.node.subdivision.field_youtube
+    - node.type.subdivision
+  module:
+    - user
+id: node.subdivision.fallback
+targetEntityType: node
+bundle: subdivision
+mode: fallback
+content:
+  field_media_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: shown_in_teaser
+      link: false
+    third_party_settings: {  }
+  field_teaser:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_body: true
+  field_city_reference: true
+  field_media_document: true
+  field_parent: true
+  field_plot_type: true
+  field_streetview_coordinates: true
+  field_subdivision_id: true
+  field_youtube: true
+  langcode: true
+  links: true

@@ -1,0 +1,20 @@
+uuid: 43195db3-72fb-41c5-9a13-3be8e06ae313
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - grundsalg
+id: breadcrumbs
+theme: grundsalg
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

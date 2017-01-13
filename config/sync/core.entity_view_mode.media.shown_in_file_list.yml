@@ -1,0 +1,10 @@
+uuid: 519292d0-2db0-491f-9b58-a4f406b648bd
+langcode: da
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.shown_in_file_list
+label: 'Shown in file list'
+targetEntityType: media
+cache: true

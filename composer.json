@@ -26,8 +26,12 @@
         "drupal/core": "~8.0",
         "drush/drush": "~8.0",
         "drupal/console": "~1.0",
-        "drupal/itkore": "dev-master",
-        "drupal/itkore-theme": "dev-master"
+        "drupal/itkore": "~1.0",
+        "drupal/itkore-theme": "dev-master",
+        "drupal/entityqueue": "1.x-dev",
+        "drupal/maxlength": "1.x-dev",
+        "drupal/itk_media_entity": "^1.0",
+        "lcobucci/jwt": "^3.2"
     },
     "require-dev": {
         "behat/mink": "~1.7",
@@ -37,6 +41,9 @@
         "mikey179/vfsStream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8"
+    },
+    "replace": {
+        "drupal/link-link": "*"
     },
     "conflict": {
         "drupal/drupal": "*"

@@ -1,0 +1,22 @@
+uuid: 34a6f97b-9052-4227-ae82-542a1a55a703
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: area_and_subdivision_node_types
+label: 'Area node type'
+type: 'canonical_entities:node'
+pattern: '[node:field_parent:entity:title]/[node:title]'
+selection_criteria:
+  bce44beb-0e2f-4fb0-ab5f-6271b211f469:
+    id: node_type
+    bundles:
+      area: area
+    negate: false
+    context_mapping:
+      node: node
+    uuid: bce44beb-0e2f-4fb0-ab5f-6271b211f469
+selection_logic: and
+weight: -5
+relationships: {  }

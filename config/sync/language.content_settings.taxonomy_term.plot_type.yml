@@ -1,0 +1,11 @@
+uuid: e7e4e7a7-36b7-4754-aa6d-ed8db4310170
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.plot_type
+id: taxonomy_term.plot_type
+target_entity_type_id: taxonomy_term
+target_bundle: plot_type
+default_langcode: site_default
+language_alterable: false

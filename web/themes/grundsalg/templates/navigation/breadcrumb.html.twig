@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+
+{% if plot_type == 'Villagrund' %}
+  {% set classes = 'is-villa' %}
+{% endif %}
+
+{% if plot_type == 'Erhvervsgrund' %}
+  {% set classes = 'is-erhverv' %}
+{% endif %}
+
+{% if plot_type == 'Storparcel' %}
+  {% set classes = 'is-storparcel' %}
+{% endif %}
+
+{% if breadcrumb %}
+  <nav class="breadcrumb {{ classes }}" role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <a class="breadcrumb--home" href="/">
+      <svg viewBox="0 0 10 11" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 4.23h10V11H0V4.23zM5 0l5 4.23H0L5 0zM3.333 6.77h3.334V11H3.333V6.77z" class="breadcrumb--home-svg" fill="#827d7d" fill-rule="evenodd"></path>
+      </svg>
+    </a>
+    {% for item in breadcrumb %}
+      {% if item.url %}
+        <a class="breadcrumb--link" href="{{ item.url }}">{{ item.text }}</a>
+      {% endif %}
+      <span class="breadcrumb--divider">/</span>
+    {% endfor %}
+  </nav>
+{% endif %}

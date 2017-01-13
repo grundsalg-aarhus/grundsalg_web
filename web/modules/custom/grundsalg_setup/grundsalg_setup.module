@@ -1,0 +1,76 @@
+<?php
+
+function grundsalg_setup_theme_suggestions_alter(array &$suggestions, array $variables) {
+  if (isset($variables['form']) && $variables['theme_hook_original'] == 'node_edit_form') {
+    $suggestions[] = 'grundsalg_setup_node_form';
+  }
+
+  return $suggestions;
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function grundsalg_setup_theme($existing, $type, $theme, $path) {
+  return array(
+    'grundsalg_setup_node_form' => array(
+      'render element' => 'form',
+      'template' => 'grundsalg-setup-node-form'
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function grundsalg_setup_form_node_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['revision']['#access'] = FALSE;
+  $form['revision_information']['#access'] = FALSE;
+  $form['advanced']['#attributes']['style'] = 'margin-top:1em';
+  $form['#attached']['library'][] = 'grundsalg_setup/form_styles';
+  $form['field_media_image']['widget']['entity_browser']['#weight'] = -10;
+  $form['field_media_image']['widget']['current']['#weight'] = -50;
+  $form['field_media_document']['widget']['entity_browser']['#weight'] = -10;
+  $form['field_media_document']['widget']['current']['#weight'] = -50;
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function grundsalg_setup_form_itkore_footer_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+  $form['contact_text'] = array(
+    '#title' => t('Contact information'),
+    '#type' => 'text_format',
+    '#format' => 'filtered_html',
+    '#default_value' => ($config->get('contact_text')) ? $config->get('contact_text') : '',
+    '#weight' => '0',
+  );
+  $form['#submit'][]= '_grundsalg_setup_form_submit_handler';
+}
+
+
+/**
+ * Custom submit handler for footer settings form.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _grundsalg_setup_form_submit_handler($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  // Set the contact settings as part of submit.
+  \Drupal::getContainer()->get('itkore_admin.itkore_config')->set('contact_text', $form_state->getValue('contact_text')['value']);
+}
+
+
+/**
+ * Implements hook_preprocess_itkore_footer_block().
+ *
+ * @param $variables
+ */
+function grundsalg_preprocess_itkore_footer_block(&$variables) {
+  $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+  $variables['contact_text'] = check_markup($config->get('contact_text'), 'filtered_html');
+}

@@ -1,0 +1,9 @@
+uuid: 1fb2bd20-5d95-47ed-89b6-3866f1348e05
+langcode: da
+status: true
+dependencies: {  }
+name: 'Plot type'
+vid: plot_type
+description: 'Different types of plots'
+hierarchy: 0
+weight: 0

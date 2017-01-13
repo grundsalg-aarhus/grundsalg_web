@@ -1,0 +1,23 @@
+uuid: 3d0fd9e0-f834-48bf-9a2a-5ad6e931657e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_postalcode
+    - taxonomy.vocabulary.cities
+id: taxonomy_term.cities.field_postalcode
+field_name: field_postalcode
+entity_type: taxonomy_term
+bundle: cities
+label: Postalcode
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

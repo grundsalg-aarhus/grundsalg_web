@@ -1,0 +1,30 @@
+uuid: 5e1c573d-8bae-42ab-8e85-939d93b166e8
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.shown_on_frontpage
+    - field.field.node.page.field_block_reference
+    - field.field.node.page.field_body
+    - field.field.node.page.field_teaser
+    - node.type.page
+  module:
+    - user
+_core:
+  default_config_hash: 0OMwscRy-FptZzG3Qevpw24ln4QvUSo2pSqovfH0Xjw
+id: node.page.shown_on_frontpage
+targetEntityType: node
+bundle: page
+mode: shown_on_frontpage
+content:
+  field_teaser:
+    type: basic_string
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_block_reference: true
+  field_body: true
+  langcode: true
+  links: true

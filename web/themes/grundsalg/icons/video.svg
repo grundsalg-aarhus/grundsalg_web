@@ -1,0 +1,15 @@
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>
+    video
+  </title>
+  <defs>
+    <circle id="a" cx="25" cy="25" r="25"/>
+    <mask id="b" x="0" y="0" width="50" height="50" fill="#fff">
+      <use xlink:href="#a"/>
+    </mask>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use class="icon-color" stroke="#1A1918" mask="url(#b)" stroke-width="4" xlink:href="#a"/>
+    <path class="icon-color" d="M18.208 16.395v18.21l15.61-9.105-15.61-9.105zm2.084 3.627l9.39 5.478-9.39 5.478V20.022z" fill="#1A1918"/>
+  </g>
+</svg>

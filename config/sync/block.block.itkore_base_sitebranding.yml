@@ -1,0 +1,25 @@
+uuid: fe0c6212-1cd6-443a-abba-d90d2558e8d4
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - itkore_base
+_core:
+  default_config_hash: _FKNAaS0oOx7lKwC7DDy5spfzV4Zo65pN8D5RGwIzlE
+id: itkore_base_sitebranding
+theme: itkore_base
+region: nav_menu
+weight: -4
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

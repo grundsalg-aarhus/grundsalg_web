@@ -1,0 +1,19 @@
+uuid: 7e29bb3e-b0cb-42aa-8a4a-aeb152bade29
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_streetview_coordinates
+    - node.type.subdivision
+id: node.subdivision.field_streetview_coordinates
+field_name: field_streetview_coordinates
+entity_type: node
+bundle: subdivision
+label: 'Streetview koordinater'
+description: "Et X,Y koordinatsæt.\r\nBrug eksempelvis <a href=\"https://www.google.com/maps\" target=\"_blank\">Google maps</a> til at finde et passende sæt koordinater."
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
