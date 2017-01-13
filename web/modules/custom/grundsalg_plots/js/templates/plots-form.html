@@ -1,22 +1,18 @@
-<div>
-  <div class="content-box--content">
-    <div class="boxes">
-      <div ng-click="fetchPlots()" class="adminimal button">Hent grunde</div>
-      <div class="boxes--inner">
-        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots">
-          <div class="form-item">
-            <div class="container-inline">
-              <h4 class="label inline">Status</h4> {{ plot.address }}
-            </div>
-            <div class="container-inline">
-              <h4 class="label inline">Status</h4> {{ plot.status }}
-            </div>
-            <div class="container-inline">
-              <h4 class="label inline">Areal (m2)</h4> {{ plot.area_m2 }}
-            </div>
-          </div>
-        </article>
-      </div>
+<div class="plots-list">
+  <div ng-click="fetchPlots()" class="adminimal button">Hent grunde</div>
+  <div class="entities-list">
+    <div class="item-container rendered-entity" data-ng-repeat="plot in plots">
+      <article class="view-mode-form-display-when-referenced">
+        <div class="field--name-name">
+          <h4 class="label inline">Adresse</h4> {{ plot.address }}
+        </div>
+        <div class="field--name-name">
+          <h4 class="label inline">Status</h4> {{ plot.status }}
+        </div>
+        <div class="field--name-name">
+          <h4 class="label inline">Areal (m2)</h4> {{ plot.area_m2 }}
+        </div>
+      </article>
     </div>
   </div>
 </div>

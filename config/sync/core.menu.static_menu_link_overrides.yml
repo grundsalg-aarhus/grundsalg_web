@@ -1,4 +1,10 @@
-definitions: {  }
+definitions:
+  help__main:
+    enabled: false
+    menu_name: admin
+    parent: system.admin
+    expanded: false
+    weight: 9
 _core:
   default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM
 langcode: da

@@ -56,5 +56,3 @@ function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterfac
     }
   }
 }
-
-

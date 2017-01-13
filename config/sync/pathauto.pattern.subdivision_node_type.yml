@@ -1,0 +1,22 @@
+uuid: 08549aeb-013d-4788-ac35-a66d55353b89
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: subdivision_node_type
+label: 'Subdivision node type'
+type: 'canonical_entities:node'
+pattern: '[node:field_parent:entity:field_parent:entity:title]/[node:field_parent:entity:title]/[node:title]'
+selection_criteria:
+  f81b3528-7909-4882-a7d6-015756ecda72:
+    id: node_type
+    bundles:
+      subdivision: subdivision
+    negate: false
+    context_mapping:
+      node: node
+    uuid: f81b3528-7909-4882-a7d6-015756ecda72
+selection_logic: and
+weight: -5
+relationships: {  }

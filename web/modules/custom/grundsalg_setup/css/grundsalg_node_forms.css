@@ -66,16 +66,38 @@
     text-align: center;
 }
 
+
 /* Document browser specific */
 .field--name-field-media-document.field--widget-entity-browser-entity-reference .rendered-entity {
-    background: #f3f3f3;
+    background: #fafafa;
     padding: .4em;
     text-align: center;
     width: 85px;
+    border: 1px solid #ddd;
 }
-
 
 .field--name-field-media-document.field--widget-entity-browser-entity-reference .view-mode-form-display-when-referenced {
     display: inline-block;
     width: 85px;
+}
+
+
+/* Plot list specific. */
+.plots-list .rendered-entity {
+    background: #fafafa;
+    padding: .4em;
+    text-align: left;
+    width: 200px;
+    border: 1px solid #ddd;
+    display: inline-block;
+}
+
+.plots-list .rendered-entity:hover {
+    cursor: auto;
+    opacity: 1;
+}
+
+.plots-list .view-mode-form-display-when-referenced {
+    display: inline-block;
+    width: 200px;
 }
