@@ -169,6 +169,11 @@ class ContentCreationTestsController extends ControllerBase {
 
     $results['test5'] = $this->test5();
 
+    $this->cleanContent();
+    $this->createBaseContent();
+
+    $results['test6'] = $this->test6();
+
     return new JsonResponse($results);
   }
 
@@ -255,7 +260,34 @@ class ContentCreationTestsController extends ControllerBase {
     return count($nids) == 1 && count($tids) == 1 && count($aids) == 1;
   }
 
+  /**
+   * Test that a subdivision can be updated with new area and postal_code.
+   */
   public function test6() {
+    $this->contentCreationService->updateSubdivision(1, 'SubTest1', 'Villagrund', 9999, 'TestBy3');
+    $this->contentCreationService->updateSubdivision(1, 'SubTest2', 'Villagrund', 8888, 'TestBy4');
+    $this->contentCreationService->updateSubdivision(1, 'SubTest1', 'Villagrund', 9999, 'TestBy3');
+    $this->contentCreationService->updateSubdivision(1, 'SubTest2', 'Villagrund', 8888, 'TestBy4');
 
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'subdivision')
+      ->condition('field_subdivision_id', 1);
+    $nids1 = $query->execute();
+
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'subdivision')
+      ->condition('field_subdivision_id', 1)
+      ->condition('title', 'SubTest2')
+      ->condition('field_city_reference.entity.field_postalcode', 8888)
+      ->condition('field_city_reference.entity.name', 'TestBy4');
+    $nids2 = $query->execute();
+
+    $query = \Drupal::entityQuery('node')
+      ->condition('type', 'subdivision')
+      ->condition('field_subdivision_id', 1)
+      ->condition('title', 'SubTest1');
+    $nids3 = $query->execute();
+
+    return count($nids1) == 1 && count($nids2) == 1 && count($nids3) == 0;
   }
 }
