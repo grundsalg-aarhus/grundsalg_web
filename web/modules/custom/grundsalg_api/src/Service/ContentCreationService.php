@@ -52,7 +52,9 @@ class ContentCreationService {
     $nids = $query->execute();
 
     // Load the overview.
-    $overview = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    if (count($nids) > 0) {
+      $overview = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    }
 
     if (!isset($overview)) {
       throw new NotFoundHttpException('Overview not found with type = ' . $type);
@@ -66,7 +68,9 @@ class ContentCreationService {
     $nids = $query->execute();
 
     // Load the area.
-    $area = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    if (count($nids) > 0) {
+      $area = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    }
 
     // If it does not exist, create it.
     if (!isset($area)) {
@@ -91,7 +95,9 @@ class ContentCreationService {
       $nids = $query->execute();
 
       // Load the cities term.
-      $cityTerm = Term::load(current($nids));
+      if (count($nids) > 0) {
+        $cityTerm = Term::load(current($nids));
+      }
 
       // If cities term does not exist, create it.
       if (!isset($cityTerm)) {
@@ -126,7 +132,9 @@ class ContentCreationService {
     $nids = $query->execute();
 
     // Load the subdivision.
-    $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    if (count($nids) > 0) {
+      $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
+    }
 
     // If the subdivision does not exist, create it.
     if (!isset($subdivision)) {

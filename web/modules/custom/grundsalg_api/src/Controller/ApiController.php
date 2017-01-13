@@ -16,13 +16,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class ApiController extends ControllerBase {
   /**
-   * Endpoint to notify when an udstykning has been updated in the Fagsystem.
+   * Endpoint to notify when a subdivision has been updated in the Fagsystem.
 
    * @param $id
    *
    * @return JsonResponse
    */
-  public function udstykningUpdated($id) {
+  public function subdivisionUpdated($id) {
     $client = new Client();
 
     try {
