@@ -1,0 +1,7 @@
+grundsalg.api.update_subdivision:
+  path: '/api/subdivision/{id}/updated'
+  defaults:
+    _controller: '\Drupal\grundsalg_api\Controller\ApiController::subdivisionUpdated'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST|GET'
