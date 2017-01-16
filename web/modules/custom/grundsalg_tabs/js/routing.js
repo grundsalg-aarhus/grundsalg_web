@@ -3,9 +3,10 @@
  * Contains routing for Tabs.
  */
 
-angular.module('grundsalg').config([
-    '$routeProvider', '$locationProvider',
+angular.module('grundsalg').config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
+      'use strict';
+
       // Configure Hash prefix.
       $locationProvider.hashPrefix('');
 
@@ -16,7 +17,7 @@ angular.module('grundsalg').config([
         controller: 'MapController'
       })
       .when('/images', {
-        templateUrl: drupalSettings.variables.grundsalg_slideshow_module_path + '/js/templates/slideshow.html',
+        templateUrl: drupalSettings.variables.grundsalg_slideshow_app_dir + '/js/templates/slideshow.html',
         controller: 'SlideshowController'
       })
       .when('/video', {

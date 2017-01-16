@@ -11,13 +11,13 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
 
-    // Add slideshow app to page.
+    // Add slide-show app to page.
     if (($type != 'subdivision' && $type != 'area')) {
 
       // Provide module path to js.
       $variables['#attached']['drupalSettings'] = array(
         'variables' => array(
-          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
+          'grundsalg_slideshow_app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
         ),
       );
 

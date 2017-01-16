@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation!
+ */
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
@@ -21,7 +25,6 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       $variables['#attached']['drupalSettings'] = array(
         'variables' => array(
           'app_dir' => '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js',
-          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
         ),
       );
 
@@ -32,7 +35,7 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       if (isset($variables['node']->field_media_image->target_id)) {
         foreach ($variables['node']->get('field_media_image') as $key => $item) {
           $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
-          
+
           $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
             'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
             'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
