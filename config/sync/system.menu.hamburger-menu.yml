@@ -1,0 +1,8 @@
+uuid: 007f4402-e819-43b6-8ad2-e3cdfb4e6740
+langcode: da
+status: true
+dependencies: {  }
+id: hamburger-menu
+label: 'Hamburger menu'
+description: 'Hamburger menu'
+locked: false
