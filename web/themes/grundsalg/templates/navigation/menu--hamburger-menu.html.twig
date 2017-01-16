@@ -30,17 +30,20 @@
   {% import _self as menus %}
     {% if items %}
       {% for item in items %}
-        {% set item_classes = ['nav--link'] %}
-        {% if item.type == 'villa' %}
-          {% set item_classes = item_classes|merge(['is-villa']) %}
+        {% if hamburger_menu == true %}
+          {% if menu_level == 0 %}
+            <div class="hamburger-menu--group {% if item.in_active_trail %} is-active {% endif %}">
+          {% endif %}
+            <div class="hamburger-menu--sub-group">
+              {{ link(item.title, item.url, attributes) }}
+            </div>
+            {{ menus.menu_links(item.below, {'class' : 'hamburger-menu--link is-sub'}, menu_level + 1, hamburger_menu) }}
+          {% if menu_level == 0 %}
+            </div>
+          {% endif %}
+        {% else %}
+          {{ link(item.title, item.url, { 'class': item_classes }) }}
         {% endif %}
-        {% if item.type == 'erhverv' %}
-          {% set item_classes = item_classes|merge(['is-erhverv']) %}
-        {% endif %}
-        {% if item.type == 'storparcel' %}
-          {% set item_classes = item_classes|merge(['is-storparcel']) %}
-        {% endif %}
-        {{ link(item.title, item.url, { 'class': item_classes }) }}
       {% endfor %}
     {% endif %}
 {% endmacro %}
