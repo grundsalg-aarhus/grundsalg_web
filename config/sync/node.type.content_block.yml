@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Indholdsblok
 type: content_block
-description: 'A block to be placed on multiple static pages'
+description: 'En indholdsblok der kan placeres på flere statiske sider'
 help: ''
 new_revision: false
 preview_mode: 0

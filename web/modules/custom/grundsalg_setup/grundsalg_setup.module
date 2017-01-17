@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
 function grundsalg_setup_theme_suggestions_alter(array &$suggestions, array $variables) {
   if (isset($variables['form']) && $variables['theme_hook_original'] == 'node_edit_form') {
     $suggestions[] = 'grundsalg_setup_node_form';
@@ -70,7 +73,33 @@ function _grundsalg_setup_form_submit_handler($form, \Drupal\Core\Form\FormState
  *
  * @param $variables
  */
-function grundsalg_preprocess_itkore_footer_block(&$variables) {
+function grundsalg_setup_preprocess_itkore_footer_block(&$variables) {
   $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
   $variables['contact_text'] = check_markup($config->get('contact_text'), 'filtered_html');
+}
+
+
+/**
+ * Implements hook_js_alter().
+ *
+ * Search angular applications for drupal translations.
+ */
+function grundsalg_setup_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  $files = array();
+  $path = 'modules/custom';
+
+  // Files to scan for translations (js and templates).
+  $extensions = Array( 'js', 'html' );
+
+  // Find the files.
+  $it = new RecursiveDirectoryIterator($path);
+  foreach(new RecursiveIteratorIterator($it) as $file)  {
+    $ext = pathinfo($file, PATHINFO_EXTENSION);
+    if (in_array($ext, $extensions)) {
+      $files[] = $file->getPathname();
+    }
+  }
+
+  // Scan the files to get translations into the database.
+  locale_js_translate($files);
 }

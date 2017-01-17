@@ -11,7 +11,7 @@ dependencies:
 _core:
   default_config_hash: '-fJpPBLfGRPa6VPFiBweHcjlSOTqltsw5cbz8VVqXAI'
 id: media
-label: Media
+label: Medier
 module: views
 description: ''
 tag: ''
@@ -803,7 +803,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Media
+      title: Medier
       header: {  }
       footer: {  }
       empty:
@@ -833,14 +833,14 @@ display:
   media_page_list:
     display_plugin: page
     id: media_page_list
-    display_title: Media
+    display_title: Medier
     position: 1
     display_options:
       display_extenders: {  }
       path: admin/content/media
       menu:
         type: tab
-        title: Media
+        title: Medier
         description: ''
         expanded: false
         parent: ''

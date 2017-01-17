@@ -43,7 +43,6 @@ angular.module('grundsalg').controller('ShowPlotsController', [
         if (drupalSettings.variables.use_dummy > 0) {
           url = drupalSettings.variables.dummy_plots;
         }
-        console.log('123');
         $http({
           method: 'GET',
           url: url

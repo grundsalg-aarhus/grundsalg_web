@@ -10,7 +10,7 @@ id: node.news.field_teaser_image
 field_name: field_teaser_image
 entity_type: node
 bundle: news
-label: 'Teaser image'
+label: 'Teaser billede'
 description: ''
 required: false
 translatable: false

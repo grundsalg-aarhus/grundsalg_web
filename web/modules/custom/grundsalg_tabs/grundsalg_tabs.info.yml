@@ -1,5 +1,7 @@
 name: Grundsalg tabs
 type: module
+interface translation project: grundsalg_tabs
+interface translation server pattern: modules/custom/grundsalg_tabs/translations/grundsalg_tabs.%language.po
 description: 'Sets up content tabs'
 package: Grundsalg
 dependencies:

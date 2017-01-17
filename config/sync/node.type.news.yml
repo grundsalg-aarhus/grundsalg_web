@@ -12,7 +12,7 @@ _core:
   default_config_hash: dpXg2bDua7pZJT2dc1czxP-OU2S2_psXPnwuvGAY_Eo
 name: Nyhed
 type: news
-description: 'News for the site'
+description: 'Nyheder til sitet'
 help: ''
 new_revision: false
 preview_mode: 0
