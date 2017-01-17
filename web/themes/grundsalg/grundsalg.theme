@@ -110,6 +110,7 @@ function grundsalg_preprocess_breadcrumb(&$variables) {
 
       // Set the cache context to depend on url.
       $variables['#cache']['contexts'][] = 'url';
+      $variables['#cache']['max-age'] = 0;
     }
   }
 }
