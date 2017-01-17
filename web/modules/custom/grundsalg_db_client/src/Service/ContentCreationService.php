@@ -4,14 +4,15 @@
  * Contains services to create content in Grundsalg.
  */
 
-namespace Drupal\grundsalg_api\Service;
+namespace Drupal\grundsalg_db_client\Service;
+
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 
 /**
  * Class ContentCreationService
- * @package Drupal\grundsalg_api\Service
+ * @package Drupal\grundsalg_db_client\Service
  */
 class ContentCreationService {
   private $entityQueryService;

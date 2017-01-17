@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Contains \Drupal\grundsalg_api\Controller\ApiController
+ * Contains \Drupal\grundsalg_db_client\Controller\ApiController
  */
 
-namespace Drupal\grundsalg_api\Controller;
+namespace Drupal\grundsalg_db_client\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use GuzzleHttp\Exception\RequestException;
@@ -26,7 +26,9 @@ class ApiController extends ControllerBase {
     $client = new Client();
 
     try {
-      $res = $client->request('GET', 'http://192.168.50.118/public/api/udstykning/' . $id);
+      $url = \Drupal::config('grundsalg_db')->get('url');
+
+      $res = $client->request('GET', $url . '/udstykning/' . $id);
 
       $contentCreationService = \Drupal::service('grundsalg.content_creation');
 
