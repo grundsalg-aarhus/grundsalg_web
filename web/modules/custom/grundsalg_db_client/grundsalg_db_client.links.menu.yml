@@ -1,6 +1,6 @@
-grundsalg_db_client:
+grundsalg_db_client.menu:
   title: Grundsalg DB Client
   description: 'Setup for grundsalg db client.'
-  route_name: grundsalg_db_client
+  route_name: grundsalg_db_client.config_client
   weight: 9
   parent: system.admin

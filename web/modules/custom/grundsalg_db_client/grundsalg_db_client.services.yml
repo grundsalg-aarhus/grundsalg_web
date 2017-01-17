@@ -1,4 +1,4 @@
 services:
   grundsalg.content_creation:
-    class: Drupal\grundsalg_api\Service\ContentCreationService
+    class: Drupal\grundsalg_db_client\Service\ContentCreationService
     arguments: ['@entity.query', '@entity_type.manager']

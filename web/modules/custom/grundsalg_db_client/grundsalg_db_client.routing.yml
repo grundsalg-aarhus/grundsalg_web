@@ -1,7 +1,15 @@
-grundsalg_db_client:
+grundsalg_db_client.config_client:
   path: '/admin/db-client'
   defaults:
     _form: '\Drupal\grundsalg_db_client\Form\GrundsalgDbClientSettingsForm'
     _title: 'Settings'
   requirements:
     _permission: 'administer site configuration'
+
+grundsalg_db_client.update_subdivision:
+  path: '/api/udstykning/{id}/updated'
+  defaults:
+    _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::subdivisionUpdated'
+  requirements:
+    _permission: 'access content'
+    _method: 'POST|GET'
