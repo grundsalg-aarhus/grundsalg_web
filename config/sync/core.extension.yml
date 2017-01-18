@@ -24,6 +24,7 @@ module:
   grundsalg_db_client: 0
   grundsalg_front: 0
   grundsalg_plots: 0
+  grundsalg_maps: 0
   grundsalg_reference_tree: 0
   grundsalg_setup: 0
   grundsalg_slideshow: 0

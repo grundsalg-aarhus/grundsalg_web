@@ -7,6 +7,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
   function($scope, $http) {
     'use strict';
 
+    console.log('HERHER');
+
     /**
      * Cookie object.
      *

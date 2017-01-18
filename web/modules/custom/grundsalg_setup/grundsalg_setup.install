@@ -61,7 +61,6 @@ function grundsalg_setup_update_8005() {
   \Drupal::service('module_installer')->install($module_list);
 }
 
-
 /**
  * Add grundsalg plots module.
  * Uninstall Imce module.
@@ -81,7 +80,6 @@ function grundsalg_setup_update_8006() {
   \Drupal::service('module_installer')->uninstall($uninstall_module_list);
 }
 
-
 /**
  * Disable contextual links
  */
@@ -93,8 +91,6 @@ function grundsalg_setup_update_8007() {
 
   \Drupal::service('module_installer')->uninstall($uninstall_module_list);
 }
-
-
 
 /**
  * Enable frontpage
@@ -108,7 +104,6 @@ function grundsalg_setup_update_8008() {
   \Drupal::service('module_installer')->install($module_list);
 }
 
-
 /**
  * Cleanup dependency mess that disabled several modules.
  */
@@ -121,5 +116,16 @@ function grundsalg_setup_update_8009() {
     'itkore_footer',
   );
 
+  \Drupal::service('module_installer')->install($module_list);
+}
+
+/**
+ * Add maps custom module
+ */
+function grundsalg_setup_update_8010() {
+  // Enable modules.
+  $module_list = array(
+    'grundsalg_maps',
+  );
   \Drupal::service('module_installer')->install($module_list);
 }
