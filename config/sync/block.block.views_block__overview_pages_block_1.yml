@@ -1,0 +1,30 @@
+uuid: 7d536f05-a88d-449e-a2b8-feae9ea7d843
+langcode: da
+status: true
+dependencies:
+  config:
+    - views.view.overview_pages
+  module:
+    - system
+    - views
+  theme:
+    - grundsalg
+id: views_block__overview_pages_block_1
+theme: grundsalg
+region: content
+weight: 5
+provider: null
+plugin: 'views_block:overview_pages-block_1'
+settings:
+  id: 'views_block:overview_pages-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /nyheder
+    negate: false
+    context_mapping: {  }
