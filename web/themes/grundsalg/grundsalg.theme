@@ -19,24 +19,27 @@ function grundsalg_theme_suggestions_field_alter(array &$suggestions, array $var
 function grundsalg_preprocess_menu(&$variables) {
   $variables['hamburger_menu'] = FALSE;
   $current_path = \Drupal::request()->getRequestUri();
-  if ($variables['menu_name'] == 'main') {
+  if ($variables['menu_name'] == 'hamburger-menu') {
     // The only way to identify which region is rendering the menu block is to check for expanded (Main nav does not have any children and neither of the parents are expanded.)
     // This won't work if for some reason none of the menu items have any children,
     foreach ($variables['items'] as $key => $item) {
       $variables['items'][$key]['attributes']->addClass('nav--link');
-      if ($item['is_expanded'] == TRUE) {
-        $variables['hamburger_menu'] = TRUE;
-      }
+      $variables['hamburger_menu'] = TRUE;
+    }
+  }
+
+  if ($variables['menu_name'] == 'main') {
+    foreach ($variables['items'] as $key => $item) {
       // Look for  certain paths and add additional classes.
       if ($item['url']->toString() == $current_path) {
         switch ($current_path) {
-          case '/villagrund' :
+          case '/villagrunde' :
             $variables['items'][$key]['type'] = 'villa';
             break;
-          case '/erhvervsgrund' :
+          case '/erhvervsgrunde' :
             $variables['items'][$key]['type'] = 'erhverv';
             break;
-          case '/storparcel' :
+          case '/storparceller' :
             $variables['items'][$key]['type'] = 'storparcel';
             break;
         }
@@ -107,6 +110,7 @@ function grundsalg_preprocess_breadcrumb(&$variables) {
 
       // Set the cache context to depend on url.
       $variables['#cache']['contexts'][] = 'url';
+      $variables['#cache']['max-age'] = 0;
     }
   }
 }

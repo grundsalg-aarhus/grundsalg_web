@@ -10,7 +10,7 @@ id: node.area.field_teaser_image
 field_name: field_teaser_image
 entity_type: node
 bundle: area
-label: 'Teaser image'
+label: 'Teaser billede'
 description: ''
 required: false
 translatable: true

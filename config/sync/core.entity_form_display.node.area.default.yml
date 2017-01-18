@@ -30,10 +30,11 @@ third_party_settings:
       label: Teaser
       format_type: details
       format_settings:
-        open: false
+        label: Teaser
         required_fields: true
-        classes: ''
         id: ''
+        classes: ''
+        open: false
     group_main_content:
       children:
         - title
@@ -114,7 +115,7 @@ content:
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: 'Postal code or city'
+      placeholder: 'Postnr. eller by'
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
   field_media_image:

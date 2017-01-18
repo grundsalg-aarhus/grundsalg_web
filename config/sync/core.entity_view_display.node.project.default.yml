@@ -1,0 +1,56 @@
+uuid: 54bb20bf-4121-4497-94b7-c24624a569b2
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.project.field_coordinate
+    - field.field.node.project.field_external_link
+    - field.field.node.project.field_teaser
+    - field.field.node.project.field_teaser_image
+    - node.type.project
+  module:
+    - link
+    - user
+id: node.project.default
+targetEntityType: node
+bundle: project
+mode: default
+content:
+  field_coordinate:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_external_link:
+    weight: 103
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+  field_teaser:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_teaser_image:
+    weight: 101
+    label: above
+    settings:
+      view_mode: shown_on_content_main_image_and_slideshow
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

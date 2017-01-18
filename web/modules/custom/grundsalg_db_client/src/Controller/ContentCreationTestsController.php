@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains \Drupal\grundsalg_api\Controller\ContentCreationTestsController
+ * Contains \Drupal\grundsalg_db_client\Controller\ContentCreationTestsController
  *
  * Notice! This a hacked way of testing the Service.
  * You should point to a testing database and not expose the route in prod.
@@ -17,7 +17,7 @@
  *     _method: 'GET'
  */
 
-namespace Drupal\grundsalg_api\Controller;
+namespace Drupal\grundsalg_db_client\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;

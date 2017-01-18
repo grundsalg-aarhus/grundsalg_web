@@ -1,4 +1,4 @@
-uuid: 23dd451f-4333-49b9-ac76-fa83275ea82a
+uuid: d79ea7b5-ba42-4fb4-9838-c6b32aa9d52c
 langcode: da
 status: true
 dependencies:
@@ -8,10 +8,10 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: Præsentation
-type: presentation
-description: 'A project presentation'
+name: Projekt
+type: project
+description: 'Et eksternt link til et projekt'
 help: ''
 new_revision: false
 preview_mode: 0
-display_submitted: false
+display_submitted: true

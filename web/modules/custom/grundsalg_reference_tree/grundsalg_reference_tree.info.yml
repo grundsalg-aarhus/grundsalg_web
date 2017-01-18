@@ -1,5 +1,7 @@
 name: Grundsalg reference tree
 type: module
+interface translation project: grundsalg_reference_tree
+interface translation server pattern: modules/custom/grundsalg_reference_tree/translations/grundsalg_reference_tree.%language.po
 description: 'Automates parent referencing based on slot type for area and subdivision content types'
 package: Grundsalg
 version: '8.x-1.0'

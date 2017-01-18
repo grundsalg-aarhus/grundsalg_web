@@ -11,7 +11,7 @@ id: node.overview_page.field_body
 field_name: field_body
 entity_type: node
 bundle: overview_page
-label: Body
+label: Hovedindhold
 description: 'The main content area'
 required: false
 translatable: true

@@ -1,17 +1,17 @@
-uuid: 74e96a58-5d11-4019-8d01-e1f70c75eb9c
+uuid: 83bf46b8-2e8c-46dc-bcdf-5e7707c77563
 langcode: da
 status: true
 dependencies:
   config:
     - field.storage.node.field_teaser
-    - node.type.presentation
-id: node.presentation.field_teaser
+    - node.type.project
+id: node.project.field_teaser
 field_name: field_teaser
 entity_type: node
-bundle: presentation
+bundle: project
 label: Teaser
-description: 'The text of this content when referenced'
-required: false
+description: ''
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

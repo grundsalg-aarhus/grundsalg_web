@@ -1,13 +1,13 @@
-uuid: f3601453-f77b-48ea-a3b5-adca0fa80ec3
+uuid: 2335a9d6-c652-40a4-9f94-4737c7d1c862
 langcode: da
 status: true
 dependencies:
   config:
-    - node.type.presentation
-id: node.presentation.promote
+    - node.type.project
+id: node.project.promote
 field_name: promote
 entity_type: node
-bundle: presentation
+bundle: project
 label: 'Forfremmet til forside'
 description: ''
 required: false
