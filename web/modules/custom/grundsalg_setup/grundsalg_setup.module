@@ -111,7 +111,6 @@ function grundsalg_setup_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAsset
 function grundsalg_setup_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account) {
   $type = $node->bundle();
   if ($type == 'project' || $type == 'content_block') {
-    $a = "2";
     if ($op == 'view') {
       if ($account->id() == 0) {
         return \Drupal\Core\Access\AccessResult::forbidden();
