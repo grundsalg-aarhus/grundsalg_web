@@ -1,13 +1,13 @@
 angular:
   js:
     js/routing.js: {}
-    js/MapController.js: {}
     js/VideoController.js: {}
     js/StreetviewController.js: {}
 
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_slideshow/angular
+    - grundsalg_maps/angular
     - core/jquery
     - core/jquery.once
     - core/jquery.ui

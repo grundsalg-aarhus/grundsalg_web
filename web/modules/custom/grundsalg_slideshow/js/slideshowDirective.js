@@ -1,6 +1,6 @@
 /**
  * @file
- * Contains the slideshow component
+ * Contains the slide show component
  */
 
 angular.module('grundsalg').directive('slideshow', function() {
@@ -14,6 +14,7 @@ angular.module('grundsalg').directive('slideshow', function() {
       scope.currentIndex = 0;
 
       // Get module path from drupalSettings.
+      console.log(drupalSettings.variables.grundsalg_slideshow_app_dir);
       scope.modulePath = drupalSettings.variables.grundsalg_slideshow_app_dir;
 
       /**
@@ -34,6 +35,6 @@ angular.module('grundsalg').directive('slideshow', function() {
           scope.currentIndex = scope.images.length - 1;
       };
     },
-    templateUrl: drupalSettings.variables.grundsalg_slideshow_app_dir + '/js/templates/images.html'
+    templateUrl: drupalSettings.variables.grundsalg_slideshow_app_dir + '/templates/images.html'
   };
 });

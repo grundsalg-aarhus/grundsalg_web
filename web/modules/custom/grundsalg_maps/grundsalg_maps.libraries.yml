@@ -1,35 +1,23 @@
 angular:
   js:
-    js/routing.js: {}
     js/MapController.js: {}
-    js/VideoController.js: {}
-    js/StreetviewController.js: {}
-
   dependencies:
     - grundsalg_angular/angular
-    - grundsalg_slideshow/angular
-    - core/jquery
-    - core/jquery.once
-    - core/jquery.ui
-    - core/drupal.ajax
-    - core/drupal
-    - core/drupalSettings
-    - leaflet/leaflet
+    - grundsalg_maps/leaflet
 
 leaflet:
-  remote: http://leafletjs.com/
-  version: 1.0.2
-  license:
-    name: Leaflet-License
-    url: https://github.com/Leaflet/Leaflet/blob/v1.0.2/LICENSE
-    gpl-compatible: true
+  header: true
   js:
-    //unpkg.com/leaflet@1.0.2/dist/leaflet.js: {}
+    js/libs/leaflet/leaflet.js: {}
+    js/libs/proj4/proj4-compressed.js: {}
+    js/libs/proj4/proj4leaflet.js: {}
   css:
-    component:
-      //unpkg.com/leaflet@1.0.2/dist/leaflet.css: {}
+    base:
+      js/libs/leaflet/leaflet.css: {}
 
-googlemaps-api:
-  header: TRUE
+openlayers:
   js:
-    //maps.googleapis.com/maps/api/js?key=AIzaSyD7hGZqMrdpmOX6gIMqVyDkz3JoOQtKtI0: {type: external}
+    js/libs/openlayers/ol.js: {}
+  css:
+    base:
+      js/libs/openlayers/ol.css: {}

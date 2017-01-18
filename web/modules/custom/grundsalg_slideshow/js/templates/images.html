@@ -4,11 +4,11 @@
     <img data-ng-src="{{ image.url }}" alt="{{ image.alt }}" />
   </div>
   <div class="content-image--arrow-left" data-ng-if="images.length > 1" data-ng-click="prev()">
-    <div class="arrow-link" data-ng-include="modulePath + '/images/arrow.svg'">
+    <div class="arrow-link" data-ng-include="modulePath + '/../images/arrow.svg'">
     </div>
   </div>
   <div class="content-image--arrow-right" data-ng-if="images.length > 1" data-ng-click="next()">
-    <div class="arrow-link" data-ng-include="modulePath + '/images/arrow.svg'">
+    <div class="arrow-link" data-ng-include="modulePath + '/../images/arrow.svg'">
     </div>
   </div>
 </div>
