@@ -1,0 +1,14 @@
+uuid: 449b260d-fc51-42b1-b741-d13b54906768
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_desktop_x2
+label: 'Main image desktop x2'
+effects:
+  1c071599-4058-4685-bf63-421fe5f6da96:
+    uuid: 1c071599-4058-4685-bf63-421fe5f6da96
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 4000
+      height: 1200

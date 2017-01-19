@@ -37,6 +37,21 @@ function grundsalg_setup_form_node_form_alter(&$form, \Drupal\Core\Form\FormStat
   $form['field_media_image']['widget']['current']['#weight'] = -50;
   $form['field_media_document']['widget']['entity_browser']['#weight'] = -10;
   $form['field_media_document']['widget']['current']['#weight'] = -50;
+
+  if ($form_id == 'node_subdivision_edit_form' || $form_id == 'node_subdivision_form') {
+    $user = \Drupal::currentUser();
+    if(!$user->hasPermission('bypass node access')) {
+      if (isset($form['field_plot_type'])) {
+        $form['field_plot_type']['widget']['#attributes']['readonly'] = TRUE;
+        $form['field_plot_type']['widget']['#attributes']['disabled'] = TRUE;
+      }
+
+      if (isset($form['field_city_reference'])) {
+        $form['field_city_reference']['widget']['0']['target_id']['#attributes']['readonly'] = TRUE;
+        $form['field_city_reference']['widget']['0']['target_id']['#attributes']['disabled'] = TRUE;
+      }
+    }
+  }
 }
 
 

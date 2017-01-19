@@ -1,0 +1,28 @@
+uuid: 395823ba-29c7-4fe5-af6e-06182ef7d040
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media_image
+    - media_entity.bundle.image
+    - node.type.page
+id: node.page.field_media_image
+field_name: field_media_image
+entity_type: node
+bundle: page
+label: 'Primært billede'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

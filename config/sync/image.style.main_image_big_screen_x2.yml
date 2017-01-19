@@ -1,0 +1,14 @@
+uuid: 87710f3a-8b8a-4a72-9ebd-1d565ddfd1dd
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_big_screen_x2
+label: 'Main image big screen x2'
+effects:
+  e2424567-7b17-460b-8d99-7926a4089122:
+    uuid: e2424567-7b17-460b-8d99-7926a4089122
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 4000
+      height: 1200
