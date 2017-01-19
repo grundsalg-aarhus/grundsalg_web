@@ -60,7 +60,7 @@ function grundsalg_plots_preprocess_node(&$variables) {
 function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
 
-  if (isset($form['field_subdivision_id']) || $use_dummy) {
+  if (isset($form['field_subdivision_id'])) {
     $form['plots_wrapper'] = array(
       '#type' => 'details',
       '#title' => t('Plots'),
