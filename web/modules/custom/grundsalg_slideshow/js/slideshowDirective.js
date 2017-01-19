@@ -14,7 +14,6 @@ angular.module('grundsalg').directive('slideshow', function() {
       scope.currentIndex = 0;
 
       // Get module path from drupalSettings.
-      console.log(drupalSettings.variables.grundsalg_slideshow_app_dir);
       scope.modulePath = drupalSettings.variables.grundsalg_slideshow_app_dir;
 
       /**
