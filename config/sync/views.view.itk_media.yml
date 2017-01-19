@@ -412,7 +412,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Updated
+          label: Opdateret
           exclude: false
           alter:
             alter_text: false
@@ -542,7 +542,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Operations
+          label: Funktioner
           exclude: false
           alter:
             alter_text: false
@@ -729,7 +729,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Media
+      title: Medier
       header: {  }
       footer: {  }
       empty:
@@ -767,14 +767,14 @@ display:
   media_page_list:
     display_plugin: page
     id: media_page_list
-    display_title: Media
+    display_title: Medier
     position: 1
     display_options:
       display_extenders: {  }
       path: admin/itk-media
       menu:
         type: normal
-        title: Media
+        title: Medier
         description: ''
         expanded: false
         parent: system.admin

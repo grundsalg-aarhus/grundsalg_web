@@ -1,0 +1,14 @@
+uuid: c6b28751-22ca-4582-92f6-ad83c304c823
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_lap_x2
+label: 'Main image lap x2'
+effects:
+  274ac064-49ec-4f0a-bc18-89c09a6bfce1:
+    uuid: 274ac064-49ec-4f0a-bc18-89c09a6bfce1
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 960
+      height: 288

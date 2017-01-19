@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
 function grundsalg_setup_theme_suggestions_alter(array &$suggestions, array $variables) {
   if (isset($variables['form']) && $variables['theme_hook_original'] == 'node_edit_form') {
     $suggestions[] = 'grundsalg_setup_node_form';
@@ -34,6 +37,21 @@ function grundsalg_setup_form_node_form_alter(&$form, \Drupal\Core\Form\FormStat
   $form['field_media_image']['widget']['current']['#weight'] = -50;
   $form['field_media_document']['widget']['entity_browser']['#weight'] = -10;
   $form['field_media_document']['widget']['current']['#weight'] = -50;
+
+  if ($form_id == 'node_subdivision_edit_form' || $form_id == 'node_subdivision_form') {
+    $user = \Drupal::currentUser();
+    if(!$user->hasPermission('bypass node access')) {
+      if (isset($form['field_plot_type'])) {
+        $form['field_plot_type']['widget']['#attributes']['readonly'] = TRUE;
+        $form['field_plot_type']['widget']['#attributes']['disabled'] = TRUE;
+      }
+
+      if (isset($form['field_city_reference'])) {
+        $form['field_city_reference']['widget']['0']['target_id']['#attributes']['readonly'] = TRUE;
+        $form['field_city_reference']['widget']['0']['target_id']['#attributes']['disabled'] = TRUE;
+      }
+    }
+  }
 }
 
 
@@ -70,7 +88,49 @@ function _grundsalg_setup_form_submit_handler($form, \Drupal\Core\Form\FormState
  *
  * @param $variables
  */
-function grundsalg_preprocess_itkore_footer_block(&$variables) {
+function grundsalg_setup_preprocess_itkore_footer_block(&$variables) {
   $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
   $variables['contact_text'] = check_markup($config->get('contact_text'), 'filtered_html');
+}
+
+
+/**
+ * Implements hook_js_alter().
+ *
+ * Search angular applications for drupal translations.
+ */
+function grundsalg_setup_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+  $files = array();
+  $path = 'modules/custom';
+
+  // Files to scan for translations (js and templates).
+  $extensions = Array( 'js', 'html' );
+
+  // Find the files.
+  $it = new RecursiveDirectoryIterator($path);
+  foreach(new RecursiveIteratorIterator($it) as $file)  {
+    $ext = pathinfo($file, PATHINFO_EXTENSION);
+    if (in_array($ext, $extensions)) {
+      $files[] = $file->getPathname();
+    }
+  }
+
+  // Scan the files to get translations into the database.
+  locale_js_translate($files);
+}
+
+
+/**
+ * Implements hook_node_access()
+ */
+function grundsalg_setup_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account) {
+  $type = $node->bundle();
+  if ($type == 'project' || $type == 'content_block') {
+    if ($op == 'view') {
+      if ($account->id() == 0) {
+        return \Drupal\Core\Access\AccessResult::forbidden();
+      }
+      return \Drupal\Core\Access\AccessResult::allowedIf($account->hasPermission('administer nodes'));
+    }
+  }
 }

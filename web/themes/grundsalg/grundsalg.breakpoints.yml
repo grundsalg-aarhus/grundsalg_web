@@ -1,0 +1,28 @@
+grundsalg.breakpoint-lap:
+  label: breakpoint-lap
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+grundsalg.breakpoint-tablet:
+  label: breakpoint-tablet
+  mediaQuery: 'all and (min-width: 481px) and (max-width: 1024px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+grundsalg.breakpoint-desktop:
+  label: breakpoint-desktop
+  mediaQuery: 'all and (min-width: 1025px) and (max-width: 2000px)'
+  weight: 3
+  multipliers:
+    - 1x
+    - 2x
+grundsalg.breakpoint-bigscreen:
+  label: breakpoint-bigscreen
+  mediaQuery: 'all and (min-width: 2001px)'
+  weight: 4
+  multipliers:
+    - 1x
+    - 2x

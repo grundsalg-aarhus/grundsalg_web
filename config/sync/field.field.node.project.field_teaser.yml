@@ -1,0 +1,19 @@
+uuid: 83bf46b8-2e8c-46dc-bcdf-5e7707c77563
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser
+    - node.type.project
+id: node.project.field_teaser
+field_name: field_teaser
+entity_type: node
+bundle: project
+label: Teaser
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

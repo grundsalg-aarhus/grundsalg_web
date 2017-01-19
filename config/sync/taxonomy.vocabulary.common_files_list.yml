@@ -1,9 +1,0 @@
-uuid: 0b452cac-a16f-44b0-a5dc-35359dc37f77
-langcode: da
-status: true
-dependencies: {  }
-name: 'Common files list'
-vid: common_files_list
-description: 'A list of files used multiple times across the site'
-hierarchy: 0
-weight: 0

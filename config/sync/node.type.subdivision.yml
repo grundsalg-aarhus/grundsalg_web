@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: Udstykning
 type: subdivision
-description: 'A subdivision of an area referencing plots in the db'
+description: 'En udstykning i et område der refererer grunde i fagsystemet'
 help: ''
 new_revision: false
 preview_mode: 0

@@ -1,5 +1,7 @@
 name: Grundsalg plots
 type: module
+interface translation project: grundsalg_plots
+interface translation server pattern: modules/custom/grundsalg_plots/translations/grundsalg_plots.%language.po
 description: 'Provides plots display for subdivisions'
 package: Grundsalg
 version: '8.x-1.0'

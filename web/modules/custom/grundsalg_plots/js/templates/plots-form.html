@@ -4,13 +4,13 @@
     <div class="item-container rendered-entity" data-ng-repeat="plot in plots">
       <article class="view-mode-form-display-when-referenced">
         <div class="field--name-name">
-          <h4 class="label inline">Adresse</h4> {{ plot.address }}
+          <h4 class="label inline">{{ Drupal.t('Address') }}</h4> {{ plot.address }}
         </div>
         <div class="field--name-name">
-          <h4 class="label inline">Status</h4> {{ plot.status }}
+          <h4 class="label inline">{{ Drupal.t('Status') }}</h4> {{ plot.status }}
         </div>
         <div class="field--name-name">
-          <h4 class="label inline">Areal (m2)</h4> {{ plot.area_m2 }}
+          <h4 class="label inline">{{ Drupal.t('Areal (m2)') }}</h4> {{ plot.area_m2 }}
         </div>
       </article>
     </div>

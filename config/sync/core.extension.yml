@@ -23,6 +23,7 @@ module:
   grundsalg_angular: 0
   grundsalg_db_client: 0
   grundsalg_front: 0
+  grundsalg_maps: 0
   grundsalg_plots: 0
   grundsalg_reference_tree: 0
   grundsalg_setup: 0
@@ -54,6 +55,7 @@ module:
   path: 0
   redirect: 0
   redirect_404: 0
+  responsive_image: 0
   role_delegation: 0
   system: 0
   taxonomy: 0

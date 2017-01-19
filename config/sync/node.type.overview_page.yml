@@ -9,9 +9,9 @@ third_party_settings:
     available_menus:
       - main
     parent: 'main:'
-name: 'Overview page'
+name: Oversigtsside
 type: overview_page
-description: 'An overview page representing a section of the site.'
+description: 'En oversigtsside der repræsenterer en del af sitet'
 help: ''
 new_revision: false
 preview_mode: 0

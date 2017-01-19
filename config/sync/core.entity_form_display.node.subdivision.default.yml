@@ -69,11 +69,12 @@ third_party_settings:
       weight: 5
       format_type: details
       format_settings:
+        label: By
+        open: true
         id: ''
         classes: ''
-        open: true
         required_fields: false
-      label: Postalcode
+      label: By
     group_stree:
       children:
         - field_streetview_coordinates
@@ -115,7 +116,7 @@ content:
     settings:
       match_operator: CONTAINS
       size: 60
-      placeholder: 'Postal code or city'
+      placeholder: 'Postnr. eller by'
     third_party_settings: {  }
     type: entity_reference_autocomplete
   field_media_document:

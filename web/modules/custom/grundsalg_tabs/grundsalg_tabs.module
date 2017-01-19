@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation!
+ */
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
@@ -9,37 +13,29 @@ use Drupal\image\Entity\ImageStyle;
 function grundsalg_tabs_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
+    $variables['display_tabs'] = FALSE;
+
     $type = $variables['node']->bundle();
     if (($type == 'subdivision' || $type == 'area')) {
       $variables['map'] = TRUE;
       $variables['images'] = TRUE;
       $variables['video'] = TRUE;
       $variables['coordinates'] = TRUE;
+
       $variables['#attached']['library'][] = 'grundsalg_tabs/angular';
-      $variables['#attached']['library'][] = 'grundsalg_tabs/leaflet';
       $variables['#attached']['library'][] = 'grundsalg_tabs/googlemaps-api';
-      $variables['#attached']['drupalSettings'] = array(
-        'variables' => array(
-          'app_dir' => '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js',
-          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
-        ),
-      );
+
+      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
+        $variables['#attached']['drupalSettings']['variables'] = array();
+      }
+      $variables['#attached']['drupalSettings']['variables']['app_dir'] = '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js';
 
       // Enable tabs (See page--node.html.twig)
       $variables['display_tabs'] = TRUE;
 
-      // Add image urls to js.
-      if (isset($variables['node']->field_media_image->target_id)) {
-        foreach ($variables['node']->get('field_media_image') as $key => $item) {
-          $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
-          
-          $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
-            'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
-            'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
-          );
-        }
-      }
-      else {
+      // If not images (hide tab). If images the grundsalg_slideshow will ensure
+      // images are displayed.
+      if (!isset($variables['node']->field_media_image->target_id)) {
         $variables['images'] = FALSE;
         $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
       }

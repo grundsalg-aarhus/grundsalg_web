@@ -1,0 +1,14 @@
+uuid: 7ee09b06-4922-4b8c-a1f6-7214a4725006
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_tablet_x2
+label: 'Main image tablet x2'
+effects:
+  40339ad6-dc73-47ed-a4c1-f34dc84f9ec1:
+    uuid: 40339ad6-dc73-47ed-a4c1-f34dc84f9ec1
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 2048
+      height: 614

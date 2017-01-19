@@ -317,7 +317,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Operations
+          label: Funktioner
           exclude: false
           alter:
             alter_text: false

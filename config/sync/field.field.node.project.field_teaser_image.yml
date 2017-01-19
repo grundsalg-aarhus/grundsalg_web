@@ -1,0 +1,28 @@
+uuid: 2ed15ff3-10f0-494c-adbc-023c2adb6da7
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser_image
+    - media_entity.bundle.image
+    - node.type.project
+id: node.project.field_teaser_image
+field_name: field_teaser_image
+entity_type: node
+bundle: project
+label: 'Teaser billede'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

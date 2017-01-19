@@ -11,9 +11,9 @@ third_party_settings:
     parent: 'main:'
 _core:
   default_config_hash: fK07PHOwyAVzgM33JrFRLxMNWk15uIB3okUHjEhcDrU
-name: Page
+name: 'Statisk indhold'
 type: page
-description: 'A static page of content'
+description: 'En statisk side af indhold'
 help: ''
 new_revision: false
 preview_mode: 0

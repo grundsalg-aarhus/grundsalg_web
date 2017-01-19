@@ -3,8 +3,7 @@
  * Contains the Streetview Controller.
  */
 
-angular.module('grundsalg').controller('StreetviewController', [
-    '$scope',
+angular.module('grundsalg').controller('StreetviewController', ['$scope',
     function ($scope) {
       'use strict';
 

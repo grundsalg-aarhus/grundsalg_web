@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
+    - field.field.node.page.field_media_image
     - field.field.node.page.field_teaser
+    - field.field.node.page.field_teaser_image
     - node.type.page
   module:
     - text
@@ -18,7 +20,7 @@ bundle: page
 mode: default
 content:
   field_block_reference:
-    weight: 2
+    weight: 0
     label: hidden
     settings:
       link: true
@@ -26,12 +28,21 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
   field_body:
-    weight: 3
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
+  field_media_image:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: shown_on_content_main_image_and_slideshow
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
 hidden:
   field_teaser: true
+  field_teaser_image: true
   langcode: true
   links: true

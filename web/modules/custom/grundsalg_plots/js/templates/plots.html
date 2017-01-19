@@ -7,19 +7,19 @@
             <h3 class="boxes--box-plot-title">{{ plot.address }}</h3>
             <div class="boxes--box-plot-infos">
               <div class="boxes--box-plot-info">
-                <p class="boxes--box-plot-info-key">Status</p>
+                <p class="boxes--box-plot-info-key">{{ Drupal.t('Status') }}</p>
                 <p class="boxes--box-plot-info-value">{{ plot.status }}</p>
               </div>
               <div class="boxes--box-plot-info">
-                <p class="boxes--box-plot-info-key">Areal (m2)</p>
+                <p class="boxes--box-plot-info-key">{{ Drupal.t('Area (m2)') }}</p>
                 <p class="boxes--box-plot-info-value">{{ plot.area_m2 }}</p>
               </div>
               <div class="boxes--box-plot-info">
-                <p class="boxes--box-plot-info-key">Mindstepris</p>
+                <p class="boxes--box-plot-info-key">{{ Drupal.t('Minimum price') }}</p>
                 <p class="boxes--box-plot-info-value">{{ plot.minimum_price }}</p>
               </div>
               <div class="boxes--box-plot-info">
-                <p class="boxes--box-plot-info-key">Salgspris</p>
+                <p class="boxes--box-plot-info-key">{{ Drupal.t('Sales price') }}</p>
                 <p class="boxes--box-plot-info-value">{{ plot.sale_price }}</p>
               </div>
             </div>
@@ -33,7 +33,7 @@
                 </g>
               </svg>
               </div>
-              <a href="{{ plot.pdf_link }}" class="boxes--box-plot-link-text">Yderligere information</a>
+              <a href="{{ plot.pdf_link }}" class="boxes--box-plot-link-text">{{ Drupal.t('Further information') }}</a>
             </div>
           </div>
         </article>
@@ -42,7 +42,7 @@
   </div>
   <div class="content-box--show-more">
     <h3 class="content-box--show-more-title" data-ng-click="displayLimit = null">
-      <a href="">Vis alle grunde</a>
+      <a href="">{{ Drupal.t('Show all plots') }}</a>
     </h3>
     <div class="content-box--show-more-arrow" data-ng-click="displayLimit = null">
       <svg viewBox="0 0 27 33" xmlns="http://www.w3.org/2000/svg">

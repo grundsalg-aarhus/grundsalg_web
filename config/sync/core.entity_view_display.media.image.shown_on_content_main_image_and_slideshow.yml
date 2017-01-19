@@ -9,13 +9,13 @@ dependencies:
     - field.field.media.image.field_itk_media_mime_type
     - field.field.media.image.field_itk_media_tag
     - field.field.media.image.field_itk_media_width
-    - image.style.main_content
     - media_entity.bundle.image
+    - responsive_image.styles.grundsalg_main_image
   enforced:
     module:
       - itk_media_entity
   module:
-    - image
+    - responsive_image
 _core:
   default_config_hash: PKSBwG0L0ToXhVptcdb1DkPu1voRsnerJi7ArbIU3sk
 id: media.image.shown_on_content_main_image_and_slideshow
@@ -24,11 +24,11 @@ bundle: image
 mode: shown_on_content_main_image_and_slideshow
 content:
   field_itk_media_image_upload:
-    type: image
+    type: responsive_image
     weight: 0
     label: hidden
     settings:
-      image_style: main_content
+      responsive_image_style: grundsalg_main_image
       image_link: ''
     third_party_settings: {  }
 hidden:

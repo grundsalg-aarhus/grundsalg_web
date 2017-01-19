@@ -1,0 +1,17 @@
+uuid: d79ea7b5-ba42-4fb4-9838-c6b32aa9d52c
+langcode: da
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Projekt
+type: project
+description: 'Et eksternt link til et projekt'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true
