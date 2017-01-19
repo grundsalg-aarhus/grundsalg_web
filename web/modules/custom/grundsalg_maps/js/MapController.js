@@ -7,8 +7,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
   function($scope, $http) {
     'use strict';
 
-    console.log('HERHER');
-
     /**
      * Cookie object.
      *
@@ -69,10 +67,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
       var basemap = new ol.layer.Tile({
         opacity: 1.0,
         source: new ol.source.WMTS({
-          url:"https://services.kortforsyningen.dk/topo_skaermkort_daempet?TICKET="+kfticket,
+          url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + kfticket,
           format: 'image/jpeg',
           matrixSet: 'View1',
-          layer: 'dtk_skaermkort_daempet',
+          layer: 'dtk_skaermkort',
           style: 'default',
           tileGrid: new ol.tilegrid.WMTS({
             origin: ol.extent.getTopLeft(projectionExtent),
@@ -83,17 +81,79 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
       });
       layers.push(basemap);
 
+      // var ortofoto = new ol.layer.Tile({
+      //   opacity: 1.0,
+      //   source: new ol.source.WMTS({
+      //     url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + kfticket,
+      //     format: 'image/jpeg',
+      //     matrixSet: 'View1',
+      //     layer: 'orto_foraar',
+      //     style: 'default',
+      //     tileGrid: new ol.tilegrid.WMTS({
+      //       origin: ol.extent.getTopLeft(projectionExtent),
+      //       resolutions: resolutions,
+      //       matrixIds: matrixIds
+      //     })
+      //   })
+      // });
+      // layers.push(ortofoto);
+
+      https://services.kortforsyningen.dk/service?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&version=1.1.1&layers=Centroide,MatrikelSkel,OptagetVej&format=image/jpeg&STYLES=sorte_centroider,sorte_skel,default&ticket=811be91758db2bafd96ab0191a89e398&service=WMS&servicename=mat&transparent=TRUE&request=GetMap&SRS=EPSG:25832&WIDTH=256&HEIGHT=256&CRS=EPSG:25832&BBOX=578752,6224748.8,580390.4,6226387.2
+
+      var matrikelkort = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.TileWMS({
+          url: 'https://services.kortforsyningen.dk/service',
+          params: {
+            VERSION: '1.3.0',
+            LAYERS: 'Centroide,MatrikelSkel,OptagetVej',
+            FORMAT: 'image/png',
+            STYLES: 'sorte_centroider,sorte_skel,default',
+            TICKET: kfticket,
+            SERVICE:'WMS',
+            SERVICENAME: 'mat',
+            TRANSPARENT: 'TRUE',
+            REQUEST: 'GetMap',
+            SRS: 'EPSG:25832'
+          },
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(projectionExtent),
+            resolutions: resolutions,
+            matrixIds: matrixIds
+          }),
+          projection: projection
+        })
+      });
+      layers.push(matrikelkort);
+
+      // // WMS layer
+      // var wms = new ol.layer.Tile({
+      //   opacity: 1.0,
+      //   extent: [420000, 6025000, 905000, 6450000],
+      //   source: new ol.source.TileWMS({
+      //     url: 'https://services.kortforsyningen.dk/topo_skaermkort?',
+      //     params: {
+      //       'LAYERS': 'dtk_skaermkort_daempet',
+      //       'TICKET': kfticket,
+      //       'TRANSPARENT': 'TRUE',
+      //       'SERVICE':'WMS',
+      //       'VERSION':'1.1.1'
+      //     }
+      //   })
+      // });
+      // layers.push(wms);
+
       // Create map with wms as background layer
       var map = new ol.Map({
         target: 'mapid',
         layers: layers,
-        logo: false, // don't display google logo
+        logo: false,
         controls: ol.control.defaults({}),
         view: new ol.View({
-          center: [724500, 6176450],
-          zoom: 2, // start zoom
-          minZoom: 1,
-          maxZoom: 14,
+          center: [575130.409185,6224236.93897],
+          zoom: 6,
+          minZoom: 5,
+          maxZoom: resolutions.length,
           projection: projection
         })
       });
