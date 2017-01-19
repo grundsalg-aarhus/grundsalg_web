@@ -5,6 +5,7 @@ interface translation server pattern: modules/custom/grundsalg_tabs/translations
 description: 'Sets up content tabs'
 package: Grundsalg
 dependencies:
+  - grundsalg_maps
   - grundsalg_slideshow
   - grundsalg_angular
 version: '8.x-1.0'

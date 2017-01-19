@@ -1,0 +1,25 @@
+<?php
+/**
+ * @file
+ * @TODO: Missing documentation!
+ */
+
+/**
+ * Implements hook_proprocess_page().
+ */
+function grundsalg_maps_preprocess_page(&$variables) {
+  // Add angular to certain node types.
+  if (isset($variables['node'])) {
+    $type = $variables['node']->bundle();
+    if (($type == 'subdivision' || $type == 'area')) {
+
+      $variables['#attached']['library'][] = 'grundsalg_maps/openlayers';
+      $variables['#attached']['library'][] = 'grundsalg_maps/angular';
+
+      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
+        $variables['#attached']['drupalSettings']['variables'] = array();
+      }
+      $variables['#attached']['drupalSettings']['variables']['grundsalg_maps_app_dir'] = '/' . drupal_get_path('module', 'grundsalg_maps') . '/js';
+    }
+  }
+}

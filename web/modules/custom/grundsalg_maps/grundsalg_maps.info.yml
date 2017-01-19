@@ -1,0 +1,8 @@
+name: Grundsalg maps
+type: module
+description: 'Leaflet maps - angular'
+package: Grundsalg
+dependencies:
+  - grundsalg_angular
+version: '8.x-1.x'
+core: '8.x'

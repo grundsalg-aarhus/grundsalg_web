@@ -3,9 +3,10 @@
  * Contains controller for showing plots.
  */
 
-angular.module('grundsalg').controller('ShowPlotsController', [
-    '$scope', '$http',
+angular.module('grundsalg').controller('ShowPlotsController', ['$scope', '$http',
     function ($scope, $http) {
+      'use strict';
+
       // Number of displayed plots.
       $scope.displayLimit = 6;
 
@@ -36,7 +37,7 @@ angular.module('grundsalg').controller('ShowPlotsController', [
           // Fetch plots based on url
           fetch(url);
         }
-      }
+      };
 
       // Fetch function. Handles the actual request
       function fetch(url) {

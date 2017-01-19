@@ -1,0 +1,23 @@
+angular:
+  js:
+    js/MapController.js: {}
+  dependencies:
+    - grundsalg_angular/angular
+    - grundsalg_maps/leaflet
+
+leaflet:
+  header: true
+  js:
+    js/libs/leaflet/leaflet.js: {}
+    js/libs/proj4/proj4-compressed.js: {}
+    js/libs/proj4/proj4leaflet.js: {}
+  css:
+    base:
+      js/libs/leaflet/leaflet.css: {}
+
+openlayers:
+  js:
+    js/libs/openlayers/ol.js: {}
+  css:
+    base:
+      js/libs/openlayers/ol.css: {}

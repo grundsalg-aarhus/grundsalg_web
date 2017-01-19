@@ -9,32 +9,27 @@ use Drupal\image\Entity\ImageStyle;
 function grundsalg_slideshow_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
-    $type = $variables['node']->bundle();
-
-    // Add slideshow app to page.
-    if (($type != 'subdivision' && $type != 'area')) {
+    // Add image urls and alt to js (if page have images).
+    if (isset($variables['node']->field_media_image->target_id)) {
+      $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
 
       // Provide module path to js.
-      $variables['#attached']['drupalSettings'] = array(
-        'variables' => array(
-          'grundsalg_slideshow_module_path' => '/' . drupal_get_path('module', 'grundsalg_slideshow'),
-        ),
-      );
-
-      // Add image urls and alt to js.
-      if (isset($variables['node']->field_media_image->target_id)) {
-        foreach ($variables['node']->get('field_media_image') as $key => $item) {
-          $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
-
-          $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
-            'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
-            'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
-          );
-        }
+      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
+        $variables['#attached']['drupalSettings']['variables'] = array();
       }
-      else {
-        $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
+      $variables['#attached']['drupalSettings']['variables']['grundsalg_slideshow_app_dir'] = '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js';
+
+      foreach ($variables['node']->get('field_media_image') as $key => $item) {
+        $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
+
+        $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
+          'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
+          'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
+        );
       }
+    }
+    else {
+      $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
     }
   }
 }

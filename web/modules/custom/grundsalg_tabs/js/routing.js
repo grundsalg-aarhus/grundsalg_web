@@ -3,20 +3,21 @@
  * Contains routing for Tabs.
  */
 
-angular.module('grundsalg').config([
-    '$routeProvider', '$locationProvider',
+angular.module('grundsalg').config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
+      'use strict';
+
       // Configure Hash prefix.
       $locationProvider.hashPrefix('');
 
       // Setup routes.
       $routeProvider
       .when('/map', {
-        templateUrl: drupalSettings.variables.app_dir + '/templates/map.html',
+        templateUrl: drupalSettings.variables.grundsalg_maps_app_dir + '/templates/map.html',
         controller: 'MapController'
       })
       .when('/images', {
-        templateUrl: drupalSettings.variables.grundsalg_slideshow_module_path + '/js/templates/slideshow.html',
+        templateUrl: drupalSettings.variables.grundsalg_slideshow_app_dir + '/templates/slideshow.html',
         controller: 'SlideshowController'
       })
       .when('/video', {
