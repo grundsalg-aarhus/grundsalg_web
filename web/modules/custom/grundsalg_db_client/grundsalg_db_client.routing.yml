@@ -1,8 +1,8 @@
 grundsalg_db_client.config_client:
-  path: '/admin/db-client'
+  path: '/admin/site-setup/db-client'
   defaults:
     _form: '\Drupal\grundsalg_db_client\Form\GrundsalgDbClientSettingsForm'
-    _title: 'Settings'
+    _title: 'DB client Settings'
   requirements:
     _permission: 'administer site configuration'
 

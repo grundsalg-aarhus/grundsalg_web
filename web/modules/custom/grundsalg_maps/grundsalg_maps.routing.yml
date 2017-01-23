@@ -1,0 +1,15 @@
+grundsalg_maps.config:
+  path: '/admin/site-setup/maps'
+  defaults:
+    _form: '\Drupal\grundsalg_maps\Form\MapsSettingsForm'
+    _title: 'Maps settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+grundsalg_maps.access:
+  path: '/maps/access'
+  defaults:
+    _controller: '\Drupal\grundsalg_maps\Controller\ProxyController::access'
+    _title: 'Maps access callback'
+  requirements:
+    _permission: 'access content'

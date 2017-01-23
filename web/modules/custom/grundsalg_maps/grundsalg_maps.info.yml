@@ -4,5 +4,6 @@ description: 'Leaflet maps - angular'
 package: Grundsalg
 dependencies:
   - grundsalg_angular
+  - itkore_admin
 version: '8.x-1.x'
 core: '8.x'
