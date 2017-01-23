@@ -7,8 +7,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
   function($scope, $http) {
     'use strict';
 
-    console.log('HERHER');
-
     /**
      * Cookie object.
      *
@@ -51,7 +49,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
     })();
 
     function displayMaps(kfticket) {
-
       proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs");
       var dkProjection = new ol.proj.Projection({
         code: 'EPSG:25832',
@@ -69,10 +66,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
       var basemap = new ol.layer.Tile({
         opacity: 1.0,
         source: new ol.source.WMTS({
-          url:"https://services.kortforsyningen.dk/topo_skaermkort_daempet?TICKET="+kfticket,
+          url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + kfticket,
           format: 'image/jpeg',
           matrixSet: 'View1',
-          layer: 'dtk_skaermkort_daempet',
+          layer: 'dtk_skaermkort',
           style: 'default',
           tileGrid: new ol.tilegrid.WMTS({
             origin: ol.extent.getTopLeft(projectionExtent),
@@ -83,17 +80,60 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
       });
       layers.push(basemap);
 
+      // var ortofoto = new ol.layer.Tile({
+      //   opacity: 1.0,
+      //   source: new ol.source.WMTS({
+      //     url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + kfticket,
+      //     format: 'image/jpeg',
+      //     matrixSet: 'View1',
+      //     layer: 'orto_foraar',
+      //     style: 'default',
+      //     tileGrid: new ol.tilegrid.WMTS({
+      //       origin: ol.extent.getTopLeft(projectionExtent),
+      //       resolutions: resolutions,
+      //       matrixIds: matrixIds
+      //     })
+      //   })
+      // });
+      // layers.push(ortofoto);
+
+      var matrikelkort = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.TileWMS({
+          url: 'https://services.kortforsyningen.dk/service',
+          params: {
+            VERSION: '1.3.0',
+            LAYERS: 'Centroide,MatrikelSkel,OptagetVej',
+            FORMAT: 'image/png',
+            STYLES: 'sorte_centroider,sorte_skel,default',
+            TICKET: kfticket,
+            SERVICE:'WMS',
+            SERVICENAME: 'mat',
+            TRANSPARENT: 'TRUE',
+            REQUEST: 'GetMap',
+            SRS: 'EPSG:25832'
+          },
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(projectionExtent),
+            resolutions: resolutions,
+            matrixIds: matrixIds
+          }),
+          projection: projection
+        })
+      });
+      layers.push(matrikelkort);
+
       // Create map with wms as background layer
       var map = new ol.Map({
         target: 'mapid',
         layers: layers,
-        logo: false, // don't display google logo
+        logo: false,
         controls: ol.control.defaults({}),
         view: new ol.View({
-          center: [724500, 6176450],
-          zoom: 2, // start zoom
-          minZoom: 1,
-          maxZoom: 14,
+          center: [575130.409185,6224236.93897],
+          zoom: 6,
+          minZoom: 5,
+          maxZoom: resolutions.length,
           projection: projection
         })
       });
@@ -107,7 +147,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
     if (ticket === undefined) {
       $http({
         method: 'GET',
-        url: 'http://localhost:3010/api/kfticket'
+        url: drupalSettings.variables.grundsalg_maps.url + '/api/kfticket'
       }).then(function successCallback(response) {
         ticket = response.data;
         ticket_cookie.set(ticket, expire);
