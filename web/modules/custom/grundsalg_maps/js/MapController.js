@@ -49,7 +49,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
     })();
 
     function displayMaps(kfticket) {
-
       proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs");
       var dkProjection = new ol.proj.Projection({
         code: 'EPSG:25832',
@@ -148,7 +147,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
     if (ticket === undefined) {
       $http({
         method: 'GET',
-        url: 'http://localhost:3010/api/kfticket'
+        url: drupalSettings.variables.grundsalg_maps.url + '/api/kfticket'
       }).then(function successCallback(response) {
         ticket = response.data;
         ticket_cookie.set(ticket, expire);

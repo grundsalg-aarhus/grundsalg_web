@@ -52,15 +52,6 @@ class MapsSettingsForm extends FormBase {
       '#size' => 60,
     );
 
-    $form['proxy']['api-key'] = array(
-      '#title' => $this->t('API key'),
-      '#type' => 'textfield',
-      '#default_value' => $config->get('grundsalg_maps_apikey'),
-      '#weight' => '1',
-      '#size' => 60,
-      '#maxlength' => 128,
-    );
-
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => t('Save changes'),
