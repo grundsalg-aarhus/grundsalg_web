@@ -98,8 +98,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
       // });
       // layers.push(ortofoto);
 
-      https://services.kortforsyningen.dk/service?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&version=1.1.1&layers=Centroide,MatrikelSkel,OptagetVej&format=image/jpeg&STYLES=sorte_centroider,sorte_skel,default&ticket=811be91758db2bafd96ab0191a89e398&service=WMS&servicename=mat&transparent=TRUE&request=GetMap&SRS=EPSG:25832&WIDTH=256&HEIGHT=256&CRS=EPSG:25832&BBOX=578752,6224748.8,580390.4,6226387.2
-
       var matrikelkort = new ol.layer.Tile({
         opacity: 1.0,
         source: new ol.source.TileWMS({
@@ -125,23 +123,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
         })
       });
       layers.push(matrikelkort);
-
-      // // WMS layer
-      // var wms = new ol.layer.Tile({
-      //   opacity: 1.0,
-      //   extent: [420000, 6025000, 905000, 6450000],
-      //   source: new ol.source.TileWMS({
-      //     url: 'https://services.kortforsyningen.dk/topo_skaermkort?',
-      //     params: {
-      //       'LAYERS': 'dtk_skaermkort_daempet',
-      //       'TICKET': kfticket,
-      //       'TRANSPARENT': 'TRUE',
-      //       'SERVICE':'WMS',
-      //       'VERSION':'1.1.1'
-      //     }
-      //   })
-      // });
-      // layers.push(wms);
 
       // Create map with wms as background layer
       var map = new ol.Map({
