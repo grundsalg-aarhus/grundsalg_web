@@ -2,6 +2,7 @@
 
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 
 /**
  * Implements hook_proprocess_page().
@@ -20,11 +21,19 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
       $variables['#attached']['drupalSettings']['variables']['grundsalg_slideshow_app_dir'] = '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js';
 
       foreach ($variables['node']->get('field_media_image') as $key => $item) {
-        $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
+        // Fetch each referencede image entity.
+        $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id)->get('field_itk_media_image_upload');
+        $id = $image_entity->target_id;
+        $alt_text = $image_entity->alt;
+        $file = File::load($id);
 
+        // Create render array fo rresponsive images.
+        $image_render_array = _load_image($file, 'grundsalg_main_image', $alt_text);
+
+        // Send rendered html to javascript.
+        $image_html = render($image_render_array);
         $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
-          'url' => ImageStyle::load('main_content')->buildUrl(File::load($image_entity->get('field_itk_media_image_upload')->target_id)->getFileUri()),
-          'alt' => $image_entity->get('field_itk_media_image_upload')->alt,
+          'html' => $image_html,
         );
       }
     }
@@ -32,4 +41,51 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
       $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
     }
   }
+}
+
+/**
+ * Render image entity as responsive image.
+ *
+ * @param $file
+ * @param $responsive_image_style_id
+ * @return array|null
+ */
+function _load_image($file, $responsive_image_style_id, $alt_text) {
+  if ($file) {
+    // Load main_image
+    if ($file) {
+      $variables = array(
+        'responsive_image_style_id' => $responsive_image_style_id,
+        'uri' => $file->getFileUri(),
+      );
+      // The image.factory service will check if our image is valid.
+      $image = \Drupal::service('image.factory')->get($file->getFileUri());
+      if ($image->isValid()) {
+        $variables['width'] = $image->getWidth();
+        $variables['height'] = $image->getHeight();
+      }
+      else {
+        $variables['width'] = $variables['height'] = NULL;
+      }
+      // Create render array.
+      $result_image = [
+        '#attributes' => array(
+          'title' => $alt_text,
+          'alt' => $alt_text
+        ),
+        '#theme' => 'responsive_image',
+        '#width' => $variables['width'],
+        '#height' => $variables['height'],
+        '#responsive_image_style_id' => $variables['responsive_image_style_id'],
+        '#uri' => $variables['uri'],
+      ];
+      // Add the file entity to the cache dependencies.
+      // This will clear our cache when this entity updates.
+      $renderer = \Drupal::service('renderer');
+      $renderer->addCacheableDependency($result_image, $file);
+      // Return the render array as block content.
+      return $result_image;
+    }
+  }
+  return NULL;
 }

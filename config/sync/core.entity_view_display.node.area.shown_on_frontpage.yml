@@ -5,8 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.node.shown_on_frontpage
     - field.field.node.area.field_body
+    - field.field.node.area.field_city_reference
+    - field.field.node.area.field_media_image
+    - field.field.node.area.field_parent
     - field.field.node.area.field_plot_type
+    - field.field.node.area.field_streetview_coordinates
     - field.field.node.area.field_teaser
+    - field.field.node.area.field_teaser_image
+    - field.field.node.area.field_youtube
     - node.type.area
   module:
     - user
@@ -17,17 +23,25 @@ mode: shown_on_frontpage
 content:
   field_plot_type:
     type: entity_reference_label
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
   field_teaser:
-    weight: 0
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+  field_teaser_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: shown_in_teaser
+      link: false
+    third_party_settings: {  }
 hidden:
   field_body: true
   field_city_reference: true

@@ -1,0 +1,14 @@
+uuid: 7272912e-ed73-4ec6-91a8-5c3a7849c4d4
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_tablet
+label: 'Main image tablet'
+effects:
+  3cfe4e37-b809-4d7f-816d-a21861745135:
+    uuid: 3cfe4e37-b809-4d7f-816d-a21861745135
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 307

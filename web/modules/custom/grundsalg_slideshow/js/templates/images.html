@@ -1,7 +1,7 @@
 <div class="content-image">
   <!-- @TODO: What does data-ng-animate do? -->
   <div class="content-image--inner" data-ng-animate="'animate'" data-ng-repeat="image in images" ng-show="$index === currentIndex">
-    <img data-ng-src="{{ image.url }}" alt="{{ image.alt }}" />
+    <div ng-bind-html="image.html"></div>
   </div>
   <div class="content-image--arrow-left" data-ng-if="images.length > 1" data-ng-click="prev()">
     <div class="arrow-link" data-ng-include="modulePath + '/../images/arrow.svg'">

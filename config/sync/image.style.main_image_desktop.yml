@@ -1,0 +1,14 @@
+uuid: 0e530daa-feb0-4150-80c4-8c3701f731b9
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_desktop
+label: 'Main image desktop'
+effects:
+  d57b7d18-d793-491d-b957-26dedf7eb30f:
+    uuid: d57b7d18-d793-491d-b957-26dedf7eb30f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 2000
+      height: 600

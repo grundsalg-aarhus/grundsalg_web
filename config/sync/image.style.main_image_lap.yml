@@ -1,0 +1,14 @@
+uuid: 14eff540-9287-4a1e-b96f-8c5f50f495f2
+langcode: da
+status: true
+dependencies: {  }
+name: main_image_lap
+label: 'Main image lap'
+effects:
+  043eb335-859e-45b4-aa94-160c0b491902:
+    uuid: 043eb335-859e-45b4-aa94-160c0b491902
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 144

@@ -8,6 +8,8 @@ angular.module('grundsalg').controller('SlideshowController', ['$scope',
 
       // Bind images to scope.
       $scope.images = drupalSettings.variables.images;
+
+      console.log($scope.images);
     }
   ]
 );
