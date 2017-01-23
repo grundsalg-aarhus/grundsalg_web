@@ -66,13 +66,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-  field_teaser_image:
-    weight: 7
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
   field_youtube:
     weight: 3
     label: above
@@ -92,5 +85,6 @@ hidden:
   field_plot_type: true
   field_subdivision_id: true
   field_teaser: true
+  field_teaser_image: true
   langcode: true
   links: true
