@@ -40,5 +40,5 @@ widgets:
       submit_text: 'Upload image to media library'
     uuid: ea5ee6d6-e3f2-48b8-be8c-99ec28653c04
     weight: 3
-    label: 'Upload new image'
+    label: 'Upload nyt billede'
     id: entity_form

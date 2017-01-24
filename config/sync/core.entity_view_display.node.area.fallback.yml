@@ -6,10 +6,10 @@ dependencies:
     - core.entity_view_mode.node.fallback
     - field.field.node.area.field_body
     - field.field.node.area.field_city_reference
+    - field.field.node.area.field_coordinate
     - field.field.node.area.field_media_image
     - field.field.node.area.field_parent
     - field.field.node.area.field_plot_type
-    - field.field.node.area.field_streetview_coordinates
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
     - field.field.node.area.field_youtube
@@ -38,10 +38,10 @@ content:
 hidden:
   field_body: true
   field_city_reference: true
+  field_coordinate: true
   field_media_image: true
   field_parent: true
   field_plot_type: true
-  field_streetview_coordinates: true
   field_youtube: true
   langcode: true
   links: true

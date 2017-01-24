@@ -43,7 +43,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filtrér
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -185,7 +185,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          action_title: Action
+          action_title: Handling
           include_exclude: exclude
           selected_actions: {  }
           entity_type: media
@@ -279,7 +279,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Media name'
+          label: 'Medie navn'
           exclude: false
           element_type: ''
           element_class: ''
@@ -310,7 +310,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Provider
+          label: Type
           exclude: false
           alter:
             alter_text: false
@@ -678,7 +678,7 @@ display:
           exposed: true
           expose:
             operator_id: bundle_op
-            label: Provider
+            label: Type
             description: ''
             use_operator: false
             operator: bundle_op
@@ -689,7 +689,7 @@ display:
             remember_roles:
               authenticated: authenticated
               anonymous: '0'
-              administrator: '0'
+              editor: '0'
             reduce: false
           is_grouped: false
           group_info:
@@ -719,7 +719,7 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Media name'
+            label: 'Medie navn'
             description: ''
             use_operator: false
             operator: name_op

@@ -15,8 +15,8 @@ id: media.document.field_itk_media_tag
 field_name: field_itk_media_tag
 entity_type: media
 bundle: document
-label: Tag
-description: 'The tag will help you navigate in your media library'
+label: Mærkat
+description: 'Mærkatet vil hjælpe dig til at navigere i mediebiblioteket'
 required: false
 translatable: false
 default_value: {  }
