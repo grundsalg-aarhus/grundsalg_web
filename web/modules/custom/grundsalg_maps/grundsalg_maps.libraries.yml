@@ -1,6 +1,8 @@
 angular:
   js:
+    js/libs/angular-cache.js: {}
     js/MapController.js: {}
+    js/services/TicketService.js: {}
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_maps/leaflet

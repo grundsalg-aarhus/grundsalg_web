@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http',
-  function($scope, $http) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'ticketService',
+  function($scope, ticketService) {
     'use strict';
 
     /**
@@ -145,19 +145,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http',
     expire.setTime(expire.getTime() + (23*60*60*1000));
 
     if (ticket === undefined) {
-      $http({
-        method: 'GET',
-        url: drupalSettings.variables.grundsalg_maps.url + '/api/kfticket'
-      }).then(function successCallback(response) {
-        ticket = response.data;
-        ticket_cookie.set(ticket, expire);
-        displayMaps(ticket);
-      }, function errorCallback(response) {
-        console.error(response);
-      });
+      ticket = ticketService.getTicket();
+      ticket_cookie.set(ticket, expire);
     }
-    else {
-      displayMaps(ticket);
-    }
+
+    displayMaps(ticket);
   }
 ]);
