@@ -55,12 +55,12 @@ third_party_settings:
       weight: 4
       format_type: details
       format_settings:
-        label: City
+        label: By
         open: true
         id: ''
         classes: ''
         required_fields: false
-      label: City
+      label: By
     group_type:
       children:
         - field_plot_type
