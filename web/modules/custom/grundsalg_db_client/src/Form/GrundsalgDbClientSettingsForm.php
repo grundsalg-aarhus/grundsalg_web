@@ -6,7 +6,7 @@
 
 namespace Drupal\grundsalg_db_client\Form;
 
-use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @package Drupal\itkore_admin\Form
  */
-class GrundsalgDbClientSettingsForm extends ConfigFormBase {
+class GrundsalgDbClientSettingsForm extends FormBase {
 
   /**
    * {@inheritdoc}
@@ -23,50 +23,98 @@ class GrundsalgDbClientSettingsForm extends ConfigFormBase {
     return 'grundsalg_db_client_settings';
   }
 
-
   /**
-   * {@inheritdoc}
+   * Get key/value storage for base config.
+   *
+   * @return object
    */
-  protected function getEditableConfigNames() {
-    return [
-      'grundsalg_db_client.settings'
-    ];
+  private function getBaseConfig() {
+    return \Drupal::getContainer()->get('itkore_admin.itkore_config');
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('grundsalg_db_client.settings');
+    $config = $this->getBaseConfig();
 
     // Add front page wrapper.
-    $form['wrapper'] = array(
-      '#title' => $this->t('Grundsalg DB client settings'),
-      '#type' => 'item',
-      '#description' => $this->t('Settings related to Grundsalg DB client'),
+    $form['example'] = array(
+      '#title' => $this->t('Use example data from JSON'),
+      '#type' => 'fieldset',
       '#weight' => '1',
       '#open' => TRUE,
     );
 
     // Add front page wrapper.
-    $form['wrapper']['use_example_data'] = array(
+    $form['example']['use_example_data'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Use example data'),
-      '#default_value' => $config->get('use_example_data'),
+      '#default_value' => $config->get('grundsalg_db_client_use_example_data'),
     );
 
-    return parent::buildForm($form, $form_state);
+    $path = drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json';
+    $form['example']['file'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('JSON file'),
+      '#description' => $this->t('The location of the example data file'),
+      '#default_value' => $config->get('grundsalg_db_client_example_file') ? $config->get('grundsalg_db_client_example_file') : $path,
+      '#size' => 60,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="use_example_data"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['fs'] = array(
+      '#title' => $this->t('Database settings (fagsystem)'),
+      '#type' => 'fieldset',
+      '#weight' => '1',
+      '#open' => TRUE,
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="use_example_data"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['fs']['url'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('URL'),
+      '#description' => $this->t('Grundslag fagsystem end-point URL'),
+      '#default_value' => $config->get('url'),
+      '#size' => 60,
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="use_example_data"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save changes'),
+      '#weight' => '6',
+    );
+
+    return $form;
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->config('grundsalg_db_client.settings')
-      ->set('use_example_data', $form_state->getValue('use_example_data'))
-      ->save();
+    drupal_set_message('Settings saved');
 
-    parent::submitForm($form, $form_state);
+    // Set the configuration values.
+    $this->getBaseConfig()->setMultiple(array(
+      'grundsalg_db_client_use_example_data' => $form_state->getValue('use_example_data'),
+      'grundsalg_db_client_example_file' => $form_state->getValue('file'),
+      'grundsalg_db_client_url' => $form_state->getValue('url'),
+    ));
+
+    drupal_flush_all_caches();
   }
 }
 
