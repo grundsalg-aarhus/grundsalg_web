@@ -6,11 +6,11 @@ dependencies:
     - core.entity_view_mode.node.shown_on_frontpage
     - field.field.node.subdivision.field_body
     - field.field.node.subdivision.field_city_reference
+    - field.field.node.subdivision.field_coordinate
     - field.field.node.subdivision.field_media_document
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
     - field.field.node.subdivision.field_plot_type
-    - field.field.node.subdivision.field_streetview_coordinates
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
@@ -47,10 +47,10 @@ content:
 hidden:
   field_body: true
   field_city_reference: true
+  field_coordinate: true
   field_media_document: true
   field_media_image: true
   field_parent: true
-  field_streetview_coordinates: true
   field_subdivision_id: true
   field_youtube: true
   langcode: true
