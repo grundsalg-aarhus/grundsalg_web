@@ -24,6 +24,7 @@ function grundsalg_plots_theme($existing, $type, $theme, $path) {
  */
 function grundsalg_plots_preprocess_node(&$variables) {
   $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
+
   // Add plots to subdivision.
   if (($variables['view_mode'] == 'full' && $variables['node']->getType() == 'subdivision')) {
     if (isset($variables['node']->get('field_subdivision_id')->value) || $use_dummy) {

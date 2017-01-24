@@ -5,3 +5,11 @@ grundsalg_maps.config:
     _title: 'Maps settings'
   requirements:
     _permission: 'administer site configuration'
+
+grundsalg_maps.areas:
+  path: '/api/maps/areas/{type}'
+  defaults:
+    _title: 'Maps overview page areas'
+    _controller: '\Drupal\grundsalg_maps\Controller\ApiController::areas'
+  requirements:
+    _permission: 'access content'
