@@ -11,19 +11,17 @@ function grundsalg_maps_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
-    if (($type == 'subdivision' || $type == 'area')) {
+    if (in_array($type, array('subdivision', 'area', 'overview_page'))) {
 
       $variables['#attached']['library'][] = 'grundsalg_maps/openlayers';
       $variables['#attached']['library'][] = 'grundsalg_maps/angular';
 
-      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
-        $variables['#attached']['drupalSettings']['variables'] = array();
-      }
-      $variables['#attached']['drupalSettings']['variables']['grundsalg_maps_app_dir'] = '/' . drupal_get_path('module', 'grundsalg_maps') . '/js';
-
-      // Get configuration.
       $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
-      $variables['#attached']['drupalSettings']['variables']['grundsalg_maps']['url'] = $config->get('grundsalg_maps_url');
+
+      $variables['#attached']['drupalSettings']['grundsalg_maps'] = array(
+        'dir' => '/' . drupal_get_path('module', 'grundsalg_maps') . '/js',
+        'url' => $config->get('grundsalg_maps_url'),
+      );
     }
   }
 }
