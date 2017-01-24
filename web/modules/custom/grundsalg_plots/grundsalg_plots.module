@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation.
+ */
 
 use \Drupal\Core\Form\FormStateInterface;
 
@@ -9,43 +13,37 @@ function grundsalg_plots_theme($existing, $type, $theme, $path) {
   return array(
     'grundsalg_plots' => array(
       'template' => 'grundsalg-plots',
-      'variables' => ['variables' => NULL],
-    ),
-    'grundsalg_plots_form' => array(
-      'template' => 'grundsalg-plots-form',
-      'variables' => ['variables' => NULL],
-    ),
+      'variables' => array(
+        'variables' => NULL,
+      ),
+    )
   );
 }
-
 
 /**
  * Implements hook_proprocess_node().
  */
 function grundsalg_plots_preprocess_node(&$variables) {
-  $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
-
   // Add plots to subdivision.
   if (($variables['view_mode'] == 'full' && $variables['node']->getType() == 'subdivision')) {
-    if (isset($variables['node']->get('field_subdivision_id')->value) || $use_dummy) {
+    // Get sub-division id.
+    $subdivision_id = $variables['node']->get('field_subdivision_id')->value;
+    $path = '/' . drupal_get_path('module', 'grundsalg_plots') . '/js';
+
+    // Build render array to kick start the Angular part of plots.
+    if (isset($subdivision_id)) {
       $variables['content']['plots'] = array(
         '#theme' => 'grundsalg_plots',
         '#type' => 'markup',
-        '#cache' => array(
-          'max-age' => 0,
-        ),
         '#attached' => array(
           'library' => array(
             'grundsalg_plots/show_plots'
           ),
           'drupalSettings' => array(
-            'variables' => array(
-              'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
-              'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
-              'use_dummy' => $use_dummy,
-              'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
-              'subdivision_id' => (isset($variables['node']->get('field_subdivision_id')->value) ? $variables['node']->get('field_subdivision_id')->value : 0 ),
-              'form_template' => 0,
+            'grundsalg_plots' => array(
+              'url' => _grundsalg_plots_get_url(),
+              'template' => $path . '/templates/plots.html',
+              'subdivision_id' => $subdivision_id,
             )
           )
         )
@@ -56,52 +54,75 @@ function grundsalg_plots_preprocess_node(&$variables) {
 
 
 /**
- * Implements hook_form_alter()
+ * Implements hook_form_node_subdivision_edit_form_alter()
+ *
+ * Modify the plots field in node edit form to display the plots for given
+ * sub-division.
  */
-function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
+function grundsalg_plots_form_node_subdivision_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Create field wrapper to attach Angular to the edit form.
+  $form['plots_wrapper'] = array(
+    '#type' => 'details',
+    '#title' => t('Plots'),
+    '#open' => FALSE,
+    '#weight' => 100,
+    '#attributes' => array(
+      'data-ng-app' => 'grundsalg',
+    ),
+  );
 
-  if (isset($form['field_subdivision_id'])) {
-    $form['plots_wrapper'] = array(
-      '#type' => 'details',
-      '#title' => t('Plots'),
-      '#open' => FALSE,
-      '#weight' => 100,
-      '#attributes' => array('data-ng-app' => 'grundsalg'),
-    );
+  // Move subdivision field into wrapper.
+  $form['plots_wrapper']['field_subdivision_id'] = $form['field_subdivision_id'];
+  unset($form['field_subdivision_id']);
+  $form['plots_wrapper']['field_subdivision_id']['#weight'] = 0;
 
-    // Move subdivision field into wrapper.
-    $form['plots_wrapper']['field_subdivision_id'] = $form['field_subdivision_id'];
-    unset($form['field_subdivision_id']);
-    $form['plots_wrapper']['field_subdivision_id']['#weight'] = 0;
+  // Get sub-division id.
+  $entity = $form_state->getFormObject()->getEntity();
+  $subdivision_id = $entity->get('field_subdivision_id')->value;
 
-    // Prepare angular tempate.
-    $plots = array(
-      '#theme' => 'grundsalg_plots_form',
-      '#type' => 'markup',
-      '#cache' => array(
-        'max-age' => 0,
+  $path = '/' . drupal_get_path('module', 'grundsalg_plots') . '/js';
+
+  // Prepare angular templates.
+  $plots = array(
+    '#theme' => 'grundsalg_plots',
+    '#type' => 'markup',
+    '#attached' => array(
+      'library' => array(
+        'grundsalg_plots/show_plots'
       ),
-      '#attached' => array(
-        'library' => array(
-          'grundsalg_plots/show_plots'
-        ),
-        'drupalSettings' => array(
-          'variables' => array(
-            'plots_module_dir' => '/' . drupal_get_path('module', 'grundsalg_plots') . '/js',
-            'dummy_plots' => '/' . drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json',
-            'use_dummy' => $use_dummy,
-            'remote_db' => \Drupal::config('grundsalg_db')->get('url'),
-            'form_template' => 1,
-          )
+      'drupalSettings' => array(
+        'grundsalg_plots' => array(
+          'url' => _grundsalg_plots_get_url(),
+          'template' => $path . '/templates/plots-form.html',
+          'subdivision_id' => $subdivision_id,
         )
       )
-    );
-    // Add angular wrapper
-    $form['plots_wrapper']['plots'] = array(
-      '#type' => 'item',
-      '#description' => render($plots),
-      '#weight' => 3,
-    );
-  }
+    )
+  );
+
+  // Add Angular plots template to wrapper.
+  $form['plots_wrapper']['plots'] = array(
+    '#type' => 'item',
+    '#description' => render($plots),
+    '#weight' => 3,
+  );
+}
+
+/**
+ * Build URL to fetch plots data from base on configuration.
+ *
+ * @return string
+ *   The URL to the plots data end-point.
+ */
+function _grundsalg_plots_get_url() {
+  $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+
+  // Find data end-point (note that %str% in the URL is replaced with the actual
+  // ID in Angular).
+  $url = $config->get('grundsalg_db_client_url') . '/udstykning/%subdivisionId%/grunde';
+  if ($config->get('grundsalg_db_client_use_example_data')) {
+    $url = '/' . $config->get('grundsalg_db_client_example_file');
+  };
+
+  return $url;
 }

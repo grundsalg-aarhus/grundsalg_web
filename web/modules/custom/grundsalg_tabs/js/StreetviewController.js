@@ -13,11 +13,15 @@ angular.module('grundsalg').controller('StreetviewController', ['$scope',
       function initialize() {
         angular.element(document).ready(function ready() {
           var sv = new google.maps.StreetViewService();
+
+          // Location from the node in drupal.
           var location = {
-            lat: Number(drupalSettings.variables.coordinates.lat),
-            lng: Number(drupalSettings.variables.coordinates.lon)
+            lat: Number(drupalSettings.grundsalg_tabs.coordinates.lat),
+            lng: Number(drupalSettings.grundsalg_tabs.coordinates.lon)
           };
 
+          // @TODO: Is the radius 1500 meters or km?
+          // Get a streetview as close as possible with in 1500 km.
           sv.getPanorama({
             location: location,
             radius: 1500

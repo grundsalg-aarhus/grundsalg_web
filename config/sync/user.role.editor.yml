@@ -10,7 +10,6 @@ weight: 2
 is_admin: null
 permissions:
   0: 'access contextual links'
-  1: 'access files overview'
   2: 'use text format filtered_html'
   3: 'translate interface'
   4: 'create itkore_event content'
@@ -36,7 +35,6 @@ permissions:
   27: 'create url aliases'
   30: 'change own username'
   32: 'assign editor role'
-  33: 'manipulate all entityqueues'
   34: 'manipulate entityqueues'
   35: 'update frontpage entityqueue'
   36: 'create content_block content'

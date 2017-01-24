@@ -25,41 +25,40 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'grundsalg_tabs/angular';
       $variables['#attached']['library'][] = 'grundsalg_tabs/googlemaps-api';
 
-      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
-        $variables['#attached']['drupalSettings']['variables'] = array();
-      }
-      $variables['#attached']['drupalSettings']['variables']['app_dir'] = '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js';
+
+      $variables['#attached']['drupalSettings']['grundsalg_tabs'] = array(
+        'app_dir' => '/' . drupal_get_path('module', 'grundsalg_tabs') . '/js',
+      );
 
       // Enable tabs (See page--node.html.twig)
       $variables['display_tabs'] = TRUE;
 
-      // If not images (hide tab). If images the grundsalg_slideshow will ensure
-      // images are displayed.
+      // If no images exists on current node (hide image tab). If images exists
+      // they will be move into JS from the grundsalg_slideshow module.
       if (!isset($variables['node']->field_media_image->target_id)) {
         $variables['images'] = FALSE;
-        $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
       }
 
       // Add youtube link to js.
       if (isset($variables['node']->field_youtube->video_id)) {
-        $variables['#attached']['drupalSettings']['variables']['video'] = $variables['node']->field_youtube->video_id;
+        $variables['#attached']['drupalSettings']['grundsalg_tabs']['video'] = $variables['node']->field_youtube->video_id;
       }
       else {
         $variables['video'] = FALSE;
-        $variables['#attached']['drupalSettings']['variables']['video'] = FALSE;
       }
 
-      // Add coordinates to js.
-      if (isset($variables['node']->field_streetview_coordinates->value)) {
-        $coordinates_str = $variables['node']->field_streetview_coordinates->value;
-        $coordinates = explode(',', str_replace (' ', '', $coordinates_str));
-        $variables['#attached']['drupalSettings']['variables']['coordinates']['full'] = $coordinates_str;
-        $variables['#attached']['drupalSettings']['variables']['coordinates']['lat'] = $coordinates['0'];
-        $variables['#attached']['drupalSettings']['variables']['coordinates']['lon'] = $coordinates['1'];
+      // Add coordinates to JS (here used for street-view).
+      if (isset($variables['node']->field_coordinate->value)) {
+        $coordinates_str = $variables['node']->field_coordinate->value;
+        $coordinates = explode(',', str_replace(' ', '', $coordinates_str));
+        $variables['#attached']['drupalSettings']['grundsalg_tabs']['coordinates'] = array(
+          'full' => $coordinates_str,
+          'lat' => $coordinates['0'],
+          'lon' => $coordinates['1'],
+        );
       }
       else {
         $variables['coordinates'] = FALSE;
-        $variables['#attached']['drupalSettings']['variables']['coordinates'] = FALSE;
       }
     }
   }
@@ -68,6 +67,8 @@ function grundsalg_tabs_preprocess_page(&$variables) {
 
 /**
  * Implements hook_proprocess_node().
+ *
+ * @TODO: Need comment about why this is needed. Would the above not do this?
  */
 function grundsalg_tabs_preprocess_node(&$variables) {
   // Add angular to certain node types.

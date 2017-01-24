@@ -7,7 +7,7 @@ angular.module('grundsalg').controller('SlideshowController', ['$scope',
       'use strict';
 
       // Bind images to scope.
-      $scope.images = drupalSettings.variables.images;
+      $scope.images = drupalSettings.grundsalg_slideshow.images;
     }
   ]
 );

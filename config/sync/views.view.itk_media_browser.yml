@@ -52,7 +52,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filtrér
           reset_button: false
           reset_button_label: 'Nulstil søgning'
           exposed_sorts_label: 'Sort by'
@@ -310,7 +310,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Tag
+          label: Mærkat
           exclude: false
           alter:
             alter_text: false
@@ -391,7 +391,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Search for documents'
+            label: 'Søg efter dokumenter'
             description: ''
             use_operator: false
             operator: combine_op
@@ -471,7 +471,7 @@ display:
           exposed: true
           expose:
             operator_id: field_itk_media_tag_target_id_op
-            label: Tag
+            label: Mærkat
             description: ''
             use_operator: false
             operator: field_itk_media_tag_target_id_op
@@ -553,7 +553,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Search for documents'
+            label: 'Søg efter dokumenter'
             description: ''
             use_operator: false
             operator: combine_op
@@ -593,7 +593,7 @@ display:
           exposed: true
           expose:
             operator_id: field_itk_media_tag_target_id_op
-            label: Tag
+            label: Mærkat
             description: ''
             use_operator: false
             operator: field_itk_media_tag_target_id_op
@@ -840,7 +840,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Tag
+          label: Mærkat
           exclude: false
           alter:
             alter_text: false
@@ -925,7 +925,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Search for images'
+            label: 'Søg efter billeder'
             description: ''
             use_operator: false
             operator: combine_op
@@ -1005,7 +1005,7 @@ display:
           exposed: true
           expose:
             operator_id: field_itk_media_tag_target_id_op
-            label: Tag
+            label: Mærkat
             description: ''
             use_operator: false
             operator: field_itk_media_tag_target_id_op

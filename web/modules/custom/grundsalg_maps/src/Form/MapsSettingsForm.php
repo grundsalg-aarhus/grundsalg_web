@@ -39,7 +39,7 @@ class MapsSettingsForm extends FormBase {
     $config = $this->getBaseConfig();
 
     $form['proxy'] = array(
-      '#type' => 'details',
+      '#type' => 'fieldset',
       '#title' => $this->t('Proxy settings'),
       '#open' => TRUE,
     );
