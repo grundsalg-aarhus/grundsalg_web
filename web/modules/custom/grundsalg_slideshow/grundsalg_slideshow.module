@@ -15,10 +15,9 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
 
       // Provide module path to js.
-      if (!isset($variables['#attached']['drupalSettings']['variables'])) {
-        $variables['#attached']['drupalSettings']['variables'] = array();
-      }
-      $variables['#attached']['drupalSettings']['variables']['grundsalg_slideshow_app_dir'] = '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js';
+      $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array(
+        'app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js',
+      );
 
       foreach ($variables['node']->get('field_media_image') as $key => $item) {
         // Fetch each referencede image entity.
@@ -32,13 +31,10 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
 
         // Send rendered html to javascript.
         $image_html = render($image_render_array);
-        $variables['#attached']['drupalSettings']['variables']['images'][$key] = array(
+        $variables['#attached']['drupalSettings']['grundsalg_slideshow']['images'][$key] = array(
           'html' => $image_html,
         );
       }
-    }
-    else {
-      $variables['#attached']['drupalSettings']['variables']['images'] = FALSE;
     }
   }
 }
@@ -46,8 +42,14 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
 /**
  * Render image entity as responsive image.
  *
+ * @TODO: Missing parameter documentation.
+ *
  * @param $file
  * @param $responsive_image_style_id
+ *
+ * @param string $alt_text
+ *   The alt text for the image.
+ *
  * @return array|null
  */
 function _load_image($file, $responsive_image_style_id, $alt_text) {

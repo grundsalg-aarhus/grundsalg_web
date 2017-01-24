@@ -57,6 +57,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
 
 /**
  * Implements hook_form_alter()
+ * 
+ * Modify the plots field in node edit form to display the plots for given
+ * sub-division.
  */
 function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $use_dummy = \Drupal::config('grundsalg_db_client.settings')->get('use_example_data');
@@ -75,7 +78,7 @@ function grundsalg_plots_form_node_form_alter(&$form, FormStateInterface $form_s
     unset($form['field_subdivision_id']);
     $form['plots_wrapper']['field_subdivision_id']['#weight'] = 0;
 
-    // Prepare angular tempate.
+    // Prepare angular templates.
     $plots = array(
       '#theme' => 'grundsalg_plots_form',
       '#type' => 'markup',
