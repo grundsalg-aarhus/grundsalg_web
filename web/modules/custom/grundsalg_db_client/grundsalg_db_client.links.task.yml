@@ -1,5 +1,5 @@
 grundsalg_db_client.admin:
   title: 'DB Client'
   description: 'Setup for grundsalg db client'
-  route_name: grundsalg_db_client.config_client
+  route_name: grundsalg_db_client.config
   base_route: itkore_admin.settings

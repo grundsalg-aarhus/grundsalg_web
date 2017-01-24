@@ -5,6 +5,7 @@
  *
  * Notice! This a hacked way of testing the Service.
  * You should point to a testing database and not expose the route in prod.
+ *
  * @TODO: Fix setup so this can be implemented as a regular drupal Test.
  *
  * Add to routing.yml:
