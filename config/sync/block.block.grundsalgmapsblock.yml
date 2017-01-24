@@ -1,0 +1,28 @@
+uuid: 82014a2c-f536-4959-80a4-ab580af88111
+langcode: da
+status: true
+dependencies:
+  module:
+    - grundsalg_maps
+    - node
+  theme:
+    - grundsalg
+id: grundsalgmapsblock
+theme: grundsalg
+region: content
+weight: -3
+provider: null
+plugin: grundsalg_maps_block
+settings:
+  id: grundsalg_maps_block
+  label: 'Grundsalg maps block'
+  provider: grundsalg_maps
+  label_display: '0'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      overview_page: overview_page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

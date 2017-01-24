@@ -11,7 +11,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
-    if (($type == 'subdivision' || $type == 'area')) {
+    if (in_array($type, array('subdivision', 'area', 'overview_page'))) {
 
       $variables['#attached']['library'][] = 'grundsalg_maps/openlayers';
       $variables['#attached']['library'][] = 'grundsalg_maps/angular';
