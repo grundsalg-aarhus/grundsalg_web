@@ -3,7 +3,7 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'ticketService',
+angular.module('grundsalg').controller('MapController', ['$scope', 'ticketService',
   function($scope, ticketService) {
     'use strict';
 
@@ -144,11 +144,14 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'tic
     var expire = new Date();
     expire.setTime(expire.getTime() + (23*60*60*1000));
 
-    if (ticket === undefined) {
-      ticket = ticketService.getTicket();
-      ticket_cookie.set(ticket, expire);
+    if (ticket == undefined) {
+      ticketService.getTicket().then(function success(ticket) {
+        ticket_cookie.set(ticket, expire);
+        displayMaps(ticket);
+      },
+      function err(err) {
+        console.error(err);
+      });
     }
-
-    displayMaps(ticket);
   }
 ]);

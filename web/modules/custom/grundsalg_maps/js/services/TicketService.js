@@ -1,6 +1,10 @@
+/**
+ * @file
+ * Ticket service to generate ticket to access maps.
+ */
 
-angular.module('grundsalg').service('ticketService', ['$http',
-  function ($http) {
+angular.module('grundsalg').service('ticketService', ['$http', '$q',
+  function ($http, $q) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
@@ -12,23 +16,23 @@ angular.module('grundsalg').service('ticketService', ['$http',
      *    The ticket need to access KS.
      */
     this.getTicket = function getTicket() {
-      var ticket = null;
+      var deferred = $q.defer();
 
       if (config && config.hasOwnProperty('url')) {
         $http({
           method: 'GET',
           url: config.url + '/api/kfticket'
         }).then(function successCallback(response) {
-          ticket = response.data;
+          deferred.resolve(response.data);
         }, function errorCallback(response) {
-          console.error(response);
+          deferred.reject(response.message);
         });
       }
       else {
-        console.error('No maps end-point URL in configuration');
+        deferred.reject('No maps end-point URL in configuration');
       }
 
-      return ticket;
+      return deferred.promise;
     };
   }
 ]);
