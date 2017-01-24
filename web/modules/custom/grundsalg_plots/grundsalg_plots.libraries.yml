@@ -2,6 +2,7 @@ show_plots:
   js:
     js/showPlotsDirective.js: {}
     js/showPlotsController.js: {}
+    js/services/PlotsService.js: {}
 
   header: TRUE
   dependencies:
