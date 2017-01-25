@@ -10,7 +10,7 @@ id: node.page.field_block_reference
 field_name: field_block_reference
 entity_type: node
 bundle: page
-label: 'Block reference'
+label: 'Blok reference'
 description: 'The block displayed on the the right '
 required: false
 translatable: false

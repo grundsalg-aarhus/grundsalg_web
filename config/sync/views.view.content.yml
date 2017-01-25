@@ -35,7 +35,7 @@ display:
         options:
           submit_button: Filter
           reset_button: true
-          reset_button_label: 'Nulstil søgning'
+          reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
@@ -48,10 +48,10 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: '‹ Tidligere'
-            next: 'Næste ›'
-            first: '« Første'
-            last: 'Sidste »'
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -693,7 +693,7 @@ display:
             default_group_multiple: {  }
             group_items:
               1:
-                title: Published
+                title: Publiseret
                 operator: '='
                 value: '1'
               2:
