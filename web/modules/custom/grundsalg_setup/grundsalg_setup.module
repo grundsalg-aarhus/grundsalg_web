@@ -71,6 +71,7 @@ function grundsalg_setup_form_itkore_footer_settings_alter(&$form, \Drupal\Core\
 }
 
 
+
 /**
  * Custom submit handler for footer settings form.
  *

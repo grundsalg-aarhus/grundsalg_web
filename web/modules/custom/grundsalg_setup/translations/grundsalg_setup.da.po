@@ -75,6 +75,5 @@ msgid "Publiseret"
 msgstr "Publiseret"
 msgid "Edit items"
 msgstr "Rediger elementer"
-
-
-
+msgid "Target type"
+msgstr "Indholdsttype"
