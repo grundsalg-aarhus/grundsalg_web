@@ -50,12 +50,16 @@ class ApiController extends ControllerBase {
       ->condition('type', 'area', '=')
       ->condition('field_plot_type', $plot_type, '=')
       ->condition('status', 1, '=')
+      ->condition('field_coordinate', NULL, 'IS NOT NULL')
       ->execute();
 
      $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
 
-     $title = array_pop($nodes)->get('field_streetview_coordinates')->value;
-     $t=1;
+     foreach ($nodes as $node) {
+       $t1 = $node->get('field_coordinate')->value;
+       $t=1;
+     }
+
 
     return new JsonResponse([
       'nids' => $nodes

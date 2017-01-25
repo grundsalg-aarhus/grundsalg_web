@@ -8,6 +8,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', 'ticketServic
     'use strict';
 
     function displayMaps(kfticket) {
+
       proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs");
       var dkProjection = new ol.proj.Projection({
         code: 'EPSG:25832',
@@ -89,13 +90,56 @@ angular.module('grundsalg').controller('MapController', ['$scope', 'ticketServic
         logo: false,
         controls: ol.control.defaults({}),
         view: new ol.View({
-          center: [575130.409185,6224236.93897],
+          center: [575130.409185, 6224236.93897],
           zoom: 6,
-          minZoom: 5,
+          minZoom: 1,
           maxZoom: resolutions.length,
           projection: projection
         })
       });
+
+
+      /**
+       * TEST
+       */
+      var geojsonObject = {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [10.2095833333,56.1572222222]
+            },
+            "properties": {"prop0": "value0"}
+          }
+        ]
+      };
+
+      var format = new ol.format.GeoJSON({
+        defaultDataProjection: 'EPSG:4326'
+      });
+      var testSource = new ol.source.Vector({
+        features: format.readFeatures(geojsonObject, {
+          dataProjection: 'EPSG:4326',
+          featureProjection: 'EPSG:25832'
+        })
+      });
+
+      var testLayer = new ol.layer.Vector({
+        source: testSource,
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 40],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'marker-icon.png'
+          })
+        })
+      });
+
+      // Add the layer to the map
+      map.addLayer(testLayer);
     }
 
     var cookieName = 'kfticket';
