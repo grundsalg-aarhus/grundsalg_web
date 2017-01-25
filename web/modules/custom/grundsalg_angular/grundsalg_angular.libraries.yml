@@ -3,6 +3,7 @@ angular:
     js/angular.min.js: { minified: true }
     js/angular-animate.min.js: { minified: true }
     js/angular-route.min.js: { minified: true }
+    js/angular-cache.js: { minified: true }
     js/app.js: {}
 
   header: TRUE
