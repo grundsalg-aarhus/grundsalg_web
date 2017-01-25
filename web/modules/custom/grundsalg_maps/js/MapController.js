@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', 'ticketService', 'cookieService',
-  function($scope, ticketService, cookieService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'ticketService', 'cookieService',
+  function($scope, $http, ticketService, cookieService) {
     'use strict';
 
     function displayMaps(kfticket) {
@@ -102,44 +102,78 @@ angular.module('grundsalg').controller('MapController', ['$scope', 'ticketServic
       /**
        * TEST
        */
-      var geojsonObject = {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [10.2095833333,56.1572222222]
-            },
-            "properties": {"prop0": "value0"}
-          }
-        ]
-      };
+      $http({
+        method: 'GET',
+        url: '/api/maps/areas/villagrund'
+      }).then(function success(response) {
+        var areas = response.data;
 
-      var format = new ol.format.GeoJSON({
-        defaultDataProjection: 'EPSG:4326'
-      });
-      var testSource = new ol.source.Vector({
-        features: format.readFeatures(geojsonObject, {
-          dataProjection: 'EPSG:4326',
-          featureProjection: 'EPSG:25832'
-        })
-      });
-
-      var testLayer = new ol.layer.Vector({
-        source: testSource,
-        style: new ol.style.Style({
-          image: new ol.style.Icon({
-            anchor: [0.5, 40],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            src: 'marker-icon.png'
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+        var testSource = new ol.source.Vector({
+          features: format.readFeatures(areas, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
           })
-        })
-      });
+        });
 
-      // Add the layer to the map
-      map.addLayer(testLayer);
+        var testLayer = new ol.layer.Vector({
+          source: testSource,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: 'marker-icon.png'
+            })
+          })
+        });
+
+        // Add the layer to the map
+        map.addLayer(testLayer);
+        map.getView().fit(testSource.getExtent(), map.getSize());
+
+        var element = document.getElementById('popup');
+        var popup = new ol.Overlay({
+          element: element,
+          positioning: 'bottom-center',
+          stopEvent: false,
+          offset: [0, -50]
+        });
+        map.addOverlay(popup);
+
+
+        // display popup on click
+        map.on('click', function(evt) {
+          var feature = map.forEachFeatureAtPixel(evt.pixel,
+            function(feature) {
+              return feature;
+            });
+
+          if (feature) {
+            var coordinates = feature.getGeometry().getCoordinates();
+            popup.setPosition(coordinates);
+
+            console.log(feature.get('title') + ' - ' + feature.get('teaser'));
+            // $(element).popover({
+            //   'placement': 'top',
+            //   'html': true,
+            //   'content': feature.get('title')
+            // });
+            // $(element).popover('show');
+          } else {
+            // $(element).popover('destroy');
+          }
+        });
+        /**
+         * TEST
+         */
+
+
+      }, function error(response) {
+        console.error('FFS');
+      });
     }
 
     var cookieName = 'kfticket';

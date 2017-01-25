@@ -7,8 +7,6 @@
 namespace Drupal\grundsalg_maps\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -53,16 +51,35 @@ class ApiController extends ControllerBase {
       ->condition('field_coordinate', NULL, 'IS NOT NULL')
       ->execute();
 
-     $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
 
-     foreach ($nodes as $node) {
-       $t1 = $node->get('field_coordinate')->value;
-       $t=1;
-     }
+    $data = array(
+      'type' => 'FeatureCollection',
+      'features' => array(),
+    );
 
+    foreach ($nodes as $node) {
+      $options = array('absolute' => FALSE);
+      $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', array('node' => $node->id()), $options);
+      $url = $url->toString();
 
-    return new JsonResponse([
-      'nids' => $nodes
-    ]);
+      $coordinates = $node->get('field_coordinate')->value;
+      $coordinates = explode(',', str_replace(' ', '', $coordinates));
+
+      $data['features'][] = array(
+        'type' => 'Feature',
+        'geometry' => array(
+          'type' => "Point",
+          'coordinates' => array($coordinates[1], $coordinates[0]),
+        ),
+        'properties' => array(
+          'title' => $node->get('title')->value,
+          'teaser' => $node->get('field_teaser')->value,
+          'url' => $url
+        ),
+      );
+    }
+
+    return new JsonResponse($data);
   }
 }
