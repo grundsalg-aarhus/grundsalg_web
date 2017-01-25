@@ -73,5 +73,8 @@ msgid "Several special characters are allowed, including space, period (.), hyph
 msgstr "Adskillige special karakterer er tilladte, inklusiv mellemrum, punktum, bindestreg, apostrof, underscore (_) og @"
 msgid "Publiseret"
 msgstr "Publiseret"
+msgid "Edit items"
+msgstr "Rediger elementer"
+
 
 
