@@ -6,7 +6,9 @@ dependencies:
     - core.entity_view_mode.node.shown_on_frontpage
     - field.field.node.page.field_block_reference
     - field.field.node.page.field_body
+    - field.field.node.page.field_media_image
     - field.field.node.page.field_teaser
+    - field.field.node.page.field_teaser_image
     - node.type.page
   module:
     - user
@@ -19,12 +21,21 @@ mode: shown_on_frontpage
 content:
   field_teaser:
     type: basic_string
-    weight: 0
+    weight: 1
     label: hidden
     settings: {  }
+    third_party_settings: {  }
+  field_teaser_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: shown_in_teaser
+      link: false
     third_party_settings: {  }
 hidden:
   field_block_reference: true
   field_body: true
+  field_media_image: true
   langcode: true
   links: true

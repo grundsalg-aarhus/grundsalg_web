@@ -1,5 +1,19 @@
 # Changelog for grundsalg project
 
+## 1.0.0-alpha2
+* Translation of strings in ui
+* Overview page for /projekter
+* Overview page for /nyheder
+* New content type: project
+* Changed content type: page (Added images)
+* Added responsive images
+* Added access denied for projects and content block for anonymous users
+* Separated main menu from hamburger menu
+* Merged grundsalg angular db client modules
+* Cleaned grundsalg angular app
+* New custom module: grundsalg_maps
+* New menu: hamburger menu.
+
 ## 1.0.0-alpha1
 * Initial release
 * New content type: News

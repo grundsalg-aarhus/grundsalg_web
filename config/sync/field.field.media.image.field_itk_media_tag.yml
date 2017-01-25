@@ -15,7 +15,7 @@ id: media.image.field_itk_media_tag
 field_name: field_itk_media_tag
 entity_type: media
 bundle: image
-label: Tag
+label: Mærkat
 description: ''
 required: false
 translatable: true

@@ -1,9 +1,12 @@
 angular:
   js:
     js/MapController.js: {}
+    js/services/TicketService.js: {}
+    js/services/CookieService.js: {}
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_maps/leaflet
+    - core/drupalSettings
 
 leaflet:
   header: true

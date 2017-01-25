@@ -6,11 +6,11 @@ dependencies:
     - entity_browser.browser.itk_image_browser
     - field.field.node.subdivision.field_body
     - field.field.node.subdivision.field_city_reference
+    - field.field.node.subdivision.field_coordinate
     - field.field.node.subdivision.field_media_document
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
     - field.field.node.subdivision.field_plot_type
-    - field.field.node.subdivision.field_streetview_coordinates
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
@@ -28,7 +28,7 @@ third_party_settings:
         - field_teaser_image
         - field_teaser
       parent_name: ''
-      weight: 6
+      weight: 7
       label: Teaser
       format_type: details
       format_settings:
@@ -53,7 +53,7 @@ third_party_settings:
       children:
         - field_plot_type
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: details
       format_settings:
         label: Type
@@ -66,7 +66,7 @@ third_party_settings:
       children:
         - field_city_reference
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: details
       format_settings:
         label: By
@@ -75,21 +75,21 @@ third_party_settings:
         classes: ''
         required_fields: false
       label: By
-    group_stree:
+    group_youtube:
       children:
-        - field_streetview_coordinates
+        - field_youtube
       parent_name: ''
-      weight: 2
+      weight: 4
       format_type: details
       format_settings:
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: Streetview
-    group_youtube:
+      label: Youtube
+    group_coordinate:
       children:
-        - field_youtube
+        - field_coordinate
       parent_name: ''
       weight: 3
       format_type: details
@@ -98,7 +98,7 @@ third_party_settings:
         classes: ''
         open: false
         required_fields: false
-      label: Youtube
+      label: Koordinat
 id: node.subdivision.default
 targetEntityType: node
 bundle: subdivision
@@ -119,6 +119,13 @@ content:
       placeholder: 'Postnr. eller by'
     third_party_settings: {  }
     type: entity_reference_autocomplete
+  field_coordinate:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
   field_media_document:
     weight: 8
     settings:
@@ -150,13 +157,6 @@ content:
     weight: 3
     settings: {  }
     third_party_settings: {  }
-  field_streetview_coordinates:
-    weight: 7
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
   field_subdivision_id:
     weight: 9
     settings:

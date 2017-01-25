@@ -2,11 +2,16 @@
 
 /**
  * Implements hook_proprocess_page().
+ *
+ * @TODO: Note this will load angular on all node pages. It should only be
+ *        loaded on pages that needs it?
  */
 function grundsalg_angular_preprocess_page(&$variables) {
-  // Add angular to certain node types.
   if (isset($variables['node'])) {
+    // Load the AngularJS.
     $variables['#attached']['library'][] = 'grundsalg_angular/angular';
+
+    // Defines the application tag that Angular will bootstrap.
     $variables['attributes']['data-ng-app'] = 'grundsalg';
   }
 }
