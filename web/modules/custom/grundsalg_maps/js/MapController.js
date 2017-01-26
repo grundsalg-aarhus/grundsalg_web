@@ -3,12 +3,92 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'ticketService', 'cookieService',
-  function($scope, $http, ticketService, cookieService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService',
+  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService) {
     'use strict';
 
-    function displayMaps(kfticket) {
+    var config = drupalSettings.grundsalg_maps;
 
+    /**
+     * Load template file from URL.
+     *
+     * @param tmpl
+     * @param config
+     * @returns {*}
+     */
+    function loadTemplateUrl(tmpl, config) {
+      return $http.get(tmpl, angular.extend({cache: false}, config || {})).then(function(res) {
+        return res.data || '';
+      });
+    }
+
+    /**
+     * Load template from cache and fallback to URL.
+     *
+     * @param tmpl
+     * @returns {*}
+     */
+    function loadTemplate(tmpl) {
+      if (!tmpl) {
+        return 'Empty template';
+      }
+
+      return $templateCache.get(tmpl) || loadTemplateUrl(tmpl, {cache: false});
+    }
+
+    /**
+     * Get ticket need to access KF tile server.
+     *
+     * @return {promise}
+     *   Resolves with the ticket or rejected with a error message.
+     */
+    function getTicket() {
+      var deferred = $q.defer();
+
+      var cookieName = 'kfticket';
+      var ticket = cookieService.get(cookieName);
+
+      if (ticket == undefined) {
+        ticketService.getTicket().then(function success(ticket) {
+          // Store the new ticket in a cookie for 23 hours.
+          var expire = new Date();
+          expire.setTime(expire.getTime() + (23*60*60*1000));
+          cookieService.set(cookieName, ticket, expire);
+
+          deferred.resolve(ticket);
+        },
+        function err(err) {
+          deferred.reject(err);
+        });
+      }
+      else {
+        deferred.resolve(ticket);
+      }
+
+      return deferred.promise;
+    }
+
+    /**
+     * Get the projection.
+     *
+     * @returns {ol.proj.Projection}
+     *   The projection used by KF.
+     */
+    function getProjectionEPSG25832() {
+      return ol.proj.get("EPSG:25832");
+    }
+
+    /**
+     * Initialize the OpenLayers Map.
+     *
+     * @param {int} zoom
+     *   The default zoom levels.
+     *
+     * @returns {ol.Map}
+     *   The OpenLayers map object.
+     */
+    function initOpenlayersMap(zoom) {
+      // Add new projection to OpenLayers to support KF.
       proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs");
       var dkProjection = new ol.proj.Projection({
         code: 'EPSG:25832',
@@ -17,185 +97,203 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', 'tic
       });
       ol.proj.addProjection(dkProjection);
 
-      var projection = ol.proj.get("EPSG:25832");
-      var projectionExtent = projection.getExtent();
-      var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
-      var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
-
-      var layers = [];
-      var basemap = new ol.layer.Tile({
-        opacity: 1.0,
-        source: new ol.source.WMTS({
-          url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + kfticket,
-          format: 'image/jpeg',
-          matrixSet: 'View1',
-          layer: 'dtk_skaermkort',
-          style: 'default',
-          tileGrid: new ol.tilegrid.WMTS({
-            origin: ol.extent.getTopLeft(projectionExtent),
-            resolutions: resolutions,
-            matrixIds: matrixIds
-          })
-        })
-      });
-      layers.push(basemap);
-
-      // var ortofoto = new ol.layer.Tile({
-      //   opacity: 1.0,
-      //   source: new ol.source.WMTS({
-      //     url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + kfticket,
-      //     format: 'image/jpeg',
-      //     matrixSet: 'View1',
-      //     layer: 'orto_foraar',
-      //     style: 'default',
-      //     tileGrid: new ol.tilegrid.WMTS({
-      //       origin: ol.extent.getTopLeft(projectionExtent),
-      //       resolutions: resolutions,
-      //       matrixIds: matrixIds
-      //     })
-      //   })
-      // });
-      // layers.push(ortofoto);
-
-      var matrikelkort = new ol.layer.Tile({
-        opacity: 1.0,
-        source: new ol.source.TileWMS({
-          url: 'https://services.kortforsyningen.dk/service',
-          params: {
-            VERSION: '1.3.0',
-            LAYERS: 'Centroide,MatrikelSkel,OptagetVej',
-            FORMAT: 'image/png',
-            STYLES: 'sorte_centroider,sorte_skel,default',
-            TICKET: kfticket,
-            SERVICE:'WMS',
-            SERVICENAME: 'mat',
-            TRANSPARENT: 'TRUE',
-            REQUEST: 'GetMap',
-            SRS: 'EPSG:25832'
-          },
-          tileGrid: new ol.tilegrid.WMTS({
-            origin: ol.extent.getTopLeft(projectionExtent),
-            resolutions: resolutions,
-            matrixIds: matrixIds
-          }),
-          projection: projection
-        })
-      });
-      layers.push(matrikelkort);
-
-      // Create map with wms as background layer
-      var map = new ol.Map({
+      // Init the map
+      return new ol.Map({
         target: 'mapid',
-        layers: layers,
         logo: false,
-        controls: ol.control.defaults({}),
+        controls: ol.control.defaults(),
         view: new ol.View({
           center: [575130.409185, 6224236.93897],
-          zoom: 6,
-          minZoom: 1,
-          maxZoom: resolutions.length,
-          projection: projection
+          zoom: zoom.default,
+          minZoom: zoom.min,
+          maxZoom: zoom.max,
+          projection: getProjectionEPSG25832()
+        })
+      });
+    }
+
+    /**
+     * Add basic topographically base map.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {array} matrixIds
+     *   Matrix IDs
+     * @param {array} resolutions
+     *   Maps resolutions.
+     */
+    function addTopographicallyLayer(map, matrixIds, resolutions) {
+      getTicket().then(function (ticket) {
+        map.addLayer(new ol.layer.Tile({
+          opacity: 1.0,
+          source: new ol.source.WMTS({
+            url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + ticket,
+            format: 'image/jpeg',
+            matrixSet: 'View1',
+            layer: 'dtk_skaermkort',
+            style: 'default',
+            tileGrid: new ol.tilegrid.WMTS({
+              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
+              resolutions: resolutions,
+              matrixIds: matrixIds
+            })
+          })
+        }));
+      });
+    }
+
+    /**
+     * Add "matrikel" map layer.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {array} matrixIds
+     *   Matrix IDs
+     * @param {array} resolutions
+     *   Maps resolutions.
+     */
+    function addMatrikelLayer(map, matrixIds, resolutions) {
+      getTicket().then(function (ticket) {
+        var projection = getProjectionEPSG25832();
+
+        map.addLayer(new ol.layer.Tile({
+          opacity: 1.0,
+          source: new ol.source.TileWMS({
+            url: 'https://services.kortforsyningen.dk/service',
+            params: {
+              VERSION: '1.3.0',
+              LAYERS: 'Centroide,MatrikelSkel,OptagetVej',
+              FORMAT: 'image/png',
+              STYLES: 'sorte_centroider,sorte_skel,default',
+              TICKET: ticket,
+              SERVICE:'WMS',
+              SERVICENAME: 'mat',
+              TRANSPARENT: 'TRUE',
+              REQUEST: 'GetMap',
+              SRS: 'EPSG:25832'
+            },
+            tileGrid: new ol.tilegrid.WMTS({
+              origin: ol.extent.getTopLeft(projection.getExtent()),
+              resolutions: resolutions,
+              matrixIds: matrixIds
+            }),
+            projection: projection
+          })
+        }));
+      });
+    }
+
+    /**
+     * Add "orto foto" map layer.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {array} matrixIds
+     *   Matrix IDs
+     * @param {array} resolutions
+     *   Maps resolutions.
+     */
+    function addOrtofotoLayer(map, matrixIds, resolutions) {
+      getTicket().then(function (ticket) {
+        map.addLayer(new ol.layer.Tile({
+          opacity: 1.0,
+          source: new ol.source.WMTS({
+            url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + ticket,
+            format: 'image/jpeg',
+            matrixSet: 'View1',
+            layer: 'orto_foraar',
+            style: 'default',
+            tileGrid: new ol.tilegrid.WMTS({
+              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
+              resolutions: resolutions,
+              matrixIds: matrixIds
+            })
+          })
+        }));
+      });
+    }
+
+    var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
+    var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
+    var zoom = {
+      default: 6,
+      min: 1,
+      max: 14
+    };
+    var map = initOpenlayersMap(zoom);
+
+    addTopographicallyLayer(map, matrixIds, resolutions);
+    //addOrtofotoLayer(map, matrixIds, resolutions);
+    addMatrikelLayer(map, matrixIds, resolutions);
+
+    $http({
+      method: 'GET',
+      url: '/api/maps/areas/' + config.plot_type
+    }).then(function success(response) {
+      var areas = response.data;
+
+      var format = new ol.format.GeoJSON({
+        defaultDataProjection: 'EPSG:4326'
+      });
+      var testSource = new ol.source.Vector({
+        features: format.readFeatures(areas, {
+          dataProjection: 'EPSG:4326',
+          featureProjection: 'EPSG:25832'
         })
       });
 
-
-      /**
-       * TEST
-       */
-      $http({
-        method: 'GET',
-        url: '/api/maps/areas/villagrund'
-      }).then(function success(response) {
-        var areas = response.data;
-
-        var format = new ol.format.GeoJSON({
-          defaultDataProjection: 'EPSG:4326'
-        });
-        var testSource = new ol.source.Vector({
-          features: format.readFeatures(areas, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:25832'
+      var testLayer = new ol.layer.Vector({
+        source: testSource,
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 40],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'marker-icon.png'
           })
-        });
-
-        var testLayer = new ol.layer.Vector({
-          source: testSource,
-          style: new ol.style.Style({
-            image: new ol.style.Icon({
-              anchor: [0.5, 40],
-              anchorXUnits: 'fraction',
-              anchorYUnits: 'pixels',
-              src: 'marker-icon.png'
-            })
-          })
-        });
-
-        // Add the layer to the map
-        map.addLayer(testLayer);
-        map.getView().fit(testSource.getExtent(), map.getSize());
-
-        var element = document.getElementById('popup');
-        var popup = new ol.Overlay({
-          element: element,
-          positioning: 'bottom-center',
-          stopEvent: false,
-          offset: [0, -50]
-        });
-        map.addOverlay(popup);
-
-
-        // display popup on click
-        map.on('click', function(evt) {
-          var feature = map.forEachFeatureAtPixel(evt.pixel,
-            function(feature) {
-              return feature;
-            });
-
-          if (feature) {
-            var coordinates = feature.getGeometry().getCoordinates();
-            popup.setPosition(coordinates);
-
-            console.log(feature.get('title') + ' - ' + feature.get('teaser'));
-            // $(element).popover({
-            //   'placement': 'top',
-            //   'html': true,
-            //   'content': feature.get('title')
-            // });
-            // $(element).popover('show');
-          } else {
-            // $(element).popover('destroy');
-          }
-        });
-        /**
-         * TEST
-         */
-
-
-      }, function error(response) {
-        console.error('FFS');
+        })
       });
-    }
 
-    var cookieName = 'kfticket';
-    var ticket = cookieService.get(cookieName);
+      // Add the layer to the map
+      map.addLayer(testLayer);
+      map.getView().fit(testSource.getExtent(), map.getSize());
+      map.getView().setZoom(zoom.default);
 
-    if (ticket == undefined) {
-      ticketService.getTicket().then(function success(ticket) {
-        // Store the new ticket in the cookie for 23 hours.
-        var expire = new Date();
-        expire.setTime(expire.getTime() + (23*60*60*1000));
-        cookieService.set(cookieName, ticket, expire);
-
-        // Display the map.
-        displayMaps(ticket);
-      },
-      function err(err) {
-        console.error(err);
+      var element = document.getElementById('popup');
+      console.log(element);
+      var popup = new ol.Overlay({
+        element: element,
+        positioning: 'bottom-center',
+        stopEvent: false,
+        offset: [0, -50]
       });
-    }
-    else {
-      // Display the map.
-      displayMaps(ticket);
-    }
+      map.addOverlay(popup);
+
+      // display popup on click
+      map.on('click', function(evt) {
+        var feature = map.forEachFeatureAtPixel(evt.pixel,
+          function(feature) {
+            return feature;
+          });
+
+        if (feature) {
+          var coordinates = feature.getGeometry().getCoordinates();
+          popup.setPosition(coordinates);
+
+          element.innerHTML = '<p>' + feature.get('title') + '</p>';
+          console.log(coordinates);
+          console.log(feature.get('title') + ' - ' + feature.get('teaser'));
+
+        } else {
+          // $(element).popover('destroy');
+        }
+      });
+
+    }, function error(response) {
+      console.error('FFS');
+    });
+    /**
+     * TEST
+     */
   }
 ]);

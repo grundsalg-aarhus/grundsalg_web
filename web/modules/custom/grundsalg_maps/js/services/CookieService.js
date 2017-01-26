@@ -6,7 +6,6 @@ angular.module('grundsalg').service('cookieService',
   function () {
     'use strict';
 
-
     /**
      * Get cookie value.
      *

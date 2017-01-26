@@ -21,6 +21,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
       $variables['#attached']['drupalSettings']['grundsalg_maps'] = array(
         'dir' => '/' . drupal_get_path('module', 'grundsalg_maps') . '/js',
         'url' => $config->get('grundsalg_maps_url'),
+        'plot_type' => $variables['node']->get('field_plot_type')->target_id,
       );
     }
   }
