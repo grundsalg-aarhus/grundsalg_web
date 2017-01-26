@@ -81,13 +81,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
     /**
      * Initialize the OpenLayers Map.
      *
-     * @param {int} zoom
-     *   The default zoom levels.
-     *
      * @returns {ol.Map}
      *   The OpenLayers map object.
      */
-    function initOpenlayersMap(zoom) {
+    function initOpenlayersMap() {
       // Add new projection to OpenLayers to support KF.
       proj4.defs("EPSG:25832","+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs");
       var dkProjection = new ol.proj.Projection({
@@ -104,9 +101,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
         controls: ol.control.defaults(),
         view: new ol.View({
           center: [575130.409185, 6224236.93897],
-          zoom: zoom.default,
-          minZoom: zoom.min,
-          maxZoom: zoom.max,
+          zoom: config.zoom.default,
+          minZoom: config.zoom.min,
+          maxZoom: config.zoom.max,
           projection: getProjectionEPSG25832()
         })
       });
@@ -215,85 +212,104 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
 
     var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
-    var zoom = {
-      default: 6,
-      min: 1,
-      max: 14
-    };
-    var map = initOpenlayersMap(zoom);
+    var map = initOpenlayersMap();
 
-    addTopographicallyLayer(map, matrixIds, resolutions);
-    //addOrtofotoLayer(map, matrixIds, resolutions);
-    addMatrikelLayer(map, matrixIds, resolutions);
-
-    $http({
-      method: 'GET',
-      url: '/api/maps/areas/' + config.plot_type
-    }).then(function success(response) {
-      var areas = response.data;
-
-      var format = new ol.format.GeoJSON({
-        defaultDataProjection: 'EPSG:4326'
-      });
-      var testSource = new ol.source.Vector({
-        features: format.readFeatures(areas, {
-          dataProjection: 'EPSG:4326',
-          featureProjection: 'EPSG:25832'
-        })
-      });
-
-      var testLayer = new ol.layer.Vector({
-        source: testSource,
-        style: new ol.style.Style({
-          image: new ol.style.Icon({
-            anchor: [0.5, 40],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            src: 'marker-icon.png'
-          })
-        })
-      });
-
-      // Add the layer to the map
-      map.addLayer(testLayer);
-      map.getView().fit(testSource.getExtent(), map.getSize());
-      map.getView().setZoom(zoom.default);
-
-      var element = document.getElementById('popup');
-      console.log(element);
-      var popup = new ol.Overlay({
-        element: element,
-        positioning: 'bottom-center',
-        stopEvent: false,
-        offset: [0, -50]
-      });
-      map.addOverlay(popup);
-
-      // display popup on click
-      map.on('click', function(evt) {
-        var feature = map.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            return feature;
-          });
-
-        if (feature) {
-          var coordinates = feature.getGeometry().getCoordinates();
-          popup.setPosition(coordinates);
-
-          element.innerHTML = '<p>' + feature.get('title') + '</p>';
-          console.log(coordinates);
-          console.log(feature.get('title') + ' - ' + feature.get('teaser'));
-
-        } else {
-          // $(element).popover('destroy');
-        }
-      });
-
-    }, function error(response) {
-      console.error('FFS');
-    });
     /**
-     * TEST
+     * @TODO: Move popup code into wrapper and move maps config etc into
+     *        functions.
      */
+    if (config.map_type == 'overview_page') {
+      addTopographicallyLayer(map, matrixIds, resolutions);
+
+      $http({
+        method: 'GET',
+        url: '/api/maps/areas/' + config.plot_type
+      }).then(function success(response) {
+        var areas = response.data;
+
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+        var testSource = new ol.source.Vector({
+          features: format.readFeatures(areas, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        var testLayer = new ol.layer.Vector({
+          source: testSource,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: config.popup.marker
+            })
+          })
+        });
+
+        // Add the layer to the map
+        map.addLayer(testLayer);
+        map.getView().fit(testSource.getExtent(), map.getSize());
+        map.getView().setZoom(config.zoom.default);
+
+        var element = document.getElementById('popup');
+        var popup = new ol.Overlay({
+          element: element,
+          positioning: 'bottom-center',
+          stopEvent: false,
+          offset: [0, 0]
+        });
+        map.addOverlay(popup);
+
+        // display popup on click
+        map.on('click', function(evt) {
+          var feature = map.forEachFeatureAtPixel(evt.pixel,
+            function(feature) {
+              return feature;
+            });
+
+          if (feature) {
+            var coordinates = feature.getGeometry().getCoordinates();
+            popup.setPosition(coordinates);
+
+            $q.when(loadTemplate(config.popup.template)).then(function (template) {
+              $templateCache.put(config.popup.template, template);
+
+              var $content = angular.element(element);
+
+              // Create new scope for the popup content.
+              var scope = $scope.$new(true);
+              scope.content = {
+                'title': feature.get('title'),
+                'teaser': feature.get('teaser'),
+                'url': feature.get('url')
+              };
+              scope.icon = config.popup.icon;
+
+              scope.close = function close() {
+                $content.html('');
+              };
+
+              // Attach the angular template to the dom and render the
+              // content.
+              $content.html(template);
+              $timeout(function () {
+                $compile($content)(scope);
+              });
+            });
+          }
+        });
+
+      }, function error(response) {
+        console.error('FFS');
+      });
+    }
+    else {
+      addTopographicallyLayer(map, matrixIds, resolutions);
+      //addOrtofotoLayer(map, matrixIds, resolutions);
+      addMatrikelLayer(map, matrixIds, resolutions);
+    }
   }
 ]);
