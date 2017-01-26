@@ -1,0 +1,16 @@
+<div class="popup">
+  <div class="popup-content-wrapper">
+    <a class="leaflet-popup-close-button" href="#close" data-ng-click="close()" style="outline: medium none;">×</a>
+    <div class="popup-content">
+      <div class="popup-container" style="display: block;">
+        <a href="{{ content.url }}">
+          <h1>{{ content.title }}</h1>
+        </a>
+        <p>{{ content.teaser }}</p>
+        <a href="{{ content.url }}" title="">
+          <img class="map--popover-image" src="{{ icon }}">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

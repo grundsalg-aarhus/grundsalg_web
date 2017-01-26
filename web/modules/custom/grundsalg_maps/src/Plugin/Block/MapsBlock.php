@@ -20,12 +20,15 @@ class MapsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    // @TODO: This should be move into a theme function.
     return array(
       '#markup' => '
         <div ng-controller="MapController">
           <div class="map">
             <div class="map--inner">
-              <div id="mapid" class="map--view"></div>
+              <div id="mapid" class="map--view">
+                <div id="popup"></div>
+              </div>
             </div>
           </div>
         </div>',
