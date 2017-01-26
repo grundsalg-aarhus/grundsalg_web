@@ -1,0 +1,20 @@
+uuid: 6a710a08-82bd-449f-8c3c-c45f1d4faab0
+langcode: da
+status: true
+dependencies:
+  module:
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  language: true
+  path: true
+  timezone: true
