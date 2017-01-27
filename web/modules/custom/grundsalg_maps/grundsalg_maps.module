@@ -17,10 +17,23 @@ function grundsalg_maps_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'grundsalg_maps/angular';
 
       $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+      $path = '/' . drupal_get_path('module', 'grundsalg_maps');
 
       $variables['#attached']['drupalSettings']['grundsalg_maps'] = array(
-        'dir' => '/' . drupal_get_path('module', 'grundsalg_maps') . '/js',
+        'dir' => $path  . '/js',
         'url' => $config->get('grundsalg_maps_url'),
+        'map_type' => $type,
+        'plot_type' => $variables['node']->get('field_plot_type')->target_id,
+        'zoom' => array (
+          'default' =>6,
+          'min' => 1,
+          'max' => 14,
+        ),
+        'popup' => array(
+          'template' => $path . '/js/templates/popup.html',
+          'marker' => $path . '/images/marker-icon.png',
+          'icon' => $path . '/images/link-arrow.svg',
+        ),
       );
     }
   }
