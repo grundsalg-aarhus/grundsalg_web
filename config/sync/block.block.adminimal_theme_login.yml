@@ -1,6 +1,6 @@
 uuid: 9218d55f-f6cf-49e5-89dc-72f91def1272
 langcode: da
-status: true
+status: false
 dependencies:
   module:
     - user
@@ -10,8 +10,8 @@ _core:
   default_config_hash: 862sIulDdHmF0vBU1s2j2_a_CwkxursrL0pIrMDzzOg
 id: adminimal_theme_login
 theme: adminimal_theme
-region: content
-weight: 10
+region: '-1'
+weight: -3
 provider: null
 plugin: user_login_block
 settings:

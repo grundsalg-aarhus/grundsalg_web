@@ -16,7 +16,7 @@ id: media.image.field_itk_media_image_upload
 field_name: field_itk_media_image_upload
 entity_type: media
 bundle: image
-label: 'Image upload'
+label: 'Billede upload'
 description: ''
 required: true
 translatable: false

@@ -10,8 +10,8 @@ dependencies:
 _core:
   default_config_hash: 8z1kJM0qM4I0QDNNGjwndK3HdGLy7q54TlhcuS391Z8
 id: image
-label: Image
-description: 'An image to be stored in the media library'
+label: Billede
+description: 'Et billede der gemmes i mediebiblioteket'
 type: image
 queue_thumbnail_downloads: false
 new_revision: false

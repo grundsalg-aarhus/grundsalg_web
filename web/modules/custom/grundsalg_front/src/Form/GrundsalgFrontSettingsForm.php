@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains Drupal\itkore_frontpage_header\Form\ItkoreFrontpageHeaderSettingsForm.
+ * Contains Drupal\grundsalg_front\Form\GrundsalgFrontSettingsForm.
  */
 
 namespace Drupal\grundsalg_front\Form;

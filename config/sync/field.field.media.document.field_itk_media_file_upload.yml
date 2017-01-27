@@ -16,7 +16,7 @@ id: media.document.field_itk_media_file_upload
 field_name: field_itk_media_file_upload
 entity_type: media
 bundle: document
-label: 'File upload'
+label: 'Fil upload'
 description: ''
 required: true
 translatable: false

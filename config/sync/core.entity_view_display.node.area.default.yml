@@ -5,10 +5,10 @@ dependencies:
   config:
     - field.field.node.area.field_body
     - field.field.node.area.field_city_reference
+    - field.field.node.area.field_coordinate
     - field.field.node.area.field_media_image
     - field.field.node.area.field_parent
     - field.field.node.area.field_plot_type
-    - field.field.node.area.field_streetview_coordinates
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
     - field.field.node.area.field_youtube
@@ -35,6 +35,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+  field_coordinate:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
   field_media_image:
     weight: 1
     label: hidden
@@ -43,13 +50,6 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
-  field_streetview_coordinates:
-    weight: 2
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
   field_youtube:
     weight: 3
     label: above

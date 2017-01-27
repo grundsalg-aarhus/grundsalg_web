@@ -1,0 +1,15 @@
+grundsalg_maps.config:
+  path: '/admin/site-setup/maps'
+  defaults:
+    _form: '\Drupal\grundsalg_maps\Form\MapsSettingsForm'
+    _title: 'Maps settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+grundsalg_maps.areas:
+  path: '/api/maps/areas/{tid}'
+  defaults:
+    _title: 'Maps overview page areas'
+    _controller: '\Drupal\grundsalg_maps\Controller\ApiController::areas'
+  requirements:
+    _permission: 'access content'

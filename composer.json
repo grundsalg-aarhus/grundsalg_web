@@ -30,7 +30,7 @@
         "drupal/itkore-theme": "dev-master",
         "drupal/entityqueue": "1.x-dev",
         "drupal/maxlength": "1.x-dev",
-        "drupal/itk_media_entity": "^1.0",
+        "drupal/itk_media_entity": "^1.1",
         "lcobucci/jwt": "^3.2"
     },
     "require-dev": {

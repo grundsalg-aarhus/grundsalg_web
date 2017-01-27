@@ -1,4 +1,4 @@
 grundsalg_front.admin:
-  title: 'Frontpage settings'
-  route_name: grundsalg_front.settings
+  title: 'Maps'
+  route_name: grundsalg_maps.config
   base_route: itkore_admin.settings

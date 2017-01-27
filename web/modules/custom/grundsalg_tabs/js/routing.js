@@ -13,16 +13,16 @@ angular.module('grundsalg').config(['$routeProvider', '$locationProvider',
       // Setup routes.
       $routeProvider
       .when('/map', {
-        templateUrl: drupalSettings.variables.grundsalg_maps_app_dir + '/templates/map.html'
+        templateUrl: drupalSettings.grundsalg_maps.dir + '/templates/map.html'
       })
       .when('/images', {
-        templateUrl: drupalSettings.variables.grundsalg_slideshow_app_dir + '/templates/slideshow.html'
+        templateUrl: drupalSettings.grundsalg_slideshow.app_dir + '/templates/slideshow.html'
       })
       .when('/video', {
-        templateUrl: drupalSettings.variables.app_dir + '/templates/video.html'
+        templateUrl: drupalSettings.grundsalg_tabs.app_dir + '/templates/video.html'
       })
       .when('/streetview', {
-        templateUrl: drupalSettings.variables.app_dir + '/templates/streetview.html'
+        templateUrl: drupalSettings.grundsalg_tabs.app_dir + '/templates/streetview.html'
       })
       .otherwise({
         redirectTo: '/map'

@@ -50,7 +50,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filtrér
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -64,6 +64,11 @@ display:
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: '‹ Tidligere'
+            next: 'Næste ›'
+            first: '« Første'
+            last: 'Sidste »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -72,11 +77,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
           quantity: 9
       style:
         type: table
@@ -214,6 +214,9 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          action_title: Handling
+          include_exclude: exclude
+          selected_actions: {  }
           set_precision: false
           precision: 0
           decimal: .
@@ -222,9 +225,6 @@ display:
           format_plural_string: "1\x03@count"
           prefix: ''
           suffix: ''
-          action_title: Action
-          include_exclude: exclude
-          selected_actions: {  }
           entity_type: media
           plugin_id: media_bulk_form
         thumbnail__target_id:
@@ -316,7 +316,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Media name'
+          label: 'Medie navn'
           exclude: false
           element_type: ''
           element_class: ''
@@ -347,7 +347,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Media type'
+          label: 'Medie type'
           exclude: false
           alter:
             alter_text: false
@@ -479,7 +479,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Tag
+          label: Mærkat
           exclude: false
           alter:
             alter_text: false
@@ -600,7 +600,7 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Media name'
+            label: 'Medie navn'
             description: ''
             use_operator: false
             operator: name_op
@@ -640,7 +640,7 @@ display:
           exposed: true
           expose:
             operator_id: bundle_op
-            label: 'Media type'
+            label: 'Medie type'
             description: ''
             use_operator: false
             operator: bundle_op
@@ -681,7 +681,7 @@ display:
           exposed: true
           expose:
             operator_id: field_itk_media_tag_target_id_op
-            label: Tag
+            label: Mærkat
             description: ''
             use_operator: false
             operator: field_itk_media_tag_target_id_op

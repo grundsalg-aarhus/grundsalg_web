@@ -11,7 +11,7 @@ _core:
   default_config_hash: 5b6bXB_RmH_XtufjDGLOpr0usXM9E9a_QJ82tSlA8bM
 id: document
 label: Dokument
-description: 'A document to be stored in the media library'
+description: 'Et dokument der gemmes i mediebiblioteket.'
 type: document
 queue_thumbnail_downloads: false
 new_revision: false

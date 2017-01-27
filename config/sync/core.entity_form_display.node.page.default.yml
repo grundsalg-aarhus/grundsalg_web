@@ -49,11 +49,12 @@ third_party_settings:
       weight: 2
       format_type: details
       format_settings:
+        label: 'Blok reference'
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: 'Block reference'
+      label: 'Blok reference'
 _core:
   default_config_hash: tT301fI1PUepYWhzNMNq9tR_Pk203i4yH-gWE0ZOno4
 id: node.page.default
