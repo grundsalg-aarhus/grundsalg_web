@@ -1,0 +1,7 @@
+grundsalg_plots.config:
+  path: '/admin/site-setup/plots'
+  defaults:
+    _form: '\Drupal\grundsalg_plots\Form\MapsSettingsForm'
+    _title: 'Maps settings'
+  requirements:
+    _permission: 'administer site configuration'

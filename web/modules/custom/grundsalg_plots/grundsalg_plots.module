@@ -30,6 +30,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
     $subdivision_id = $variables['node']->get('field_subdivision_id')->value;
     $path = '/' . drupal_get_path('module', 'grundsalg_plots') . '/js';
 
+    $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+    $cache_ttl = $config->get('grundsalg_plots_cache');
+
     // Build render array to kick start the Angular part of plots.
     if (isset($subdivision_id)) {
       $variables['content']['plots'] = array(
@@ -44,6 +47,7 @@ function grundsalg_plots_preprocess_node(&$variables) {
               'url' => _grundsalg_plots_get_url(),
               'template' => $path . '/templates/plots.html',
               'subdivision_id' => $subdivision_id,
+              'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
             )
           )
         )
@@ -82,6 +86,9 @@ function grundsalg_plots_form_node_subdivision_edit_form_alter(&$form, FormState
 
   $path = '/' . drupal_get_path('module', 'grundsalg_plots') . '/js';
 
+  $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+  $cache_ttl = $config->get('grundsalg_plots_cache');
+
   // Prepare angular templates.
   $plots = array(
     '#theme' => 'grundsalg_plots',
@@ -95,6 +102,7 @@ function grundsalg_plots_form_node_subdivision_edit_form_alter(&$form, FormState
           'url' => _grundsalg_plots_get_url(),
           'template' => $path . '/templates/plots-form.html',
           'subdivision_id' => $subdivision_id,
+          'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
         )
       )
     )

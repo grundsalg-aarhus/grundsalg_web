@@ -1,0 +1,5 @@
+grundsalg_plots.admin:
+  title: 'Plots'
+  description: 'Plots settings'
+  route_name: grundsalg_plots.config
+  base_route: itkore_admin.settings

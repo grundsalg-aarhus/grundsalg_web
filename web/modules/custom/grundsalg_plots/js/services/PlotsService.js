@@ -13,7 +13,7 @@ angular.module('grundsalg').service('plotsService', ['$http', '$q', 'CacheFactor
     // @TODO: Make cache configurable in "Site settings".
     if (!CacheFactory.get('plotsCache')) {
       CacheFactory.createCache('plotsCache', {
-        maxAge: 600 * 1000,
+        maxAge: Number(config.cache_ttl),
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
