@@ -39,7 +39,7 @@ class MapsSettingsForm extends FormBase {
     $config = $this->getBaseConfig();
 
     $form['proxy'] = array(
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => $this->t('Proxy settings'),
       '#open' => TRUE,
     );
@@ -50,6 +50,22 @@ class MapsSettingsForm extends FormBase {
       '#default_value' => $config->get('grundsalg_maps_url'),
       '#weight' => '1',
       '#size' => 60,
+    );
+
+    $form['maps'] = array(
+      '#type' => 'details',
+      '#title' => $this->t('Maps settings'),
+      '#open' => TRUE,
+    );
+
+    $default = $config->get('grundsalg_maps_areas_cache');
+    $form['maps']['cache'] = array(
+      '#title' => $this->t('Areas cache timeout in seconds'),
+      '#description' => $this->t('Default is 300. Set it to "0" to disable cache.'),
+      '#type' => 'textfield',
+      '#default_value' => isset($default) ? $default : 300,
+      '#weight' => '1',
+      '#size' => 20,
     );
 
     $form['submit'] = array(
@@ -71,6 +87,7 @@ class MapsSettingsForm extends FormBase {
     $this->getBaseConfig()->setMultiple(array(
       'grundsalg_maps_url' => $form_state->getValue('url'),
       'grundsalg_maps_apikey' => $form_state->getValue('api-key'),
+      'grundsalg_maps_areas_cache' => $form_state->getValue('cache'),
     ));
 
     drupal_flush_all_caches();

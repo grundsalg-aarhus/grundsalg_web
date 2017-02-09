@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService',
-  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService',
+  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
@@ -221,24 +221,19 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
     if (config.map_type == 'overview_page') {
       addTopographicallyLayer(map, matrixIds, resolutions);
 
-      $http({
-        method: 'GET',
-        url: '/api/maps/areas/' + config.plot_type
-      }).then(function success(response) {
-        var areas = response.data;
-
+      drupalService.getAreas(config.plot_type).then(function success(areas) {
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
         });
-        var testSource = new ol.source.Vector({
+        var areasSource = new ol.source.Vector({
           features: format.readFeatures(areas, {
             dataProjection: 'EPSG:4326',
             featureProjection: 'EPSG:25832'
           })
         });
 
-        var testLayer = new ol.layer.Vector({
-          source: testSource,
+        var areasLayer = new ol.layer.Vector({
+          source: areasSource,
           style: new ol.style.Style({
             image: new ol.style.Icon({
               anchor: [0.5, 40],
@@ -250,8 +245,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
         });
 
         // Add the layer to the map
-        map.addLayer(testLayer);
-        map.getView().fit(testSource.getExtent(), map.getSize());
+        map.addLayer(areasLayer);
+        map.getView().fit(areasSource.getExtent(), map.getSize());
         map.getView().setZoom(config.zoom.default);
 
         var element = document.getElementById('popup');
@@ -301,9 +296,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
             });
           }
         });
-
-      }, function error(response) {
-        console.error('FFS');
+      }, function error(err) {
+        console.error(err);
       });
     }
     else {

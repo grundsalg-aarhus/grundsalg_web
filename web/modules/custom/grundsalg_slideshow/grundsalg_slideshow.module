@@ -26,7 +26,7 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
         $alt_text = $image_entity->alt;
         $file = File::load($id);
 
-        // Create render array fo rresponsive images.
+        // Create render array for responsive images.
         $image_render_array = _load_image($file, 'grundsalg_main_image', $alt_text);
 
         // Send rendered html to javascript.
@@ -54,7 +54,7 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
  */
 function _load_image($file, $responsive_image_style_id, $alt_text) {
   if ($file) {
-    // Load main_image
+    // Load main_image.
     if ($file) {
       $variables = array(
         'responsive_image_style_id' => $responsive_image_style_id,

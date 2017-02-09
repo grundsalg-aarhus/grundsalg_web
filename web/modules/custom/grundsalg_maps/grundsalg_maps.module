@@ -19,9 +19,12 @@ function grundsalg_maps_preprocess_page(&$variables) {
       $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
       $path = '/' . drupal_get_path('module', 'grundsalg_maps');
 
+      $cache_ttl = $config->get('grundsalg_maps_areas_cache');
+
       $variables['#attached']['drupalSettings']['grundsalg_maps'] = array(
         'dir' => $path  . '/js',
         'url' => $config->get('grundsalg_maps_url'),
+        'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
         'map_type' => $type,
         'plot_type' => $variables['node']->get('field_plot_type')->target_id,
         'zoom' => array (

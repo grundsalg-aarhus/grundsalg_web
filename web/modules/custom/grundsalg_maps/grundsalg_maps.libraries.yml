@@ -3,6 +3,7 @@ angular:
     js/MapController.js: {}
     js/services/TicketService.js: {}
     js/services/CookieService.js: {}
+    js/services/DrupalService.js: {}
   css:
     base:
       css/popup.css: {}
