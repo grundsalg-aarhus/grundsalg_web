@@ -95,22 +95,20 @@
   {% set link_classes = 'is-storparcel' %}
 {% endif %}
 
-<article {{ content_attributes.addClass(item_classes) }}>
+<a {{ content_attributes.addClass(item_classes) }} href="{{ url }}" title="{{ label }}">
   {{ title_prefix }}
   {{ title_suffix }}
-  <a href="{{ url }}" title="{{ label }}">{{ content.field_teaser_image }}</a>
+  {{ content.field_teaser_image }}
   <div class="boxes--box-inner">
-    <h2 class="boxes--box-header"><a href="{{ url }}" title="{{ label }}">{{ label }}</a></h2>
+    <h2 class="boxes--box-header">{{ label }}</h2>
     <p class="boxes--box-content">{{ content.field_teaser }}</p>
-    <a href="{{ url }}" title="{{ label }}">
-      <div class="arrow-link {{ link_classes }}">
-        <svg viewBox="0 0 33 27" xmlns="http://www.w3.org/2000/svg">
-          <g class="arrow-link--svg" fill="#1A1918">
-            <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>
-            <path d="M30 16v-4H0v4"></path>
-          </g>
-        </svg>
-      </div>
-    </a>
+    <div class="arrow-link {{ link_classes }}">
+      <svg viewBox="0 0 33 27" xmlns="http://www.w3.org/2000/svg">
+        <g class="arrow-link--svg" fill="#1A1918">
+          <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>
+          <path d="M30 16v-4H0v4"></path>
+        </g>
+      </svg>
+    </div>
   </div>
-</article>
+</a>
