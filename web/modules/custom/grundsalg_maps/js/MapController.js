@@ -210,6 +210,93 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
       });
     }
 
+    /**
+     * Add marks layer to the map.
+     *
+     * @param data
+     *   The data (marks) to add to the layer.
+     * @param zoomLevel
+     *   The zoom level to use.
+     */
+    function addMarkerLayer(data, zoomLevel) {
+      var format = new ol.format.GeoJSON({
+        defaultDataProjection: 'EPSG:4326'
+      });
+
+      var dataSource = new ol.source.Vector({
+        features: format.readFeatures(data, {
+          dataProjection: 'EPSG:4326',
+          featureProjection: 'EPSG:25832'
+        })
+      });
+
+      var dataLayer = new ol.layer.Vector({
+        source: dataSource,
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 40],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: config.popup.marker
+          })
+        })
+      });
+
+      // Add the layer to the map
+      map.addLayer(dataLayer);
+      map.getView().fit(dataSource.getExtent(), map.getSize());
+      map.getView().setZoom(zoomLevel);
+
+      var element = document.getElementById('popup');
+      var popup = new ol.Overlay({
+        element: element,
+        positioning: 'bottom-center',
+        stopEvent: false,
+        offset: [0, 0]
+      });
+      map.addOverlay(popup);
+
+      // Display popup on click.
+      map.on('click', function(evt) {
+        var feature = map.forEachFeatureAtPixel(evt.pixel,
+          function(feature) {
+            return feature;
+          });
+
+        if (feature) {
+          var coordinates = feature.getGeometry().getCoordinates();
+          popup.setPosition(coordinates);
+
+          $q.when(loadTemplate(config.popup.template)).then(function (template) {
+            $templateCache.put(config.popup.template, template);
+
+            var $content = angular.element(element);
+
+            // Create new scope for the popup content.
+            var scope = $scope.$new(true);
+            scope.content = {};
+            for (var i in config.popup.fields) {
+              var field = config.popup.fields[i];
+              scope.content[field] = feature.get(field);
+            }
+
+            scope.icon = config.popup.icon;
+
+            scope.close = function close() {
+              $content.html('');
+            };
+
+            // Attach the angular template to the dom and render the
+            // content.
+            $content.html(template);
+            $timeout(function () {
+              $compile($content)(scope);
+            });
+          });
+        }
+      });
+    }
+
     var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
     var map = initOpenlayersMap();
@@ -222,80 +309,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
       addTopographicallyLayer(map, matrixIds, resolutions);
 
       drupalService.getAreas(config.plot_type).then(function success(areas) {
-        var format = new ol.format.GeoJSON({
-          defaultDataProjection: 'EPSG:4326'
-        });
-        var areasSource = new ol.source.Vector({
-          features: format.readFeatures(areas, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: 'EPSG:25832'
-          })
-        });
-
-        var areasLayer = new ol.layer.Vector({
-          source: areasSource,
-          style: new ol.style.Style({
-            image: new ol.style.Icon({
-              anchor: [0.5, 40],
-              anchorXUnits: 'fraction',
-              anchorYUnits: 'pixels',
-              src: config.popup.marker
-            })
-          })
-        });
-
-        // Add the layer to the map
-        map.addLayer(areasLayer);
-        map.getView().fit(areasSource.getExtent(), map.getSize());
-        map.getView().setZoom(config.zoom.default);
-
-        var element = document.getElementById('popup');
-        var popup = new ol.Overlay({
-          element: element,
-          positioning: 'bottom-center',
-          stopEvent: false,
-          offset: [0, 0]
-        });
-        map.addOverlay(popup);
-
-        // display popup on click
-        map.on('click', function(evt) {
-          var feature = map.forEachFeatureAtPixel(evt.pixel,
-            function(feature) {
-              return feature;
-            });
-
-          if (feature) {
-            var coordinates = feature.getGeometry().getCoordinates();
-            popup.setPosition(coordinates);
-
-            $q.when(loadTemplate(config.popup.template)).then(function (template) {
-              $templateCache.put(config.popup.template, template);
-
-              var $content = angular.element(element);
-
-              // Create new scope for the popup content.
-              var scope = $scope.$new(true);
-              scope.content = {
-                'title': feature.get('title'),
-                'teaser': feature.get('teaser'),
-                'url': feature.get('url')
-              };
-              scope.icon = config.popup.icon;
-
-              scope.close = function close() {
-                $content.html('');
-              };
-
-              // Attach the angular template to the dom and render the
-              // content.
-              $content.html(template);
-              $timeout(function () {
-                $compile($content)(scope);
-              });
-            });
-          }
-        });
+        addMarkerLayer(areas, config.zoom.default, config.map_type);
       }, function error(err) {
         console.error(err);
       });

@@ -33,6 +33,11 @@ function grundsalg_maps_preprocess_page(&$variables) {
           'max' => 14,
         ),
         'popup' => array(
+          'fields' => array(
+            'title',
+            'teaser',
+            'url',
+          ),
           'template' => $path . '/js/templates/popup.html',
           'marker' => $path . '/images/marker-icon.png',
           'icon' => $path . '/images/link-arrow.svg',
