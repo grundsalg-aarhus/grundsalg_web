@@ -56,6 +56,7 @@ class ApiController extends ControllerBase {
           'coordinates' => array($coordinates[1], $coordinates[0]),
         ),
         'properties' => array(
+          'markers' => TRUE,
           'title' => $node->get('title')->value,
           'teaser' => $node->get('field_teaser')->value,
           'url' => $url

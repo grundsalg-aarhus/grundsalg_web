@@ -10,7 +10,7 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
 
     if (!CacheFactory.get('drupalCache')) {
       CacheFactory.createCache('drupalCache', {
-        maxAge: Number(config.cache_ttl),
+        maxAge: Number(config.cache_ttl) * 1000,
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
@@ -43,5 +43,32 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
 
       return deferred.promise;
     };
+
+    this.getMunicipalities = function getMunicipalities() {
+      var deferred = $q.defer();
+
+      var cid = 'drupalCache_municipalities';
+
+      var areas =  drupalCache.get(cid);
+      if (areas !== undefined) {
+        deferred.resolve(areas);
+      }
+      else {
+        $http({
+          method: 'GET',
+          url: '/modules/custom/grundsalg_maps/data/kommuner.json'
+        }).then(function success(response) {
+          var data = response.data;
+          drupalCache.put(cid, data);
+
+          deferred.resolve(data);
+        }, function error(response) {
+          console.error(response);
+          deferred.reject('Error communicating with the server.');
+        });
+      }
+
+      return deferred.promise;
+    }
   }]
 );

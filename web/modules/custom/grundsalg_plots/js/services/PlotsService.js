@@ -9,11 +9,9 @@ angular.module('grundsalg').service('plotsService', ['$http', '$q', 'CacheFactor
 
     var config = drupalSettings.grundsalg_plots;
 
-    // Create cache object (expire 10 min.).
-    // @TODO: Make cache configurable in "Site settings".
     if (!CacheFactory.get('plotsCache')) {
       CacheFactory.createCache('plotsCache', {
-        maxAge: Number(config.cache_ttl),
+        maxAge: Number(config.cache_ttl) * 1000,
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
