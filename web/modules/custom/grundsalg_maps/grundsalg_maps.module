@@ -26,23 +26,58 @@ function grundsalg_maps_preprocess_page(&$variables) {
         'url' => $config->get('grundsalg_maps_url'),
         'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
         'map_type' => $type,
-        'plot_type' => $variables['node']->get('field_plot_type')->target_id,
-        'zoom' => array (
-          'default' =>6,
-          'min' => 1,
-          'max' => 14,
-        ),
-        'popup' => array(
-          'fields' => array(
-            'title',
-            'teaser',
-            'url',
-          ),
-          'template' => $path . '/js/templates/popup.html',
-          'marker' => $path . '/images/marker-icon.png',
-          'icon' => $path . '/images/link-arrow.svg',
-        ),
       );
+
+      switch ($type) {
+        case 'overview_page':
+          $config = array(
+            'plot_type' => $variables['node']->get('field_plot_type')->target_id,
+            'zoom' => array (
+              'default' => 6,
+              'min' => 1,
+              'max' => 14,
+            ),
+            'popup' => array(
+              'fields' => array(
+                'title',
+                'teaser',
+                'url',
+              ),
+              'template' => $path . '/js/templates/popup.html',
+              'marker' => $path . '/images/marker-icon.png',
+              'icon' => $path . '/images/link-arrow.svg',
+            ),
+          );
+          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
+          break;
+
+        case 'subdivision':
+          // Get sub-division id.
+          $subdivision_id = $variables['node']->get('field_subdivision_id')->value;
+
+          $config = array(
+            'zoom' => array (
+              'default' => 12,
+              'min' => 6,
+              'max' => 14,
+            ),
+            'subdivision_id' => $subdivision_id,
+          );
+          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
+
+          break;
+
+        default:
+          $config = array(
+            'zoom' => array (
+              'default' =>6,
+              'min' => 1,
+              'max' => 14,
+            ),
+          );
+          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
+          break;
+      }
     }
   }
 }

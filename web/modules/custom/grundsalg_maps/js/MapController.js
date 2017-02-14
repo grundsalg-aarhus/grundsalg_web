@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService',
-  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService',
+  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
@@ -381,6 +381,49 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
       });
     }
 
+    /**
+     * Add plots to the map.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     */
+    function addPlots(map) {
+      plotsService.getPlotsAsGeoJson(config.subdivision_id).then(function success(data) {
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:25832'
+        });
+
+        console.log(data);
+
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:25832',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          style: new ol.style.Style({
+            fill: new ol.style.Fill({
+              color: 'rgba(155,255,155,0.9)'
+            }),
+            stroke: new ol.style.Stroke({
+              color: '#000',
+              width: 0.25
+            })
+          })
+        });
+
+        // Add the layer to the map.
+        map.addLayer(dataLayer);
+        map.getView().fit(dataSource.getExtent(), map.getSize());
+      }, function error(err) {
+        console.error(err);
+      });
+    }
+
+
     var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
     var map = initOpenlayersMap();
@@ -398,6 +441,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
       }, function error(err) {
         console.error(err);
       });
+    }
+    else if (config.map_type == 'subdivision') {
+      addOrtofotoLayer(map, matrixIds, resolutions);
+      addMunicipalitiesFadeLayer(map);
+      addMatrikelLayer(map, matrixIds, resolutions);
+      addPlots(map);
     }
     else {
       addTopographicallyLayer(map, matrixIds, resolutions);

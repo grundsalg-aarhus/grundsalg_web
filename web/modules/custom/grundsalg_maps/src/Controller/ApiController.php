@@ -56,6 +56,7 @@ class ApiController extends ControllerBase {
           'coordinates' => array($coordinates[1], $coordinates[0]),
         ),
         'properties' => array(
+          // If true popup will be enabled for the feature.
           'markers' => TRUE,
           'title' => $node->get('title')->value,
           'teaser' => $node->get('field_teaser')->value,

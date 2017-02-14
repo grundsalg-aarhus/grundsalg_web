@@ -83,7 +83,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('URL'),
       '#description' => $this->t('Grundslag fagsystem end-point URL'),
-      '#default_value' => $config->get('url'),
+      '#default_value' => $config->get('grundsalg_db_client_url'),
       '#size' => 60,
       '#states' => array(
         'invisible' => array(

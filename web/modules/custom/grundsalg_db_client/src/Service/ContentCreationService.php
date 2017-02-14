@@ -29,8 +29,10 @@ class ContentCreationService {
   /**
    * Update Subdivision.
    *
-   * Checks if the overview_page the subdivision should be placed under exists, else returns.
-   * Checks if the area exists, else creates it (This also creates plot_type and cities taxonomy terms).
+   * Checks if the overview_page the subdivision should be placed under exists,
+   * else returns.
+   * Checks if the area exists, else creates it (This also creates plot_type and
+   * cities taxonomy terms).
    * Checks if the subdivision exists (then updates it), else creates it.
    *
    * @param $subdivisionId
@@ -140,8 +142,8 @@ class ContentCreationService {
     // If the subdivision does not exist, create it.
     if (!isset($subdivision)) {
       $subdivision = Node::create([
-        'type'        => 'subdivision',
-        'title'       =>  $subdivisionTitle,
+        'type' => 'subdivision',
+        'title' =>  $subdivisionTitle,
         'field_subdivision_id' => $subdivisionId,
         'field_parent' => $area->id(),
         'field_plot_type' => $plotTypeTerm->id(),

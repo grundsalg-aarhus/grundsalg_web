@@ -2,10 +2,18 @@ show_plots:
   js:
     js/showPlotsDirective.js: {}
     js/showPlotsController.js: {}
-    js/services/PlotsService.js: {}
 
   header: TRUE
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_tabs/angular
+    - core/drupalSettings
+
+show_plots.services:
+  js:
+    js/services/PlotsService.js: {}
+
+  header: TRUE
+  dependencies:
+    - grundsalg_angular/angular
     - core/drupalSettings
