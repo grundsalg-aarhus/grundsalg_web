@@ -38,9 +38,19 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'max' => 14,
             ),
             'popup' => array(
-              'template' => $path . '/js/templates/popup.html',
-              'marker' => $path . '/images/marker-icon.png',
-              'icon' => $path . '/images/link-arrow.svg',
+              'areas' => array(
+                'template' => $path . '/js/templates/popup-areas.html',
+                'marker' => $path . '/images/marker-icon.png',
+              ),
+              'industry' => array(
+                'template' => $path . '/js/templates/popup-industry.html',
+                'marker' => array(
+                  'default' => $path . '/images/marker-icon.png',
+                  '471110' => $path . '/images/marker-icon.png',
+                  '471120' => $path . '/images/marker-icon.png',
+                  '471130' => $path . '/images/marker-icon.png',
+                ),
+              ),
             ),
           );
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
@@ -58,9 +68,10 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'max' => 14,
             ),
             'popup' => array(
-              'template' => $path . '/js/templates/popup-plot.html',
-              'marker' => $path . '/images/marker-icon.png',
-              'icon' => $path . '/images/link-arrow.svg',
+              'plots' => array(
+                'template' => $path . '/js/templates/popup-plot.html',
+                'marker' => $path . '/images/marker-icon.png',
+              ),
             ),
           );
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;

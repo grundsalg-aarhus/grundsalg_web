@@ -4,6 +4,7 @@ angular:
     js/services/TicketService.js: {}
     js/services/CookieService.js: {}
     js/services/DrupalService.js: {}
+    js/services/MapsProxyService.js: {}
   css:
     base:
       css/popup.css: {}

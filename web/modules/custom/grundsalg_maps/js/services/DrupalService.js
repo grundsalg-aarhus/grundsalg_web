@@ -20,7 +20,7 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
     this.getAreas = function getAreas(plot_type) {
       var deferred = $q.defer();
 
-      var cid = 'drupalCache_areas';
+      var cid = 'drupalCache_areas_' + plot_type;
 
       var areas =  drupalCache.get(cid);
       if (areas !== undefined) {
@@ -29,7 +29,7 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
       else {
         $http({
           method: 'GET',
-          url: '/api/maps/areas/' + config.plot_type
+          url: '/api/maps/areas/' + plot_type
         }).then(function success(response) {
           var areas = response.data;
           drupalCache.put(cid, areas);
@@ -44,6 +44,9 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
       return deferred.promise;
     };
 
+    /**
+     * Get the faded municipalities borders as geoJson.
+     */
     this.getMunicipalities = function getMunicipalities() {
       var deferred = $q.defer();
 
