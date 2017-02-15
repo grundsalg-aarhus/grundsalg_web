@@ -11,7 +11,7 @@ angular:
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_maps/leaflet
-    - core/drupalSettings
+    - core/drupal
 
 openlayers:
   js:

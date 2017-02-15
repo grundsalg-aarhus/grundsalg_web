@@ -7,7 +7,7 @@ show_plots:
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_tabs/angular
-    - core/drupalSettings
+    - core/drupal
 
 show_plots.services:
   js:
