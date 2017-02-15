@@ -424,11 +424,28 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addPlots(map) {
       plotsService.getPlotsAsGeoJson(config.subdivision_id).then(function success(data) {
+
+        // @TODO: Should this be configurable under "site settings"?
+        var statusStyles = {
+          'Udbud': 'rgba(245, 196, 0, 0.8)',
+          'Auktion slut': 'rgba(227, 6, 19, 0.8)',
+          'Ledig': 'rgba(78, 157, 45, 0.8)'
+        };
+
+        var defaultStyle = new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(78, 157, 45, 0.8)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#000',
+            width: 0.25
+          })
+        });
+        var styleCache = {};
+
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:25832'
         });
-
-        console.log(data);
 
         var dataSource = new ol.source.Vector({
           features: format.readFeatures(data, {
@@ -439,15 +456,27 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         var dataLayer = new ol.layer.Vector({
           source: dataSource,
-          style: new ol.style.Style({
-            fill: new ol.style.Fill({
-              color: 'rgba(155,255,155,0.9)'
-            }),
-            stroke: new ol.style.Stroke({
-              color: '#000',
-              width: 0.25
-            })
-          })
+          style: function styleFunction(feature, resolution) {
+            var status = feature.get('status');
+
+            // If the status is unknown use default style.
+            if (!status || !statusStyles[status]) {
+              return [defaultStyle];
+            }
+
+            // Check if style have been created. If not create it else use the
+            // existing style.
+            if (!styleCache[status]) {
+              styleCache[status] = new ol.style.Style({
+                fill: new ol.style.Fill({
+                  color: statusStyles[status]
+                }),
+                stroke: defaultStyle.stroke
+              });
+            }
+
+            return [styleCache[status]];
+          }
         });
 
         // Add the layer to the map.
@@ -467,10 +496,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
     var map = initOpenlayersMap();
 
-    /**
-     * @TODO: Move popup code into wrapper and move maps config etc into
-     *        functions.
-     */
     if (config.map_type == 'overview_page') {
       addTopographicallyLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
