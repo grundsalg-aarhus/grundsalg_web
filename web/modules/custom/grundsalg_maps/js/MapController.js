@@ -433,8 +433,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   The OpenLayers map object.
      * @param {number} industryId
      *   The industry's identification number.
+     * @param {string} title
+     *   The layers title.
      */
-    function addIndustryLayer(map, industryId) {
+    function addIndustryLayer(map, industryId, title) {
       mapsProxyService.getIndustryAsGeoJson(industryId).then(function success(data) {
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
@@ -452,6 +454,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         var dataLayer = new ol.layer.Vector({
           source: dataSource,
+          title: title,
+          visible: false,
           style: new ol.style.Style({
             image: new ol.style.Icon({
               anchor: [0.5, 40],
@@ -561,10 +565,14 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       addMunicipalitiesFadeLayer(map);
       addAreasLayer(map, config.zoom.default, config.plot_type);
 
-      addIndustryLayer(map, 471110);
-      addIndustryLayer(map, 471120);
-      addIndustryLayer(map, 471130);
+      addIndustryLayer(map, 471110, 'Købmænd og døgnkiosker');
+      addIndustryLayer(map, 471120, 'Supermarkeder');
+      addIndustryLayer(map, 471130, 'Discountforretninger');
 
+      var layerSwitcher = new ol.control.LayerSwitcher({
+        tipLabel: 'Légende' // Optional label for button
+      });
+      map.addControl(layerSwitcher);
 
       addPopups(map);
     }
