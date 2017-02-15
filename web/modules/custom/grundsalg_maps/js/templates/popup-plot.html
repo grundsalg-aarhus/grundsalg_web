@@ -1,0 +1,52 @@
+<div class="popup" data-ng-show="show">
+  <div class="popup-content-wrapper">
+    <span class="leaflet-popup-close-button" data-ng-click="close()" style="outline: medium none;">×</span>
+    <div class="popup-content">
+      <div class="popup-container" style="display: block;">
+        <div>
+          <div class="content-box--content">
+            <div class="boxes">
+              <div class="boxes--inner">
+                <article class="boxes--box is-inside-context-box" data-ng-class="{'is-offering' : content.status === 'Udbud','is-sold' : content.status === 'Auktion slut','is-available' : content.status === 'Ledig'}">
+                  <div class="boxes--box-inner">
+                    <h3 class="boxes--box-plot-title">{{ content.address }}</h3>
+                    <div class="boxes--box-plot-infos">
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Status') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.status }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Area (m2)') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.area_m2 }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Minimum price') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.minimum_price }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Sales price') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.sale_price }}</p>
+                      </div>
+                    </div>
+                    <div class="boxes--box-plot-link" data-ng-if='plot.pdf_link !== undefined'>
+                      <div class="boxes--box-plot-link-icon"><svg viewBox="0 0 34 38" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" fill-rule="evenodd">
+                          <path d="M5.093 32.23v3.47c0 .766.61 1.387 1.364 1.387h24.56c.752 0 1.363-.62 1.363-1.388V9.327M22.147 1H6.457c-.753 0-1.364.62-1.364 1.388v15.268M32.59 9.792L24.4 1.495" stroke="#000" stroke-width="2"></path>
+                          <path d="M24.194 1v5.552c0 1.533 1.222 2.776 2.73 2.776h5.456" stroke="#000" stroke-width="2"></path>
+                          <path d="M8.452 21.818c.368.32.55.807.55 1.466 0 .66-.188 1.14-.565 1.447-.378.305-.954.46-1.73.46H6.01v1.487H4.84V21.34H6.69c.806 0 1.392.16 1.76.478zm-.86 2.1c.14-.16.21-.395.21-.703 0-.308-.09-.527-.273-.656-.184-.13-.468-.196-.853-.196H6.01v1.794h.787c.39 0 .656-.08.796-.24zM13.926 22.04c.5.465.75 1.113.75 1.943 0 .83-.243 1.485-.73 1.97-.49.483-1.234.724-2.234.724H9.92V21.34h1.852c.935 0 1.653.234 2.154.7zm-.86 3.172c.287-.275.43-.675.43-1.2 0-.523-.143-.927-.43-1.21-.288-.28-.73-.423-1.324-.423h-.653v3.245h.742c.536 0 .947-.14 1.234-.413zM19.29 21.34v1.048h-2.43v1.152h2.312v1.046h-2.31v2.09H15.69v-5.335" fill="#000"></path>
+                          <path stroke="#000" stroke-width="2" d="M1 17.656h21.83v12.492H1z"></path>
+                        </g>
+                      </svg>
+                      </div>
+                      <a href="{{ content.pdf_link }}" class="boxes--box-plot-link-text">{{ Drupal.t('Further information') }}</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
