@@ -194,7 +194,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   The layer to fetch form the service.
      */
     function addDagiLayer(map, matrixIds, resolutions, layer) {
-      console.log(layer);
       getTicket().then(function (ticket) {
         var projection = getProjectionEPSG25832();
 
@@ -336,8 +335,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               for (var i in properties) {
                 scope.content[i] = properties[i];
               }
-
-              console.log(scope.content);
 
               /**
                * Close the popup.
@@ -538,6 +535,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
             return [styleCache[status]];
           }
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'plots'
         });
 
         // Add the layer to the map.
