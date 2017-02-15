@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService',
-  function($scope, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService',
+  function($scope, $window, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
@@ -295,6 +295,87 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
     }
 
     /**
+     * Add feature event clicks with popup to features with "markers" = true.
+     *
+     * @TODO: Optimizations reuse the scope and template. No need to recompile a
+     *        new scope every time.
+     */
+    function addPopups() {
+      var element = document.getElementById('popup');
+      var popup = new ol.Overlay({
+        element: element,
+        autoPan: true,
+        autoPanAnimation: {
+          duration: 250
+        }
+      });
+      map.addOverlay(popup);
+
+      // Display popup on click.
+      map.on('click', function(evt) {
+        var feature = map.forEachFeatureAtPixel(evt.pixel,
+          function(feature) {
+            return feature;
+          }
+        );
+
+        if (feature && feature.get('markers')) {
+          var coordinates = evt.coordinate;
+          popup.setPosition(coordinates);
+
+          $q.when(loadTemplate(config.popup.template)).then(function (template) {
+            $templateCache.put(config.popup.template, template);
+
+            var $content = angular.element(element);
+
+            // Create new scope for the popup content.
+            var scope = $scope.$new(true);
+            scope.content = {};
+            var properties = feature.getProperties();
+            for (var i in properties) {
+              scope.content[i] = properties[i];
+            }
+
+            scope.icon = config.popup.icon;
+
+            /**
+             * Close the popup.
+             */
+            scope.close = function close() {
+              $content.html('');
+              scope.show = false;
+            };
+
+            /**
+             * Expose the Drupal.t() function to angular templates.
+             *
+             * @param str
+             *   The string to translate.
+             * @returns string
+             *   The translated string.
+             */
+            scope.Drupal = {
+              "t": function (str) {
+                return $window.Drupal.t(str);
+              }
+            };
+
+            // Attach the angular template to the dom and render the
+            // content.
+            $content.html(template);
+            $timeout(function () {
+              $compile($content)(scope);
+
+              scope.show = true;
+            });
+          }, function (err) {
+            console.error(err);
+          });
+        }
+      });
+    }
+
+    /**
      * Add marks layer to the map.
      *
      * @param {json} data
@@ -331,54 +412,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
       map.getView().fit(dataSource.getExtent(), map.getSize());
       map.getView().setZoom(zoomLevel);
 
-      var element = document.getElementById('popup');
-      var popup = new ol.Overlay({
-        element: element,
-        positioning: 'bottom-center',
-        stopEvent: false,
-        offset: [0, 0]
-      });
-      map.addOverlay(popup);
-
-      // Display popup on click.
-      map.on('click', function(evt) {
-        var feature = map.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            return feature;
-          });
-
-        if (feature && feature.get('markers')) {
-          var coordinates = feature.getGeometry().getCoordinates();
-          popup.setPosition(coordinates);
-
-          $q.when(loadTemplate(config.popup.template)).then(function (template) {
-            $templateCache.put(config.popup.template, template);
-
-            var $content = angular.element(element);
-
-            // Create new scope for the popup content.
-            var scope = $scope.$new(true);
-            scope.content = {};
-            for (var i in config.popup.fields) {
-              var field = config.popup.fields[i];
-              scope.content[field] = feature.get(field);
-            }
-
-            scope.icon = config.popup.icon;
-
-            scope.close = function close() {
-              $content.html('');
-            };
-
-            // Attach the angular template to the dom and render the
-            // content.
-            $content.html(template);
-            $timeout(function () {
-              $compile($content)(scope);
-            });
-          });
-        }
-      });
+      // Add popups to the markers.
+      addPopups();
     }
 
     /**
@@ -418,6 +453,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$http', '$ti
         // Add the layer to the map.
         map.addLayer(dataLayer);
         map.getView().fit(dataSource.getExtent(), map.getSize());
+
+        // Add popups to the areas.
+        addPopups();
+
       }, function error(err) {
         console.error(err);
       });
