@@ -110,6 +110,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
     }
 
+    function addOSMMap(map) {
+      map.addLayer(new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }));
+    }
+
     /**
      * Add basic topographically base map.
      *
@@ -223,6 +229,50 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         }));
       });
     }
+
+    /**
+     * Layer from Midt trafik.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {string} layerName
+     *   The name of the WFS layer to load.
+     * @param {string} title
+     *   Title to add to the layer.
+     */
+    function addMidttrafikLayer(map, layerName, title) {
+      var format = new ol.format.GeoJSON({
+        defaultDataProjection: 'EPSG:25832',
+        defaultFeatureProjection: 'EPSG:25832'
+      });
+
+      var dataSource = new ol.source.Vector({
+        format:  format,
+        url: function(extent) {
+          return 'http://localhost:3010/api/midttrafik?SERVICE=WFS&VERSION=1.0.0&OUTPUTFORMAT=application/json&REQUEST=GetFeature&TYPENAME=Midttrafik:' + layerName + '&SRSNAME=EPSG:25832&&CQL_FILTER=komnr=751';
+        }
+      });
+
+      var dataLayer = new ol.layer.Vector({
+        source: dataSource,
+        title: title,
+        visible: false,
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 40],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: '/modules/custom/grundsalg_maps/images/Bus_stop_symbol.svg'
+          })
+        })
+      });
+
+      console.log(dataSource.getFeatures());
+
+      map.addLayer(dataLayer);
+    }
+
+
 
     /**
      * Fade all municipalities not Aarhus.
@@ -614,7 +664,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     var map = initOpenlayersMap();
 
     if (config.map_type == 'overview_page') {
-      addTopographicallyLayer(map, matrixIds, resolutions);
+      addOSMMap(map);
+
+      // addTopographicallyLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
       addAreasLayer(map, config.zoom.default, config.plot_type);
 
@@ -637,6 +689,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
       addInstitutionLayer(map, 'privskole', 'Private skole');
 
+
+      addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
 
       var layerSwitcher = new ol.control.LayerSwitcher({
         tipLabel: 'Légende' // Optional label for button
