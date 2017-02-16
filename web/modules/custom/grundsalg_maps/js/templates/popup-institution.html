@@ -1,0 +1,44 @@
+<div class="popup">
+  <div class="popup-content-wrapper">
+    <span class="leaflet-popup-close-button" data-ng-click="close()" style="outline: medium none;">×</span>
+    <div class="popup-content">
+      <div class="popup-container" style="display: block;">
+        <div>
+          <div class="content-box--content">
+            <div class="boxes">
+              <div class="boxes--inner">
+                <article class="boxes--box is-inside-context-box" data-ng-class="{'is-offering' : content.status === 'Udbud','is-sold' : content.status === 'Auktion slut','is-available' : content.status === 'Ledig'}">
+                  <div class="boxes--box-inner">
+                    <h3 class="boxes--box-plot-title">{{ content.name }}</h3>
+                    <div class="boxes--box-plot-infos">
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Type') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.enhtype }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Address') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.adress }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Hjemmeside') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.hjside }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Leader') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.leder }}</p>
+                      </div>
+                      <div class="boxes--box-plot-info">
+                        <p class="boxes--box-plot-info-key">{{ Drupal.t('Telephone') }}</p>
+                        <p class="boxes--box-plot-info-value">{{ content.tlf }}</p>
+                      </div>
+                    </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

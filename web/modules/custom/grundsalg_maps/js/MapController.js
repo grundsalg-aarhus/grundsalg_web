@@ -479,6 +479,59 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     }
 
     /**
+     * Add layer with institution markers.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {number} type
+     *   The institution type.
+     * @param {string} title
+     *   The layers title.
+     */
+    function addInstitutionLayer(map, type, title) {
+      mapsProxyService.getInstitutionAsGeoJson(type).then(function success(data) {
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        // Find the marker to use or fallback to default.
+        var markerUrl = config.popup.institution.marker.hasOwnProperty(type) ? config.popup.institution.marker[type] : config.popup.institution.marker.default;
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          title: title,
+          visible: false,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: markerUrl
+            })
+          })
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'institution',
+          'institutionType': type
+        });
+
+        // Add the layer to the map
+        map.addLayer(dataLayer);
+      });
+    }
+
+
+    /**
      * Add plots to the map.
      *
      * @param {ol.Map} map
@@ -568,6 +621,22 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       addIndustryLayer(map, 471110, 'Købmænd og døgnkiosker');
       addIndustryLayer(map, 471120, 'Supermarkeder');
       addIndustryLayer(map, 471130, 'Discountforretninger');
+
+
+      addInstitutionLayer(map, 'dagtilbud', 'Dagtilbud');
+      addInstitutionLayer(map, 'dagpleje', 'Dagpleje');
+      addInstitutionLayer(map, 'fritid', 'Fritid');
+      addInstitutionLayer(map, 'intinst', 'Institutioner');
+      addInstitutionLayer(map, 'vuggestue', 'Vuggestue');
+      addInstitutionLayer(map, 'bornehave', 'Børnehave');
+      addInstitutionLayer(map, 'specskole', 'Specialskole');
+      addInstitutionLayer(map, 'skole', 'Skoler');
+      addInstitutionLayer(map, 'sfo', 'SFO');
+      addInstitutionLayer(map, 'fu', 'Fælles ungdomsklub');
+      addInstitutionLayer(map, 'privtilbud', 'Privat tilbud');
+      addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
+      addInstitutionLayer(map, 'privskole', 'Private skole');
+
 
       var layerSwitcher = new ol.control.LayerSwitcher({
         tipLabel: 'Légende' // Optional label for button

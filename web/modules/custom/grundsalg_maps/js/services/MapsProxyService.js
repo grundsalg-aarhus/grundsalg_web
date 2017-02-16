@@ -9,14 +9,14 @@ angular.module('grundsalg').service('mapsProxyService', ['$http', '$q', 'CacheFa
 
     var config = drupalSettings.grundsalg_maps;
 
-    if (!CacheFactory.get('industryCache')) {
-      CacheFactory.createCache('industryCache', {
+    if (!CacheFactory.get('mapsProxyCache')) {
+      CacheFactory.createCache('mapsProxyCache', {
         maxAge: Number(config.cache_ttl) * 1000,
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
     }
-    var industryCache = CacheFactory.get('industryCache');
+    var mapsProxyCache = CacheFactory.get('mapsProxyCache');
 
     /**
      * Get geojson information about the plots.
@@ -31,7 +31,7 @@ angular.module('grundsalg').service('mapsProxyService', ['$http', '$q', 'CacheFa
         var url = config.url + '/api/industry/' + industryId;
         var cid = 'industry_geojson_' + industryId;
 
-        var industries = industryCache.get(cid);
+        var industries = mapsProxyCache.get(cid);
         if (industries !== undefined) {
           deferred.resolve(industries);
         }
@@ -41,9 +41,48 @@ angular.module('grundsalg').service('mapsProxyService', ['$http', '$q', 'CacheFa
             url: url
           }).then(function success(response) {
             var industries = response.data;
-            industryCache.put(cid, industries);
+            mapsProxyCache.put(cid, industries);
 
             deferred.resolve(industries);
+          }, function error(response) {
+            console.error(response);
+            deferred.reject('Error communicating with the server.');
+          });
+        }
+      }
+      else {
+        deferred.reject('No maps end-point URL in configuration');
+      }
+
+      return deferred.promise;
+    };
+
+    /**
+     * Get institution information.
+     *
+     * @param {string} type
+     *   The type of institution to get.
+     */
+    this.getInstitutionAsGeoJson = function getInstitutionAsGeoJson(type) {
+      var deferred = $q.defer();
+
+      if (config && config.hasOwnProperty('url')) {
+        var url = config.url + '/api/bunyt/' + type;
+        var cid = 'institution_geojson_' + type;
+
+        var institution = mapsProxyCache.get(cid);
+        if (institution !== undefined) {
+          deferred.resolve(institution);
+        }
+        else {
+          $http({
+            method: 'GET',
+            url: url
+          }).then(function success(response) {
+            var institution = response.data;
+            mapsProxyCache.put(cid, institution);
+
+            deferred.resolve(institution);
           }, function error(response) {
             console.error(response);
             deferred.reject('Error communicating with the server.');
