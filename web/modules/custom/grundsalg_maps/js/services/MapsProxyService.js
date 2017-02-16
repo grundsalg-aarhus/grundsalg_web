@@ -3,47 +3,47 @@
  * FagSystem service to generate ticket to access maps.
  */
 
-angular.module('grundsalg').service('fagSystemService', ['$http', '$q', 'CacheFactory',
+angular.module('grundsalg').service('mapsProxyService', ['$http', '$q', 'CacheFactory',
   function ($http, $q, CacheFactory) {
     'use strict';
 
-    var config = drupalSettings.grundsalg_plots;
+    var config = drupalSettings.grundsalg_maps;
 
-    if (!CacheFactory.get('plotsCache')) {
-      CacheFactory.createCache('plotsCache', {
+    if (!CacheFactory.get('industryCache')) {
+      CacheFactory.createCache('industryCache', {
         maxAge: Number(config.cache_ttl) * 1000,
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
     }
-    var plotsCache = CacheFactory.get('plotsCache');
+    var industryCache = CacheFactory.get('industryCache');
 
     /**
      * Get geojson information about the plots.
      *
-     * @param {number} subdivisionId
-     *   The subdivision ID to fetch plots for.
+     * @param {number} industryId
+     *   The industry ID to fetch information about.
      */
-    this.getPlotsAsGeoJson = function getPlotsAsGeoJson(subdivisionId) {
+    this.getIndustryAsGeoJson = function getIndustryAsGeoJson(industryId) {
       var deferred = $q.defer();
 
       if (config && config.hasOwnProperty('url')) {
-        var url = config.url.replace('%subdivisionId%', subdivisionId);
-        var cid = 'plots_geojson_' + subdivisionId;
+        var url = config.url + '/api/industry/' + industryId;
+        var cid = 'industry_geojson_' + industryId;
 
-        var plots =  plotsCache.get(cid);
-        if (plots !== undefined) {
-          deferred.resolve(plots);
+        var industries = industryCache.get(cid);
+        if (industries !== undefined) {
+          deferred.resolve(industries);
         }
         else {
           $http({
             method: 'GET',
-            url: url + 'geojson'
+            url: url
           }).then(function success(response) {
-            var plots = response.data;
-            plotsCache.put(cid, plots);
+            var industries = response.data;
+            industryCache.put(cid, industries);
 
-            deferred.resolve(plots);
+            deferred.resolve(industries);
           }, function error(response) {
             console.error(response);
             deferred.reject('Error communicating with the server.');

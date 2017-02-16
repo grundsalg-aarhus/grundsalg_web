@@ -3,8 +3,8 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService',
-  function($scope, $window, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService', 'mapsProxyService',
+  function($scope, $window, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService, mapsProxyService) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
@@ -194,7 +194,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   The layer to fetch form the service.
      */
     function addDagiLayer(map, matrixIds, resolutions, layer) {
-      console.log(layer);
       getTicket().then(function (ticket) {
         var projection = getProjectionEPSG25832();
 
@@ -297,10 +296,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     /**
      * Add feature event clicks with popup to features with "markers" = true.
      *
-     * @TODO: Optimizations reuse the scope and template. No need to recompile a
-     *        new scope every time.
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
      */
-    function addPopups() {
+    function addPopups(map) {
       var element = document.getElementById('popup');
       var popup = new ol.Overlay({
         element: element,
@@ -313,107 +312,170 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
       // Display popup on click.
       map.on('click', function(evt) {
-        var feature = map.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            return feature;
-          }
-        );
+        map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+          // Get metadata for the clicked on features layer.
+          var metadata = layer.get('metadata');
 
-        if (feature && feature.get('markers')) {
-          var coordinates = evt.coordinate;
-          popup.setPosition(coordinates);
+          if (feature && feature.get('markers')) {
+            // Move popup into the right position.
+            var coordinates = evt.coordinate;
+            popup.setPosition(coordinates);
 
-          $q.when(loadTemplate(config.popup.template)).then(function (template) {
-            $templateCache.put(config.popup.template, template);
+            // Load the template and add content to it.
+            var templateUrl = config.popup[metadata.type].template;
+            $q.when(loadTemplate(templateUrl)).then(function (template) {
+              $templateCache.put(templateUrl, template);
 
-            var $content = angular.element(element);
+              var $content = angular.element(element);
 
-            // Create new scope for the popup content.
-            var scope = $scope.$new(true);
-            scope.content = {};
-            var properties = feature.getProperties();
-            for (var i in properties) {
-              scope.content[i] = properties[i];
-            }
-
-            scope.icon = config.popup.icon;
-
-            /**
-             * Close the popup.
-             */
-            scope.close = function close() {
-              $content.html('');
-              scope.show = false;
-            };
-
-            /**
-             * Expose the Drupal.t() function to angular templates.
-             *
-             * @param str
-             *   The string to translate.
-             * @returns string
-             *   The translated string.
-             */
-            scope.Drupal = {
-              "t": function (str) {
-                return $window.Drupal.t(str);
+              // Create new scope for the popup content.
+              var scope = $scope.$new(true);
+              scope.content = {};
+              var properties = feature.getProperties();
+              for (var i in properties) {
+                scope.content[i] = properties[i];
               }
-            };
 
-            // Attach the angular template to the dom and render the
-            // content.
-            $content.html(template);
-            $timeout(function () {
-              $compile($content)(scope);
+              /**
+               * Close the popup.
+               */
+              scope.close = function close() {
+                $content.html('');
+                scope.show = false;
+              };
 
-              scope.show = true;
+              /**
+               * Expose the Drupal.t() function to angular templates.
+               *
+               * @param str
+               *   The string to translate.
+               * @returns string
+               *   The translated string.
+               */
+              scope.Drupal = {
+                "t": function (str) {
+                  return $window.Drupal.t(str);
+                }
+              };
+
+              // Attach the angular template to the dom and render the
+              // content.
+              $content.html(template);
+              $timeout(function () {
+                $compile($content)(scope);
+
+                scope.show = true;
+              });
+            }, function (err) {
+              console.error(err);
             });
-          }, function (err) {
-            console.error(err);
-          });
-        }
+          }
+        });
       });
     }
 
     /**
-     * Add marks layer to the map.
+     * Add areas marks layer to the map.
      *
-     * @param {json} data
-     *   The data (marks) to add to the layer.
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
      * @param {number} zoomLevel
      *   The zoom level to use.
+     * @param {number} typeId
+     *   The type of area to get (Villa, Parcelle, Erhvers) as their id.
      */
-    function addMarkerLayer(data, zoomLevel) {
-      var format = new ol.format.GeoJSON({
-        defaultDataProjection: 'EPSG:4326'
-      });
+    function addAreasLayer(map, zoomLevel, typeId) {
+      drupalService.getAreas(typeId).then(function success(data) {
 
-      var dataSource = new ol.source.Vector({
-        features: format.readFeatures(data, {
-          dataProjection: 'EPSG:4326',
-          featureProjection: 'EPSG:25832'
-        })
-      });
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
 
-      var dataLayer = new ol.layer.Vector({
-        source: dataSource,
-        style: new ol.style.Style({
-          image: new ol.style.Icon({
-            anchor: [0.5, 40],
-            anchorXUnits: 'fraction',
-            anchorYUnits: 'pixels',
-            src: config.popup.marker
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
           })
-        })
+        });
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: config.popup.areas.marker
+            })
+          })
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'areas'
+        });
+
+        // Add the layer to the map and zoom to it.
+        map.addLayer(dataLayer);
+        map.getView().fit(dataSource.getExtent(), map.getSize());
+        map.getView().setZoom(zoomLevel);
+      }, function error(err) {
+        console.error(err);
       });
+    }
 
-      // Add the layer to the map
-      map.addLayer(dataLayer);
-      map.getView().fit(dataSource.getExtent(), map.getSize());
-      map.getView().setZoom(zoomLevel);
 
-      // Add popups to the markers.
-      addPopups();
+    /**
+     * Add layer with industry markers.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {number} industryId
+     *   The industry's identification number.
+     * @param {string} title
+     *   The layers title.
+     */
+    function addIndustryLayer(map, industryId, title) {
+      mapsProxyService.getIndustryAsGeoJson(industryId).then(function success(data) {
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        // Find the marker to use or fallback to default.
+        var markerUrl = config.popup.industry.marker.hasOwnProperty(industryId) ? config.popup.industry.marker[industryId] : config.popup.industry.marker.default;
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          title: title,
+          visible: false,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: markerUrl
+            })
+          })
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'industry',
+          'industryId': industryId
+        });
+
+        // Add the layer to the map
+        map.addLayer(dataLayer);
+      });
     }
 
     /**
@@ -479,18 +541,20 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           }
         });
 
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'plots'
+        });
+
         // Add the layer to the map.
         map.addLayer(dataLayer);
         map.getView().fit(dataSource.getExtent(), map.getSize());
-
-        // Add popups to the areas.
-        addPopups();
 
       }, function error(err) {
         console.error(err);
       });
     }
-
 
     var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
@@ -499,24 +563,32 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     if (config.map_type == 'overview_page') {
       addTopographicallyLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
+      addAreasLayer(map, config.zoom.default, config.plot_type);
 
-      drupalService.getAreas(config.plot_type).then(function success(areas) {
-        addMarkerLayer(areas, config.zoom.default, config.map_type);
-      }, function error(err) {
-        console.error(err);
+      addIndustryLayer(map, 471110, 'Købmænd og døgnkiosker');
+      addIndustryLayer(map, 471120, 'Supermarkeder');
+      addIndustryLayer(map, 471130, 'Discountforretninger');
+
+      var layerSwitcher = new ol.control.LayerSwitcher({
+        tipLabel: 'Légende' // Optional label for button
       });
+      map.addControl(layerSwitcher);
+
+      addPopups(map);
     }
     else if (config.map_type == 'subdivision') {
       addOrtofotoLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
       addMatrikelLayer(map, matrixIds, resolutions);
       addPlots(map);
+
+      addPopups(map);
     }
     else {
       addTopographicallyLayer(map, matrixIds, resolutions);
-      //addOrtofotoLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
       addMatrikelLayer(map, matrixIds, resolutions);
+
       //addDagiLayer(map, matrixIds, resolutions, 'kommune');
     }
   }

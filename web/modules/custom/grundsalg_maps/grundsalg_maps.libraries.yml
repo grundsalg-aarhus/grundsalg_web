@@ -4,6 +4,7 @@ angular:
     js/services/TicketService.js: {}
     js/services/CookieService.js: {}
     js/services/DrupalService.js: {}
+    js/services/MapsProxyService.js: {}
   css:
     base:
       css/popup.css: {}
@@ -15,8 +16,10 @@ angular:
 
 openlayers:
   js:
-    js/libs/proj4/proj4-compressed.js: {}
-    js/libs/openlayers/ol.js: {}
+    js/libs/proj4/proj4-compressed.js: { minified: true }
+    js/libs/openlayers/ol.js: { minified: true }
+    js/libs/openlayers/ol3-layerswitcher.js: {}
   css:
     base:
       js/libs/openlayers/ol.css: {}
+      js/libs/openlayers/ol3-layerswitcher.css: {}
