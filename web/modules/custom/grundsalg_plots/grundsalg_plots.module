@@ -111,7 +111,8 @@ function grundsalg_plots_form_node_subdivision_edit_form_alter(&$form, FormState
     '#type' => 'markup',
     '#attached' => array(
       'library' => array(
-        'grundsalg_plots/show_plots'
+        'grundsalg_plots/show_plots',
+        'grundsalg_plots/show_plots.services',
       ),
       'drupalSettings' => array(
         'grundsalg_plots' => array(
