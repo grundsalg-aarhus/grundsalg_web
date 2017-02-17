@@ -305,7 +305,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var dataSource = new ol.source.Vector({
         format:  format,
         url: function(extent) {
-          return 'http://localhost:3010/api/midttrafik?SERVICE=WFS&VERSION=1.0.0&OUTPUTFORMAT=application/json&REQUEST=GetFeature&TYPENAME=Midttrafik:' + layerName + '&SRSNAME=EPSG:25832&&CQL_FILTER=komnr=751';
+          return config.url + '/api/midttrafik?SERVICE=WFS&VERSION=1.0.0&OUTPUTFORMAT=application/json&REQUEST=GetFeature&TYPENAME=Midttrafik:' + layerName + '&SRSNAME=EPSG:25832&&CQL_FILTER=komnr=751';
         }
       });
 
