@@ -312,7 +312,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var dataLayer = new ol.layer.Vector({
         source: dataSource,
         title: title,
-        visible: true,
+        visible: false,
         style: new ol.style.Style({
           image: new ol.style.Icon({
             anchor: [0.5, 40],
