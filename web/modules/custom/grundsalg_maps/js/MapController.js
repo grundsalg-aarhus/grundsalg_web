@@ -110,6 +110,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
     }
 
+    /**
+     * OpenStreetMap layer to use in test.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     */
     function addOSMMap(map) {
       map.addLayer(new ol.layer.Tile({
         source: new ol.source.OSM()
@@ -128,7 +134,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addTopographicallyLayer(map, matrixIds, resolutions) {
       getTicket().then(function (ticket) {
-        map.addLayer(new ol.layer.Tile({
+        var layer = new ol.layer.Tile({
           opacity: 1.0,
           source: new ol.source.WMTS({
             url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + ticket,
@@ -142,7 +148,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               matrixIds: matrixIds
             })
           })
-        }));
+        });
+
+        // As this layer may bee delayed in added to the map do to the ticket
+        // callback. We have to ensure that it's based below the marker layers.
+        layer.setZIndex(-10);
+        map.addLayer(layer);
       });
     }
 
@@ -160,7 +171,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       getTicket().then(function (ticket) {
         var projection = getProjectionEPSG25832();
 
-        map.addLayer(new ol.layer.Tile({
+        var layer = new ol.layer.Tile({
           opacity: 1.0,
           source: new ol.source.TileWMS({
             url: 'https://services.kortforsyningen.dk/service',
@@ -183,7 +194,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             }),
             projection: projection
           })
-        }));
+        });
+
+        // As this layer may bee delayed in added to the map do to the ticket
+        // callback. We have to ensure that it's based below the marker layers.
+        layer.setZIndex(-5);
+        map.addLayer(layer);
       });
     }
 
@@ -203,7 +219,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       getTicket().then(function (ticket) {
         var projection = getProjectionEPSG25832();
 
-        map.addLayer(new ol.layer.Tile({
+        var layer = new ol.layer.Tile({
           opacity: 1.0,
           source: new ol.source.TileWMS({
             url: 'https://services.kortforsyningen.dk/service',
@@ -226,7 +242,47 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             }),
             projection: projection
           })
-        }));
+        });
+
+        // As this layer may bee delayed in added to the map do to the ticket
+        // callback. We have to ensure that it's based below the marker layers.
+        layer.setZIndex(-5);
+        map.addLayer(layer);
+      });
+    }
+
+    /**
+     * Add "orto foto" map layer.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {array} matrixIds
+     *   Matrix IDs
+     * @param {array} resolutions
+     *   Maps resolutions.
+     */
+    function addOrtofotoLayer(map, matrixIds, resolutions) {
+      getTicket().then(function (ticket) {
+        var layer = new ol.layer.Tile({
+          opacity: 1.0,
+          source: new ol.source.WMTS({
+            url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + ticket,
+            format: 'image/jpeg',
+            matrixSet: 'View1',
+            layer: 'orto_foraar',
+            style: 'default',
+            tileGrid: new ol.tilegrid.WMTS({
+              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
+              resolutions: resolutions,
+              matrixIds: matrixIds
+            })
+          })
+        });
+
+        // As this layer may bee delayed in added to the map do to the ticket
+        // callback. We have to ensure that it's based below the marker layers.
+        layer.setZIndex(-5);
+        map.addLayer(layer);
       });
     }
 
@@ -243,7 +299,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     function addMidttrafikLayer(map, layerName, title) {
       var format = new ol.format.GeoJSON({
         defaultDataProjection: 'EPSG:25832',
-        defaultFeatureProjection: 'EPSG:25832'
+        featureProjection: 'EPSG:25832'
       });
 
       var dataSource = new ol.source.Vector({
@@ -256,7 +312,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var dataLayer = new ol.layer.Vector({
         source: dataSource,
         title: title,
-        visible: false,
+        visible: true,
         style: new ol.style.Style({
           image: new ol.style.Icon({
             anchor: [0.5, 40],
@@ -267,12 +323,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         })
       });
 
-      console.log(dataSource.getFeatures());
-
       map.addLayer(dataLayer);
+      console.log(map.getLayers());
+
     }
-
-
 
     /**
      * Fade all municipalities not Aarhus.
@@ -310,36 +364,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         map.addLayer(dataLayer);
       }, function error(err) {
         console.error(err);
-      });
-    }
-
-    /**
-     * Add "orto foto" map layer.
-     *
-     * @param {ol.Map} map
-     *   The OpenLayers map object.
-     * @param {array} matrixIds
-     *   Matrix IDs
-     * @param {array} resolutions
-     *   Maps resolutions.
-     */
-    function addOrtofotoLayer(map, matrixIds, resolutions) {
-      getTicket().then(function (ticket) {
-        map.addLayer(new ol.layer.Tile({
-          opacity: 1.0,
-          source: new ol.source.WMTS({
-            url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + ticket,
-            format: 'image/jpeg',
-            matrixSet: 'View1',
-            layer: 'orto_foraar',
-            style: 'default',
-            tileGrid: new ol.tilegrid.WMTS({
-              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
-              resolutions: resolutions,
-              matrixIds: matrixIds
-            })
-          })
-        }));
       });
     }
 
@@ -664,9 +688,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     var map = initOpenlayersMap();
 
     if (config.map_type == 'overview_page') {
-      addOSMMap(map);
+      //addOSMMap(map);
 
-      // addTopographicallyLayer(map, matrixIds, resolutions);
+      addTopographicallyLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
       addAreasLayer(map, config.zoom.default, config.plot_type);
 
