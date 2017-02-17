@@ -1,5 +1,15 @@
 # Changelog for grundsalg project
 
+## 1.0.0-alpha3
+* Added more translations
+* Removed rights to create subdivisions
+* Removed rights to create overview pages
+* Removed login form from access denied pages
+* Fixed small visual bug in footer
+* Added maps to overview page
+* Added maps to area
+* Added map to subdivision
+
 ## 1.0.0-alpha2
 * Translation of strings in ui
 * Overview page for /projekter

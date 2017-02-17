@@ -3,24 +3,23 @@ angular:
     js/MapController.js: {}
     js/services/TicketService.js: {}
     js/services/CookieService.js: {}
+    js/services/DrupalService.js: {}
+    js/services/MapsProxyService.js: {}
+  css:
+    base:
+      css/popup.css: {}
+
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_maps/leaflet
-    - core/drupalSettings
-
-leaflet:
-  header: true
-  js:
-    js/libs/leaflet/leaflet.js: {}
-    js/libs/proj4/proj4-compressed.js: {}
-    js/libs/proj4/proj4leaflet.js: {}
-  css:
-    base:
-      js/libs/leaflet/leaflet.css: {}
+    - core/drupal
 
 openlayers:
   js:
-    js/libs/openlayers/ol.js: {}
+    js/libs/proj4/proj4-compressed.js: { minified: true }
+    js/libs/openlayers/ol.js: { minified: true }
+    js/libs/openlayers/ol3-layerswitcher.js: {}
   css:
     base:
       js/libs/openlayers/ol.css: {}
+      js/libs/openlayers/ol3-layerswitcher.css: {}

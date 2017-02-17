@@ -9,11 +9,9 @@ angular.module('grundsalg').service('plotsService', ['$http', '$q', 'CacheFactor
 
     var config = drupalSettings.grundsalg_plots;
 
-    // Create cache object (expire 10 min.).
-    // @TODO: Make cache configurable in "Site settings".
     if (!CacheFactory.get('plotsCache')) {
       CacheFactory.createCache('plotsCache', {
-        maxAge: 600 * 1000,
+        maxAge: Number(config.cache_ttl) * 1000,
         deleteOnExpire: 'aggressive',
         storageMode: 'localStorage'
       });
@@ -43,6 +41,45 @@ angular.module('grundsalg').service('plotsService', ['$http', '$q', 'CacheFactor
           $http({
             method: 'GET',
             url: url
+          }).then(function success(response) {
+            var plots = response.data;
+            plotsCache.put(cid, plots);
+
+            deferred.resolve(plots);
+          }, function error(response) {
+            console.error(response);
+            deferred.reject('Error communicating with the server.');
+          });
+        }
+      }
+      else {
+        deferred.reject('No maps end-point URL in configuration');
+      }
+
+      return deferred.promise;
+    };
+
+    /**
+     * Get geojson information about the plots.
+     *
+     * @param {number} subdivisionId
+     *   The subdivision ID to fetch plots for.
+     */
+    this.getPlotsAsGeoJson = function getPlotsAsGeoJson(subdivisionId) {
+      var deferred = $q.defer();
+
+      if (config && config.hasOwnProperty('url')) {
+        var url = config.url.replace('%subdivisionId%', subdivisionId);
+        var cid = 'plots_geojson_' + subdivisionId;
+
+        var plots =  plotsCache.get(cid);
+        if (plots !== undefined) {
+          deferred.resolve(plots);
+        }
+        else {
+          $http({
+            method: 'GET',
+            url: url + '/geojson'
           }).then(function success(response) {
             var plots = response.data;
             plotsCache.put(cid, plots);

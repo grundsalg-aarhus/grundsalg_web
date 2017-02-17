@@ -20,20 +20,26 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
       );
 
       foreach ($variables['node']->get('field_media_image') as $key => $item) {
-        // Fetch each referencede image entity.
-        $image_entity = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id)->get('field_itk_media_image_upload');
-        $id = $image_entity->target_id;
-        $alt_text = $image_entity->alt;
-        $file = File::load($id);
+        // We need to check if the file exists, as it may have been deleted and
+        // get field below will make WPOD.
+        $file = \Drupal::entityTypeManager()->getStorage('media')->load($item->target_id);
 
-        // Create render array fo rresponsive images.
-        $image_render_array = _load_image($file, 'grundsalg_main_image', $alt_text);
+        if (!empty($file)) {
+          // Fetch each referenced image entity.
+          $image_entity = $file->get('field_itk_media_image_upload');
+          $id = $image_entity->target_id;
+          $alt_text = $image_entity->alt;
+          $file = File::load($id);
 
-        // Send rendered html to javascript.
-        $image_html = render($image_render_array);
-        $variables['#attached']['drupalSettings']['grundsalg_slideshow']['images'][$key] = array(
-          'html' => $image_html,
-        );
+          // Create render array for responsive images.
+          $image_render_array = _load_image($file, 'grundsalg_main_image', $alt_text);
+
+          // Send rendered html to javascript.
+          $image_html = render($image_render_array);
+          $variables['#attached']['drupalSettings']['grundsalg_slideshow']['images'][$key] = array(
+            'html' => $image_html,
+          );
+        }
       }
     }
   }
@@ -54,7 +60,7 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
  */
 function _load_image($file, $responsive_image_style_id, $alt_text) {
   if ($file) {
-    // Load main_image
+    // Load main_image.
     if ($file) {
       $variables = array(
         'responsive_image_style_id' => $responsive_image_style_id,

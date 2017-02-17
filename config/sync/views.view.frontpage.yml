@@ -67,7 +67,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filtrér
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -139,10 +139,10 @@ display:
             offset: false
             offset_label: Offset
           tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
+            previous: '‹ Tidligere'
+            next: 'Næste ›'
+            first: '« Første'
+            last: 'Sidste »'
           quantity: 9
       query:
         type: views_query

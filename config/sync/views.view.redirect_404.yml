@@ -268,7 +268,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Language
+          label: Sprog
           exclude: false
           alter:
             alter_text: false
@@ -411,7 +411,7 @@ display:
           exposed: true
           expose:
             operator_id: langcode_op
-            label: Language
+            label: Sprog
             description: ''
             use_operator: false
             operator: langcode_op

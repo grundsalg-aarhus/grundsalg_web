@@ -26,7 +26,8 @@ class ApiController extends ControllerBase {
     $client = new Client();
 
     try {
-      $url = \Drupal::config('grundsalg_db')->get('url');
+      $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+      $url = $config->get('grundsalg_db_client_url');
 
       $res = $client->request('GET', $url . '/udstykning/' . $id);
 
