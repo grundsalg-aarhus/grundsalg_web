@@ -51,6 +51,25 @@ function grundsalg_maps_preprocess_page(&$variables) {
                   '471130' => $path . '/images/marker-icon.png',
                 ),
               ),
+              'institution' => array(
+                'template' => $path . '/js/templates/popup-institution.html',
+                'marker' => array(
+                  'default' => $path . '/images/marker-icon.png',
+                  'dagtilbud' => $path . '/images/marker-icon.png',
+                  'dagpleje' => $path . '/images/marker-icon.png',
+                  'fritid' => $path . '/images/marker-icon.png',
+                  'intinst' => $path . '/images/marker-icon.png',
+                  'vuggestue' => $path . '/images/marker-icon.png',
+                  'bornehave' => $path . '/images/marker-icon.png',
+                  'specskole' => $path . '/images/marker-icon.png',
+                  'skole' => $path . '/images/marker-icon.png',
+                  'sfo' => $path . '/images/marker-icon.png',
+                  'fu' => $path . '/images/marker-icon.png',
+                  'privtilbud' => $path . '/images/marker-icon.png',
+                  'tandplejen' => $path . '/images/marker-icon.png',
+                  'privskole' => $path . '/images/marker-icon.png'
+                ),
+              ),
             ),
           );
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
