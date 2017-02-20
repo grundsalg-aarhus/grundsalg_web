@@ -324,8 +324,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
 
       map.addLayer(dataLayer);
-      console.log(map.getLayers());
-
     }
 
     /**
@@ -453,12 +451,10 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
-     * @param {number} zoomLevel
-     *   The zoom level to use.
      * @param {number} typeId
      *   The type of area to get (Villa, Parcelle, Erhvers) as their id.
      */
-    function addAreasLayer(map, zoomLevel, typeId) {
+    function addAreasLayer(map, typeId) {
       drupalService.getAreas(typeId).then(function success(data) {
 
         var format = new ol.format.GeoJSON({
@@ -492,8 +488,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         // Add the layer to the map and zoom to it.
         map.addLayer(dataLayer);
-        map.getView().fit(dataSource.getExtent(), map.getSize());
-        map.getView().setZoom(zoomLevel);
       }, function error(err) {
         console.error(err);
       });
@@ -505,12 +499,14 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
+     * @param {ol.Collection } collection
+     *   The group for this layer.
      * @param {number} industryId
      *   The industry's identification number.
      * @param {string} title
      *   The layers title.
      */
-    function addIndustryLayer(map, industryId, title) {
+    function addIndustryLayer(map, collection, industryId, title) {
       mapsProxyService.getIndustryAsGeoJson(industryId).then(function success(data) {
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
@@ -547,8 +543,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           'industryId': industryId
         });
 
-        // Add the layer to the map
-        map.addLayer(dataLayer);
+        // Add the layer to the collection.
+        collection.push(dataLayer);
       });
     }
 
@@ -557,12 +553,14 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
+     * @param {ol.Collection } collection
+     *   The group for this layer.
      * @param {number} type
      *   The institution type.
      * @param {string} title
      *   The layers title.
      */
-    function addInstitutionLayer(map, type, title) {
+    function addInstitutionLayer(map, collection, type, title) {
       mapsProxyService.getInstitutionAsGeoJson(type).then(function success(data) {
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
@@ -599,8 +597,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           'institutionType': type
         });
 
-        // Add the layer to the map
-        map.addLayer(dataLayer);
+        // Add the layer to the collection.
+        collection.push(dataLayer);
       });
     }
 
@@ -677,9 +675,24 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         // Add the layer to the map.
         map.addLayer(dataLayer);
         map.getView().fit(dataSource.getExtent(), map.getSize());
-
       }, function error(err) {
         console.error(err);
+      });
+    }
+
+    /**
+     * Display information about the map.
+     *
+     * Used when debuging and changes in configuration.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     */
+    function mapDebugInfo(map) {
+      map.on('moveend', function(evt) {
+        var ext = map.getView().calculateExtent(map.getSize());
+        console.log('Extent: ' + ext[0] + ',' + ext[1] + ',' + ext[2] + ',' + ext[3]);
+        console.log('Zoom: ' + map.getView().getZoom());
       });
     }
 
@@ -687,41 +700,112 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
     var map = initOpenlayersMap();
 
-    if (config.map_type == 'overview_page') {
-      //addOSMMap(map);
+    /**
+     * Helper function to restrict pan in the maps.
+     */
+    var view = map.getView();
+    var extent = config.extent;
+    function constrainPan() {
+      var visible = view.calculateExtent(map.getSize());
+      var centre = view.getCenter();
 
+      var delta;
+      var adjust = false;
+
+      if ((delta = extent[0] - visible[0]) > 0) {
+        adjust = true;
+        centre[0] += delta;
+      }
+      else if ((delta = extent[2] - visible[2]) < 0) {
+        adjust = true;
+        centre[0] += delta;
+      }
+
+      if ((delta = extent[1] - visible[1]) > 0) {
+        adjust = true;
+        centre[1] += delta;
+      }
+      else if ((delta = extent[3] - visible[3]) < 0) {
+        adjust = true;
+        centre[1] += delta;
+      }
+      if (adjust) {
+        view.setCenter(centre);
+      }
+    }
+    view.on('change:resolution', constrainPan);
+    view.on('change:center', constrainPan);
+
+    if (config.map_type == 'overview_page') {
       addTopographicallyLayer(map, matrixIds, resolutions);
       addMunicipalitiesFadeLayer(map);
-      addAreasLayer(map, config.zoom.default, config.plot_type);
 
-      addIndustryLayer(map, 471110, 'Købmænd og døgnkiosker');
-      addIndustryLayer(map, 471120, 'Supermarkeder');
-      addIndustryLayer(map, 471130, 'Discountforretninger');
+      // Add areas layer.
+      addAreasLayer(map, config.plot_type);
+    }
+    else if (config.map_type == 'area') {
+      addTopographicallyLayer(map, matrixIds, resolutions);
+      addMunicipalitiesFadeLayer(map);
 
+      var layerSwitcher = new ol.control.LayerSwitcher();
+      map.addControl(layerSwitcher);
 
-      addInstitutionLayer(map, 'dagtilbud', 'Dagtilbud');
-      addInstitutionLayer(map, 'dagpleje', 'Dagpleje');
-      addInstitutionLayer(map, 'fritid', 'Fritid');
-      addInstitutionLayer(map, 'intinst', 'Institutioner');
-      addInstitutionLayer(map, 'vuggestue', 'Vuggestue');
-      addInstitutionLayer(map, 'bornehave', 'Børnehave');
-      addInstitutionLayer(map, 'specskole', 'Specialskole');
-      addInstitutionLayer(map, 'skole', 'Skoler');
-      addInstitutionLayer(map, 'sfo', 'SFO');
-      addInstitutionLayer(map, 'fu', 'Fælles ungdomsklub');
-      addInstitutionLayer(map, 'privtilbud', 'Privat tilbud');
-      addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
-      addInstitutionLayer(map, 'privskole', 'Private skole');
+      // Create layer collection - Butikker.
+      var colStores = new ol.Collection();
+      addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
+      addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
+      addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
 
+      // Create layer group based on store collection.
+      var layerGroupStore = new ol.layer.Group({
+        title: 'Butikker',
+        combine: true,
+        visible: false
+      });
+      layerGroupStore.setLayers(colStores);
+      map.addLayer(layerGroupStore);
+
+      // Create layer collection - Skoler.
+      var colSchools = new ol.Collection();
+      addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
+      addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
+      addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
+      addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
+
+      // Create layer group based on store collection.
+      var layerGroupSchools = new ol.layer.Group({
+        title: 'Skoler',
+        combine: true,
+        visible: false
+      });
+      layerGroupSchools.setLayers(colSchools);
+      map.addLayer(layerGroupSchools);
+
+      // Create layer collection - Institutioner.
+      var colInstitution = new ol.Collection();
+      addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
+      addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
+      addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
+      addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
+      addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
+      addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
+      addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
+      addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
+
+      // Create layer group based on store collection.
+      var layerGroupInstitution = new ol.layer.Group({
+        title: 'Institutioner',
+        combine: true,
+        visible: false
+      });
+      layerGroupInstitution.setLayers(colInstitution);
+      map.addLayer(layerGroupInstitution);
 
       addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
 
-      var layerSwitcher = new ol.control.LayerSwitcher({
-        tipLabel: 'Légende' // Optional label for button
-      });
-      map.addControl(layerSwitcher);
-
+      // Enable popups.
       addPopups(map);
+      //addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
     }
     else if (config.map_type == 'subdivision') {
       addOrtofotoLayer(map, matrixIds, resolutions);
@@ -729,14 +813,63 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       addMatrikelLayer(map, matrixIds, resolutions);
       addPlots(map);
 
-      addPopups(map);
-    }
-    else {
-      addTopographicallyLayer(map, matrixIds, resolutions);
-      addMunicipalitiesFadeLayer(map);
-      addMatrikelLayer(map, matrixIds, resolutions);
+      var layerSwitcher = new ol.control.LayerSwitcher();
+      map.addControl(layerSwitcher);
 
-      //addDagiLayer(map, matrixIds, resolutions, 'kommune');
+      // Create layer collection - Butikker.
+      var colStores = new ol.Collection();
+      addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
+      addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
+      addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
+
+      // Create layer group based on store collection.
+      var layerGroupStore = new ol.layer.Group({
+        title: 'Butikker',
+        combine: true,
+        visible: false
+      });
+      layerGroupStore.setLayers(colStores);
+      map.addLayer(layerGroupStore);
+
+      // Create layer collection - Skoler.
+      var colSchools = new ol.Collection();
+      addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
+      addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
+      addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
+      addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
+
+      // Create layer group based on store collection.
+      var layerGroupSchools = new ol.layer.Group({
+        title: 'Skoler',
+        combine: true,
+        visible: false
+      });
+      layerGroupSchools.setLayers(colSchools);
+      map.addLayer(layerGroupSchools);
+
+      // Create layer collection - Institutioner.
+      var colInstitution = new ol.Collection();
+      addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
+      addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
+      addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
+      addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
+      addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
+      addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
+      addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
+      addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
+
+      // Create layer group based on store collection.
+      var layerGroupInstitution = new ol.layer.Group({
+        title: 'Institutioner',
+        combine: true,
+        visible: false
+      });
+      layerGroupInstitution.setLayers(colInstitution);
+      map.addLayer(layerGroupInstitution);
+
+      addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
+
+      addPopups(map);
     }
   }
 ]);

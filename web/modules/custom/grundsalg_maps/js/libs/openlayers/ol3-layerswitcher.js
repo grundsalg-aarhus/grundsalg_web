@@ -151,6 +151,16 @@
     ol.control.LayerSwitcher.prototype.setVisible_ = function(lyr, visible) {
         var map = this.getMap();
         lyr.setVisible(visible);
+
+        /**
+        * HACK TO STANDARD LIBRARY.
+        */
+        if (lyr.getLayers()) {
+            ol.control.LayerSwitcher.forEachRecursive(lyr, function(l, idx, a) {
+                l.setVisible(visible);
+            });
+        }
+
         if (visible && lyr.get('type') === 'base') {
             // Hide all other base layers regardless of grouping
             ol.control.LayerSwitcher.forEachRecursive(map, function(l, idx, a) {
@@ -179,7 +189,6 @@
         var label = document.createElement('label');
 
         if (lyr.getLayers && !lyr.get('combine')) {
-
             li.className = 'group';
             label.innerHTML = lyrTitle;
             li.appendChild(label);
@@ -189,7 +198,6 @@
             this.renderLayers_(lyr, ul);
 
         } else {
-
             li.className = 'layer';
             var input = document.createElement('input');
             if (lyr.get('type') === 'base') {
@@ -222,7 +230,7 @@
      * @param {Element} elm DOM element that children will be appended to.
      */
     ol.control.LayerSwitcher.prototype.renderLayers_ = function(lyr, elm) {
-        var lyrs = lyr.getLayers().getArray().slice().reverse();
+        var lyrs = lyr.getLayers().getArray().slice();
         for (var i = 0, l; i < lyrs.length; i++) {
             l = lyrs[i];
             if (l.get('title')) {
