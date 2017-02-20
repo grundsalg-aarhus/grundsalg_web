@@ -10,17 +10,17 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class GrundsalgFrontSettingsForm
+ * Class PlotsSettingsForm.
  *
  * @package Drupal\grundsalg_maps\Form
  */
-class MapsSettingsForm extends FormBase {
+class PlotsSettingsForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'maps_settings_form';
+    return 'plots_settings_form';
   }
 
   /**

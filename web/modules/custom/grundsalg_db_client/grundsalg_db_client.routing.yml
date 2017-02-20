@@ -7,9 +7,10 @@ grundsalg_db_client.config:
     _permission: 'administer site configuration'
 
 grundsalg_db_client.update_subdivision:
-  path: '/api/udstykning/{id}/updated'
+  path: '/api/udstykning/{sid}/updated'
   defaults:
     _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::subdivisionUpdated'
   requirements:
+    sid: \d+
     _permission: 'access content'
     _method: 'POST|GET'

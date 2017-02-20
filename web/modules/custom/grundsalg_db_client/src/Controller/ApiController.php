@@ -17,33 +17,49 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ApiController extends ControllerBase {
   /**
    * Endpoint to notify when a subdivision has been updated in the Fagsystem.
-
-   * @param $id
+   *
+   * @param int $sid
+   *   The remote systems ID for the subdivivion.
    *
    * @return JsonResponse
    */
-  public function subdivisionUpdated($id) {
-    $client = new Client();
+  public function subdivisionUpdated($sid) {
 
     try {
       $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
-      $url = $config->get('grundsalg_db_client_url');
 
-      $res = $client->request('GET', $url . '/udstykning/' . $id);
+      // Create client and fetch content from remote system.
+      $client = new Client();
+      $url = $config->get('grundsalg_db_client_url') . '/udstykning/' . $sid;
+      $response = $client->request('GET', $url);
 
+      // @TODO: Check for error code in $response?
+
+      // Parse content fetched from the remote system.
+      $body = $response->getBody()->getContents();
+      $content = \GuzzleHttp\json_decode($body);
+
+      // Fix content mappings.
+      if ($content->type == 'Parcelhusgrund') {
+        $content->type = 'Villagrund';
+      }
+
+      // Create the content.
       $contentCreationService = \Drupal::service('grundsalg.content_creation');
-
-      $body = $res->getBody()->getContents();
-      $body = \GuzzleHttp\json_decode($body);
-
-      $contentCreationService->updateSubdivision($id, $body->title, $body->type, $body->postalCode, $body->city);
+      $operation = $contentCreationService->updateSubdivision((array) $content);
 
       return new JsonResponse([
-        'message' => 'Subdivision updated/created!',
+        'error' => FALSE,
+        'message' => $operation,
         'body' => $body,
       ]);
-    } catch (RequestException $e) {
-      throw $e;
+    }
+    catch (\Exception $e) {
+      return new JsonResponse([
+        'error' => TRUE,
+        'message' => $e->getMessage(),
+        'body' => $e->getMessage(),
+      ]);
     }
   }
 }
