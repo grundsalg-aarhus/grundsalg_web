@@ -33,10 +33,29 @@ function grundsalg_maps_preprocess_page(&$variables) {
           $config = array(
             'plot_type' => $variables['node']->get('field_plot_type')->target_id,
             'zoom' => array (
-              'default' => 6,
-              'min' => 1,
-              'max' => 14,
+              'default' => 5,
+              'min' => 5,
+              'max' => 8,
             ),
+            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'popup' => array(
+              'areas' => array(
+                'template' => $path . '/js/templates/popup-areas.html',
+                'marker' => $path . '/images/marker-icon.png',
+              )
+            )
+          );
+          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
+          break;
+
+        case 'area':
+          $config = array(
+            'zoom' => array (
+              'default' => 6,
+              'min' => 6,
+              'max' => 10,
+            ),
+            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
               'areas' => array(
                 'template' => $path . '/js/templates/popup-areas.html',
@@ -68,9 +87,9 @@ function grundsalg_maps_preprocess_page(&$variables) {
                   'privtilbud' => $path . '/images/marker-icon.png',
                   'tandplejen' => $path . '/images/marker-icon.png',
                   'privskole' => $path . '/images/marker-icon.png'
-                ),
-              ),
-            ),
+                )
+              )
+            )
           );
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
           break;
@@ -82,28 +101,45 @@ function grundsalg_maps_preprocess_page(&$variables) {
           $config = array(
             'subdivision_id' => $subdivision_id,
             'zoom' => array (
-              'default' => 14,
+              'default' => 11,
               'min' => 11,
-              'max' => 14,
+              'max' => 16,
             ),
+            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
-              'plots' => array(
-                'template' => $path . '/js/templates/popup-plot.html',
+              'areas' => array(
+                'template' => $path . '/js/templates/popup-areas.html',
                 'marker' => $path . '/images/marker-icon.png',
               ),
-            ),
-          );
-          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
-
-          break;
-
-        default:
-          $config = array(
-            'zoom' => array (
-              'default' =>6,
-              'min' => 1,
-              'max' => 14,
-            ),
+              'industry' => array(
+                'template' => $path . '/js/templates/popup-industry.html',
+                'marker' => array(
+                  'default' => $path . '/images/marker-icon.png',
+                  '471110' => $path . '/images/marker-icon.png',
+                  '471120' => $path . '/images/marker-icon.png',
+                  '471130' => $path . '/images/marker-icon.png',
+                ),
+              ),
+              'institution' => array(
+                'template' => $path . '/js/templates/popup-institution.html',
+                'marker' => array(
+                  'default' => $path . '/images/marker-icon.png',
+                  'dagtilbud' => $path . '/images/marker-icon.png',
+                  'dagpleje' => $path . '/images/marker-icon.png',
+                  'fritid' => $path . '/images/marker-icon.png',
+                  'intinst' => $path . '/images/marker-icon.png',
+                  'vuggestue' => $path . '/images/marker-icon.png',
+                  'bornehave' => $path . '/images/marker-icon.png',
+                  'specskole' => $path . '/images/marker-icon.png',
+                  'skole' => $path . '/images/marker-icon.png',
+                  'sfo' => $path . '/images/marker-icon.png',
+                  'fu' => $path . '/images/marker-icon.png',
+                  'privtilbud' => $path . '/images/marker-icon.png',
+                  'tandplejen' => $path . '/images/marker-icon.png',
+                  'privskole' => $path . '/images/marker-icon.png'
+                )
+              )
+            )
           );
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
           break;
