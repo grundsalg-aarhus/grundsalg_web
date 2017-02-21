@@ -10,7 +10,7 @@ field_name: field_coordinate
 entity_type: node
 bundle: subdivision
 label: Koordinat
-description: "Et X,Y koordinatsæt.\r\nBrug eksempelvis <a href=\"https://www.google.com/maps\" target=\"_blank\">Google maps</a> til at finde et passende sæt koordinater."
+description: ''
 required: false
 translatable: true
 default_value: {  }

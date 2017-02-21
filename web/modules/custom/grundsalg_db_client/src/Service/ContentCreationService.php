@@ -149,7 +149,6 @@ class ContentCreationService {
     if ($nids) {
       // Found existing sub-division, so this will be an update operation.
       $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
-      $subdivision->set('title', $content['title']);
       $subdivision->set('field_subdivision_id', $content['id']);
       $subdivision->set('field_parent', $area->id());
       $subdivision->set('field_plot_type', $plotTypeTerm->id());
