@@ -154,6 +154,7 @@ class ContentCreationService {
       $subdivision->set('field_plot_type', $plotTypeTerm->id());
       $subdivision->set('field_city_reference', $cityTerm->id());
       $subdivision->set('field_coordinate', $coordinates);
+      $subdivision->set('status', $content['publish']);
       $subdivision->save();
 
       return 'updated';
@@ -168,6 +169,7 @@ class ContentCreationService {
         'field_plot_type' => $plotTypeTerm->id(),
         'field_city_reference' => $cityTerm->id(),
         'field_coordinate' => $coordinates,
+        'status' => $content['publish'],
       ])->save();
 
       return 'created';
