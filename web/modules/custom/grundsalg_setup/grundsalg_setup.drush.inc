@@ -1,4 +1,10 @@
 <?php
+/**
+ * @TODO: Missing documentation!
+ *
+ * @TODO: Why is this needed, cities are created if needed by the sync from the
+ *        fagsystem!
+ */
 
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\taxonomy\Entity\Term;

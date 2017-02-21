@@ -1,4 +1,9 @@
 <?php
+/**
+ * @file
+ * @TODO: What it this file and is it used for any thing!
+ * @TODO: All parameters documentation is missing!
+ */
 
 /**
  * Creates a subdivision and possibly area parent if they don't exist.
@@ -25,7 +30,6 @@ function create_subdivision($title, $subdivision_id, $postal_code, $plot_type) {
   }
 }
 
-
 /**
  * Searches for nodes of type subdivision with the given subdivision_id.
  *
@@ -37,7 +41,6 @@ function search_subdivision($subdivision_id) {
   $nid = 0;
   return $nid;
 }
-
 
 /**
  * Searches for nodes of type area with the given postal code and plot type.
@@ -52,7 +55,6 @@ function search_area($postal_code, $plot_type) {
   return $nid;
 }
 
-
 /**
  * Searches for nodes of type overview_page with the given plot type.
  *
@@ -65,7 +67,6 @@ function search_overview($plot_type) {
   return $nid;
 }
 
-
 /**
  * Creates an area from the given parameters.
  *
@@ -75,7 +76,6 @@ function search_overview($plot_type) {
 function create_area_node($postal_code, $plot_type) {
   // @todo Create a node of type area.
 }
-
 
 /**
  * Creates subdivision from the given parameters.
@@ -87,7 +87,6 @@ function create_subdivision_node($title, $postal_code, $plot_type, $subdivision_
   // @todo Create a node of type area.
 }
 
-
 /**
  * Look for plot type term in plot type taxonomy.
  *
@@ -98,7 +97,6 @@ function _plot_type_exists($plot_type) {
   // @todo look for plot type in plot type taxonomy.
   return TRUE;
 }
-
 
 /**
  * Look for postal code field value in term in city taxonomy.
