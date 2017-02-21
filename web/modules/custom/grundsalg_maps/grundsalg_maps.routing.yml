@@ -12,4 +12,15 @@ grundsalg_maps.areas:
     _title: 'Maps overview page areas'
     _controller: '\Drupal\grundsalg_maps\Controller\ApiController::areas'
   requirements:
+    tid: \d+
+    _permission: 'access content'
+
+grundsalg_maps.subdivision:
+  path: '/api/maps/area/{tid}/subdivision/{aid}'
+  defaults:
+    _title: 'Maps sub-division in area'
+    _controller: '\Drupal\grundsalg_maps\Controller\ApiController::subdivision'
+  requirements:
+    tid: \d+
+    aid: \d+
     _permission: 'access content'

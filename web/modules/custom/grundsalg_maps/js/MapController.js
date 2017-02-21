@@ -495,6 +495,56 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
     }
 
+    /**
+     * Add subdivision marks layer to the map.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {number} typeId
+     *   The type of area to get (Villa, Parcelle, Erhvers) as their id.
+     * @param {number} areaId
+     *   The id of the area to use.
+     */
+    function addSubdivisionLayer(map, typeId, areaId) {
+      drupalService.getSubdivisions(typeId, areaId).then(function success(data) {
+
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: config.popup.subdivision.marker
+            })
+          })
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'subdivision'
+        });
+
+        // Add the layer to the map and zoom to it.
+        map.addLayer(dataLayer);
+        map.getView().fit(dataSource.getExtent(), map.getSize());
+      }, function error(err) {
+        console.error(err);
+      });
+    }
+
 
     /**
      * Add layer with industry markers.
@@ -807,6 +857,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       map.addLayer(layerGroupInstitution);
 
       addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
+
+      // Add areas layer.
+      addSubdivisionLayer(map, config.plot_type, config.area_id);
 
       // Enable popups.
       addPopups(map);

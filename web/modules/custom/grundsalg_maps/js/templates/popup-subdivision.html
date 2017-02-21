@@ -1,0 +1,21 @@
+<div class="popup">
+  <div class="popup-content-wrapper">
+    <span class="leaflet-popup-close-button" data-ng-click="close()" style="outline: medium none;">×</span>
+    <div class="popup-content">
+      <div class="popup-container" style="display: block;">
+        <a href="{{ content.url }}">
+          <h1>{{ content.title }}</h1>
+        </a>
+        <p>{{ content.teaser }}</p>
+        <a href="{{ content.url }}" title="">
+          <svg viewBox="0 0 125 102" xmlns="http://www.w3.org/2000/svg">
+            <g class="arrow-link--svg" fill="#1A1918">
+              <path d="M124.094 52.64L74.47 0 63.984 10.935 101.53 52.64 63.928 90.578l10.477 10.942"/>
+              <path d="M112.813 60.16V45.12H0v15.04"/>
+            </g>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
