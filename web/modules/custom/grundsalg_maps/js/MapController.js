@@ -393,6 +393,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             var coordinates = evt.coordinate;
             popup.setPosition(coordinates);
 
+            console.log(metadata);
+
             // Load the template and add content to it.
             var templateUrl = config.popup[metadata.type].template;
             $q.when(loadTemplate(templateUrl)).then(function (template) {
@@ -742,6 +744,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
       // Add areas layer.
       addAreasLayer(map, config.plot_type);
+
+      // Enable popups.
+      addPopups(map);
     }
     else if (config.map_type == 'area') {
       addTopographicallyLayer(map, matrixIds, resolutions);

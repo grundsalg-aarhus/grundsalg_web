@@ -21,7 +21,7 @@ angular.module('grundsalg').controller('StreetviewController', ['$scope',
           };
 
           // @TODO: Is the radius 1500 meters or km?
-          // Get a streetview as close as possible with in 1500 km.
+          // Get a street view as close as possible with in 1500 km.
           sv.getPanorama({
             location: location,
             radius: 1500
