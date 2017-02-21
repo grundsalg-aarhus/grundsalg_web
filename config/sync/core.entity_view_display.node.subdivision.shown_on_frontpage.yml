@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.subdivision.field_body
     - field.field.node.subdivision.field_city_reference
     - field.field.node.subdivision.field_coordinate
+    - field.field.node.subdivision.field_streetview_coordinate
     - field.field.node.subdivision.field_media_document
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
@@ -51,6 +52,7 @@ hidden:
   field_media_document: true
   field_media_image: true
   field_parent: true
+  field_streetview_coordinate: true
   field_subdivision_id: true
   field_youtube: true
   langcode: true

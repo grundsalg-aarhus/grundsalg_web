@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
     - field.field.node.subdivision.field_plot_type
+    - field.field.node.subdivision.field_streetview_coordinate
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
@@ -90,6 +91,7 @@ third_party_settings:
     group_coordinate:
       children:
         - field_coordinate
+        - field_streetview_coordinate
       parent_name: ''
       weight: 3
       format_type: details
@@ -157,6 +159,13 @@ content:
     weight: 3
     settings: {  }
     third_party_settings: {  }
+  field_streetview_coordinate:
+    weight: 29
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
   field_subdivision_id:
     weight: 9
     settings:

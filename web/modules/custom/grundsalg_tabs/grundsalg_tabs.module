@@ -48,8 +48,8 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       }
 
       // Add coordinates to JS (here used for street-view).
-      if (isset($variables['node']->field_coordinate->value)) {
-        $coordinates_str = $variables['node']->field_coordinate->value;
+      if (isset($variables['node']->field_streetview_coordinate->value)) {
+        $coordinates_str = $variables['node']->field_streetview_coordinate->value;
         $coordinates = explode(',', str_replace(' ', '', $coordinates_str));
         $variables['#attached']['drupalSettings']['grundsalg_tabs']['coordinates'] = array(
           'full' => $coordinates_str,
