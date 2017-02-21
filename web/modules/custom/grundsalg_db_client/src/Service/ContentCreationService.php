@@ -6,6 +6,9 @@
 
 namespace Drupal\grundsalg_db_client\Service;
 
+use proj4php\Point;
+use proj4php\Proj;
+use proj4php\Proj4php;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
@@ -126,6 +129,23 @@ class ContentCreationService {
       ->condition('field_subdivision_id', $content['id']);
     $nids = $query->execute();
 
+    // Find coordinates for the area if provided.
+    $coordinates = '';
+    if (!empty($content['geometry'])) {
+      // We need to convert the projection of the coordinates.
+      $proj4 = new Proj4php();
+      $proj4->addDef('EPSG:25832', '+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs');
+      $projFrom = new Proj('EPSG:25832', $proj4);
+      $projTo = new Proj('EPSG:4326', $proj4);
+      $pointSrc = new Point($content['geometry']->coordinates[0], $content['geometry']->coordinates[1], $projFrom);
+      $pointDest = $proj4->transform($projTo, $pointSrc);
+
+      // Change the lat/lng to lng/lot so it matches what the user would enter.
+      $coordinates = explode(' ', $pointDest->toShortString());
+      $coordinates = array_reverse($coordinates);
+      $coordinates = implode(', ', $coordinates);
+    }
+
     if ($nids) {
       // Found existing sub-division, so this will be an update operation.
       $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
@@ -134,6 +154,7 @@ class ContentCreationService {
       $subdivision->set('field_parent', $area->id());
       $subdivision->set('field_plot_type', $plotTypeTerm->id());
       $subdivision->set('field_city_reference', $cityTerm->id());
+      $subdivision->set('field_coordinate', $coordinates);
       $subdivision->save();
 
       return 'updated';
@@ -147,6 +168,7 @@ class ContentCreationService {
         'field_parent' => $area->id(),
         'field_plot_type' => $plotTypeTerm->id(),
         'field_city_reference' => $cityTerm->id(),
+        'field_coordinate' => $coordinates,
       ])->save();
 
       return 'created';

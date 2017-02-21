@@ -17,6 +17,12 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
     }
     var drupalCache = CacheFactory.get('drupalCache');
 
+    /**
+     * Get areas for a given type.
+     *
+     * @param {int} plot_type
+     *   The type of areas to fetch.
+     */
     this.getAreas = function getAreas(plot_type) {
       var deferred = $q.defer();
 
@@ -30,6 +36,42 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
         $http({
           method: 'GET',
           url: '/api/maps/areas/' + plot_type
+        }).then(function success(response) {
+          var areas = response.data;
+          drupalCache.put(cid, areas);
+
+          deferred.resolve(areas);
+        }, function error(response) {
+          console.error(response);
+          deferred.reject('Error communicating with the server.');
+        });
+      }
+
+      return deferred.promise;
+    };
+
+    /**
+     * Get subdivisions.
+     *
+     * @param {int} plot_type
+     *   The area type to limit by.
+     * @param {int} area_id
+     *   The area to get subdivision for.
+     */
+    this.getSubdivisions = function getSubdivisions(plot_type, area_id) {
+      var deferred = $q.defer();
+
+      var cid = 'drupalCache_subdivision_' + plot_type + '_' + area_id;
+
+      var areas =  drupalCache.get(cid);
+      if (areas !== undefined) {
+        deferred.resolve(areas);
+      }
+      else {
+        console.log('/api/maps/area/' + plot_type + '/subdivision/' + area_id);
+        $http({
+          method: 'GET',
+          url: '/api/maps/area/' + plot_type + '/subdivision/' + area_id
         }).then(function success(response) {
           var areas = response.data;
           drupalCache.put(cid, areas);
