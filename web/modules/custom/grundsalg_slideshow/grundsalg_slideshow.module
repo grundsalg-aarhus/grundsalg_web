@@ -10,6 +10,8 @@ use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 function grundsalg_slideshow_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
+    $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array();
+
     // Add image urls and alt to js (if page have images).
     if (isset($variables['node']->field_media_image->target_id)) {
       $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
@@ -66,6 +68,7 @@ function _load_image($file, $responsive_image_style_id, $alt_text) {
         'responsive_image_style_id' => $responsive_image_style_id,
         'uri' => $file->getFileUri(),
       );
+
       // The image.factory service will check if our image is valid.
       $image = \Drupal::service('image.factory')->get($file->getFileUri());
       if ($image->isValid()) {
@@ -73,8 +76,10 @@ function _load_image($file, $responsive_image_style_id, $alt_text) {
         $variables['height'] = $image->getHeight();
       }
       else {
-        $variables['width'] = $variables['height'] = NULL;
+        $variables['width'] = NULL;
+        $variables['height'] = NULL;
       }
+
       // Create render array.
       $result_image = [
         '#attributes' => array(
@@ -87,13 +92,16 @@ function _load_image($file, $responsive_image_style_id, $alt_text) {
         '#responsive_image_style_id' => $variables['responsive_image_style_id'],
         '#uri' => $variables['uri'],
       ];
+
       // Add the file entity to the cache dependencies.
       // This will clear our cache when this entity updates.
       $renderer = \Drupal::service('renderer');
       $renderer->addCacheableDependency($result_image, $file);
+
       // Return the render array as block content.
       return $result_image;
     }
   }
+
   return NULL;
 }
