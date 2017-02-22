@@ -64,7 +64,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'min' => 5,
               'max' => 8,
             ),
-            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'extent' => 'auto',
             'popup' => array(
               'areas' => array(
                 'scale' => 1,

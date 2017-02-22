@@ -130,7 +130,7 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
       else {
         $http({
           method: 'GET',
-          url: '/modules/custom/grundsalg_maps/data/kommuner.json'
+          url: '/modules/custom/grundsalg_maps/data/kommuner_light.json'
         }).then(function success(response) {
           var data = response.data;
           drupalCache.put(cid, data);
