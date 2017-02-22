@@ -12,17 +12,16 @@
       <p class="popup--key">{{ Drupal.t('Address') }}</p>
       <p class="popup--value">{{ content.adress }}</p>
     </div>
-    <div class="popup--metadata">
-      <p class="popup--key">{{ Drupal.t('Homepage') }}</p>
-      <p class="popup--value"><a href="{{  content.hjside }}" target="_blank">{{ content.hjside }}</a></p>
-    </div>
-    <div class="popup--metadata">
-      <p class="popup--key">{{ Drupal.t('Leader') }}</p>
-      <p class="popup--value">{{ content.leder }}</p>
-    </div>
-    <div class="popup--metadata">
-      <p class="popup--key">{{ Drupal.t('Telephone') }}</p>
-      <p class="popup--value">{{ content.tlf }}</p>
+    <div class="popup--link-wrapper" data-ng-if="{{ content.hjside }}">
+      <a href="{{ content.hjside }}" target="_blank" class="popup--link">Yderligere information</a>
+      <div class="popup--link-icon">
+        <svg viewBox="0 0 33 27" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#1A1918">
+            <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>
+            <path d="M30 16v-4H0v4"></path>
+          </g>
+        </svg>
+      </div>
     </div>
   </div>
 </div>
