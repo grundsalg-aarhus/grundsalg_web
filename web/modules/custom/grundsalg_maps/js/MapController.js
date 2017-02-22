@@ -858,14 +858,15 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      * Helper function to restrict pan in the maps.
      */
     var view = map.getView();
-    var extent = config.extent;
-    function constrainPan() {
+    var extent = config.extent === 'auto' ? view.calculateExtent(map.getSize()) : config.extent;
+    view.on('change:center', function () {
       var visible = view.calculateExtent(map.getSize());
       var centre = view.getCenter();
 
       var delta;
       var adjust = false;
 
+      // Left/right
       if ((delta = extent[0] - visible[0]) > 0) {
         adjust = true;
         centre[0] += delta;
@@ -875,6 +876,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         centre[0] += delta;
       }
 
+      // Left/right
       if ((delta = extent[1] - visible[1]) > 0) {
         adjust = true;
         centre[1] += delta;
@@ -883,12 +885,12 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         adjust = true;
         centre[1] += delta;
       }
+
+      // If changes are needed to prevent pan outside extend.
       if (adjust) {
         view.setCenter(centre);
       }
-    }
-    view.on('change:resolution', constrainPan);
-    view.on('change:center', constrainPan);
+    });
 
     switch (config.map_type) {
       case 'overview_page':
