@@ -40,7 +40,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
             'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
               'areas' => array(
-                'scale' => 0.8,
+                'scale' => 1,
                 'template' => $path . '/js/templates/popup-areas.html',
                 'marker' => $path . '/images/marker-default.svg',
               ),
@@ -61,7 +61,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
             'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
               'subdivision'=> array(
-                'scale' => 0.8,
+                'scale' => 1,
                 'template' => $path . '/js/templates/popup-subdivision.html',
                 'marker' => $path . '/images/marker-default.svg',
               ),
