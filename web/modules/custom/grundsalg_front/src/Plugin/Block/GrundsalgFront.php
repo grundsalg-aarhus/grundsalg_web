@@ -7,7 +7,7 @@ use Drupal\Core\Menu\MenuTreeParameters;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides frontpage content
+ * Provides front page content
  *
  * @Block(
  *   id = "grundsalg_front",
@@ -24,9 +24,6 @@ class GrundsalgFront extends BlockBase {
     return array(
       '#type' => 'markup',
       '#theme' => 'grundsalg_front_block',
-      '#cache' => array(
-        'max-age' => 0,
-      ),
       '#text' => $config,
     );
   }

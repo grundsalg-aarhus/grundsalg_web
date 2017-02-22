@@ -107,10 +107,6 @@ function grundsalg_preprocess_breadcrumb(&$variables) {
     $node = $request->get('node');
     if ($node->hasField('field_plot_type')) {
       $variables['plot_type'] = Term::load($node->get('field_plot_type')->target_id)->getName();
-
-      // Set the cache context to depend on url.
-      $variables['#cache']['contexts'][] = 'url';
-      $variables['#cache']['max-age'] = 0;
     }
   }
 }

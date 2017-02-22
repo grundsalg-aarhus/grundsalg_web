@@ -8,10 +8,10 @@
  * Implements hook_theme().
  */
 function grundsalg_front_theme($existing, $type, $theme, $path) {
-  return array(
-    'grundsalg_front_block' => array(
+  return [
+    'grundsalg_front_block' => [
       'template' => 'grundsalg-front-block',
-      'variables' => ['text' => NULL],
-    ),
-  );
+      'variables' => [ 'text' => NULL ],
+    ],
+  ];
 }

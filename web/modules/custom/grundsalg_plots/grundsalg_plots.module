@@ -94,8 +94,6 @@ function grundsalg_plots_form_node_subdivision_edit_form_alter(&$form, FormState
   // Prevent user from edit these fields.
   $form['field_coordinate']['#disabled'] = TRUE;
   $form['field_subdivision_id']['#disabled'] = TRUE;
-  $form['field_plot_type']['#disabled'] = TRUE;
-  $form['field_city_reference']['#disabled'] = TRUE;
 
   // Move subdivision field into wrapper.
   $form['plots_wrapper']['field_subdivision_id'] = $form['field_subdivision_id'];
