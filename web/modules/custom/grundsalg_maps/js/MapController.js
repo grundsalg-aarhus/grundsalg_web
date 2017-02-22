@@ -334,7 +334,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   The OpenLayers map object.
      */
     function addMunicipalitiesFadeLayer(map) {
-      drupalService.getMunicipalities(config.plot_type).then(function success(data) {
+      drupalService.getMunicipalities().then(function success(data) {
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
         });
@@ -594,6 +594,52 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
     }
 
+    /**
+     * Add projects marks layer to the map.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     */
+    function addProjectsLayer(map) {
+      drupalService.getProjects().then(function success(data) {
+
+        var format = new ol.format.GeoJSON({
+          defaultDataProjection: 'EPSG:4326'
+        });
+
+        var dataSource = new ol.source.Vector({
+          features: format.readFeatures(data, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:25832'
+          })
+        });
+
+        var dataLayer = new ol.layer.Vector({
+          source: dataSource,
+          style: new ol.style.Style({
+            image: new ol.style.Icon({
+              anchor: [0.5, 40],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'pixels',
+              src: config.popup.projects.marker,
+              scale: config.popup.projects.scale
+            })
+          })
+        });
+
+        // Store metadata on the layer. Used later on to create correct
+        // templates.
+        dataLayer.set('metadata', {
+          'type' : 'projects'
+        });
+
+        // Add the layer to the map and zoom to it.
+        map.addLayer(dataLayer);
+      }, function error(err) {
+        console.error(err);
+      });
+    }
+
 
     /**
      * Add layer with industry markers.
@@ -844,146 +890,159 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     view.on('change:resolution', constrainPan);
     view.on('change:center', constrainPan);
 
-    if (config.map_type == 'overview_page') {
-      addTopographicallyLayer(map, matrixIds, resolutions);
-      addMunicipalitiesFadeLayer(map);
+    switch (config.map_type) {
+      case 'overview_page':
+        addTopographicallyLayer(map, matrixIds, resolutions);
+        addMunicipalitiesFadeLayer(map);
 
-      // Add areas layer.
-      addAreasLayer(map, config.plot_type);
+        // Add areas layer.
+        addAreasLayer(map, config.plot_type);
 
-      // Enable popups.
-      addPopups(map);
-    }
-    else if (config.map_type == 'area') {
-      addTopographicallyLayer(map, matrixIds, resolutions);
-      addMunicipalitiesFadeLayer(map);
+        // Enable popups.
+        addPopups(map);
+        break;
 
-      var layerSwitcher = new ol.control.LayerSwitcher();
-      map.addControl(layerSwitcher);
+      case 'area':
+        addTopographicallyLayer(map, matrixIds, resolutions);
+        addMunicipalitiesFadeLayer(map);
 
-      // Create layer collection - Butikker.
-      var colStores = new ol.Collection();
-      addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
-      addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
-      addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
+        var layerSwitcher = new ol.control.LayerSwitcher();
+        map.addControl(layerSwitcher);
 
-      // Create layer group based on store collection.
-      var layerGroupStore = new ol.layer.Group({
-        title: 'Butikker',
-        combine: true,
-        visible: false
-      });
-      layerGroupStore.setLayers(colStores);
-      map.addLayer(layerGroupStore);
+        // Create layer collection - Butikker.
+        var colStores = new ol.Collection();
+        addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
+        addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
+        addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
 
-      // Create layer collection - Skoler.
-      var colSchools = new ol.Collection();
-      addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
-      addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
-      addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
-      addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
+        // Create layer group based on store collection.
+        var layerGroupStore = new ol.layer.Group({
+          title: 'Butikker',
+          combine: true,
+          visible: false
+        });
+        layerGroupStore.setLayers(colStores);
+        map.addLayer(layerGroupStore);
 
-      // Create layer group based on store collection.
-      var layerGroupSchools = new ol.layer.Group({
-        title: 'Skoler',
-        combine: true,
-        visible: false
-      });
-      layerGroupSchools.setLayers(colSchools);
-      map.addLayer(layerGroupSchools);
+        // Create layer collection - Skoler.
+        var colSchools = new ol.Collection();
+        addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
+        addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
+        addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
+        addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
 
-      // Create layer collection - Institutioner.
-      var colInstitution = new ol.Collection();
-      addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
-      addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
-      addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
-      addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
-      addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
-      addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
-      addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
-      addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
+        // Create layer group based on store collection.
+        var layerGroupSchools = new ol.layer.Group({
+          title: 'Skoler',
+          combine: true,
+          visible: false
+        });
+        layerGroupSchools.setLayers(colSchools);
+        map.addLayer(layerGroupSchools);
 
-      // Create layer group based on store collection.
-      var layerGroupInstitution = new ol.layer.Group({
-        title: 'Institutioner',
-        combine: true,
-        visible: false
-      });
-      layerGroupInstitution.setLayers(colInstitution);
-      map.addLayer(layerGroupInstitution);
+        // Create layer collection - Institutioner.
+        var colInstitution = new ol.Collection();
+        addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
+        addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
+        addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
+        addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
+        addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
+        addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
+        addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
+        addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
 
-      addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
+        // Create layer group based on store collection.
+        var layerGroupInstitution = new ol.layer.Group({
+          title: 'Institutioner',
+          combine: true,
+          visible: false
+        });
+        layerGroupInstitution.setLayers(colInstitution);
+        map.addLayer(layerGroupInstitution);
 
-      // Add areas layer.
-      addSubdivisionLayer(map, config.plot_type, config.area_id);
+        addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
 
-      // Enable popups.
-      addPopups(map);
-      //addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
-    }
-    else if (config.map_type == 'subdivision') {
-      addOrtofotoLayer(map, matrixIds, resolutions);
-      addMunicipalitiesFadeLayer(map);
-      addMatrikelLayer(map, matrixIds, resolutions);
-      addPlots(map);
+        // Add areas layer.
+        addSubdivisionLayer(map, config.plot_type, config.area_id);
 
-      var layerSwitcher = new ol.control.LayerSwitcher();
-      map.addControl(layerSwitcher);
+        // Enable popups.
+        addPopups(map);
+        //addInstitutionLayer(map, 'tandplejen', 'Tandplejen');
+        break;
 
-      // Create layer collection - Butikker.
-      var colStores = new ol.Collection();
-      addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
-      addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
-      addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
+      case 'subdivision':
+        addOrtofotoLayer(map, matrixIds, resolutions);
+        addMunicipalitiesFadeLayer(map);
+        addMatrikelLayer(map, matrixIds, resolutions);
+        addPlots(map);
 
-      // Create layer group based on store collection.
-      var layerGroupStore = new ol.layer.Group({
-        title: 'Butikker',
-        combine: true,
-        visible: false
-      });
-      layerGroupStore.setLayers(colStores);
-      map.addLayer(layerGroupStore);
+        var layerSwitcher = new ol.control.LayerSwitcher();
+        map.addControl(layerSwitcher);
 
-      // Create layer collection - Skoler.
-      var colSchools = new ol.Collection();
-      addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
-      addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
-      addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
-      addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
+        // Create layer collection - Butikker.
+        var colStores = new ol.Collection();
+        addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
+        addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
+        addIndustryLayer(map, colStores, 471130, 'Discountforretninger');
 
-      // Create layer group based on store collection.
-      var layerGroupSchools = new ol.layer.Group({
-        title: 'Skoler',
-        combine: true,
-        visible: false
-      });
-      layerGroupSchools.setLayers(colSchools);
-      map.addLayer(layerGroupSchools);
+        // Create layer group based on store collection.
+        var layerGroupStore = new ol.layer.Group({
+          title: 'Butikker',
+          combine: true,
+          visible: false
+        });
+        layerGroupStore.setLayers(colStores);
+        map.addLayer(layerGroupStore);
 
-      // Create layer collection - Institutioner.
-      var colInstitution = new ol.Collection();
-      addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
-      addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
-      addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
-      addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
-      addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
-      addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
-      addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
-      addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
+        // Create layer collection - Skoler.
+        var colSchools = new ol.Collection();
+        addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
+        addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
+        addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
+        addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
 
-      // Create layer group based on store collection.
-      var layerGroupInstitution = new ol.layer.Group({
-        title: 'Institutioner',
-        combine: true,
-        visible: false
-      });
-      layerGroupInstitution.setLayers(colInstitution);
-      map.addLayer(layerGroupInstitution);
+        // Create layer group based on store collection.
+        var layerGroupSchools = new ol.layer.Group({
+          title: 'Skoler',
+          combine: true,
+          visible: false
+        });
+        layerGroupSchools.setLayers(colSchools);
+        map.addLayer(layerGroupSchools);
 
-      addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
+        // Create layer collection - Institutioner.
+        var colInstitution = new ol.Collection();
+        addInstitutionLayer(map, colInstitution, 'dagtilbud', 'Dagtilbud');
+        addInstitutionLayer(map, colInstitution, 'dagpleje', 'Dagpleje');
+        addInstitutionLayer(map, colInstitution, 'fritid', 'Fritid');
+        addInstitutionLayer(map, colInstitution, 'intinst', 'Institutioner');
+        addInstitutionLayer(map, colInstitution, 'vuggestue', 'Vuggestue');
+        addInstitutionLayer(map, colInstitution, 'bornehave', 'Børnehave');
+        addInstitutionLayer(map, colInstitution, 'fu', 'Fælles ungdomsklub');
+        addInstitutionLayer(map, colInstitution, 'privtilbud', 'Privat tilbud');
 
-      addPopups(map);
+        // Create layer group based on store collection.
+        var layerGroupInstitution = new ol.layer.Group({
+          title: 'Institutioner',
+          combine: true,
+          visible: false
+        });
+        layerGroupInstitution.setLayers(colInstitution);
+        map.addLayer(layerGroupInstitution);
+
+        addMidttrafikLayer(map, 'STOPS_28052014', 'Busstoppesteder');
+
+        addPopups(map);
+        break;
+
+      case 'project':
+        addTopographicallyLayer(map, matrixIds, resolutions);
+        addMunicipalitiesFadeLayer(map);
+
+        addProjectsLayer(map);
+
+        addPopups(map);
+        break;
     }
   }
 ]);

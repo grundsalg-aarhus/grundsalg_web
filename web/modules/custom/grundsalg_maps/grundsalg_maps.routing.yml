@@ -24,3 +24,11 @@ grundsalg_maps.subdivision:
     tid: \d+
     aid: \d+
     _permission: 'access content'
+
+grundsalg_maps.projects:
+  path: '/api/maps/projects'
+  defaults:
+    _title: 'Projects mapping information'
+    _controller: '\Drupal\grundsalg_maps\Controller\ApiController::projects'
+  requirements:
+    _permission: 'access content'

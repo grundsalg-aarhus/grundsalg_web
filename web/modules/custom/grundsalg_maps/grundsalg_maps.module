@@ -11,8 +11,16 @@ function grundsalg_maps_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
     $type = $variables['node']->bundle();
-    if (in_array($type, array('subdivision', 'area', 'overview_page'))) {
 
+    // We have a special use of maps on the project page. So we match the pages
+    // nid and give it the type project. It's important to note here that the
+    // system also have the entity type project and that this is not the once
+    // that need to display a map.
+    if ($type == 'page' && $variables['node']->id() == 7) {
+      $type = 'project';
+    }
+
+    if (in_array($type, array('subdivision', 'area', 'overview_page', 'project'))) {
       $variables['#attached']['library'][] = 'grundsalg_maps/openlayers';
       $variables['#attached']['library'][] = 'grundsalg_maps/angular';
 
@@ -29,6 +37,25 @@ function grundsalg_maps_preprocess_page(&$variables) {
       );
 
       switch ($type) {
+        case 'project':
+          $config = array(
+            'zoom' => array (
+              'default' => 5,
+              'min' => 5,
+              'max' => 8,
+            ),
+            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'popup' => array(
+              'projects' => array(
+                'scale' => 1,
+                'template' => $path . '/js/templates/popup-projects.html',
+                'marker' => $path . '/images/marker-default.svg',
+              ),
+            ),
+          );
+          $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
+          break;
+
         case 'overview_page':
           $config = array(
             'plot_type' => $variables['node']->get('field_plot_type')->target_id,
@@ -40,7 +67,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
             'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
               'areas' => array(
-                'scale' => 0.8,
+                'scale' => 1,
                 'template' => $path . '/js/templates/popup-areas.html',
                 'marker' => $path . '/images/marker-default.svg',
               ),
@@ -61,7 +88,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
             'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
             'popup' => array(
               'subdivision'=> array(
-                'scale' => 0.8,
+                'scale' => 1,
                 'template' => $path . '/js/templates/popup-subdivision.html',
                 'marker' => $path . '/images/marker-default.svg',
               ),

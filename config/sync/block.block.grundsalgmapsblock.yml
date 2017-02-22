@@ -3,8 +3,8 @@ langcode: da
 status: true
 dependencies:
   module:
-    - ctools
     - grundsalg_maps
+    - system
   theme:
     - grundsalg
 id: grundsalgmapsblock
@@ -19,10 +19,8 @@ settings:
   provider: grundsalg_maps
   label_display: '0'
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      overview_page: overview_page
+  request_path:
+    id: request_path
+    pages: "/projekter\r\n/villagrunde\r\n/storparceller\r\n/erhvervsgrunde"
     negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+    context_mapping: {  }

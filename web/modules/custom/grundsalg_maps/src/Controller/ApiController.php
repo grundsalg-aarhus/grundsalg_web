@@ -124,4 +124,49 @@ class ApiController extends ControllerBase {
     // Transform to JSON and return the result.
     return new JsonResponse($data);
   }
+
+  /**
+   * Get all entities of type project at GeoJson.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   GeoJson encode project entities.
+   */
+  public function projects() {
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'project', '=')
+      ->condition('status', 1, '=')
+      ->condition('field_coordinate', NULL, 'IS NOT NULL')
+      ->execute();
+    $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
+
+    // GeoJSON basic array.
+    $data = array(
+      'type' => 'FeatureCollection',
+      'features' => array(),
+    );
+
+    // Loop over the areas and create geoJSON features base on it.
+    foreach ($nodes as $node) {
+      $coordinates = $node->get('field_coordinate')->value;
+      $coordinates = explode(',', str_replace(' ', '', $coordinates));
+
+      $data['features'][] = array(
+        'type' => 'Feature',
+        'geometry' => array(
+          'type' => "Point",
+          'coordinates' => array($coordinates[1], $coordinates[0]),
+        ),
+        'properties' => array(
+          // If true popup will be enabled for the feature.
+          'markers' => TRUE,
+          'title' => $node->get('title')->value,
+          'teaser' => $node->get('field_teaser')->value,
+          'url' => $node->get('field_external_link')->uri,
+        ),
+      );
+    }
+
+    // Transform to JSON and return the result.
+    return new JsonResponse($data);
+  }
 }

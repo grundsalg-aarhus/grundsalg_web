@@ -10,6 +10,8 @@ use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 function grundsalg_slideshow_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
+    // This empty array is need to prevent pages from not loading JS.
+    // @TODO: Find better solution.
     $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array();
 
     // Add image urls and alt to js (if page have images).
