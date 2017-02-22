@@ -95,18 +95,3 @@ function grundsalg_preprocess_file_link(&$variables) {
   $url = file_create_url($variables['file']->getFileUri());
   $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
 }
-
-
-/**
- * Implements hook_preprocess_breadcrumb().
- */
-function grundsalg_preprocess_breadcrumb(&$variables) {
-  $request = \Drupal::request();
-  $route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT);
-  if ($route->getPath() ==  '/node/{node}') {
-    $node = $request->get('node');
-    if ($node->hasField('field_plot_type')) {
-      $variables['plot_type'] = Term::load($node->get('field_plot_type')->target_id)->getName();
-    }
-  }
-}

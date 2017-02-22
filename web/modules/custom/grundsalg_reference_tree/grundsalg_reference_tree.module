@@ -1,25 +1,31 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation!
+ */
 
 /**
  * Implements hook_node_presave().
+ *
+ * @TODO: Some documentation about this function would be nice!
  */
-
 function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterface $node){
   $reference_is_set = FALSE;
   // If content type is area and it's the first save of the node.
   if ($node->getType() == 'area') {
 
-    // Get plot type
+    // Get plot type.
     $term_id = $node->get('field_plot_type')->target_id;
 
-    // Get all overview pages
+    // Get all overview pages.
     $nids = \Drupal::entityQuery('node')->condition('type', 'overview_page')->execute();
     $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
 
     // Look for overview pages with the same tag as our saved node.
     foreach ($nodes as $overview_page_node) {
       if ($overview_page_node->get('field_plot_type')->target_id == $term_id) {
-        // Set reference to an overview page with the same tag. (There should be only one)
+        // Set reference to an overview page with the same tag. (There should
+        // be only one).
         $node->set('field_parent', $overview_page_node->id());
         $reference_is_set = TRUE;
       }
@@ -31,13 +37,11 @@ function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterfac
   }
 
   if ($node->getType() == 'subdivision') {
-
-    // Get plot type
+    // Get plot type.
     $term_id = $node->get('field_plot_type')->target_id;
 
-    // Get city
+    // Get city.
     $city_term_id = $node->get('field_city_reference')->target_id;
-
 
     // Get all area pages (We might want to not load them all)
     $nids = \Drupal::entityQuery('node')->condition('type', 'area')->execute();
