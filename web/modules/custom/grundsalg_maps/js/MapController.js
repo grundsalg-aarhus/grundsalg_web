@@ -318,7 +318,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             anchor: [0.5, 40],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: '/modules/custom/grundsalg_maps/images/Bus_stop_symbol.svg'
+            src: config.popup.bus.marker,
+            scale: config.popup.bus.scale
           })
         })
       });
@@ -523,7 +524,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: config.popup.areas.marker
+              src: config.popup.areas.marker,
+              scale: config.popup.areas.scale
             })
           })
         });
@@ -572,7 +574,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: config.popup.subdivision.marker
+              src: config.popup.subdivision.marker,
+              scale: config.popup.subdivision.scale
             })
           })
         });
@@ -629,7 +632,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: markerUrl
+              src: markerUrl,
+              scale: config.popup.industry.marker.scale
             })
           })
         });
@@ -683,7 +687,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: markerUrl
+              src: markerUrl,
+              scale: config.popup.institution.marker.scale
             })
           })
         });
@@ -712,9 +717,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         // @TODO: Should this be configurable under "site settings"?
         var statusStyles = {
-          'Udbud': 'rgba(245, 196, 0, 0.8)',
-          'Auktion slut': 'rgba(227, 6, 19, 0.8)',
-          'Ledig': 'rgba(78, 157, 45, 0.8)'
+          'Udbud': [245, 196, 0, 0.4],
+          'Auktion slut': [227, 6, 19, 0.4],
+          'Ledig': [78, 157, 45, 0.4]
         };
 
         var defaultStyle = new ol.style.Style({
@@ -722,8 +727,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             color: 'rgba(78, 157, 45, 0.8)'
           }),
           stroke: new ol.style.Stroke({
-            color: '#000',
-            width: 0.25
+            color: [78, 157, 45],
+            width: 4
           })
         });
         var styleCache = {};
@@ -752,11 +757,16 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             // Check if style have been created. If not create it else use the
             // existing style.
             if (!styleCache[status]) {
+              var strokeColor = angular.copy(statusStyles[status]);
+              strokeColor[3] = 1;
               styleCache[status] = new ol.style.Style({
                 fill: new ol.style.Fill({
                   color: statusStyles[status]
                 }),
-                stroke: defaultStyle.stroke
+                stroke: new ol.style.Stroke({
+                  color: strokeColor,
+                  width: 3
+                })
               });
             }
 
