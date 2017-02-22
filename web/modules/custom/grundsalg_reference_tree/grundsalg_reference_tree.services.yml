@@ -1,6 +1,0 @@
-services:
-  grundsalg_reference_tree.breadcrumb:
-    class: Drupal\grundsalg_reference_tree\BreadcrumbBuilder
-    arguments: ['@router.request_context', '@access_manager', '@router', '@path_processor_manager', '@config.factory',  '@title_resolver', '@current_user', '@path.current', '@menu.active_trail', '@plugin.manager.menu.link']
-    tags:
-      - { name: breadcrumb_builder, priority: 1 }
