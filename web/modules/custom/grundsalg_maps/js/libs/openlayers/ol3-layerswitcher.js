@@ -155,7 +155,7 @@
         /**
         * HACK TO STANDARD LIBRARY.
         */
-        if (lyr.getLayers()) {
+        if (typeof lyr.getLayers === 'function') {
             ol.control.LayerSwitcher.forEachRecursive(lyr, function(l, idx, a) {
                 l.setVisible(visible);
             });

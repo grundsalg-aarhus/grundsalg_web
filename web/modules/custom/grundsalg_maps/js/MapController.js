@@ -318,7 +318,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             anchor: [0.5, 40],
             anchorXUnits: 'fraction',
             anchorYUnits: 'pixels',
-            src: '/modules/custom/grundsalg_maps/images/Bus_stop_symbol.svg'
+            src: config.popup.bus.marker,
+            scale: config.popup.bus.scale
           })
         })
       });
@@ -375,10 +376,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var element = document.getElementById('popup');
       var popup = new ol.Overlay({
         element: element,
-        autoPan: true,
-        autoPanAnimation: {
-          duration: 250
-        }
+        positioning: 'top-center',
       });
       map.addOverlay(popup);
 
@@ -392,8 +390,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             // Move popup into the right position.
             var coordinates = evt.coordinate;
             popup.setPosition(coordinates);
-
-            console.log(metadata);
 
             // Load the template and add content to it.
             var templateUrl = config.popup[metadata.type].template;
@@ -437,8 +433,59 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               $content.html(template);
               $timeout(function () {
                 $compile($content)(scope);
-
                 scope.show = true;
+
+                // Add timeout function here to allow angular to render the
+                // popup content or the calculated height will be wrong. This is
+                // used to move the popup/map into view if this partly outside
+                // the current view area.
+                $timeout(function () {
+                  // Get element
+                  var bs_element = document.getElementsByClassName('popup')[0];
+                  var clicked_pixel = evt.pixel;
+                  var mapSize = map.getSize();
+
+                  var offset_height = 10;
+                  var offset_width = 10;
+
+
+                  // Get popup height.
+                  var popup_height = Math.max(
+                    bs_element.scrollHeight,
+                    bs_element.offsetHeight,
+                    bs_element.clientHeight
+                  ) + offset_height;
+
+                  // Get popup width.
+                  var popup_width = Math.max(
+                      bs_element.scrollWidth,
+                      bs_element.offsetWidth,
+                      bs_element.clientWidth
+                    ) + offset_width;
+
+                  // Calculate if the popup is outside the view area.
+                  var height_left = mapSize[1] - clicked_pixel[1] - popup_height;
+                  var width_left = mapSize[0] - clicked_pixel[0] - popup_width;
+
+                  // Get current view and map center.
+                  var view = map.getView();
+                  var center_px = map.getPixelFromCoordinate(view.getCenter());
+
+                  // Check if we are outside map view.
+                  if (height_left < 0 || width_left < 0) {
+                    if (height_left < 0) {
+                      center_px[1] -= height_left;
+                    }
+                    if (width_left < 0) {
+                      center_px[0] -= width_left;
+                    }
+
+                    view.animate({
+                      center: map.getCoordinateFromPixel(center_px),
+                      duration: 300
+                    });
+                  }
+                });
               });
             }, function (err) {
               console.error(err);
@@ -477,7 +524,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: config.popup.areas.marker
+              src: config.popup.areas.marker,
+              scale: config.popup.areas.scale
             })
           })
         });
@@ -526,7 +574,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: config.popup.subdivision.marker
+              src: config.popup.subdivision.marker,
+              scale: config.popup.subdivision.scale
             })
           })
         });
@@ -583,7 +632,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: markerUrl
+              src: markerUrl,
+              scale: config.popup.industry.marker.scale
             })
           })
         });
@@ -637,7 +687,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               anchor: [0.5, 40],
               anchorXUnits: 'fraction',
               anchorYUnits: 'pixels',
-              src: markerUrl
+              src: markerUrl,
+              scale: config.popup.institution.marker.scale
             })
           })
         });
@@ -666,9 +717,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         // @TODO: Should this be configurable under "site settings"?
         var statusStyles = {
-          'Udbud': 'rgba(245, 196, 0, 0.8)',
-          'Auktion slut': 'rgba(227, 6, 19, 0.8)',
-          'Ledig': 'rgba(78, 157, 45, 0.8)'
+          'Udbud': [245, 196, 0, 0.4],
+          'Auktion slut': [227, 6, 19, 0.4],
+          'Ledig': [78, 157, 45, 0.4]
         };
 
         var defaultStyle = new ol.style.Style({
@@ -676,8 +727,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             color: 'rgba(78, 157, 45, 0.8)'
           }),
           stroke: new ol.style.Stroke({
-            color: '#000',
-            width: 0.25
+            color: [78, 157, 45],
+            width: 4
           })
         });
         var styleCache = {};
@@ -706,11 +757,16 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             // Check if style have been created. If not create it else use the
             // existing style.
             if (!styleCache[status]) {
+              var strokeColor = angular.copy(statusStyles[status]);
+              strokeColor[3] = 1;
               styleCache[status] = new ol.style.Style({
                 fill: new ol.style.Fill({
                   color: statusStyles[status]
                 }),
-                stroke: defaultStyle.stroke
+                stroke: new ol.style.Stroke({
+                  color: strokeColor,
+                  width: 3
+                })
               });
             }
 

@@ -21,7 +21,7 @@ angular.module('grundsalg').controller('ShowPlotsController', ['$scope', '$http'
         $scope.plots = plots['grunde'];
       }, function (err) {
         // @TODO: Display message to user.
-        console.log(err);
+        console.error(err);
       });
     }
   ]
