@@ -86,6 +86,36 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
     };
 
     /**
+     * Get projects.
+     */
+    this.getProjects = function getProjects() {
+      var deferred = $q.defer();
+
+      var cid = 'drupalCache_projects';
+
+      var areas =  drupalCache.get(cid);
+      if (areas !== undefined) {
+        deferred.resolve(areas);
+      }
+      else {
+        $http({
+          method: 'GET',
+          url: '/api/maps/projects'
+        }).then(function success(response) {
+          var projects = response.data;
+          drupalCache.put(cid, projects);
+
+          deferred.resolve(projects);
+        }, function error(response) {
+          console.error(response);
+          deferred.reject('Error communicating with the server.');
+        });
+      }
+
+      return deferred.promise;
+    };
+
+    /**
      * Get the faded municipalities borders as geoJson.
      */
     this.getMunicipalities = function getMunicipalities() {
