@@ -68,7 +68,6 @@ angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFacto
         deferred.resolve(areas);
       }
       else {
-        console.log('/api/maps/area/' + plot_type + '/subdivision/' + area_id);
         $http({
           method: 'GET',
           url: '/api/maps/area/' + plot_type + '/subdivision/' + area_id

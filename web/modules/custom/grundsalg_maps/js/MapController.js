@@ -375,10 +375,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var element = document.getElementById('popup');
       var popup = new ol.Overlay({
         element: element,
-        autoPan: true,
-        autoPanAnimation: {
-          duration: 250
-        }
+        positioning: 'top-center',
       });
       map.addOverlay(popup);
 
@@ -392,8 +389,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
             // Move popup into the right position.
             var coordinates = evt.coordinate;
             popup.setPosition(coordinates);
-
-            console.log(metadata);
 
             // Load the template and add content to it.
             var templateUrl = config.popup[metadata.type].template;
@@ -437,8 +432,59 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               $content.html(template);
               $timeout(function () {
                 $compile($content)(scope);
-
                 scope.show = true;
+
+                // Add timeout function here to allow angular to render the
+                // popup content or the calculated height will be wrong. This is
+                // used to move the popup/map into view if this partly outside
+                // the current view area.
+                $timeout(function () {
+                  // Get element
+                  var bs_element = document.getElementsByClassName('popup')[0];
+                  var clicked_pixel = evt.pixel;
+                  var mapSize = map.getSize();
+
+                  var offset_height = 10;
+                  var offset_width = 10;
+
+
+                  // Get popup height.
+                  var popup_height = Math.max(
+                    bs_element.scrollHeight,
+                    bs_element.offsetHeight,
+                    bs_element.clientHeight
+                  ) + offset_height;
+
+                  // Get popup width.
+                  var popup_width = Math.max(
+                      bs_element.scrollWidth,
+                      bs_element.offsetWidth,
+                      bs_element.clientWidth
+                    ) + offset_width;
+
+                  // Calculate if the popup is outside the view area.
+                  var height_left = mapSize[1] - clicked_pixel[1] - popup_height;
+                  var width_left = mapSize[0] - clicked_pixel[0] - popup_width;
+
+                  // Get current view and map center.
+                  var view = map.getView();
+                  var center_px = map.getPixelFromCoordinate(view.getCenter());
+
+                  // Check if we are outside map view.
+                  if (height_left < 0 || width_left < 0) {
+                    if (height_left < 0) {
+                      center_px[1] -= height_left;
+                    }
+                    if (width_left < 0) {
+                      center_px[0] -= width_left;
+                    }
+
+                    view.animate({
+                      center: map.getCoordinateFromPixel(center_px),
+                      duration: 300
+                    });
+                  }
+                });
               });
             }, function (err) {
               console.error(err);
