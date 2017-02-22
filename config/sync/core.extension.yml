@@ -65,6 +65,7 @@ module:
   toolbar_visibility: 0
   update: 0
   user: 0
+  view_unpublished: 0
   views_ui: 0
   youtube: 0
   menu_link_content: 1
