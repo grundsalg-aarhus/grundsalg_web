@@ -1,0 +1,14 @@
+uuid: 09bf756b-f512-42ec-bbbf-1cffb6b67126
+langcode: da
+status: true
+dependencies:
+  config:
+    - user.role.administrator
+  module:
+    - user
+id: user_add_role_action.administrator
+label: 'Tilføj rollen Administrator til de valgte brugere'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: administrator
