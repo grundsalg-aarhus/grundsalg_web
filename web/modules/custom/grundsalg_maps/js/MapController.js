@@ -101,7 +101,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         interactions: ol.interaction.defaults({ mouseWheelZoom: false }),
         controls: ol.control.defaults(),
         view: new ol.View({
-          center: [575130.409185, 6224236.93897],
+          center: config.hasOwnProperty('center') ? config.center : [575130.409185, 6224236.93897],
           zoom: config.zoom.default,
           minZoom: config.zoom.min,
           maxZoom: config.zoom.max,
@@ -760,75 +760,77 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addPlots(map) {
       plotsService.getPlotsAsGeoJson(config.subdivision_id).then(function success(data) {
+        // Only add the layer if it has features.
+        if (data.features.length) {
+          // @TODO: Should this be configurable under "site settings"?
+          var statusStyles = {
+            'Udbud': [245, 196, 0, 0.4],
+            'Auktion slut': [227, 6, 19, 0.4],
+            'Ledig': [78, 157, 45, 0.4]
+          };
 
-        // @TODO: Should this be configurable under "site settings"?
-        var statusStyles = {
-          'Udbud': [245, 196, 0, 0.4],
-          'Auktion slut': [227, 6, 19, 0.4],
-          'Ledig': [78, 157, 45, 0.4]
-        };
+          var defaultStyle = new ol.style.Style({
+            fill: new ol.style.Fill({
+              color: 'rgba(78, 157, 45, 0.8)'
+            }),
+            stroke: new ol.style.Stroke({
+              color: [78, 157, 45],
+              width: 4
+            })
+          });
+          var styleCache = {};
 
-        var defaultStyle = new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(78, 157, 45, 0.8)'
-          }),
-          stroke: new ol.style.Stroke({
-            color: [78, 157, 45],
-            width: 4
-          })
-        });
-        var styleCache = {};
+          var format = new ol.format.GeoJSON({
+            defaultDataProjection: 'EPSG:25832'
+          });
 
-        var format = new ol.format.GeoJSON({
-          defaultDataProjection: 'EPSG:25832'
-        });
+          var dataSource = new ol.source.Vector({
+            features: format.readFeatures(data, {
+              dataProjection: 'EPSG:25832',
+              featureProjection: 'EPSG:25832'
+            })
+          });
 
-        var dataSource = new ol.source.Vector({
-          features: format.readFeatures(data, {
-            dataProjection: 'EPSG:25832',
-            featureProjection: 'EPSG:25832'
-          })
-        });
+          var dataLayer = new ol.layer.Vector({
+            source: dataSource,
+            style: function styleFunction(feature, resolution) {
+              var status = feature.get('status');
 
-        var dataLayer = new ol.layer.Vector({
-          source: dataSource,
-          style: function styleFunction(feature, resolution) {
-            var status = feature.get('status');
+              // If the status is unknown use default style.
+              if (!status || !statusStyles[status]) {
+                return [defaultStyle];
+              }
 
-            // If the status is unknown use default style.
-            if (!status || !statusStyles[status]) {
-              return [defaultStyle];
+              // Check if style have been created. If not create it else use the
+              // existing style.
+              if (!styleCache[status]) {
+                var strokeColor = angular.copy(statusStyles[status]);
+                strokeColor[3] = 1;
+                styleCache[status] = new ol.style.Style({
+                  fill: new ol.style.Fill({
+                    color: statusStyles[status]
+                  }),
+                  stroke: new ol.style.Stroke({
+                    color: strokeColor,
+                    width: 3
+                  })
+                });
+              }
+
+              return [styleCache[status]];
             }
+          });
 
-            // Check if style have been created. If not create it else use the
-            // existing style.
-            if (!styleCache[status]) {
-              var strokeColor = angular.copy(statusStyles[status]);
-              strokeColor[3] = 1;
-              styleCache[status] = new ol.style.Style({
-                fill: new ol.style.Fill({
-                  color: statusStyles[status]
-                }),
-                stroke: new ol.style.Stroke({
-                  color: strokeColor,
-                  width: 3
-                })
-              });
-            }
+          // Store metadata on the layer. Used later on to create correct
+          // templates.
+          dataLayer.set('metadata', {
+            'type' : 'plots'
+          });
 
-            return [styleCache[status]];
-          }
-        });
-
-        // Store metadata on the layer. Used later on to create correct
-        // templates.
-        dataLayer.set('metadata', {
-          'type' : 'plots'
-        });
-
-        // Add the layer to the map.
-        map.addLayer(dataLayer);
-        map.getView().fit(dataSource.getExtent(), map.getSize());
+          // Add the layer to the map.
+          map.addLayer(dataLayer);
+          map.getView().fit(dataSource.getExtent(), map.getSize());
+        }
       }, function error(err) {
         console.error(err);
       });

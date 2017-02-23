@@ -138,6 +138,25 @@ function grundsalg_maps_preprocess_page(&$variables) {
           // Get sub-division id.
           $subdivision_id = $variables['node']->get('field_subdivision_id')->value;
 
+          // Get center .
+          $coordinates = $variables['node']->get('field_coordinate')->value;
+
+          $default_center = null;
+          if (!empty($coordinates)) {
+            $coordinates = explode(',', str_replace(' ', '', $coordinates));
+
+            // Transform the center to new projection that matches the map's.
+            $proj4 = new \proj4php\Proj4php();
+            $proj4->addDef('EPSG:25832', '+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs');
+            $projTo = new \proj4php\Proj('EPSG:25832', $proj4);
+            $projFrom = new \proj4php\Proj('EPSG:4326', $proj4);
+            $pointSrc = new \proj4php\Point($coordinates[1], $coordinates[0], $projFrom);
+            $pointDest = $proj4->transform($projTo, $pointSrc);
+
+            $default_center = explode(' ', $pointDest->toShortString());
+            $default_center = array((float) $default_center[0], (float) $default_center[1]) ;
+          }
+
           $config = array(
             'subdivision_id' => $subdivision_id,
             'zoom' => array (
@@ -190,6 +209,12 @@ function grundsalg_maps_preprocess_page(&$variables) {
               ),
             ),
           );
+
+          // Add default center if one exists.
+          if ($default_center) {
+            $config['center'] = $default_center;
+          }
+
           $variables['#attached']['drupalSettings']['grundsalg_maps'] += $config;
           break;
       }
