@@ -8,41 +8,45 @@
  */
 #}
 <header role="banner">
-  <header class="boxes has-no-spacing">
-    <div class="boxes--inner">
-      <div class="boxes--box has-no-top-spacing">
-        <a class="header--item is-villa" href="/villagrunde" title="{{ 'Villa plots'|trans }}">
-          <div class="header--box-content is-villa">
-            <div class="header--box-text">
-              <h1 class="header--box-text-title">{{ text.villa_header }}</h1>
-              <p class="header--box-text-caption">{{ text.villa_text }}</p>
-              <div class="arrow-link">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
-            </div>
+  <div class="boxes--container">
+    <div class="boxes--container-inner">
+      <header class="boxes has-no-spacing">
+        <div class="boxes--inner">
+          <div class="boxes--box has-no-top-spacing">
+            <a class="header--item is-villa" href="/villagrunde" title="{{ 'Villa plots'|trans }}">
+              <div class="header--box-content is-villa">
+                <div class="header--box-text">
+                  <h1 class="header--box-text-title">{{ text.villa_header }}</h1>
+                  <p class="header--box-text-caption">{{ text.villa_text }}</p>
+                  <div class="arrow-link">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
+                </div>
+              </div>
+            </a>
           </div>
-        </a>
-      </div>
-      <div class="boxes--box has-no-top-spacing">
-        <a class="header--item is-storparcel" href="/storparceller" title="{{ 'Parcel'|trans }}">
-          <div class="header--box-content is-storparcel">
-            <div class="header--box-text">
-              <h2 class="header--box-text-title">{{ text.parcel_header }}</h2>
-              <p class="header--box-text-caption">{{ text.parcel_text }}</p>
-              <div class="arrow-link is-storparcel">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
-            </div>
+          <div class="boxes--box has-no-top-spacing">
+            <a class="header--item is-storparcel" href="/storparceller" title="{{ 'Parcel'|trans }}">
+              <div class="header--box-content is-storparcel">
+                <div class="header--box-text">
+                  <h2 class="header--box-text-title">{{ text.parcel_header }}</h2>
+                  <p class="header--box-text-caption">{{ text.parcel_text }}</p>
+                  <div class="arrow-link is-storparcel">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
+                </div>
+              </div>
+            </a>
           </div>
-        </a>
-      </div>
-      <div class="boxes--box has-no-top-spacing">
-        <a class="header--item is-erhverv" href="/erhvervsgrunde" title="{{ 'Industry'|trans }}">
-          <div class="header--box-content is-erhverv">
-            <div class="header--box-text">
-              <h2 class="header--box-text-title">{{ text.industry_header }}</h2>
-              <p class="header--box-text-caption">{{ text.industry_text }}</p>
-              <div class="arrow-link is-erhverv">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
-            </div>
+          <div class="boxes--box has-no-top-spacing">
+            <a class="header--item is-erhverv" href="/erhvervsgrunde" title="{{ 'Industry'|trans }}">
+              <div class="header--box-content is-erhverv">
+                <div class="header--box-text">
+                  <h2 class="header--box-text-title">{{ text.industry_header }}</h2>
+                  <p class="header--box-text-caption">{{ text.industry_text }}</p>
+                  <div class="arrow-link is-erhverv">{% include '@grundsalg/../icons/link-arrow.svg' %}</div>
+                </div>
+              </div>
+            </a>
           </div>
-        </a>
-      </div>
+        </div>
+      </header>
     </div>
-  </header>
+  </div>
 </header>
