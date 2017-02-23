@@ -6,15 +6,17 @@
     <h3 class="popup--title">{{ content.title }}</h3>
     <p>{{ content.teaser }}</p>
     <div class="popup--link-wrapper">
-      <a href="{{ content.url }}" class="popup--link">{{ Drupal.t('More information') }}</a>
-      <div class="popup--link-icon">
-        <svg viewBox="0 0 33 27" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#1A1918">
-            <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>
-            <path d="M30 16v-4H0v4"></path>
-          </g>
-        </svg>
-      </div>
+      <a href="{{ content.url }}" class="popup--link">
+        <div class="popup--link-text">{{ Drupal.t('More information') }}</div>
+        <div class="popup--link-icon">
+          <svg viewBox="0 0 33 27" xmlns="http://www.w3.org/2000/svg">
+            <g fill="#1A1918">
+              <path d="M33 14L19.803 0l-2.788 2.908L27 14 17 24.09 19.786 27"></path>
+              <path d="M30 16v-4H0v4"></path>
+            </g>
+          </svg>
+        </div>
+      </a>
     </div>
   </div>
 </div>
