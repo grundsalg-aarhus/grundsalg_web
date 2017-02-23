@@ -376,9 +376,25 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var element = document.getElementById('popup');
       var popup = new ol.Overlay({
         element: element,
-        positioning: 'top-center',
+        positioning: 'top-center'
       });
       map.addOverlay(popup);
+
+      // Change mouse cursor when over a marker.
+      var target =  document.getElementById(map.getTarget());
+      map.on('pointermove', function(e) {
+        var pixel = map.getEventPixel(e.originalEvent);
+        var hit = map.hasFeatureAtPixel(pixel);
+        if (hit) {
+          // Check if this feature has an marker.
+          map.forEachFeatureAtPixel(pixel, function(feature) {
+            target.style.cursor = feature.get('markers') ? 'pointer' : '';
+          });
+        }
+        else {
+          target.style.cursor = '';
+        }
+      });
 
       // Display popup on click.
       map.on('click', function(evt) {

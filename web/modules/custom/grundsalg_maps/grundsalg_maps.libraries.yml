@@ -5,9 +5,6 @@ angular:
     js/services/CookieService.js: {}
     js/services/DrupalService.js: {}
     js/services/MapsProxyService.js: {}
-  css:
-    base:
-      css/popup.css: {}
 
   dependencies:
     - grundsalg_angular/angular
