@@ -53,8 +53,9 @@ function grundsalg_preprocess_menu(&$variables) {
  */
 function grundsalg_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
-    if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
-      $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
+    $node = $variables['node'];
+    if ($node->hasField('field_plot_type') && !empty($node->get('field_plot_type')->target_id)) {
+      $variables['plot_type'] = $node->get('field_plot_type')->referencedEntities()[0]->getName();
     }
   }
 }
@@ -63,9 +64,10 @@ function grundsalg_preprocess_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function grundsalg_preprocess_node(&$variables) {
-  if ($variables['node']->hasField('field_plot_type') && !empty($variables['node']->get('field_plot_type')->target_id)) {
-    $variables['plot_type'] = Term::load($variables['node']->get('field_plot_type')->target_id)->getName();
-    $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $variables['node']->id());
+  $node = $variables['node'];
+  if ($node->hasField('field_plot_type') && !empty($node->get('field_plot_type')->target_id)) {
+    $variables['plot_type'] = $node->get('field_plot_type')->referencedEntities()[0]->getName();
+    $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $node->id());
   }
 }
 
@@ -94,4 +96,24 @@ function grundsalg_preprocess_file_link(&$variables) {
   $options['attributes']['class'] = 'content-box--link-with-icon-text';
   $url = file_create_url($variables['file']->getFileUri());
   $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
+}
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ *
+ * Ensures that the right class is added to the breadcrumb based on plot type.
+ */
+function grundsalg_preprocess_breadcrumb(&$variables) {
+  $request = \Drupal::request();
+  $route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT);
+  if ($route->getPath() == '/node/{node}') {
+    $node = $request->get('node');
+    if ($node->hasField('field_plot_type')) {
+      $variables['plot_type'] = $node->get('field_plot_type')->referencedEntities()[0]->getName();
+
+      // Set the cache context to depend on url. So the breadcrumb class can be
+      // changed based on the page and the plot type.
+      $variables['#cache']['contexts'][] = 'url';
+    }
+  }
 }
