@@ -1,5 +1,5 @@
-<div class="content-box">
-  <div ng-controller="ShowPlotsController" class="content-box--inner">
+<div class="content-box" data-ng-controller="ShowPlotsController">
+  <div class="content-box--inner" data-ng-if="plots.length">
     <show-plots plots="plots" display-limit="displayLimit"></show-plots>
   </div>
 </div>
