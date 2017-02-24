@@ -4,10 +4,8 @@
  * @TODO: Missing documentation!
  */
 
-use Drupal\taxonomy\Entity\Term;
-
 /**
- * Enable required modules
+ * Enable required modules.
  */
 function grundsalg_setup_update_8001() {
   // Enable modules.
@@ -20,25 +18,25 @@ function grundsalg_setup_update_8001() {
 }
 
 /**
- * Enable grundsalg_tabs module
+ * Enable grundsalg_tabs module.
  */
 function grundsalg_setup_update_8002() {
   // Enable modules.
   $module_list = array(
-    'grundsalg_tabs'
+    'grundsalg_tabs',
   );
   \Drupal::service('module_installer')->install($module_list);
 }
 
 /**
- * Enable several modules
+ * Enable several modules.
  */
 function grundsalg_setup_update_8003() {
   // Enable modules.
   $module_list = array(
     'grundsalg_slideshow',
     'itk_media_entity',
-    'grundsalg_angular'
+    'grundsalg_angular',
   );
   \Drupal::service('module_installer')->install($module_list);
 }
@@ -66,8 +64,7 @@ function grundsalg_setup_update_8005() {
 }
 
 /**
- * Add grundsalg plots module.
- * Uninstall Imce module.
+ * Add grundsalg plots module. Uninstall Imce module.
  */
 function grundsalg_setup_update_8006() {
   // Enable modules.
@@ -85,7 +82,7 @@ function grundsalg_setup_update_8006() {
 }
 
 /**
- * Disable contextual links
+ * Disable contextual links.
  */
 function grundsalg_setup_update_8007() {
   // Uninstall modules.
@@ -97,7 +94,7 @@ function grundsalg_setup_update_8007() {
 }
 
 /**
- * Enable frontpage
+ * Enable frontpage.
  */
 function grundsalg_setup_update_8008() {
   // Uninstall modules.
@@ -124,7 +121,7 @@ function grundsalg_setup_update_8009() {
 }
 
 /**
- * Add maps custom module
+ * Add maps custom module.
  */
 function grundsalg_setup_update_8010() {
   // Enable modules.
