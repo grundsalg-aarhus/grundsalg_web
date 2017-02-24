@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * @TODO: Missing documentation.
+ * Adds javascript libraries to pages.
  */
 
 use Drupal\file\Entity\File;
@@ -9,7 +9,7 @@ use Drupal\file\Entity\File;
 /**
  * Implements hook_proprocess_page().
  *
- * @TODO: Why?
+ * Adds javascript libraries and services to the pages where it's needed.
  */
 function grundsalg_slideshow_preprocess_page(&$variables) {
   // Add angular to certain node types.
@@ -56,15 +56,15 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
 /**
  * Render image entity as responsive image.
  *
- * @TODO: Missing parameter documentation.
- *
  * @param $file
+ *   The file that is used to generate the images.
  * @param $responsive_image_style_id
- *
+ *   The id of the image style to use.
  * @param string $alt_text
  *   The alt text for the image.
  *
  * @return array|null
+ *   Render array with the images or null if file not given.
  */
 function _grundsalg_slideshow_load_image($file, $responsive_image_style_id, $alt_text) {
   if ($file) {
