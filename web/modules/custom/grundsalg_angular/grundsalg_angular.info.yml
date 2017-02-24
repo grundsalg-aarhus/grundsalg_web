@@ -1,6 +1,6 @@
 name: Grundsalg angular
 type: module
-description: 'Provides angular for all node pages'
+description: 'Provides an angular app for all node pages'
 package: Grundsalg
 version: '8.x-1.0'
 core: '8.x'
