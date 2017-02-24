@@ -1,6 +1,6 @@
 name: Grundsalg db client
 type: module
-description: 'Provide connection to fag system'
+description: 'Provide connection to fagsystem'
 package: Grundsalg
 dependencies:
   - itkore_admin

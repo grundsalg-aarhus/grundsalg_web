@@ -4,12 +4,15 @@
  * @TODO: Missing documentation!
  */
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+
 /**
  * Implements hook_node_presave().
  *
  * @TODO: Some documentation about this function would be nice!
  */
-function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterface $node){
+function grundsalg_reference_tree_node_presave(EntityInterface $node) {
   $reference_is_set = FALSE;
   // If content type is area and it's the first save of the node.
   if ($node->getType() == 'area') {
@@ -19,7 +22,7 @@ function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterfac
 
     // Get all overview pages.
     $nids = \Drupal::entityQuery('node')->condition('type', 'overview_page')->execute();
-    $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+    $nodes = Node::loadMultiple($nids);
 
     // Look for overview pages with the same tag as our saved node.
     foreach ($nodes as $overview_page_node) {
@@ -45,12 +48,13 @@ function grundsalg_reference_tree_node_presave(Drupal\Core\Entity\EntityInterfac
 
     // Get all area pages (We might want to not load them all)
     $nids = \Drupal::entityQuery('node')->condition('type', 'area')->execute();
-    $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+    $nodes = Node::loadMultiple($nids);
 
     // Look for overview pages with the same tag as our saved node.
     foreach ($nodes as $area_page_node) {
       if ($area_page_node->get('field_plot_type')->target_id == $term_id && $area_page_node->get('field_city_reference')->target_id == $city_term_id) {
-        // Set reference to an overview page with the same tag. (There should be only one)
+        // Set reference to an overview page with the same tag. (There should
+        // be only one).
         $node->set('field_parent', $area_page_node->id());
         $reference_is_set = TRUE;
       }

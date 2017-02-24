@@ -8,7 +8,6 @@ namespace Drupal\grundsalg_front\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session;
 
 /**
  * Class GrundsalgFrontSettingsForm
@@ -28,6 +27,7 @@ class GrundsalgFrontSettingsForm extends FormBase {
    * Get key/value storage for base config.
    *
    * @return object
+   *   The config object.
    */
   private function getBaseConfig() {
     return \Drupal::getContainer()->get('itkore_admin.itkore_config');
@@ -57,7 +57,6 @@ class GrundsalgFrontSettingsForm extends FormBase {
       '#open' => TRUE,
     );
 
-
     $form['villa']['villa_header'] = array(
       '#title' => $this->t('Villa Header'),
       '#type' => 'textfield',
@@ -75,7 +74,6 @@ class GrundsalgFrontSettingsForm extends FormBase {
       '#size' => 60,
       '#maxlength' => 128,
     );
-
 
     $form['parcel']['parcel_header'] = array(
       '#title' => $this->t('Parcel Header'),
@@ -95,7 +93,6 @@ class GrundsalgFrontSettingsForm extends FormBase {
       '#maxlength' => 128,
     );
 
-
     $form['industry']['industry_header'] = array(
       '#title' => $this->t('Industry Header'),
       '#type' => 'textfield',
@@ -113,7 +110,6 @@ class GrundsalgFrontSettingsForm extends FormBase {
       '#size' => 60,
       '#maxlength' => 128,
     );
-
 
     $form['submit'] = array(
       '#type' => 'submit',
@@ -137,10 +133,10 @@ class GrundsalgFrontSettingsForm extends FormBase {
       'parcel_header' => $form_state->getValue('parcel_header'),
       'parcel_text' => $form_state->getValue('parcel_text'),
       'industry_header' => $form_state->getValue('industry_header'),
-      'industry_text' => $form_state->getValue('industry_text')
+      'industry_text' => $form_state->getValue('industry_text'),
     ));
 
     drupal_flush_all_caches();
   }
-}
 
+}

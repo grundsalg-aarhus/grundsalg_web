@@ -1,13 +1,12 @@
 <?php
 /**
  * @file
- * Contains \Drupal\grundsalg_db_client\Controller\ApiController
+ * Contains \Drupal\grundsalg_db_client\Controller\ApiController.
  */
 
 namespace Drupal\grundsalg_db_client\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -15,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * ApiController.
  */
 class ApiController extends ControllerBase {
+
   /**
    * Endpoint to notify when a subdivision has been updated in the Fagsystem.
    *
@@ -22,9 +22,9 @@ class ApiController extends ControllerBase {
    *   The remote systems ID for the subdivivion.
    *
    * @return JsonResponse
+   *   The result as json.
    */
   public function subdivisionUpdated($sid) {
-
     try {
       $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
 

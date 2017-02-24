@@ -16,7 +16,7 @@ function grundsalg_plots_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'variables' => NULL,
       ),
-    )
+    ),
   );
 }
 
@@ -50,9 +50,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
               'template' => $path . '/templates/plots.html',
               'subdivision_id' => $subdivision_id,
               'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
-            )
-          )
-        )
+            ),
+          ),
+        ),
       );
     }
   }

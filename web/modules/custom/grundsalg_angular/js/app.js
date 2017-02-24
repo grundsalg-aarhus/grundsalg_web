@@ -1,6 +1,8 @@
 /**
  * @file
  * Contains the App grundsalg.
+ *
+ * @TODO: Move the library files to libs folder.
  */
 
 /**

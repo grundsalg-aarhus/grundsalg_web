@@ -5,11 +5,9 @@
 
 /**
  * Plots component directive.
- *
- * html parameters:
  */
-angular.module('grundsalg').directive('plots', ['$window', 'plotsService',
-  function($window, plotsService) {
+angular.module('grundsalg').directive('plots', ['$window',
+  function($window) {
     return {
       restrict: 'AE',
       replace: true,

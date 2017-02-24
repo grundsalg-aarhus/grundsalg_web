@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation.
+ */
 
 namespace Drupal\grundsalg_maps\Plugin\Block;
 
@@ -21,6 +25,7 @@ class MapsBlock extends BlockBase {
    */
   public function build() {
     // @TODO: This should be move into a theme function.
+    // @TODO: Yikes!
     return array(
       '#markup' => '
         <div ng-controller="MapController">

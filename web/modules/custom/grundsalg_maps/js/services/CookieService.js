@@ -2,6 +2,7 @@
  * @file
  * Service to access cookies.
  */
+
 angular.module('grundsalg').service('cookieService',
   function () {
     'use strict';

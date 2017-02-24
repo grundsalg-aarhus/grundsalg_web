@@ -1,13 +1,14 @@
 <?php
 /**
  * @file
- * Contains \Drupal\grundsalg_maps\Controller\ApiController
+ * Contains \Drupal\grundsalg_maps\Controller\ApiController.
  */
 
 namespace Drupal\grundsalg_maps\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Drupal\Core\Url;
 
 /**
  * Class ApiController.
@@ -23,6 +24,7 @@ class ApiController extends ControllerBase {
    *   The taxonomy id plot type to load areas for.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   TODO: Missing documentation.
    */
   public function areas($tid) {
     // Find all areas with the plot type and coordinates set.
@@ -35,6 +37,7 @@ class ApiController extends ControllerBase {
     $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($nids);
 
     // GeoJSON basic array.
+    // @TODO: Many places in the code. Change to [] notation for arrays.
     $data = array(
       'type' => 'FeatureCollection',
       'features' => array(),
@@ -43,7 +46,7 @@ class ApiController extends ControllerBase {
     // Loop over the areas and create geoJSON features base on it.
     foreach ($nodes as $node) {
       $options = array('absolute' => FALSE);
-      $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', array('node' => $node->id()), $options);
+      $url = Url::fromRoute('entity.node.canonical', array('node' => $node->id()), $options);
       $url = $url->toString();
 
       $coordinates = $node->get('field_coordinate')->value;
@@ -52,7 +55,7 @@ class ApiController extends ControllerBase {
       $data['features'][] = array(
         'type' => 'Feature',
         'geometry' => array(
-          'type' => "Point",
+          'type' => 'Point',
           'coordinates' => array($coordinates[1], $coordinates[0]),
         ),
         'properties' => array(
@@ -60,7 +63,7 @@ class ApiController extends ControllerBase {
           'markers' => TRUE,
           'title' => $node->get('title')->value,
           'teaser' => $node->get('field_teaser')->value,
-          'url' => $url
+          'url' => $url,
         ),
       );
     }
@@ -99,7 +102,7 @@ class ApiController extends ControllerBase {
     // Loop over the areas and create geoJSON features base on it.
     foreach ($nodes as $node) {
       $options = array('absolute' => FALSE);
-      $url = \Drupal\Core\Url::fromRoute('entity.node.canonical', array('node' => $node->id()), $options);
+      $url = Url::fromRoute('entity.node.canonical', array('node' => $node->id()), $options);
       $url = $url->toString();
 
       $coordinates = $node->get('field_coordinate')->value;
@@ -108,7 +111,7 @@ class ApiController extends ControllerBase {
       $data['features'][] = array(
         'type' => 'Feature',
         'geometry' => array(
-          'type' => "Point",
+          'type' => 'Point',
           'coordinates' => array($coordinates[1], $coordinates[0]),
         ),
         'properties' => array(
@@ -116,7 +119,7 @@ class ApiController extends ControllerBase {
           'markers' => TRUE,
           'title' => $node->get('title')->value,
           'teaser' => $node->get('field_teaser')->value,
-          'url' => $url
+          'url' => $url,
         ),
       );
     }
@@ -153,7 +156,7 @@ class ApiController extends ControllerBase {
       $data['features'][] = array(
         'type' => 'Feature',
         'geometry' => array(
-          'type' => "Point",
+          'type' => 'Point',
           'coordinates' => array($coordinates[1], $coordinates[0]),
         ),
         'properties' => array(
@@ -169,4 +172,5 @@ class ApiController extends ControllerBase {
     // Transform to JSON and return the result.
     return new JsonResponse($data);
   }
+
 }

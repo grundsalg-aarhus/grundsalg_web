@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation.
+ */
 
 /**
  * Implements hook_proprocess_page().
@@ -40,4 +44,3 @@ function grundsalg_angular_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAss
   // Scan the files to get translations into the database.
   locale_js_translate($files);
 }
-

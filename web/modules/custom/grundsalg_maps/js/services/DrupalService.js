@@ -2,6 +2,7 @@
  * @file
  * Service to access cookies.
  */
+
 angular.module('grundsalg').service('drupalService', ['$http', '$q', 'CacheFactory',
   function ($http, $q, CacheFactory) {
     'use strict';

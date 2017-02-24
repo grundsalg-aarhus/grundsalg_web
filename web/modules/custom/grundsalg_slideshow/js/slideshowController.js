@@ -2,6 +2,7 @@
  * @file
  * Contains the Images Controller.
  */
+
 angular.module('grundsalg').controller('SlideshowController', ['$scope',
     function ($scope) {
       'use strict';

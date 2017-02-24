@@ -1,17 +1,19 @@
 <?php
 /**
  * @file
- * Add template for widget.
+ * Contains module hooks.
  */
 
 /**
  * Implements hook_theme().
+ *
+ * Add template for block.
  */
 function grundsalg_front_theme($existing, $type, $theme, $path) {
   return [
     'grundsalg_front_block' => [
       'template' => 'grundsalg-front-block',
-      'variables' => [ 'text' => NULL ],
+      'variables' => ['text' => NULL],
     ],
   ];
 }
