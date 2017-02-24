@@ -141,7 +141,6 @@ class ContentCreationService {
     }
 
     // Try loading subdivision.
-    // @TODO: Do we have a safe-guard that only one subdivision exists with a given field_subdivision_id?
     $query = $this->entityQueryService->get('node', 'AND')
       ->condition('type', 'subdivision')
       ->condition('field_subdivision_id', $content['id']);

@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * @TODO: Missing documentation!
+ * Adds map libraries to pages.
  */
 
 use proj4php\Proj4php;
@@ -9,9 +9,21 @@ use proj4php\Proj;
 use proj4php\Point;
 
 /**
+ * Implements hook_theme().
+ */
+function grundsalg_maps_theme($existing, $type, $theme, $path) {
+  return array(
+    'grundsalg_maps_map_block' => array(
+      'variables' => array(),
+    ),
+  );
+}
+
+/**
  * Implements hook_proprocess_page().
  *
- * @TODO: Why do we have this hook?
+ * Adds maps javascript libraries to pages and sets the configuration needed by
+ * the different types of maps used on the site.
  */
 function grundsalg_maps_preprocess_page(&$variables) {
   // Add angular to certain node types.
@@ -50,9 +62,9 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'min' => 5,
               'max' => 8,
             ),
-            'extent' => [
+            'extent' => array(
               498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
-            ],
+            ),
             'popup' => array(
               'projects' => array(
                 'scale' => 1,
@@ -93,9 +105,9 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'min' => 6,
               'max' => 10,
             ),
-            'extent' => [
+            'extent' => array(
               498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
-            ],
+            ),
             'popup' => array(
               'subdivision' => array(
                 'scale' => 1,
@@ -174,9 +186,9 @@ function grundsalg_maps_preprocess_page(&$variables) {
               'min' => 11,
               'max' => 16,
             ),
-            'extent' => [
+            'extent' => array(
               498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
-            ],
+            ),
             'popup' => array(
               'plots' => array(
                 'scale' => 0.8,
