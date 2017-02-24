@@ -4,8 +4,14 @@
  * @TODO: Missing documentation!
  */
 
+use proj4php\Proj4php;
+use proj4php\Proj;
+use proj4php\Point;
+
 /**
  * Implements hook_proprocess_page().
+ *
+ * @TODO: Why do we have this hook?
  */
 function grundsalg_maps_preprocess_page(&$variables) {
   // Add angular to certain node types.
@@ -30,7 +36,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
       $cache_ttl = $config->get('grundsalg_maps_areas_cache');
 
       $variables['#attached']['drupalSettings']['grundsalg_maps'] = array(
-        'dir' => $path  . '/js',
+        'dir' => $path . '/js',
         'url' => $config->get('grundsalg_maps_url'),
         'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
         'map_type' => $type,
@@ -39,12 +45,14 @@ function grundsalg_maps_preprocess_page(&$variables) {
       switch ($type) {
         case 'project':
           $config = array(
-            'zoom' => array (
+            'zoom' => array(
               'default' => 5,
               'min' => 5,
               'max' => 8,
             ),
-            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'extent' => [
+              498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
+            ],
             'popup' => array(
               'projects' => array(
                 'scale' => 1,
@@ -59,7 +67,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
         case 'overview_page':
           $config = array(
             'plot_type' => $variables['node']->get('field_plot_type')->target_id,
-            'zoom' => array (
+            'zoom' => array(
               'default' => 5,
               'min' => 5,
               'max' => 8,
@@ -80,14 +88,16 @@ function grundsalg_maps_preprocess_page(&$variables) {
           $config = array(
             'plot_type' => $variables['node']->get('field_plot_type')->target_id,
             'area_id' => $variables['node']->id(),
-            'zoom' => array (
+            'zoom' => array(
               'default' => 6,
               'min' => 6,
               'max' => 10,
             ),
-            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'extent' => [
+              498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
+            ],
             'popup' => array(
-              'subdivision'=> array(
+              'subdivision' => array(
                 'scale' => 1,
                 'template' => $path . '/js/templates/popup-subdivision.html',
                 'marker' => $path . '/images/marker-default.png',
@@ -141,30 +151,32 @@ function grundsalg_maps_preprocess_page(&$variables) {
           // Get center.
           $coordinates = $variables['node']->get('field_coordinate')->value;
 
-          $default_center = null;
+          $default_center = NULL;
           if (!empty($coordinates)) {
             $coordinates = explode(',', str_replace(' ', '', $coordinates));
 
             // Transform the center to new projection that matches the map's.
-            $proj4 = new \proj4php\Proj4php();
+            $proj4 = new Proj4php();
             $proj4->addDef('EPSG:25832', '+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs');
-            $projTo = new \proj4php\Proj('EPSG:25832', $proj4);
-            $projFrom = new \proj4php\Proj('EPSG:4326', $proj4);
-            $pointSrc = new \proj4php\Point($coordinates[1], $coordinates[0], $projFrom);
+            $projTo = new Proj('EPSG:25832', $proj4);
+            $projFrom = new Proj('EPSG:4326', $proj4);
+            $pointSrc = new Point($coordinates[1], $coordinates[0], $projFrom);
             $pointDest = $proj4->transform($projTo, $pointSrc);
 
             $default_center = explode(' ', $pointDest->toShortString());
-            $default_center = array((float) $default_center[0], (float) $default_center[1]) ;
+            $default_center = array((float) $default_center[0], (float) $default_center[1]);
           }
 
           $config = array(
             'subdivision_id' => $subdivision_id,
-            'zoom' => array (
+            'zoom' => array(
               'default' => 11,
               'min' => 11,
               'max' => 16,
             ),
-            'extent' => [498874.409185, 6195308.93897, 651386.409185, 6253164.93897],
+            'extent' => [
+              498874.409185, 6195308.93897, 651386.409185, 6253164.93897,
+            ],
             'popup' => array(
               'plots' => array(
                 'scale' => 0.8,

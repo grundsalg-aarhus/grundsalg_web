@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class GrundsalgDbClientSettingsForm
+ * Class GrundsalgDbClientSettingsForm.
  *
  * @package Drupal\itkore_admin\Form
  */
@@ -53,6 +53,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#default_value' => $config->get('grundsalg_db_client_use_example_data'),
     );
 
+    // If "grundsalg_db_client_example_file" has not been set, use default.
     $path = drupal_get_path('module', 'grundsalg_db_client') . '/example_data/example-subdivision-plots.json';
     $form['example']['file'] = array(
       '#type' => 'textfield',
@@ -117,4 +118,3 @@ class GrundsalgDbClientSettingsForm extends FormBase {
     drupal_flush_all_caches();
   }
 }
-

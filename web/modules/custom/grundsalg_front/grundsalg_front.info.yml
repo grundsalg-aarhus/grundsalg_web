@@ -2,7 +2,7 @@ name: Grundsalg frontpage
 type: module
 interface translation project: grundsalg_front
 interface translation server pattern: modules/custom/grundsalg_front/translations/grundsalg_front.%language.po
-description: 'Adds config page and block for frontpage'
+description: 'Adds a config page and a block for the frontpage.'
 package: Grundsalg
 dependencies:
   - itkore_admin

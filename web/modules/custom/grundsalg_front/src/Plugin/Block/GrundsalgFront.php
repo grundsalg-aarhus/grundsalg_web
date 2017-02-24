@@ -1,13 +1,15 @@
 <?php
+/**
+ * @file
+ * @TODO: Missing documentation.
+ */
 
 namespace Drupal\grundsalg_front\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Menu\MenuTreeParameters;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides front page content
+ * Provides front page content.
  *
  * @Block(
  *   id = "grundsalg_front",
@@ -15,6 +17,7 @@ use Drupal\Core\Form\FormStateInterface;
  * )
  */
 class GrundsalgFront extends BlockBase {
+
   /**
    * {@inheritdoc}
    */
@@ -27,5 +30,5 @@ class GrundsalgFront extends BlockBase {
       '#text' => $config,
     );
   }
+
 }
-?>
