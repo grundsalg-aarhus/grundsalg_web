@@ -447,7 +447,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               // Attach the angular template to the dom and render the
               // content.
               $content.html(template);
-              // @TODO: Why timeout here? To allow it to be added to the DOM? Digest cycle...
+              // Timeout here is to allow the DOM a digest cycle. It will not
+              // work without it.
               $timeout(function () {
                 $compile($content)(scope);
                 scope.show = true;
