@@ -101,6 +101,17 @@
 
     <div class="content-box">
       <div class="content-box--inner">
+        <div class="content-box--title">
+          <h2 class="content-box--title-text">
+            {% if plot_type == 'Villagrund' %}
+              {{ 'Villagrunde in'|t }} {{ label }}
+            {% elseif plot_type == 'Storparcel' %}
+                {{ 'Storeparceller in'|t }} {{ label }}
+            {% else  %}
+                {{ 'Erhversgrunde in'|t }} {{ label }}
+            {% endif %}
+          </h2>
+        </div>
         {{ child_nodes }}
       </div>
     </div>
