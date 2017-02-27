@@ -781,17 +781,19 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         if (data.features.length) {
           // @TODO: Should this be configurable under "site settings"?
           var statusStyles = {
-            'Udbud': [245, 196, 0, 0.4],
-            'Auktion slut': [227, 6, 19, 0.4],
-            'Ledig': [78, 157, 45, 0.4]
+            'Fremtidig': [64, 156, 218, 0.4],
+            'Ledig': [78, 157, 45, 0.4],
+            'Reserveret': [245, 196, 0, 0.4],
+            'I udbud': [159, 182, 201, 0.4],
+            'Solgt': [227, 6, 19, 0.4]
           };
 
           var defaultStyle = new ol.style.Style({
             fill: new ol.style.Fill({
-              color: 'rgba(78, 157, 45, 0.8)'
+              color: [227, 6, 19, 0,4]
             }),
             stroke: new ol.style.Stroke({
-              color: [78, 157, 45],
+              color: [227, 6, 19],
               width: 4
             })
           });
