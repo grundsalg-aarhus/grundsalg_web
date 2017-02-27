@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class GrundsalgFrontSettingsForm
+ * Class GrundsalgFrontSettingsForm.
  *
  * @package Drupal\grundsalg_maps\Form
  */
@@ -27,6 +27,7 @@ class MapsSettingsForm extends FormBase {
    * Get key/value storage for base config.
    *
    * @return object
+   *   The configuration object.
    */
   private function getBaseConfig() {
     return \Drupal::getContainer()->get('itkore_admin.itkore_config');
@@ -92,5 +93,5 @@ class MapsSettingsForm extends FormBase {
 
     drupal_flush_all_caches();
   }
-}
 
+}

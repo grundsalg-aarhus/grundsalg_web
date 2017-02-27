@@ -9,6 +9,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
     var config = drupalSettings.grundsalg_maps;
 
+    // Send plot type into map template.
+    $scope.type = config.map_type;
+
     /**
      * Load template file from URL.
      *
@@ -37,7 +40,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     }
 
     /**
-     * Get ticket need to access KF tile server.
+     * Get ticket needed to access KF tile server.
      *
      * @return {promise}
      *   Resolves with the ticket or rejected with a error message.
@@ -94,7 +97,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
       ol.proj.addProjection(dkProjection);
 
-      // Init the map
+      // Init the map.
       return new ol.Map({
         target: 'mapid',
         logo: false,
@@ -150,8 +153,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           })
         });
 
-        // As this layer may bee delayed in added to the map do to the ticket
-        // callback. We have to ensure that it's based below the marker layers.
+        // As this layer may be delayed in being added to the map, do to the ticket
+        // callback. We have to ensure that it's placed below the marker layers.
         layer.setZIndex(-10);
         map.addLayer(layer);
       });
@@ -196,8 +199,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           })
         });
 
-        // As this layer may bee delayed in added to the map do to the ticket
-        // callback. We have to ensure that it's based below the marker layers.
+        // As this layer may be delayed in being added to the map, do to the ticket
+        // callback. We have to ensure that it's placed below the marker layers.
         layer.setZIndex(-5);
         map.addLayer(layer);
       });
@@ -244,8 +247,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           })
         });
 
-        // As this layer may bee delayed in added to the map do to the ticket
-        // callback. We have to ensure that it's based below the marker layers.
+        // As this layer may be delayed in being added to the map, do to the ticket
+        // callback. We have to ensure that it's placed below the marker layers.
         layer.setZIndex(-5);
         map.addLayer(layer);
       });
@@ -279,15 +282,15 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           })
         });
 
-        // As this layer may bee delayed in added to the map do to the ticket
-        // callback. We have to ensure that it's based below the marker layers.
+        // As this layer may be delayed in being added to the map, do to the ticket
+        // callback. We have to ensure that it's placed below the marker layers.
         layer.setZIndex(-5);
         map.addLayer(layer);
       });
     }
 
     /**
-     * Layer from Midt trafik.
+     * Layer from Midttrafik.
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
@@ -328,7 +331,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     }
 
     /**
-     * Fade all municipalities not Aarhus.
+     * Fade all municipalities except Aarhus.
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
@@ -403,7 +406,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           var metadata = layer.get('metadata');
 
           if (feature && feature.get('markers')) {
-            // Move popup into the right position.
+            // Move popup to the right position.
             var coordinates = evt.coordinate;
             popup.setPosition(coordinates);
 
@@ -447,6 +450,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               // Attach the angular template to the dom and render the
               // content.
               $content.html(template);
+              // Timeout here is to allow the DOM a digest cycle. It will not
+              // work without it.
               $timeout(function () {
                 $compile($content)(scope);
                 scope.show = true;
@@ -463,7 +468,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
                   var offset_height = 10;
                   var offset_width = 10;
-
 
                   // Get popup height.
                   var popup_height = Math.max(
@@ -512,7 +516,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     }
 
     /**
-     * Add areas marks layer to the map.
+     * Add area marks layer to the map.
      *
      * @param {ol.Map} map
      *   The OpenLayers map object.
@@ -521,7 +525,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addAreasLayer(map, typeId) {
       drupalService.getAreas(typeId).then(function success(data) {
-
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
         });
@@ -571,7 +574,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addSubdivisionLayer(map, typeId, areaId) {
       drupalService.getSubdivisions(typeId, areaId).then(function success(data) {
-
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
         });
@@ -618,7 +620,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      */
     function addProjectsLayer(map) {
       drupalService.getProjects().then(function success(data) {
-
         var format = new ol.format.GeoJSON({
           defaultDataProjection: 'EPSG:4326'
         });
@@ -780,17 +781,19 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         if (data.features.length) {
           // @TODO: Should this be configurable under "site settings"?
           var statusStyles = {
-            'Udbud': [245, 196, 0, 0.4],
-            'Auktion slut': [227, 6, 19, 0.4],
-            'Ledig': [78, 157, 45, 0.4]
+            'Fremtidig': [64, 156, 218, 0.4],
+            'Ledig': [78, 157, 45, 0.4],
+            'Reserveret': [245, 196, 0, 0.4],
+            'I udbud': [159, 182, 201, 0.4],
+            'Solgt': [227, 6, 19, 0.4]
           };
 
           var defaultStyle = new ol.style.Style({
             fill: new ol.style.Fill({
-              color: 'rgba(78, 157, 45, 0.8)'
+              color: [227, 6, 19, 0,4]
             }),
             stroke: new ol.style.Stroke({
-              color: [78, 157, 45],
+              color: [227, 6, 19],
               width: 4
             })
           });

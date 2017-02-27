@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * @TODO: Missing documentation.
+ * Handles plots from the fagsystem.
  */
 
 use \Drupal\Core\Form\FormStateInterface;
@@ -16,12 +16,14 @@ function grundsalg_plots_theme($existing, $type, $theme, $path) {
       'variables' => array(
         'variables' => NULL,
       ),
-    )
+    ),
   );
 }
 
 /**
  * Implements hook_proprocess_node().
+ *
+ * Adds the plots javascript and service to the pages where it's needed.
  */
 function grundsalg_plots_preprocess_node(&$variables) {
   $path = '/' . drupal_get_path('module', 'grundsalg_plots') . '/js';
@@ -50,9 +52,9 @@ function grundsalg_plots_preprocess_node(&$variables) {
               'template' => $path . '/templates/plots.html',
               'subdivision_id' => $subdivision_id,
               'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
-            )
-          )
-        )
+            ),
+          ),
+        ),
       );
     }
   }

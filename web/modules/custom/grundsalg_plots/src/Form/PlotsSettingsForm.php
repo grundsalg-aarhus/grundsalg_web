@@ -27,6 +27,7 @@ class PlotsSettingsForm extends FormBase {
    * Get key/value storage for base config.
    *
    * @return object
+   *   The configuration object.
    */
   private function getBaseConfig() {
     return \Drupal::getContainer()->get('itkore_admin.itkore_config');
@@ -71,10 +72,10 @@ class PlotsSettingsForm extends FormBase {
 
     // Set the configuration values.
     $this->getBaseConfig()->setMultiple(array(
-      'grundsalg_plots_cache' => $form_state->getValue('cache')
+      'grundsalg_plots_cache' => $form_state->getValue('cache'),
     ));
 
     drupal_flush_all_caches();
   }
-}
 
+}

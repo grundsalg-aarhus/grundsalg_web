@@ -10,7 +10,7 @@ angular.module('grundsalg').config(['$routeProvider', '$locationProvider',
       // Configure Hash prefix.
       $locationProvider.hashPrefix('');
 
-      // Setup routes.
+      // Setup routes for tabs.
       $routeProvider
       .when('/map', {
         templateUrl: drupalSettings.grundsalg_maps.dir + '/templates/map.html'

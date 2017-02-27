@@ -33,11 +33,11 @@ class ContentCreationService {
   /**
    * Update Subdivision.
    *
-   * 1. Checks if the overview_page the subdivision should be placed under exists,
-   * else returns.
+   * 1. Checks if the overview_page the subdivision should be placed under
+   * exists, else returns.
    *
-   * 2. Checks if the area exists, else creates it (This also creates plot_type and
-   * cities taxonomy terms).
+   * 2. Checks if the area exists, else creates it (This also creates plot_type
+   * and cities taxonomy terms).
    *
    * 3. Checks if the subdivision exists (then updates it), else creates it.
    *
@@ -65,7 +65,7 @@ class ContentCreationService {
     $overview_nid = current($nids);
 
     // Make sure an area with the postal code given exists.
-    $query =  $this->entityQueryService->get('node', 'AND')
+    $query = $this->entityQueryService->get('node', 'AND')
       ->condition('type', 'area')
       ->condition('field_plot_type.entity.name', $content['type'])
       ->condition('field_city_reference.entity.field_postalcode', $content['postalCode']);
@@ -81,7 +81,7 @@ class ContentCreationService {
     }
     else {
       // Make sure plot_type term exists with type given in the $content.
-      $query =  $this->entityQueryService->get('taxonomy_term', 'AND')
+      $query = $this->entityQueryService->get('taxonomy_term', 'AND')
         ->condition('vid', 'plot_type')
         ->condition('name', $content['type']);
       $nids = $query->execute();
@@ -123,12 +123,6 @@ class ContentCreationService {
       $area->save();
     }
 
-    // Try loading subdivision to do an update.
-    $query =  $this->entityQueryService->get('node', 'AND')
-      ->condition('type', 'subdivision')
-      ->condition('field_subdivision_id', $content['id']);
-    $nids = $query->execute();
-
     // Find coordinates for the area if provided.
     $coordinates = '';
     if (!empty($content['geometry'])) {
@@ -146,6 +140,13 @@ class ContentCreationService {
       $coordinates = implode(', ', $coordinates);
     }
 
+    // Try loading subdivision.
+    $query = $this->entityQueryService->get('node', 'AND')
+      ->condition('type', 'subdivision')
+      ->condition('field_subdivision_id', $content['id']);
+    $nids = $query->execute();
+
+    // If the subdivision exists, update it, else create a new one.
     if ($nids) {
       // Found existing sub-division, so this will be an update operation.
       $subdivision = $this->entityTypeManager->getStorage('node')->load(current($nids));
@@ -163,7 +164,7 @@ class ContentCreationService {
       // Create new sub-division entity.
       Node::create([
         'type' => 'subdivision',
-        'title' =>  $content['title'],
+        'title' => $content['title'],
         'field_subdivision_id' => $content['id'],
         'field_parent' => $area->id(),
         'field_plot_type' => $plotTypeTerm->id(),

@@ -2,7 +2,7 @@
   <div class="content-box--content">
     <div class="boxes">
       <div class="boxes--inner">
-        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displayLimit" data-ng-class="{'is-offering' : plot.status === 'Udbud','is-sold' : plot.status === 'Auktion slut','is-available' : plot.status === 'Ledig'}">
+        <article class="boxes--box is-inside-context-box" data-ng-repeat="plot in plots | limitTo:displayLimit" data-ng-class="getClass(plot.status)">
           <div class="boxes--box-inner">
             <h3 class="boxes--box-plot-title">{{ plot.address }}</h3>
             <div class="boxes--box-plot-infos">
@@ -33,14 +33,14 @@
                 </g>
               </svg>
               </div>
-              <a href="{{ plot.pdf_link }}" class="boxes--box-plot-link-text">{{ Drupal.t('Further information') }}</a>
+              <a href="{{ plot.pdf_link }}" target="_blank" class="boxes--box-plot-link-text">{{ Drupal.t('Further information') }}</a>
             </div>
           </div>
         </article>
       </div>
     </div>
   </div>
-  <div class="content-box--show-more" data-ng-hide="!displayLimit">
+  <div class="content-box--show-more" data-ng-hide="plots.length == displayLimit || !displayLimit">
     <h3 class="content-box--show-more-title" data-ng-click="displayLimit = null">
       <a href="">{{ Drupal.t('Show all plots') }}</a>
     </h3>
