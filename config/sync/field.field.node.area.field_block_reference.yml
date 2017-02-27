@@ -1,0 +1,28 @@
+uuid: c83537f2-9ffd-4dec-929d-3f40a07e827c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_block_reference
+    - node.type.area
+    - node.type.content_block
+id: node.area.field_block_reference
+field_name: field_block_reference
+entity_type: node
+bundle: area
+label: 'Blok reference'
+description: 'The block displayed on the the right '
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      content_block: content_block
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
