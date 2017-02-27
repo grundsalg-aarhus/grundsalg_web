@@ -9,6 +9,9 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
     var config = drupalSettings.grundsalg_maps;
 
+    // Send plot type into map template.
+    $scope.type = config.map_type;
+
     /**
      * Load template file from URL.
      *
