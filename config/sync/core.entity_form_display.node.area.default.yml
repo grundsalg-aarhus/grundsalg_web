@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.itk_image_browser
+    - field.field.node.area.field_block_reference
     - field.field.node.area.field_body
     - field.field.node.area.field_city_reference
     - field.field.node.area.field_coordinate
@@ -27,7 +28,7 @@ third_party_settings:
         - field_teaser_image
         - field_teaser
       parent_name: ''
-      weight: 2
+      weight: 3
       label: Teaser
       format_type: details
       format_settings:
@@ -54,7 +55,7 @@ third_party_settings:
       children:
         - field_city_reference
       parent_name: ''
-      weight: 4
+      weight: 5
       format_type: details
       format_settings:
         label: By
@@ -67,7 +68,7 @@ third_party_settings:
       children:
         - field_plot_type
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: fieldset
       format_settings:
         label: ''
@@ -93,7 +94,7 @@ third_party_settings:
         - field_coordinate
         - field_streetview_coordinate
       parent_name: ''
-      weight: 5
+      weight: 6
       format_type: details
       format_settings:
         id: ''
@@ -101,11 +102,28 @@ third_party_settings:
         open: false
         required_fields: false
       label: Koordinat
+    group_block_reference:
+      children:
+        - field_block_reference
+      parent_name: ''
+      weight: 2
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: false
+      label: 'Blok reference'
 id: node.area.default
 targetEntityType: node
 bundle: area
 mode: default
 content:
+  field_block_reference:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
   field_body:
     weight: 2
     settings:

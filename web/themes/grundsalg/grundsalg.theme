@@ -20,8 +20,10 @@ function grundsalg_preprocess_menu(&$variables) {
   $variables['hamburger_menu'] = FALSE;
   $current_path = \Drupal::request()->getRequestUri();
   if ($variables['menu_name'] == 'hamburger-menu') {
-    // The only way to identify which region is rendering the menu block is to check for expanded (Main nav does not have any children and neither of the parents are expanded.)
-    // This won't work if for some reason none of the menu items have any children,
+    // The only way to identify which region is rendering the menu block is to
+    // check for expanded (Main nav does not have any children and neither of
+    // the parents are expanded.). This won't work if for some reason none of
+    // the menu items have any children,
     foreach ($variables['items'] as $key => $item) {
       $variables['items'][$key]['attributes']->addClass('nav--link');
       $variables['hamburger_menu'] = TRUE;
