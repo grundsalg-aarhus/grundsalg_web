@@ -21,7 +21,7 @@
       <p class="popup--value">{{ content.sale_price }}</p>
     </div>
 
-    <div class="popup--link-wrapper">
+    <div class="popup--link-wrapper" data-ng-if="content.pdf_link">
       <a href="{{ content.pdf_link }}" target="_blank" class="popup--link">
         <div class="popup--link-type-icon">
           <svg viewBox="0 0 34 38" xmlns="http://www.w3.org/2000/svg">

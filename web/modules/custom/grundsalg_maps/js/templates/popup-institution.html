@@ -12,7 +12,7 @@
       <p class="popup--key">{{ Drupal.t('Address') }}</p>
       <p class="popup--value">{{ content.adress }}</p>
     </div>
-    <div class="popup--link-wrapper">
+    <div class="popup--link-wrapper" data-ng-if="content.hjside">
       <a href="{{ content.hjside }}" target="_blank" class="popup--link">
         <div class="popup--link-text">{{ Drupal.t('More information') }}</div>
         <div class="popup--link-icon">
