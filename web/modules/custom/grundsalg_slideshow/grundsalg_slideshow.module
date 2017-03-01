@@ -15,18 +15,21 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
   // Add angular to certain node types.
   if (isset($variables['node'])) {
     // This empty array is need to prevent pages from not loading JS.
-    // @TODO: Find better solution.
     $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array();
+
+    // Add JavaScript. It's added to all pages as grundsalg_tabs may be loaded
+    // on the page and if the slide-show controller is not load it will give an
+    // error. But as slide-show is used on non tabs pages, we don't known when
+    // and where it's used. So we load it on all pages.
+    $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
+
+    // Provide module path to js.
+    $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array(
+      'app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js',
+    );
 
     // Add image urls and alt to js (if page have images).
     if (isset($variables['node']->field_media_image->target_id)) {
-      $variables['#attached']['library'][] = 'grundsalg_slideshow/angular';
-
-      // Provide module path to js.
-      $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array(
-        'app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js',
-      );
-
       foreach ($variables['node']->get('field_media_image') as $key => $item) {
         // We need to check if the file exists, as it may have been deleted and
         // get field below will make WPOD.
