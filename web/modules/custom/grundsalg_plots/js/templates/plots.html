@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="content-box--show-more" data-ng-hide="plots.length == displayLimit || !displayLimit">
+  <div class="content-box--show-more" data-ng-hide="plots.length <= displayLimit || !displayLimit">
     <h3 class="content-box--show-more-title" data-ng-click="displayLimit = null">
       <a href="">{{ Drupal.t('Show all plots') }}</a>
     </h3>
