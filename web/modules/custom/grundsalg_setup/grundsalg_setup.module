@@ -108,12 +108,14 @@ function grundsalg_setup_preprocess_itkore_footer_block(&$variables) {
 /**
  * Implements hook_node_access().
  *
- * @TODO: An extra note about this change to access to some node types would be
- *        nice!
+ * Limit access to "project" and "content_block" page for direct view. They are
+ * used in entity references and hence only need to be blocked for view by there
+ * "/node" url.
  */
 function grundsalg_setup_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  $current_uri = \Drupal::request()->getRequestUri();
   $type = $node->bundle();
-  if ($type == 'project' || $type == 'content_block') {
+  if (($type == 'project' || $type == 'content_block') && substr($current_uri, 0, 5 ) == '/node') {
     if ($op == 'view') {
       if ($account->id() == 0) {
         return AccessResult::forbidden();

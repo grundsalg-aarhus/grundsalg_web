@@ -9,6 +9,5 @@ label: 'Anonym bruger'
 weight: 0
 is_admin: false
 permissions:
-  - 'access content'
-  - 'view the administration theme'
-  - 'view media'
+  0: 'access content'
+  2: 'view media'

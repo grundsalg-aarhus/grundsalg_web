@@ -13,7 +13,7 @@ bundle: area
 label: 'Blok reference'
 description: 'The block displayed on the the right '
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -22,7 +22,8 @@ settings:
     target_bundles:
       content_block: content_block
     sort:
-      field: _none
+      field: title
+      direction: ASC
     auto_create: true
     auto_create_bundle: ''
 field_type: entity_reference
