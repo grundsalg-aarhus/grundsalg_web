@@ -137,3 +137,15 @@ function grundsalg_setup_menu_local_actions_alter(&$local_actions) {
     unset($local_actions['entity.entity_queue.add_form']);
   }
 }
+
+/**
+ * Implements hook_proprocess_page().
+ *
+ * Adds javascript libraries need in the pages.
+ */
+function grundsalg_setup_preprocess_page(&$variables) {
+  // IE11 don't support responsive images and picture fill is needed.
+  if (isset($variables['node'])) {
+    $variables['#attached']['library'][] = 'grundsalg_setup/picturefill';
+  }
+}

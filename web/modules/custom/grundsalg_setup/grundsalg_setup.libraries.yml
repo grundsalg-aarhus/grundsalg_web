@@ -3,3 +3,7 @@ form_styles:
   css:
     theme:
       css/grundsalg_node_forms.css: { media: screen }
+
+picturefill:
+  js:
+    js/libs/picturefill.min.js: { minified: true }
