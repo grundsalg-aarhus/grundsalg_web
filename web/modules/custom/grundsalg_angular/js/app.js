@@ -11,4 +11,3 @@ angular.module('grundsalg', ['ngRoute', 'ngAnimate', 'angular-cache']).config(fu
   // @see grundsalg_slideshow
   $sceProvider.enabled(false);
 });
-
