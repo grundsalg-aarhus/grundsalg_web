@@ -72,12 +72,14 @@ function grundsalg_preprocess_node(&$variables) {
     $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $node->id());
   }
 
-  $block = \Drupal\block\Entity\Block::load('contactblock');
-  $variables['contactblock'] = \Drupal::entityManager()
-    ->getViewBuilder('block')
-    ->view($block);
-
-  $t=1;
+  // Render contact block on the contact page only.
+  $current_path = \Drupal::request()->getRequestUri();
+  if ($current_path == '/kontaktoplysninger') {
+    $block = \Drupal\block\Entity\Block::load('contactblock');
+    $variables['contactblock'] = \Drupal::entityManager()
+      ->getViewBuilder('block')
+      ->view($block);
+  }
 }
 
 /**
