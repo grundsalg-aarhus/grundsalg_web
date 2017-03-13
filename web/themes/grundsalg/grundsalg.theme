@@ -82,6 +82,13 @@ function grundsalg_preprocess_field(&$variables) {
     case 'field_itk_media_mime_type' :
       $variables['mime_type'] = $variables['element']['0']['#context']['value'];
       break;
+
+    case 'field_docs_external_link':
+      // Add class to a tags in document box.
+      foreach ($variables['items'] as &$item) {
+        $item['content']['#attributes']['class'] = array('content-box--link-with-icon-text');
+      }
+      break;
   }
 }
 

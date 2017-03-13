@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.subdivision.field_body
     - field.field.node.subdivision.field_city_reference
     - field.field.node.subdivision.field_coordinate
+    - field.field.node.subdivision.field_docs_external_link
     - field.field.node.subdivision.field_media_document
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
@@ -20,6 +21,7 @@ dependencies:
   module:
     - entity_browser
     - field_group
+    - link
     - text
     - youtube
 third_party_settings:
@@ -29,7 +31,7 @@ third_party_settings:
         - field_teaser_image
         - field_teaser
       parent_name: ''
-      weight: 7
+      weight: 6
       label: Teaser
       format_type: details
       format_settings:
@@ -54,7 +56,7 @@ third_party_settings:
       children:
         - field_plot_type
       parent_name: ''
-      weight: 5
+      weight: 4
       format_type: details
       format_settings:
         label: Type
@@ -67,7 +69,7 @@ third_party_settings:
       children:
         - field_city_reference
       parent_name: ''
-      weight: 6
+      weight: 5
       format_type: details
       format_settings:
         label: By
@@ -80,7 +82,7 @@ third_party_settings:
       children:
         - field_youtube
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: details
       format_settings:
         id: ''
@@ -93,7 +95,7 @@ third_party_settings:
         - field_coordinate
         - field_streetview_coordinate
       parent_name: ''
-      weight: 3
+      weight: 2
       format_type: details
       format_settings:
         id: ''
@@ -101,6 +103,20 @@ third_party_settings:
         open: false
         required_fields: false
       label: Koordinat
+    group_dokumenter:
+      children:
+        - field_media_document
+        - field_docs_external_link
+      parent_name: ''
+      weight: 8
+      format_type: details
+      format_settings:
+        label: Dokumenter
+        required_fields: true
+        id: ''
+        classes: ''
+        open: false
+      label: Dokumenter
 id: node.subdivision.default
 targetEntityType: node
 bundle: subdivision
@@ -128,17 +144,24 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-  field_media_document:
+  field_docs_external_link:
     weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_media_document:
+    weight: 7
     settings:
       entity_browser: itk_document_browser
       field_widget_display: rendered_entity
       field_widget_remove: true
+      open: true
       selection_mode: selection_append
       field_widget_display_settings:
         view_mode: form_display_when_referenced
       field_widget_edit: false
-      open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
   field_media_image:
