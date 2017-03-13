@@ -10,7 +10,7 @@ dependencies:
 id: itkadminlinks
 theme: grundsalg
 region: content
-weight: -2
+weight: -5
 provider: null
 plugin: itk_admin_links
 settings:

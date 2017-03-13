@@ -10,7 +10,7 @@ dependencies:
 id: grundsalgmapsblock
 theme: grundsalg
 region: content
-weight: 0
+weight: -4
 provider: null
 plugin: grundsalg_maps_block
 settings:

@@ -69,3 +69,4 @@ permissions:
   - 'administer users'
   - 'change own username'
   - 'access user profiles'
+  - 'access site-wide contact form'

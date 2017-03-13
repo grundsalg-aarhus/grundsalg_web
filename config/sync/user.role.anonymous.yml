@@ -11,3 +11,4 @@ is_admin: false
 permissions:
   0: 'access content'
   2: 'view media'
+  3: 'access site-wide contact form'

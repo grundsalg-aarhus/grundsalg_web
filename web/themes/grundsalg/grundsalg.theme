@@ -71,8 +71,14 @@ function grundsalg_preprocess_node(&$variables) {
     $variables['plot_type'] = $node->get('field_plot_type')->referencedEntities()[0]->getName();
     $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $node->id());
   }
-}
 
+  $block = \Drupal\block\Entity\Block::load('contactblock');
+  $variables['contactblock'] = \Drupal::entityManager()
+    ->getViewBuilder('block')
+    ->view($block);
+
+  $t=1;
+}
 
 /**
  * Implements hook_preprocess_field().

@@ -48,18 +48,18 @@ content:
     third_party_settings: {  }
     type: string
   field_docs_external_link:
-    weight: 9
-    label: above
+    weight: 4
+    label: hidden
     settings:
-      trim_length: 80
+      trim_length: null
+      rel: nofollow
+      target: _blank
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
     third_party_settings: {  }
     type: link
   field_media_document:
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       view_mode: shown_in_file_list
@@ -88,7 +88,7 @@ content:
     third_party_settings: {  }
     type: string
   field_youtube:
-    weight: 3
+    weight: 2
     label: above
     settings:
       youtube_size: 450x315

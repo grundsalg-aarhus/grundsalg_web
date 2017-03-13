@@ -1,0 +1,12 @@
+uuid: 129f0cfc-9468-4349-96ef-72a18842df7c
+langcode: da
+status: true
+dependencies: {  }
+id: contact_form
+label: 'Kontakt formular'
+recipients:
+  - wwwadmin@mkb.aarhus.dk
+reply: ''
+weight: 0
+message: 'Tak for din henvendelse.'
+redirect: ''
