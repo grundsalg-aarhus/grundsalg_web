@@ -5,7 +5,6 @@ module:
   config: 0
   config_translation: 0
   contact: 0
-  contact_ajax: 0
   contact_block: 0
   ctools: 0
   datetime: 0

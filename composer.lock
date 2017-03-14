@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cea9f3e4da4216c3ed49fc2652f5c555",
+    "content-hash": "a45d2d3ae0bd69912db95f80061c4076",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1328,49 +1328,6 @@
                 "symfony"
             ],
             "time": "2017-01-03T17:10:01+00:00"
-        },
-        {
-            "name": "drupal/contact_ajax",
-            "version": "1.4.0-beta4",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/contact_ajax",
-                "reference": "8.x-1.4-beta4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/contact_ajax-8.x-1.4-beta4.zip",
-                "reference": null,
-                "shasum": "f481612797e9f011305ad226dfb1aa83718717b7"
-            },
-            "require": {
-                "drupal/core": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.4-beta4",
-                    "datestamp": "1480410480"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "ziomizar",
-                    "homepage": "https://www.drupal.org/user/814348"
-                }
-            ],
-            "description": "Submit contact form using ajax.",
-            "homepage": "https://www.drupal.org/project/contact_ajax",
-            "support": {
-                "source": "http://cgit.drupalcode.org/contact_ajax"
-            }
         },
         {
             "name": "drupal/contact_block",
@@ -7557,8 +7514,7 @@
         "drupal/itkore-theme": 20,
         "drupal/entityqueue": 20,
         "drupal/maxlength": 20,
-        "drupal/view_unpublished": 15,
-        "drupal/contact_ajax": 10
+        "drupal/view_unpublished": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
