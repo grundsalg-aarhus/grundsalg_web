@@ -10,15 +10,15 @@
     </div>
     <div class="popup--metadata">
       <p class="popup--key">{{ Drupal.t('Area (m2)') }}</p>
-      <p class="popup--value">{{ content.area_m2 }}</p>
+      <p class="popup--value">{{ numberWithSeparator(content.area_m2) }}</p>
     </div>
     <div class="popup--metadata">
       <p class="popup--key">{{ Drupal.t('Minimum price') }}</p>
-      <p class="popup--value">{{ content.minimum_price }}</p>
+      <p class="popup--value">{{ numberWithSeparator(content.minimum_price) }}</p>
     </div>
     <div class="popup--metadata">
       <p class="popup--key">{{ Drupal.t('Sales price') }}</p>
-      <p class="popup--value">{{ content.sale_price }}</p>
+      <p class="popup--value">{{ numberWithSeparator(content.sale_price) }}</p>
     </div>
 
     <div class="popup--link-wrapper" data-ng-if="content.pdf_link">

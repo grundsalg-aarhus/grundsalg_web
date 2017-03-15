@@ -426,6 +426,20 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               }
 
               /**
+               * Place number separators in a number.
+               *
+               * @param {int} x
+               *   The input number.
+               * @returns {string}
+               *   The number as a string with separators in place.
+               */
+              scope.numberWithSeparator = function numberWithSeparator(x) {
+                var parts = x.toString().split(".");
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                return parts.join(",");
+              };
+
+              /**
                * Close the popup.
                */
               scope.close = function close() {

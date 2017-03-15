@@ -12,15 +12,15 @@
               </div>
               <div class="boxes--box-plot-info">
                 <p class="boxes--box-plot-info-key">{{ Drupal.t('Area (m2)') }}</p>
-                <p class="boxes--box-plot-info-value">{{ plot.area_m2 }}</p>
+                <p class="boxes--box-plot-info-value">{{ numberWithSeparator(plot.area_m2) }}</p>
               </div>
               <div class="boxes--box-plot-info">
                 <p class="boxes--box-plot-info-key">{{ Drupal.t('Minimum price') }}</p>
-                <p class="boxes--box-plot-info-value">{{ plot.minimum_price }}</p>
+                <p class="boxes--box-plot-info-value">{{ numberWithSeparator(plot.minimum_price) }}</p>
               </div>
               <div class="boxes--box-plot-info">
                 <p class="boxes--box-plot-info-key">{{ Drupal.t('Sales price') }}</p>
-                <p class="boxes--box-plot-info-value">{{ plot.sale_price }}</p>
+                <p class="boxes--box-plot-info-value">{{ numberWithSeparator(plot.sale_price) }}</p>
               </div>
             </div>
             <div class="boxes--box-plot-link" data-ng-if='plot.pdf_link !== undefined'>
