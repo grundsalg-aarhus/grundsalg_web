@@ -1,0 +1,23 @@
+uuid: fafabc9d-48a9-455c-b0ca-079abde1df90
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_docs_external_link
+    - node.type.subdivision
+  module:
+    - link
+id: node.subdivision.field_docs_external_link
+field_name: field_docs_external_link
+entity_type: node
+bundle: subdivision
+label: 'Eksternt link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 2
+field_type: link

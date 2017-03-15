@@ -10,7 +10,7 @@ dependencies:
 id: grundsalgfrontpage
 theme: grundsalg
 region: content
-weight: -3
+weight: -6
 provider: null
 plugin: grundsalg_front
 settings:

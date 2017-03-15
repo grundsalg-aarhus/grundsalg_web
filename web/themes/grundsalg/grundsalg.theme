@@ -71,8 +71,16 @@ function grundsalg_preprocess_node(&$variables) {
     $variables['plot_type'] = $node->get('field_plot_type')->referencedEntities()[0]->getName();
     $variables['child_nodes'] = views_embed_view('grundsalg_node_children', 'block_1', $node->id());
   }
-}
 
+  // Render contact block on the contact page only.
+  $current_path = \Drupal::request()->getRequestUri();
+  if ($current_path == '/kontaktoplysninger') {
+    $block = \Drupal\block\Entity\Block::load('contactblock');
+    $variables['contactblock'] = \Drupal::entityManager()
+      ->getViewBuilder('block')
+      ->view($block);
+  }
+}
 
 /**
  * Implements hook_preprocess_field().
@@ -81,6 +89,13 @@ function grundsalg_preprocess_field(&$variables) {
   switch ($variables['element']['#field_name']) {
     case 'field_itk_media_mime_type' :
       $variables['mime_type'] = $variables['element']['0']['#context']['value'];
+      break;
+
+    case 'field_docs_external_link':
+      // Add class to a tags in document box.
+      foreach ($variables['items'] as &$item) {
+        $item['content']['#attributes']['class'] = array('content-box--link-with-icon-text');
+      }
       break;
   }
 }

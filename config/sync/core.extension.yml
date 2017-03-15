@@ -4,6 +4,8 @@ module:
   ckeditor: 0
   config: 0
   config_translation: 0
+  contact: 0
+  contact_block: 0
   ctools: 0
   datetime: 0
   dblog: 0

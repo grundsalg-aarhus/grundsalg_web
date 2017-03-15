@@ -88,6 +88,11 @@
         <div class="content-box--content has-spacing">
           <div class="content-wysiwyg">
             {{ content.field_body }}
+            {% if contactblock is defined %}
+            <div class="contact-form">
+              {{ contactblock }}
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>

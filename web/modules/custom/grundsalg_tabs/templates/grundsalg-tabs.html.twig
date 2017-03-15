@@ -10,7 +10,7 @@
 
 <div class="tabs">
   {% if map %}
-    <a href="#/map" class="tabs--tab {{ classes }}">
+    <a href="#/map" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/map'}">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
@@ -30,7 +30,7 @@
     </a>
   {% endif %}
   {% if images %}
-    <a href="#/images" class="tabs--tab {{ classes }}">
+    <a href="#/images" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/images'}">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <title>
@@ -53,7 +53,7 @@
     </a>
   {% endif %}
   {% if video %}
-    <a href="#/video" class="tabs--tab {{ classes }}">
+    <a href="#/video" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/video'}">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <title>
@@ -75,7 +75,7 @@
     </a>
   {% endif %}
   {% if coordinates %}
-    <a href="#/streetview" class="tabs--tab {{ classes }}">
+    <a href="#/streetview" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/streetview'}">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>

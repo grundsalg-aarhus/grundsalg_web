@@ -353,7 +353,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
           source: dataSource,
           style: new ol.style.Style({
             fill: new ol.style.Fill({
-              color: 'rgba(255,255,255,0.8)'
+              color: 'rgba(255, 255, 255, 0.55)'
             }),
             stroke: new ol.style.Stroke({
               color: '#000',
@@ -424,6 +424,20 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
               for (var i in properties) {
                 scope.content[i] = properties[i];
               }
+
+              /**
+               * Place number separators in a number.
+               *
+               * @param {int} x
+               *   The input number.
+               * @returns {string}
+               *   The number as a string with separators in place.
+               */
+              scope.numberWithSeparator = function numberWithSeparator(x) {
+                var parts = x.toString().split(".");
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                return parts.join(",");
+              };
 
               /**
                * Close the popup.

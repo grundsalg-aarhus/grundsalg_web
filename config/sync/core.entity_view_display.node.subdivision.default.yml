@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.subdivision.field_body
     - field.field.node.subdivision.field_city_reference
     - field.field.node.subdivision.field_coordinate
+    - field.field.node.subdivision.field_docs_external_link
     - field.field.node.subdivision.field_media_document
     - field.field.node.subdivision.field_media_image
     - field.field.node.subdivision.field_parent
@@ -17,6 +18,7 @@ dependencies:
     - field.field.node.subdivision.field_youtube
     - node.type.subdivision
   module:
+    - link
     - text
     - user
     - youtube
@@ -45,8 +47,19 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-  field_media_document:
+  field_docs_external_link:
     weight: 4
+    label: hidden
+    settings:
+      trim_length: null
+      rel: nofollow
+      target: _blank
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+    type: link
+  field_media_document:
+    weight: 3
     label: hidden
     settings:
       view_mode: shown_in_file_list
@@ -75,7 +88,7 @@ content:
     third_party_settings: {  }
     type: string
   field_youtube:
-    weight: 3
+    weight: 2
     label: above
     settings:
       youtube_size: 450x315

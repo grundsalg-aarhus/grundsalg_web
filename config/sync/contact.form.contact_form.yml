@@ -1,0 +1,20 @@
+uuid: 129f0cfc-9468-4349-96ef-72a18842df7c
+langcode: da
+status: true
+dependencies:
+  module:
+    - contact_ajax
+third_party_settings:
+  contact_ajax:
+    enabled: true
+    prefix_id: ''
+    render_selector: ''
+    confirmation_type: 1
+id: contact_form
+label: 'Kontakt formular'
+recipients:
+  - wwwadmin@mkb.aarhus.dk
+reply: ''
+weight: 0
+message: 'Tak for din henvendelse vi vender tilbage hurtigste muligt'
+redirect: ''

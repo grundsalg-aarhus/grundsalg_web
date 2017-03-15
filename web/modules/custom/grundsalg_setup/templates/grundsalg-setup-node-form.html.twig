@@ -17,14 +17,14 @@
 #}
 <div class="layout-node-form clearfix">
   <div class="layout-region layout-region-node-main">
-    {{ form|without('advanced', 'actions', 'group_type', 'group_teaser', 'group_postalcode', 'field_media_document', 'group_block_reference') }}
+    {{ form|without('advanced', 'actions', 'group_type', 'group_teaser', 'group_postalcode', 'group_dokumenter', 'group_block_reference') }}
   </div>
   <div class="layout-region layout-region-node-secondary">
     {{ form.advanced }}
     {{ form.group_type }}
     {{ form.group_postalcode }}
     {{ form.group_block_reference }}
-    {{ form.field_media_document }}
+    {{ form.group_dokumenter }}
     {{ form.group_teaser }}
   </div>
   <div class="layout-region layout-region-node-footer">
