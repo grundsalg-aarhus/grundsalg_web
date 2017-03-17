@@ -1,6 +1,7 @@
 uuid: 129f0cfc-9468-4349-96ef-72a18842df7c
 langcode: da
 status: true
+dependencies: {  }
 third_party_settings:
   contact_ajax:
     enabled: true

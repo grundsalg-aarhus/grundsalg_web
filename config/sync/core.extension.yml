@@ -53,7 +53,6 @@ module:
   metatag: 0
   node: 0
   page_cache: 0
-  paragraphs: 0
   path: 0
   redirect: 0
   redirect_404: 0
@@ -73,6 +72,7 @@ module:
   menu_link_content: 1
   pathauto: 1
   views: 10
+  paragraphs: 11
   itkore: 1000
 theme:
   stark: 0

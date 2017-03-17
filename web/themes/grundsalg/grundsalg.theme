@@ -110,7 +110,10 @@ function grundsalg_preprocess_file_link(&$variables) {
   else {
     $link_text = $variables['description'];
   }
+
   $options['attributes']['class'] = 'content-box--link-with-icon-text';
+  $options['attributes']['target'] = '_blank';
+
   $url = file_create_url($variables['file']->getFileUri());
   $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
 }
