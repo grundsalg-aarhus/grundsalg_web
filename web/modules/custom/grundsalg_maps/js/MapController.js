@@ -890,10 +890,33 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     var map = initOpenlayersMap();
 
     /**
+     * Calculates the extent that should be used to limit the map.
+     *
+     * It has a minimum extent size that should be used if the current we is smaller
+     * than that.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     *
+     * @return extent
+     *   The extent that the map should be limited to.
+     */
+    function calculateExtent(map) {
+      var currentExtent = view.calculateExtent(map.getSize())
+      var minExtentLimit = [489831.209185,6183840.13897,660429.609185,6264633.738969999];
+
+      if (!ol.extent.containsExtent(currentExtent, minExtentLimit)) {
+        return minExtentLimit;
+      }
+
+      return currentExtent;
+    }
+
+    /**
      * Helper function to restrict pan in the maps.
      */
     var view = map.getView();
-    var extent = config.extent === 'auto' ? view.calculateExtent(map.getSize()) : config.extent;
+    var extent = config.extent === 'auto' ? calculateExtent(map) : config.extent;
     view.on('change:center', function () {
       var visible = view.calculateExtent(map.getSize());
       var centre = view.getCenter();

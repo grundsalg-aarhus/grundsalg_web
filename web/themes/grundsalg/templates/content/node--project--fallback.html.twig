@@ -95,7 +95,7 @@
   {% set link_classes = 'is-storparcel' %}
 {% endif %}
 
-<a {{ content_attributes.addClass(item_classes) }} href="{{ content.field_external_link[0]['#plain_text'] }}" title="{{ label }}">
+<a {{ content_attributes.addClass(item_classes) }} href="{{ content.field_external_link[0]['#plain_text'] }}" title="{{ label }}" target="_blank">
   {{ title_prefix }}
   {{ title_suffix }}
   {{ content.field_teaser_image }}

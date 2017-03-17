@@ -152,3 +152,16 @@ function grundsalg_setup_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'grundsalg_setup/picturefill';
   }
 }
+
+/**
+ * Implements hook_from_FORM_form_alter().
+ *
+ * Changes the contact form.
+ */
+function grundsalg_setup_form_contact_message_form_alter(&$form, &$form_state, $form_id) {
+  // Disable "copy" for logged in users as well.
+  $form['copy']['#access'] = FALSE;
+
+  // Remove preview button.
+  unset($form['actions']['preview']);
+}

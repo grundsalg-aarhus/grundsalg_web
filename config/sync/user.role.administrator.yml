@@ -56,3 +56,4 @@ permissions:
   - 'administer toolbar visibility'
   - 'administer account settings'
   - 'administer permissions'
+  - 'administer redirect settings'
