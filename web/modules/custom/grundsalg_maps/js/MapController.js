@@ -498,20 +498,20 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
                     ) + offset_width;
 
                   // Calculate if the popup is outside the view area.
-                  var height_left = mapSize[1] - clicked_pixel[1] - popup_height;
-                  var width_left = mapSize[0] - clicked_pixel[0] - popup_width;
+                  var remaining_height = mapSize[1] - clicked_pixel[1] - popup_height;
+                  var remaining_width = mapSize[0] - clicked_pixel[0] - popup_width;
 
                   // Get current view and map center.
                   var view = map.getView();
                   var center_px = map.getPixelFromCoordinate(view.getCenter());
 
                   // Check if we are outside map view.
-                  if (height_left < 0 || width_left < 0) {
-                    if (height_left < 0) {
-                      center_px[1] -= height_left;
+                  if (remaining_height < 0 || remaining_width < 0) {
+                    if (remaining_height < 0) {
+                      center_px[1] -= remaining_height;
                     }
-                    if (width_left < 0) {
-                      center_px[0] -= width_left;
+                    if (remaining_width < 0) {
+                      center_px[0] -= remaining_width;
                     }
 
                     view.animate({
@@ -782,7 +782,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       });
     }
 
-
     /**
      * Add plots to the map.
      *
@@ -902,8 +901,8 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   The extent that the map should be limited to.
      */
     function calculateExtent(map) {
-      var currentExtent = view.calculateExtent(map.getSize())
-      var minExtentLimit = [489831.209185,6183840.13897,660429.609185,6264633.738969999];
+      var currentExtent = view.calculateExtent(map.getSize());
+      var minExtentLimit = [474778.409185, 6184044.93897, 675482.409185, 6264428.93897];
 
       if (!ol.extent.containsExtent(currentExtent, minExtentLimit)) {
         return minExtentLimit;
