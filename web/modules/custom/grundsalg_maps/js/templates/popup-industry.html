@@ -5,13 +5,7 @@
   <div class="popup--content-wrapper">
     <h3 class="popup--title">{{ content.Navn }}</h3>
     <div class="popup--metadata">
-      <p class="popup--key">{{ Drupal.t('Branch') }}</p>
-      <p class="popup--value">{{ content.Branche }}</p>
-    </div>
-    <div class="popup--metadata">
-      <p class="popup--key">{{ Drupal.t('Address') }}</p>
-      <p class="popup--value">{{ content.Adresse }}</p>
-      <p class="popup--value">{{ content.PostNummer }} {{ content.PostDistrikt }}</p>
+      <p class="popup--value">{{ content.Adresse }}, {{ content.PostNummer }} {{ content.PostDistrikt }}</p>
     </div>
   </div>
 </div>
