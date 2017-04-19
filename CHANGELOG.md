@@ -1,6 +1,8 @@
 # Changelog for grundsalg project
 
 ## In development
+
+## 1.0.2
 * Fixed styling of map popup overlay and legend on smaller devices 
 
 ## 1.0.1
