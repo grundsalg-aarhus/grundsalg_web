@@ -215,8 +215,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   Matrix IDs
      * @param {array} resolutions
      *   Maps resolutions.
-     * @param {string} layer
-     *   The layer to fetch form the service.
      */
     function addDagiLayer(map, matrixIds, resolutions, layer) {
       getTicket().then(function (ticket) {
@@ -287,6 +285,46 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         layer.setZIndex(-5);
         map.addLayer(layer);
       });
+    }
+
+    /**
+     * Add road names and numbers.
+     *
+     * @param {ol.Map} map
+     *   The OpenLayers map object.
+     * @param {array} matrixIds
+     *   Matrix IDs
+     * @param {array} resolutions
+     *   Maps resolutions.
+     */
+    function addRoadnamesAndNumbersLayer(map, matrixIds, resolutions) {
+      var projection = getProjectionEPSG25832();
+
+      var layer = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.TileWMS({
+          url: 'http://webkort.aarhuskommune.dk/wms',
+          params: {
+            VERSION: '1.0',
+            LAYERS: 'theme-vejmidter_tot_txt-90800',
+            FORMAT: 'image/png',
+            STYLES: 'default',
+            SERVICE:'WMS',
+            SERVICENAME: 'wms_services',
+            TRANSPARENT: 'TRUE',
+            REQUEST: 'GetMap',
+            SRS: 'EPSG:25832'
+          },
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(projection.getExtent()),
+            resolutions: resolutions,
+            matrixIds: matrixIds
+          }),
+          projection: projection
+        })
+      });
+
+      map.addLayer(layer);
     }
 
     /**
@@ -1029,6 +1067,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         break;
 
       case 'subdivision':
+        addRoadnamesAndNumbersLayer(map, matrixIds, resolutions);
         addOrtofotoLayer(map, matrixIds, resolutions);
         addMunicipalitiesFadeLayer(map);
         addMatrikelLayer(map, matrixIds, resolutions);
