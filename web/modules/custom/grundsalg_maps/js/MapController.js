@@ -968,7 +968,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         var layerSwitcher = new ol.control.LayerSwitcher();
         map.addControl(layerSwitcher);
 
-        // Create layer collection - Butikker.
+        // Create layer collection - Dagligvarer.
         var colStores = new ol.Collection();
         addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
         addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
@@ -1037,7 +1037,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         var layerSwitcher = new ol.control.LayerSwitcher();
         map.addControl(layerSwitcher);
 
-        // Create layer collection - Butikker.
+        // Create layer collection - Dagligvarer.
         var colStores = new ol.Collection();
         addIndustryLayer(map, colStores, 471110, 'Købmænd og døgnkiosker');
         addIndustryLayer(map, colStores, 471120, 'Supermarkeder');
@@ -1045,7 +1045,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
         // Create layer group based on store collection.
         var layerGroupStore = new ol.layer.Group({
-          title: 'Butikker',
+          title: 'Dagligvarer',
           combine: true,
           visible: false
         });
@@ -1056,7 +1056,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
         var colSchools = new ol.Collection();
         addInstitutionLayer(map, colSchools, 'specskole', 'Specialskole');
         addInstitutionLayer(map, colSchools, 'skole', 'Skoler');
-        addInstitutionLayer(map, colSchools, 'sfo', 'SFO');
         addInstitutionLayer(map, colSchools, 'privskole', 'Private skole');
 
         // Create layer group based on store collection.
