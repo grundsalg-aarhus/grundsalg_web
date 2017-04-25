@@ -60,7 +60,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
           deferred.resolve(ticket);
         },
-        function err(err) {
+        function error(err) {
           deferred.reject(err);
         });
       }
@@ -559,7 +559,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
                   }
                 });
               });
-            }, function (err) {
+            }, function error(err) {
               console.error(err);
             });
           }
