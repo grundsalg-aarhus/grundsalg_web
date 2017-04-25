@@ -1,5 +1,31 @@
 # Changelog for grundsalg project
 
+## In development
+
+## 1.0.2
+* Fixed styling of map popup overlay and legend on smaller devices 
+
+## 1.0.1
+* Update missing
+
+## 1.0.0
+* Update missing
+
+## 1.0.0-rc5
+* Update missing
+
+## 1.0.0-rc4
+* Update missing
+
+## 1.0.0-rc3
+* Update missing
+
+## 1.0.0-rc2
+* Update missing
+
+## 1.0.0-rc1
+* Update missing
+
 ## 1.0.0-alpha3
 * Added more translations
 * Removed rights to create subdivisions
