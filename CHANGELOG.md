@@ -1,6 +1,10 @@
 # Changelog for grundsalg project
 
 ## In development
+* Added road names and house number map layer.
+* Fixed map layer switcher labels
+* Fixed more links in "Erhver" and "Storparcell" popup boxes
+* Fixed maps displaying on old ipads
 
 ## 1.0.2
 * Fixed styling of map popup overlay and legend on smaller devices 
