@@ -165,3 +165,32 @@ function grundsalg_setup_form_contact_message_form_alter(&$form, &$form_state, $
   // Remove preview button.
   unset($form['actions']['preview']);
 }
+
+/**
+ * Implements hook_mail_alter().
+ *
+ * Alter the contact mail with better formatted context.
+ */
+function grundsalg_setup_mail_alter(&$message) {
+
+  // Process only 'contact_page_mail' messages
+  if ($message['id'] != 'contact_page_mail') {
+    return;
+  }
+
+  $contactMessage = $message['params']['contact_message'];
+
+  $message['subject'] = '[' . $contactMessage->get('field_contact_subject')->getString() . '] ' . $contactMessage->get('subject')->getString();
+  $message['body'] = [];
+  $message['body'][] = t('Name: @name', array(
+    '@name' => $contactMessage->get('name')->getString()
+  ), array('context' => 'mail'));
+  $message['body'][] = t('Phone number: @phone', array(
+    '@phone' => $contactMessage->get('field_phone_number')->getString()
+  ), array('context' => 'mail'));
+  $message['body'][] = t('Mail: @mail', array(
+    '@mail' => $contactMessage->get('mail')->getString()
+  ), array('context' => 'mail'));
+  $message['body'][] = t('Message:', array(), array('context' => 'mail'));
+  $message['body'][] = $contactMessage->get('message')->getString();
+}

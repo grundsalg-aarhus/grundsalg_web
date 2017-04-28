@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - contact.form.contact_form
+    - field.field.contact_message.contact_form.field_contact_subject
     - field.field.contact_message.contact_form.field_phone_number
   module:
     - maxlength
@@ -12,12 +13,13 @@ targetEntityType: contact_message
 bundle: contact_form
 mode: default
 content:
-  copy:
-    weight: 5
+  field_contact_subject:
+    weight: 2
     settings: {  }
     third_party_settings: {  }
+    type: options_select
   field_phone_number:
-    weight: 3
+    weight: 4
     settings:
       size: 14
       placeholder: ''
@@ -32,7 +34,7 @@ content:
     third_party_settings: {  }
   message:
     type: string_textarea
-    weight: 4
+    weight: 5
     settings:
       rows: 12
       placeholder: ''
@@ -46,14 +48,14 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
-  preview:
-    weight: 40
   subject:
     type: string_textfield
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  copy: true
   langcode: true
+  preview: true
