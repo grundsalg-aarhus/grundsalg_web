@@ -1,0 +1,30 @@
+uuid: d9fdd8aa-0097-4ef5-b413-78a5271a4cb1
+langcode: da
+status: true
+dependencies:
+  module:
+    - contact
+    - options
+id: contact_message.field_contact_subject
+field_name: field_contact_subject
+entity_type: contact_message
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Villagrunde
+      label: Villagrunde
+    -
+      value: Storparceller
+      label: Storparceller
+    -
+      value: Erhvervsgrunde
+      label: Erhvervsgrunde
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

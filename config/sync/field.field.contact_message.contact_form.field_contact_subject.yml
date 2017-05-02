@@ -1,0 +1,23 @@
+uuid: 2b28c795-ffdd-4c2b-9024-a97a67b8d33f
+langcode: da
+status: true
+dependencies:
+  config:
+    - contact.form.contact_form
+    - field.storage.contact_message.field_contact_subject
+  module:
+    - options
+id: contact_message.contact_form.field_contact_subject
+field_name: field_contact_subject
+entity_type: contact_message
+bundle: contact_form
+label: Angående
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Villagrunde
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -11,7 +11,7 @@ third_party_settings:
 id: contact_form
 label: 'Kontakt formular'
 recipients:
-  - wwwadmin@mkb.aarhus.dk
+  - grundsalg@mtm.aarhus.dk
 reply: ''
 weight: 0
 message: 'Tak for din henvendelse vi vender tilbage hurtigste muligt'
