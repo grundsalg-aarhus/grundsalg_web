@@ -21,6 +21,7 @@ platform drush-aliases
 
 Pull database:
 ```sh
+cd /vagrant/htdocs/web
 drush pull-prod
 ```
 
