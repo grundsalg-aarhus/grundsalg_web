@@ -135,6 +135,11 @@ Setting a branch to use develop as parent (using the branch you have checked out
 platform environment:info parent develop
 ```
 
+Activate environment
+```sh
+platform environment:activate environment_name
+```
+
 Pushing develop
 ```sh
 git push platform develop       # or master
