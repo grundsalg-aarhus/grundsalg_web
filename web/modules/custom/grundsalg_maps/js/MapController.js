@@ -899,7 +899,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
 
           // Add the layer to the map.
           map.addLayer(dataLayer);
-          map.getView().fit(dataSource.getExtent(), map.getSize());
+          map.getView().fit(dataSource.getExtent(), { "size": map.getSize(), "maxZoom": 12});
         }
       }, function error(err) {
         console.error(err);
