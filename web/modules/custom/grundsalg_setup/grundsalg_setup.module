@@ -183,14 +183,14 @@ function grundsalg_setup_mail_alter(&$message) {
   $message['subject'] = '[' . $contactMessage->get('field_contact_subject')->getString() . '] ' . $contactMessage->get('subject')->getString();
   $message['body'] = [];
   $message['body'][] = t('Name: @name', array(
-    '@name' => $contactMessage->get('name')->getString()
+    '@name' => trim($contactMessage->get('name')->getString())
   ), array('context' => 'mail'));
   $message['body'][] = t('Phone number: @phone', array(
-    '@phone' => $contactMessage->get('field_phone_number')->getString()
+    '@phone' => trim($contactMessage->get('field_phone_number')->getString())
   ), array('context' => 'mail'));
   $message['body'][] = t('Mail: @mail', array(
-    '@mail' => $contactMessage->get('mail')->getString()
+    '@mail' => trim($contactMessage->get('mail')->getString())
   ), array('context' => 'mail'));
   $message['body'][] = t('Message:', array(), array('context' => 'mail'));
-  $message['body'][] = $contactMessage->get('message')->getString();
+  $message['body'][] = trim($contactMessage->get('message')->getString());
 }
