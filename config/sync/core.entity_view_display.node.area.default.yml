@@ -32,12 +32,14 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
   field_body:
     weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
   field_city_reference:
     weight: 4
     label: above
@@ -45,6 +47,7 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   field_coordinate:
     weight: 5
     label: above
@@ -52,6 +55,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_media_image:
     weight: 1
     label: hidden
@@ -60,6 +64,7 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
   field_streetview_coordinate:
     weight: 6
     label: above
@@ -67,6 +72,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_youtube:
     weight: 3
     label: above
@@ -82,6 +88,7 @@ content:
       youtube_iv_load_policy: false
     third_party_settings: {  }
     type: youtube_video
+    region: content
 hidden:
   field_parent: true
   field_plot_type: true

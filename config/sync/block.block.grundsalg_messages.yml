@@ -10,7 +10,7 @@ _core:
   default_config_hash: 20RmvGPY4UHWTvHkJ9Iu-iNl9I2ThGe2CsfvHNhwjG4
 id: grundsalg_messages
 theme: grundsalg
-region: '-1'
+region: hamburger
 weight: -4
 provider: null
 plugin: system_messages_block

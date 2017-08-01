@@ -476,7 +476,7 @@ display:
           settings:
             format: custom
             format_custom_true: Publiseret
-            format_custom_false: Upubliseret
+            format_custom_false: Unpublished
           group_column: value
           group_columns: {  }
           group_rows: true

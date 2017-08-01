@@ -11,7 +11,7 @@ dependencies:
     - grundsalg
 id: contactblock
 theme: grundsalg
-region: '-1'
+region: hamburger
 weight: 0
 provider: null
 plugin: contact_block

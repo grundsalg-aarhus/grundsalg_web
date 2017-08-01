@@ -398,7 +398,7 @@ display:
           type: boolean
           settings:
             format: custom
-            format_custom_false: Temporary
+            format_custom_false: Midlertidig
             format_custom_true: Permanent
           plugin_id: field
           entity_type: file

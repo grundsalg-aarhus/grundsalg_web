@@ -30,6 +30,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
   thumbnail:
     type: image
     weight: 0
@@ -38,6 +39,7 @@ content:
       image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_itk_media_height: true

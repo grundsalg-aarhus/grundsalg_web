@@ -22,11 +22,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_youtube:
     weight: 1
     settings: {  }
     third_party_settings: {  }
     type: youtube
+    region: content
 hidden:
   created: true
   status: true
