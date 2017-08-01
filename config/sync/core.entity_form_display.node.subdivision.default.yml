@@ -129,6 +129,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
   field_city_reference:
     weight: 4
     settings:
@@ -137,6 +138,7 @@ content:
       placeholder: 'Postnr. eller by'
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
   field_coordinate:
     weight: 28
     settings:
@@ -144,6 +146,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_docs_external_link:
     weight: 8
     settings:
@@ -151,6 +154,7 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
   field_media_document:
     weight: 7
     settings:
@@ -164,6 +168,7 @@ content:
       field_widget_edit: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
   field_media_image:
     weight: 1
     settings:
@@ -177,11 +182,13 @@ content:
       open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
   field_plot_type:
     type: options_buttons
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_streetview_coordinate:
     weight: 29
     settings:
@@ -189,6 +196,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_subdivision_id:
     weight: 9
     settings:
@@ -196,6 +204,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
   field_teaser:
     weight: 27
     settings:
@@ -208,6 +217,7 @@ content:
         maxlength_js_enforce: false
         maxlength_js_truncate_html: false
     type: string_textarea
+    region: content
   field_teaser_image:
     weight: 26
     settings:
@@ -221,11 +231,13 @@ content:
       field_widget_edit: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
   field_youtube:
     weight: 8
     settings: {  }
     third_party_settings: {  }
     type: youtube
+    region: content
   title:
     type: string_textfield
     weight: 0
@@ -233,6 +245,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_parent: true

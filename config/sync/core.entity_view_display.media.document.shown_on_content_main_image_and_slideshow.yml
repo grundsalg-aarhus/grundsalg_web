@@ -32,12 +32,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+    region: content
   field_itk_media_file_upload:
     type: file_default
     weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_itk_media_mime_type:
     weight: 3
     label: above
@@ -45,6 +47,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_itk_media_size:
     weight: 4
     label: above
@@ -52,6 +55,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_itk_media_tag:
     weight: 6
     label: above
@@ -59,6 +63,7 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
   name:
     label: hidden
     type: string
@@ -66,6 +71,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    region: content
   thumbnail:
     type: image
     weight: 2
@@ -74,6 +80,7 @@ content:
       image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   langcode: true
   uid: true

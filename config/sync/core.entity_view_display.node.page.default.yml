@@ -27,12 +27,14 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
   field_body:
     weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
   field_media_image:
     weight: 2
     label: hidden
@@ -41,6 +43,7 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
 hidden:
   field_teaser: true
   field_teaser_image: true

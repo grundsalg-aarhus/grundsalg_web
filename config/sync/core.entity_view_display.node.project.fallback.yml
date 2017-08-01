@@ -24,6 +24,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_external_link:
     weight: 103
     label: above
@@ -35,12 +36,14 @@ content:
       target: '0'
     third_party_settings: {  }
     type: link
+    region: content
   field_teaser:
     weight: 102
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
   field_teaser_image:
     weight: 101
     label: above
@@ -49,9 +52,11 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
   links:
     weight: 100
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   langcode: true

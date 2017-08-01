@@ -10,7 +10,7 @@ _core:
   default_config_hash: 862sIulDdHmF0vBU1s2j2_a_CwkxursrL0pIrMDzzOg
 id: adminimal_theme_login
 theme: adminimal_theme
-region: '-1'
+region: header
 weight: -3
 provider: null
 plugin: user_login_block

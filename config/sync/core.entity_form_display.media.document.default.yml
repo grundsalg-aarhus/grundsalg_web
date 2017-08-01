@@ -26,11 +26,13 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
+    region: content
   field_itk_media_tag:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
   name:
     type: string_textfield
     weight: 0
@@ -38,6 +40,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_itk_media_mime_type: true

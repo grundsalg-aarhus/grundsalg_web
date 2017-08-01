@@ -22,6 +22,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_youtube:
     weight: 1
     label: hidden
@@ -37,6 +38,7 @@ content:
       youtube_iv_load_policy: false
     third_party_settings: {  }
     type: youtube_video
+    region: content
 hidden:
   created: true
   uid: true
