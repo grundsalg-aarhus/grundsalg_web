@@ -93,6 +93,11 @@
             "drush/contrib/{$name}": [
                 "type:drupal-drush"
             ]
+        },
+        "patches": {
+            "drupal/role_delegation": {
+                "https://www.drupal.org/node/2862360": "https://www.drupal.org/files/issues/2862360-Lock-down-assignable-permissions-in-the-VBO-action-12.patch"
+            }
         }
     }
 }
