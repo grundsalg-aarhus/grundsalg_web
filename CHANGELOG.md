@@ -1,6 +1,13 @@
 # Changelog for grundsalg project
 
-## In development
+## 1.1.1
+* GRUND-409: Updated itk_media_entity to 1.1.9
+* GRUND-409: Updated core to 8.3.5
+* GRUND-409: Changed display of document entity
+* GRUND-409: Added hotfix https://www.drupal.org/node/2862360 for role delegation module
+
+
+## 1.1.0
 * Added road names and house number map layer
 * Fixed map layer switcher labels
 * Fixed more links in "Erhverv" and "Storparcel" popup boxes
