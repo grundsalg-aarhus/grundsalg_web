@@ -30,7 +30,7 @@
         "drupal/itkore-theme": "dev-master",
         "drupal/entityqueue": "1.x-dev",
         "drupal/maxlength": "1.x-dev",
-        "drupal/itk_media_entity": "^1.1",
+        "drupal/itk_media_entity": "1.1.9",
         "lcobucci/jwt": "^3.2",
         "proj4php/Proj4php": "^2.0",
         "drupal/view_unpublished": "^1.0@alpha",
