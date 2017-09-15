@@ -81,7 +81,7 @@
 
 <div class="content-boxes">
   <div class="content-boxes--inner contextual-region">
-    <div class="content-box is-alpha">
+    <div class="content-box {{ content.field_block_reference['#object'] ? 'is-alpha' }}">
       <div class="content-box--inner">
         {{ title_prefix }}
         {{ title_suffix }}
@@ -89,19 +89,20 @@
           <div class="content-wysiwyg">
             {{ content.field_body }}
             {% if contactblock is defined %}
-            <div class="contact-form">
-              {{ contactblock }}
-            </div>
+              <div class="contact-form">
+                {{ contactblock }}
+              </div>
             {% endif %}
           </div>
         </div>
       </div>
     </div>
-
-    <div class="content-box is-beta">
-      <div class="content-box--inner">
-        {{ content.field_block_reference }}
+    {% if content.field_block_reference['#object'] %}
+      <div class="content-box is-beta">
+        <div class="content-box--inner">
+          {{ content.field_block_reference }}
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 </div>
