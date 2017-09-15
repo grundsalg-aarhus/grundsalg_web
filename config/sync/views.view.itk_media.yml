@@ -3,6 +3,7 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.storage.media.field_itk_media_mime_type
     - field.storage.media.field_itk_media_tag
     - image.style.thumbnail
     - system.menu.admin
@@ -93,12 +94,10 @@ display:
             media_bulk_form: media_bulk_form
             thumbnail__target_id: thumbnail__target_id
             name: name
-            bundle: bundle
+            field_itk_media_mime_type: field_itk_media_mime_type
             changed: changed
             field_itk_media_tag: field_itk_media_tag
             operations: operations
-            title: title
-            title_1: title
           info:
             media_bulk_form:
               align: ''
@@ -119,7 +118,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            bundle:
+            field_itk_media_mime_type:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -141,22 +140,6 @@ display:
               empty_column: false
               responsive: ''
             operations:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title_1:
-              sortable: false
-              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
@@ -340,18 +323,18 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        bundle:
-          id: bundle
-          table: media_field_data
-          field: bundle
+        field_itk_media_mime_type:
+          id: field_itk_media_mime_type
+          table: media__field_itk_media_mime_type
+          field: field_itk_media_mime_type
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Medie type'
+          label: 'Mime type'
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{% set type = field_itk_media_mime_type__value |split('/') %}\n{% if type['0'] == 'image' %}\n{% trans %}Image{% endtrans %}\n{%else%}\n{% trans %}Document{% endtrans %}\n{%endif%}"
             make_link: false
             path: ''
             absolute: false
@@ -388,11 +371,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: value
+          type: string
           settings:
-            link: false
-          group_column: target_id
+            link_to_entity: false
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -402,8 +385,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: media
-          entity_field: bundle
           plugin_id: field
         changed:
           id: changed
@@ -763,6 +744,7 @@ display:
         - user
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_itk_media_mime_type'
         - 'config:field.storage.media.field_itk_media_tag'
   media_page_list:
     display_plugin: page
@@ -792,4 +774,5 @@ display:
         - user
         - user.permissions
       tags:
+        - 'config:field.storage.media.field_itk_media_mime_type'
         - 'config:field.storage.media.field_itk_media_tag'
