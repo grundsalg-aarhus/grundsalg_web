@@ -30,6 +30,7 @@ permissions:
   - 'create itkore_event content'
   - 'create itkore_resource content'
   - 'create media'
+  - 'create news content'
   - 'create page content'
   - 'create project content'
   - 'create url aliases'
