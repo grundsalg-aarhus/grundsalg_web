@@ -29,7 +29,7 @@ content:
     weight: 103
     label: above
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: true
       url_plain: true
       rel: '0'
@@ -55,8 +55,8 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true
