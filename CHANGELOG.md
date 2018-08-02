@@ -1,5 +1,9 @@
 # Changelog for grundsalg project
 
+## 1.2.1
+* SERV-205: Updated drupal core to 8.5.6
+* SERV-205: Updated nodequeue to comply with new core
+
 ## 1.1.1
 * GRUND-409: Updated itk_media_entity to 1.1.9
 * GRUND-409: Updated core to 8.3.5
