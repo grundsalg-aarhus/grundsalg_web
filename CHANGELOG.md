@@ -1,5 +1,8 @@
 # Changelog for grundsalg project
 
+## 1.2.2
+* SERV-205: Changed php dependency to 7.2
+
 ## 1.2.1
 * SERV-205: Updated drupal core to 8.5.6
 * SERV-205: Updated nodequeue to comply with new core
