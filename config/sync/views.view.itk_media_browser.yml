@@ -403,6 +403,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               editor: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -511,7 +512,7 @@ display:
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -565,6 +566,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               editor: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -633,7 +635,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -937,6 +939,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               editor: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1042,7 +1045,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1061,7 +1064,7 @@ display:
       display_extenders: {  }
       display_description: ''
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

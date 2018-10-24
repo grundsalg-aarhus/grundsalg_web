@@ -35,7 +35,8 @@ content:
     weight: 2
     region: content
     label: above
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
   field_itk_media_tag:
     type: entity_reference_label
