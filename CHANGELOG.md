@@ -1,4 +1,7 @@
-# Changelog for grundsalg project
+'# Changelog for grundsalg project
+
+## 1.2.4
+* Updated drupal to 8.6.2.
 
 ## 1.2.3
 * Exported config from prod.
