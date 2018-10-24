@@ -5,6 +5,18 @@ definitions:
     parent: system.admin
     expanded: false
     weight: 9
+  system__admin_config_media:
+    menu_name: admin
+    parent: system.admin_config
+    weight: -10
+    expanded: false
+    enabled: true
+  entity__menu__collection:
+    menu_name: admin
+    parent: system.admin_structure
+    weight: 0
+    expanded: false
+    enabled: true
 _core:
   default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM
 langcode: da

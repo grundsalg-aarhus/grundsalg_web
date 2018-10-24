@@ -1,5 +1,8 @@
 # Changelog for grundsalg project
 
+## 1.2.3
+* Exported config from prod.
+
 ## 1.2.2
 * SERV-205: Changed php dependency to 7.2
 
