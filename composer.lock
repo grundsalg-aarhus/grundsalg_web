@@ -3603,16 +3603,16 @@
         },
         {
             "name": "itk-dev/itk_azure_video",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itk-dev/itk_azure_video.git",
-                "reference": "69f38f1705a4b6c749f77df2b518e6af0b5cd275"
+                "reference": "ffce420fb8271c8bddaf6dae9f34c33b7a584a26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itk-dev/itk_azure_video/zipball/69f38f1705a4b6c749f77df2b518e6af0b5cd275",
-                "reference": "69f38f1705a4b6c749f77df2b518e6af0b5cd275",
+                "url": "https://api.github.com/repos/itk-dev/itk_azure_video/zipball/ffce420fb8271c8bddaf6dae9f34c33b7a584a26",
+                "reference": "ffce420fb8271c8bddaf6dae9f34c33b7a584a26",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -3624,7 +3624,7 @@
             "keywords": [
                 "drupal"
             ],
-            "time": "2018-12-13T07:55:23+00:00"
+            "time": "2018-12-13T08:27:20+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
