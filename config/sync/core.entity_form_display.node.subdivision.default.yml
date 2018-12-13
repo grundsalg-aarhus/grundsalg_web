@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
     - field.field.node.subdivision.field_video
-    - field.field.node.subdivision.field_youtube
     - node.type.subdivision
   module:
     - entity_browser
@@ -25,7 +24,6 @@ dependencies:
     - itk_azure_video
     - link
     - text
-    - youtube
 third_party_settings:
   field_group:
     group_teaser:
@@ -83,16 +81,16 @@ third_party_settings:
     group_youtube:
       children:
         - field_video
-        - field_youtube
       parent_name: ''
       weight: 3
       format_type: details
       format_settings:
+        label: Video
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: Youtube
+      label: Video
     group_coordinate:
       children:
         - field_coordinate
@@ -242,12 +240,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: itk_azure_video_widget
-    region: content
-  field_youtube:
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    type: youtube
     region: content
   status:
     type: boolean_checkbox

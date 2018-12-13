@@ -16,7 +16,7 @@ dependencies:
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
-    - field.field.node.subdivision.field_youtube
+    - field.field.node.subdivision.field_video
     - node.type.subdivision
   module:
     - user
@@ -52,6 +52,6 @@ hidden:
   field_plot_type: true
   field_streetview_coordinate: true
   field_subdivision_id: true
-  field_youtube: true
+  field_video: true
   langcode: true
   links: true

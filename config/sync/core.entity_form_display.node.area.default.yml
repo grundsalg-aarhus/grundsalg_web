@@ -15,14 +15,12 @@ dependencies:
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
     - field.field.node.area.field_video
-    - field.field.node.area.field_youtube
     - node.type.area
   module:
     - entity_browser
     - field_group
     - itk_azure_video
     - text
-    - youtube
 third_party_settings:
   field_group:
     group_teaser:
@@ -81,17 +79,17 @@ third_party_settings:
       label: ''
     group_youtube:
       children:
-        - field_youtube
         - field_video
       parent_name: ''
       weight: 7
       format_type: details
       format_settings:
+        label: Video
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: Youtube
+      label: Video
     group_coordinate:
       children:
         - field_coordinate
@@ -215,12 +213,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: itk_azure_video_widget
-    region: content
-  field_youtube:
-    weight: 7
-    settings: {  }
-    third_party_settings: {  }
-    type: youtube
     region: content
   status:
     type: boolean_checkbox
