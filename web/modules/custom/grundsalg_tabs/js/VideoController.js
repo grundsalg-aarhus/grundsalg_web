@@ -3,17 +3,19 @@
  * Contains the Video Controller.
  */
 
-angular.module('grundsalg').controller('VideoController', ['$scope', '$sce',
-    function ($scope, $sce) {
+angular.module('grundsalg').controller('VideoController', ['$scope', '$timeout',
+    function ($scope, $timeout) {
       'use strict';
 
       // Set path from the backend.
       $scope.video = drupalSettings.grundsalg_tabs.video;
 
-      // Trust the i-frame for youtube.
-      if (drupalSettings.grundsalg_tabs.video) {
-        $scope.youtube = $sce.trustAsHtml('<iframe src="//www.youtube.com/embed/' + $scope.video + '?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>');
-      }
+      $timeout(function () {
+        var player = dashjs.MediaPlayer().create();
+        var element = document.querySelector(".itk-azure-video > video");
+
+        player.initialize(element, element.src, false);
+      }, 500);
     }
   ]
 );

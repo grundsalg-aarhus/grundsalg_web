@@ -13,9 +13,11 @@ dependencies:
     - field.field.node.area.field_streetview_coordinate
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
+    - field.field.node.area.field_video
     - field.field.node.area.field_youtube
     - node.type.area
   module:
+    - itk_azure_video
     - text
     - user
     - youtube
@@ -73,8 +75,19 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_youtube:
+  field_video:
     weight: 3
+    label: above
+    settings:
+      responsive: true
+      muted: false
+      autoplay: false
+      controls: true
+    third_party_settings: {  }
+    type: itk_azure_video_formatter
+    region: content
+  field_youtube:
+    weight: 2
     label: above
     settings:
       youtube_size: 450x315

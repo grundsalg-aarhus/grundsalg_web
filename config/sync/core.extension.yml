@@ -35,6 +35,7 @@ module:
   image: 0
   inline_entity_form: 0
   itk_admin_links: 0
+  itk_azure_video: 0
   itk_cookie_message: 0
   itk_hamburger_menu: 0
   itk_media_entity: 0

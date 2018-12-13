@@ -38,8 +38,11 @@ function grundsalg_tabs_preprocess_page(&$variables) {
       }
 
       // Add youtube link to js.
-      if (isset($variables['node']->field_youtube->video_id)) {
-        $variables['#attached']['drupalSettings']['grundsalg_tabs']['video'] = $variables['node']->field_youtube->video_id;
+      if (isset($variables['node']->field_video)) {
+        $render_array = $variables['node']->field_video->view('default');
+
+        $variables['#attached']['library'][] = 'itk_azure_video/azure-video';
+        $variables['#attached']['drupalSettings']['grundsalg_tabs']['video'] = \Drupal::service('renderer')->renderRoot($render_array);
       }
       else {
         $variables['video'] = FALSE;
