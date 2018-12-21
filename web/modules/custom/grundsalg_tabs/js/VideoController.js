@@ -14,7 +14,9 @@ angular.module('grundsalg').controller('VideoController', ['$scope', '$timeout',
         var player = dashjs.MediaPlayer().create();
         var element = document.querySelector(".itk-azure-video > video");
 
-        player.initialize(element, element.src, false);
+        if (element !== null && element.src !== '') {
+          player.initialize(element, element.src, false);
+        }
       }, 500);
     }
   ]
