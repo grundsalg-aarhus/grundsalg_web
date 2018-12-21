@@ -1,9 +1,11 @@
 angular:
+  css:
+    theme:
+      css/video.css: {}
   js:
     js/routing.js: {}
     js/VideoController.js: {}
     js/StreetviewController.js: {}
-
   dependencies:
     - grundsalg_angular/angular
     - grundsalg_slideshow/angular

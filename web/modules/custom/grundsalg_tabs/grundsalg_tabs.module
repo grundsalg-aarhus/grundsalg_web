@@ -37,8 +37,8 @@ function grundsalg_tabs_preprocess_page(&$variables) {
         $variables['images'] = FALSE;
       }
 
-      // Add youtube link to js.
-      if (isset($variables['node']->field_video)) {
+      // Add video link to js.
+      if (isset($variables['node']->field_video->value)) {
         $render_array = $variables['node']->field_video->view('default');
 
         $variables['#attached']['library'][] = 'itk_azure_video/azure-video';
