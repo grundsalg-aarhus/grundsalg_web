@@ -15,13 +15,13 @@ dependencies:
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
-    - field.field.node.subdivision.field_youtube
+    - field.field.node.subdivision.field_video
     - node.type.subdivision
   module:
+    - itk_azure_video
     - link
     - text
     - user
-    - youtube
 id: node.subdivision.default
 targetEntityType: node
 bundle: subdivision
@@ -35,7 +35,7 @@ content:
     type: text_default
     region: content
   field_city_reference:
-    weight: 6
+    weight: 7
     label: above
     settings:
       link: true
@@ -43,7 +43,7 @@ content:
     type: entity_reference_label
     region: content
   field_coordinate:
-    weight: 7
+    weight: 8
     label: above
     settings:
       link_to_entity: false
@@ -51,7 +51,7 @@ content:
     type: string
     region: content
   field_docs_external_link:
-    weight: 4
+    weight: 5
     label: hidden
     settings:
       trim_length: null
@@ -63,7 +63,7 @@ content:
     type: link
     region: content
   field_media_document:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       view_mode: shown_in_file_list
@@ -80,7 +80,7 @@ content:
     type: entity_reference_label
     region: content
   field_parent:
-    weight: 5
+    weight: 6
     label: above
     settings:
       link: true
@@ -88,28 +88,23 @@ content:
     type: entity_reference_label
     region: content
   field_streetview_coordinate:
-    weight: 8
+    weight: 9
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-  field_youtube:
-    weight: 2
+  field_video:
+    weight: 3
     label: above
     settings:
-      youtube_size: 450x315
-      youtube_width: ''
-      youtube_height: ''
-      youtube_autoplay: false
-      youtube_loop: false
-      youtube_showinfo: false
-      youtube_controls: false
-      youtube_autohide: false
-      youtube_iv_load_policy: false
+      responsive: true
+      muted: false
+      autoplay: false
+      controls: true
     third_party_settings: {  }
-    type: youtube_video
+    type: itk_azure_video_formatter
     region: content
 hidden:
   field_plot_type: true

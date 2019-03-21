@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.area.field_streetview_coordinate
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
-    - field.field.node.area.field_youtube
+    - field.field.node.area.field_video
     - node.type.area
   module:
     - user
@@ -55,6 +55,6 @@ hidden:
   field_media_image: true
   field_parent: true
   field_streetview_coordinate: true
-  field_youtube: true
+  field_video: true
   langcode: true
   links: true

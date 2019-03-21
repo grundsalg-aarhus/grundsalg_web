@@ -130,3 +130,18 @@ function grundsalg_setup_update_8010() {
   );
   \Drupal::service('module_installer')->install($module_list);
 }
+
+/**
+ * Add itk_azure_video and uninstall youtube.
+ */
+function grundsalg_setup_update_8011() {
+  $enable_modules = array(
+    'itk_azure_video',
+  );
+  \Drupal::service('module_installer')->install($enable_modules);
+
+  $disable_modules = array(
+    'youtube',
+  );
+  \Drupal::service('module_installer')->uninstall($disable_modules);
+}

@@ -14,13 +14,13 @@ dependencies:
     - field.field.node.area.field_streetview_coordinate
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
-    - field.field.node.area.field_youtube
+    - field.field.node.area.field_video
     - node.type.area
   module:
     - entity_browser
     - field_group
+    - itk_azure_video
     - text
-    - youtube
 third_party_settings:
   field_group:
     group_teaser:
@@ -79,16 +79,17 @@ third_party_settings:
       label: ''
     group_youtube:
       children:
-        - field_youtube
+        - field_video
       parent_name: ''
       weight: 7
       format_type: details
       format_settings:
+        label: Video
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: Youtube
+      label: Video
     group_coordinate:
       children:
         - field_coordinate
@@ -205,11 +206,13 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
-  field_youtube:
-    weight: 7
-    settings: {  }
+  field_video:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: youtube
+    type: itk_azure_video_widget
     region: content
   status:
     type: boolean_checkbox

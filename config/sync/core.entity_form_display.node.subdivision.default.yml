@@ -16,14 +16,14 @@ dependencies:
     - field.field.node.subdivision.field_subdivision_id
     - field.field.node.subdivision.field_teaser
     - field.field.node.subdivision.field_teaser_image
-    - field.field.node.subdivision.field_youtube
+    - field.field.node.subdivision.field_video
     - node.type.subdivision
   module:
     - entity_browser
     - field_group
+    - itk_azure_video
     - link
     - text
-    - youtube
 third_party_settings:
   field_group:
     group_teaser:
@@ -80,16 +80,17 @@ third_party_settings:
       label: By
     group_youtube:
       children:
-        - field_youtube
+        - field_video
       parent_name: ''
       weight: 3
       format_type: details
       format_settings:
+        label: Video
         id: ''
         classes: ''
         open: false
         required_fields: false
-      label: Youtube
+      label: Video
     group_coordinate:
       children:
         - field_coordinate
@@ -232,17 +233,19 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
-  field_youtube:
-    weight: 8
-    settings: {  }
+  field_video:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: youtube
+    type: itk_azure_video_widget
     region: content
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 10
     third_party_settings: {  }
     region: content
   title:
