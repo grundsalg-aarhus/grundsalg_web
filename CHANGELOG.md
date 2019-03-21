@@ -1,5 +1,9 @@
 # Changelog for grundsalg project
 
+## 1.2.7
+* Updated drupal to 8.6.13.
+* Updated contrib
+
 ## 1.2.6
 * Updated Paragraphs to 1.6.0
 
