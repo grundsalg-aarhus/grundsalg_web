@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c5e80a14361d736505577ce436d7802c",
+    "content-hash": "8d92a782ebbadf009a7ab5f7dfbcc882",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2919,17 +2919,17 @@
         },
         {
             "name": "drupal/paragraphs",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/paragraphs",
-                "reference": "8.x-1.6"
+                "reference": "8.x-1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "cd93e244f3a78dabdcf362adc31e59aad25b3fae"
+                "url": "https://ftp.drupal.org/files/projects/paragraphs-8.x-1.7.zip",
+                "reference": "8.x-1.7",
+                "shasum": "85f7a2ef0850dd9113fb57934986a5c31ee2b555"
             },
             "require": {
                 "drupal/core": "~8",
@@ -2939,7 +2939,7 @@
                 "drupal/block_field": "~1.0",
                 "drupal/ctools": "3.x-dev",
                 "drupal/diff": "~1.0",
-                "drupal/entity_browser": "1.x-dev",
+                "drupal/entity_browser": "2.x-dev",
                 "drupal/entity_usage": "2.x-dev",
                 "drupal/field_group": "~1.0",
                 "drupal/inline_entity_form": "~1.0",
@@ -2957,12 +2957,15 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.6",
+                    "version": "8.x-1.7",
                     "datestamp": "1553087589",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "https://www.drupal.org/project/paragraphs/issues/3041868": "https://www.drupal.org/files/issues/2019-03-21/paragraphs-update-endless-loop-3041868-16.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
