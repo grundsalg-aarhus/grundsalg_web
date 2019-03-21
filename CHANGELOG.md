@@ -1,5 +1,8 @@
 # Changelog for grundsalg project
 
+## 1.3.0
+* GRUND-461: Replaced Youtube with Azure Media Video
+
 ## 1.2.8
 * Updated Paragraphs to 1.7.0
 
