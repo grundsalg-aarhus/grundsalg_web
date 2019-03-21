@@ -13,12 +13,12 @@ dependencies:
     - field.field.node.area.field_streetview_coordinate
     - field.field.node.area.field_teaser
     - field.field.node.area.field_teaser_image
-    - field.field.node.area.field_youtube
+    - field.field.node.area.field_video
     - node.type.area
   module:
+    - itk_azure_video
     - text
     - user
-    - youtube
 id: node.area.default
 targetEntityType: node
 bundle: area
@@ -73,21 +73,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_youtube:
+  field_video:
     weight: 3
     label: above
     settings:
-      youtube_size: 450x315
-      youtube_width: ''
-      youtube_height: ''
-      youtube_autoplay: false
-      youtube_loop: false
-      youtube_showinfo: false
-      youtube_controls: false
-      youtube_autohide: false
-      youtube_iv_load_policy: false
+      responsive: true
+      muted: false
+      autoplay: false
+      controls: true
     third_party_settings: {  }
-    type: youtube_video
+    type: itk_azure_video_formatter
     region: content
 hidden:
   field_parent: true

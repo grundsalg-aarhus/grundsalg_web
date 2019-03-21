@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d92a782ebbadf009a7ab5f7dfbcc882",
+    "content-hash": "3020bad52214bb84de2ec0517cdf3821",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3686,6 +3686,31 @@
                 "url"
             ],
             "time": "2018-12-04T20:46:45+00:00"
+        },
+        {
+            "name": "itk-dev/itk_azure_video",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itk-dev/itk_azure_video.git",
+                "reference": "54cee41873d956a575997d6da9a52d914bec1d8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itk-dev/itk_azure_video/zipball/54cee41873d956a575997d6da9a52d914bec1d8e",
+                "reference": "54cee41873d956a575997d6da9a52d914bec1d8e",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Module that supplies an Azure Video Media Service field for Drupal 8",
+            "keywords": [
+                "drupal"
+            ],
+            "time": "2019-02-01T10:25:36+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

@@ -1,16 +1,16 @@
-uuid: f5878130-bd1d-4f03-b0e6-a98bc0e8896a
+uuid: c0f6c5bc-1979-458c-a0ab-449234350e12
 langcode: da
 status: true
 dependencies:
   module:
+    - itk_azure_video
     - node
-    - youtube
-id: node.field_youtube
-field_name: field_youtube
+id: node.field_video
+field_name: field_video
 entity_type: node
-type: youtube
+type: itk_azure_video_field
 settings: {  }
-module: youtube
+module: itk_azure_video
 locked: false
 cardinality: 1
 translatable: true

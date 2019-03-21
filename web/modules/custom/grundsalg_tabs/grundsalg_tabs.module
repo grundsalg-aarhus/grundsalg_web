@@ -37,9 +37,12 @@ function grundsalg_tabs_preprocess_page(&$variables) {
         $variables['images'] = FALSE;
       }
 
-      // Add youtube link to js.
-      if (isset($variables['node']->field_youtube->video_id)) {
-        $variables['#attached']['drupalSettings']['grundsalg_tabs']['video'] = $variables['node']->field_youtube->video_id;
+      // Add video link to js.
+      if (isset($variables['node']->field_video->value)) {
+        $render_array = $variables['node']->field_video->view('default');
+
+        $variables['#attached']['library'][] = 'itk_azure_video/azure-video';
+        $variables['#attached']['drupalSettings']['grundsalg_tabs']['video'] = \Drupal::service('renderer')->renderRoot($render_array);
       }
       else {
         $variables['video'] = FALSE;
