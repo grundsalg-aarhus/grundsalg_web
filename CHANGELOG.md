@@ -1,5 +1,10 @@
 # Changelog for grundsalg project
 
+## 1.3.2
+* SERV-234: Updated entityqueue module
+* SERV-234: Updated maxlength module
+* SERV-234: Uninstalled Obsolete config_translation module
+
 ## 1.3.1
 * SERV-234: Added System Status module
 
