@@ -1,17 +1,20 @@
 # Changelog for grundsalg project
 
+## 1.3.1
+* SERV-234: Added System Status module
+
 ## 1.3.0
 * GRUND-461: Replaced Youtube with Azure Media Video
 
 ## 1.2.8
-* Updated Paragraphs to 1.7.0
+* SERV-234: Updated Paragraphs to 1.7.0
 
 ## 1.2.7
-* Updated drupal to 8.6.13.
-* Updated contrib
+* SERV-234: Updated drupal to 8.6.13.
+* SERV-234: Updated contrib
 
 ## 1.2.6
-* Updated Paragraphs to 1.6.0
+* SERV-234: Updated Paragraphs to 1.6.0
 
 ## 1.2.5
 * Updated drupal to 8.6.10.
