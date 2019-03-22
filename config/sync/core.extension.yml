@@ -3,7 +3,6 @@ module:
   breakpoint: 0
   ckeditor: 0
   config: 0
-  config_translation: 0
   contact: 0
   contact_block: 0
   ctools: 0
