@@ -18,7 +18,7 @@ display: modal
 display_configuration:
   width: ''
   height: ''
-  link_text: 'Vælg billeder'
+  link_text: 'Vælg elementer'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
