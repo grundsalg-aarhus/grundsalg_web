@@ -1,4 +1,9 @@
-# Changelog for grundsalg project
+# Changelog for the "Grundsalg Aarhus" project
+
+## 1.3.3
+* SERV-234: Updated drupal core to 8.6.16
+* SERV-234: Updated role_delegation to alpha3
+* SERV-234: Updated contrib and composer packages
 
 ## 1.3.2
 * SERV-234: Updated entityqueue module
