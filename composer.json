@@ -20,13 +20,12 @@
         "composer/installers": "^1.2",
         "drupal-composer/drupal-scaffold": "^2.2",
         "cweagans/composer-patches": "~1.0",
-        "drupal/core": "8.6.*",
+        "drupal/core": "~8.7.0",
         "drupal/console": "~1.0",
         "drupal/itkore": "~1.0",
         "drupal/itkore-theme": "dev-master",
         "drupal/entityqueue": "^1.0@dev",
         "drupal/maxlength": "^1.0@dev",
-        "drupal/itk_media_entity": "1.1.9",
         "lcobucci/jwt": "^3.2",
         "proj4php/proj4php": "^2.0",
         "drupal/view_unpublished": "^1.0@alpha",
@@ -35,7 +34,8 @@
         "itk-dev/itk_azure_video": "~1.1",
         "drupal/system_status": "^2.8",
         "drupal/role_delegation": "^1.0@alpha",
-        "drush/drush": "^10.0"
+        "drush/drush": "^10.0",
+        "itk-dev/itk_media_entity": "^1.1"
     },
     "require-dev": {
         "behat/mink": "~1.7",
