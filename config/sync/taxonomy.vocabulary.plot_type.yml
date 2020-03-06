@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Plot type'
 vid: plot_type
 description: 'Different types of plots'
-hierarchy: 0
 weight: 0
