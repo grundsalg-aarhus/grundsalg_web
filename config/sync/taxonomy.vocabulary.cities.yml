@@ -5,5 +5,4 @@ dependencies: {  }
 name: Cities
 vid: cities
 description: ''
-hierarchy: 0
 weight: 0
