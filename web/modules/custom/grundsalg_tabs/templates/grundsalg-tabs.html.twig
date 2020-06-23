@@ -10,7 +10,7 @@
 
 <div class="tabs">
   {% if map %}
-    <a href="#/map" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/map'}">
+    <a href="#/map" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/map'}" aria-hidden="true">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
@@ -30,7 +30,7 @@
     </a>
   {% endif %}
   {% if images %}
-    <a href="#/images" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/images'}">
+    <a href="#/images" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/images'}" aria-hidden="true">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <title>
@@ -53,7 +53,7 @@
     </a>
   {% endif %}
   {% if video %}
-    <a href="#/video" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/video'}">
+    <a href="#/video" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/video'}" aria-hidden="true">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <title>
@@ -75,7 +75,7 @@
     </a>
   {% endif %}
   {% if coordinates %}
-    <a href="#/streetview" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/streetview'}">
+    <a href="#/streetview" class="tabs--tab {{ classes }}" ng-class="{'is-active': activetab=='/streetview'}" aria-hidden="true">
       <div class="tabs--tab-icon">
         <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
