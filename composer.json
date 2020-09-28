@@ -36,7 +36,8 @@
         "drupal/role_delegation": "^1.0@alpha",
         "drush/drush": "^10.0",
         "itk-dev/itk_media_entity": "^1.1",
-        "drupal/upgrade_status": "^2.7"
+        "drupal/upgrade_status": "^2.7",
+        "itk-dev/web_accessibility_statement": "dev-master"
     },
     "require-dev": {
         "behat/mink": "~1.7",
