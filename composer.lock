@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "383642a862ad428eda60d0896032228f",
+    "content-hash": "0a591f3f3f5d59a304470a7fdff78f3a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5032,6 +5032,25 @@
                 "drupal"
             ],
             "time": "2019-11-15T09:33:28+00:00"
+        },
+        {
+            "name": "itk-dev/web_accessibility_statement",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itk-dev/web_accessibility_statement.git",
+                "reference": "730c1b4f47d0a5ed6626a86814f84bd1027b2dd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itk-dev/web_accessibility_statement/zipball/730c1b4f47d0a5ed6626a86814f84bd1027b2dd4",
+                "reference": "730c1b4f47d0a5ed6626a86814f84bd1027b2dd4",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Provides path for accessibility statement",
+            "time": "2020-09-23T13:23:11+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -10273,6 +10292,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2017-12-04T08:55:13+00:00"
         },
         {
@@ -10843,7 +10863,8 @@
         "drupal/entityqueue": 20,
         "drupal/maxlength": 20,
         "drupal/view_unpublished": 15,
-        "drupal/role_delegation": 15
+        "drupal/role_delegation": 15,
+        "itk-dev/web_accessibility_statement": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
