@@ -303,7 +303,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       var layer = new ol.layer.Tile({
         opacity: 1.0,
         source: new ol.source.TileWMS({
-          url: 'http://webkort.aarhuskommune.dk/wms',
+          url: 'https://webkort.aarhuskommune.dk/wms',
           params: {
             VERSION: '1.0',
             LAYERS: 'theme-vejmidter_tot_txt-90800',
