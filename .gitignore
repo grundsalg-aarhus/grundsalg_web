@@ -18,4 +18,5 @@ web/sites/simpletest
 # Local setup files
 services.local.yml
 settings.local.php
+docker.settings.local.php
 

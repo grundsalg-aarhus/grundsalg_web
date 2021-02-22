@@ -1,28 +1,26 @@
 # Grundsalg Aarhus web
 
-#### Setup
+Site for [www.grundsalgaarhus.dk](https://www.grundsalgaarhus.dk/)
 
-Assuming you have followed the steps in 
-https://github.com/aakb/vagrant/blob/development/grundsalg_web/README.md, continue by completing the following: 
+## Installation instructions for development
+- Requires: https://github.com/aakb/itkdev-docker
 
-Connect with platform.sh:
-
-```sh
-cd /vagrant/htdocs
-platform    # login
-platform project:set-remote [Project ID]
+Setup Docker environment (Optional):
+```
+itkdev-docker-compose up -d
+```
+Get php packages
+```
+itkdev-docker-compose composer install
+```
+Setup local site configuration:
+```
+cp web/sites/default/_docker.settings.local.php web/sites/default/docker.settings.local.php
 ```
 
-Setup drush aliases:
-
-```sh
-platform drush-aliases
+## Sync files and DB
 ```
-
-Pull database:
-```sh
-cd /vagrant/htdocs/web
-drush pull-prod
+itkdev-docker-compose sync
 ```
 
 ## Uses composer
@@ -94,53 +92,3 @@ Contrib themes are added and managed by composer.
 * Angular app for providing tabs on area and subdivision content types.
 * Provides controllers for streetview and video display.
 * Provides paths for each tab.
-
-## platform.sh
-
-There are included two platform.sh apps in the project (app and styleguide).
-
-#### Connect with platform.sh
-
-```sh
-cd /vagrant/htdocs
-platform    # login
-platform project:set-remote [Project ID]
-```
-
-#### Push to platform.sh
-
-Read more about environments here: https://docs.platform.sh/administration/web/environments.html
-
-When building a new branch, the parent branch (default master) will be used as reference, this might cause a unresponsive environment. Therefore it is important to make sure to set parent branch before pushing.
-
-##### Environment scructure
-* Master
-  * Release
-    * release/name_of_release
-  * develop
-    * feature/JIRA_ISSUE_ID_name_of_branch
-
-Make sure you have checked out the branch you want to push:
-```sh
-git checkout branch_name
-```
-
-Push the branch to platform so we can set the parent. Note: this will not trigger a build.
-```sh
-git push platform branch_name
-```
-
-Setting a branch to use develop as parent (using the branch you have checked out)
-```sh
-platform environment:info parent develop
-```
-
-Activate environment
-```sh
-platform environment:activate environment_name
-```
-
-Pushing develop
-```sh
-git push platform develop       # or master
-```
