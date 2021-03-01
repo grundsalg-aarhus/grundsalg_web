@@ -50,7 +50,6 @@ module:
   media_entity_document: 0
   media_entity_image: 0
   menu_ui: 0
-  web_accessibility_statement: 0  
   metatag: 0
   node: 0
   options: 0
@@ -71,6 +70,7 @@ module:
   user: 0
   view_unpublished: 0
   views_ui: 0
+  web_accessibility_statement: 0
   menu_link_content: 1
   pathauto: 1
   views: 10
