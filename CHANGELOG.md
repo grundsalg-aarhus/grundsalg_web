@@ -1,5 +1,50 @@
 # Changelog for the "Grundsalg Aarhus" project
 
+## 1.4.10
+* SERV-288: Updated drupal core to 8.9.14
+* SERV-288: Updated contrib
+
+## 1.4.9
+* SERV-296: Updated drupal core to 8.9.13
+* SERV-296: Updated contrib
+* SERV-296: removed platform.sh config
+
+## 1.4.8
+* Updated drupal core to 8.9.6
+* Updated drupal contrib
+* Added WAS statement
+
+## 1.4.7
+* GRUND-474: Added new cookiebanner
+* GRUND-477: Hide maps from screen readers
+
+## 1.4.6
+* SERV-377: Updated drupal core to 8.9.1
+* SERV-377: Updated contrib
+
+## 1.4.5
+* SERV-317: Updated drupal core to 8.9.0
+* SERV-317: Updated contrib
+
+## 1.4.4
+* SERV-296: Updated config after drupal core update to 8.8.3
+
+## 1.4.3
+* SERV-296: Updated drupal core to 8.8.3
+* SERV-296: Updated contrib
+
+## 1.4.2
+* SERV-296: Updated drupal core to 8.8.1
+* SERV-296: Updated contrib
+
+## 1.4.1
+* SERV-274: Updated drupal core to 8.7.10
+* SERV-274: Updated contrib
+
+## 1.4.0
+* SERV-274: Updated drupal core to 8.6.17
+* SERV-274: Updated contrib
+
 ## 1.3.3
 * SERV-234: Updated drupal core to 8.6.16
 * SERV-234: Updated role_delegation to alpha3
