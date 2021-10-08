@@ -1,5 +1,13 @@
 # Changelog for the "Grundsalg Aarhus" project
 
+## 1.4.12
+* Updated drupal core to 8.9.19
+* Updated drupal contrib
+
+## 1.4.11
+* Updated drupal core to 8.9.16
+* Updated drupal contrib
+
 ## 1.4.10
 * SERV-288: Updated drupal core to 8.9.14
 * SERV-288: Updated contrib
