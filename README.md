@@ -5,10 +5,6 @@
 <https://www.drupal.org/docs/8/core/modules/media/faq-transition-from-media-entity-to-media-in-core#upgrade-instructions-from-media-entity-contrib-to-media-in-core>
 
 ```sh
-docker-compose up --detach
-```
-
-```sh
 composer install
 vendor/bin/drush cache:rebuild
 vendor/bin/drush media-entity-check-upgrade
