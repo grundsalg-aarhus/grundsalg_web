@@ -3,14 +3,18 @@
  * Contains the Map Controller.
  */
 
-angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$http', '$timeout', '$templateCache', '$compile', '$q', 'ticketService', 'cookieService', 'drupalService', 'plotsService', 'mapsProxyService',
-  function($scope, $window, $http, $timeout, $templateCache, $compile, $q, ticketService, cookieService, drupalService, plotsService, mapsProxyService) {
+angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$http', '$timeout', '$templateCache', '$compile', '$q', 'cookieService', 'drupalService', 'plotsService', 'mapsProxyService',
+  function($scope, $window, $http, $timeout, $templateCache, $compile, $q, cookieService, drupalService, plotsService, mapsProxyService) {
     'use strict';
 
     var config = drupalSettings.grundsalg_maps;
 
     // Send plot type into map template.
     $scope.type = config.map_type;
+
+    // Set username and password for datafordeleren.
+    var maps_username = config.username;
+    var maps_password = config.password;
 
     /**
      * Load template file from URL.
@@ -37,38 +41,6 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
       }
 
       return $templateCache.get(tmpl) || loadTemplateUrl(tmpl, {cache: false});
-    }
-
-    /**
-     * Get ticket needed to access KF tile server.
-     *
-     * @return {promise}
-     *   Resolves with the ticket or rejected with a error message.
-     */
-    function getTicket() {
-      var deferred = $q.defer();
-
-      var cookieName = 'kfticket';
-      var ticket = cookieService.get(cookieName);
-
-      if (ticket == undefined) {
-        ticketService.getTicket().then(function success(ticket) {
-          // Store the new ticket in a cookie for 23 hours.
-          var expire = new Date();
-          expire.setTime(expire.getTime() + (23*60*60*1000));
-          cookieService.set(cookieName, ticket, expire);
-
-          deferred.resolve(ticket);
-        },
-        function error(err) {
-          deferred.reject(err);
-        });
-      }
-      else {
-        deferred.resolve(ticket);
-      }
-
-      return deferred.promise;
     }
 
     /**
@@ -136,28 +108,27 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   Maps resolutions.
      */
     function addTopographicallyLayer(map, matrixIds, resolutions) {
-      getTicket().then(function (ticket) {
-        var layer = new ol.layer.Tile({
-          opacity: 1.0,
-          source: new ol.source.WMTS({
-            url: 'https://services.kortforsyningen.dk/topo_skaermkort?ticket=' + ticket,
-            format: 'image/jpeg',
-            matrixSet: 'View1',
-            layer: 'dtk_skaermkort',
-            style: 'default',
-            tileGrid: new ol.tilegrid.WMTS({
-              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
-              resolutions: resolutions,
-              matrixIds: matrixIds
-            })
+      var layer = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.WMTS({
+          url:
+            'https://services.datafordeler.dk/Dkskaermkort/topo_skaermkort_wmts/1.0.0/wmts?username='+maps_username+'&password='+maps_password,
+          format: 'image/jpeg',
+          matrixSet: 'View1',
+          layer: 'topo_skaermkort',
+          style: 'default',
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
+            resolutions: resolutions,
+            matrixIds: matrixIds
           })
-        });
-
-        // As this layer may be delayed in being added to the map, do to the ticket
-        // callback. We have to ensure that it's placed below the marker layers.
-        layer.setZIndex(-10);
-        map.addLayer(layer);
+        })
       });
+
+      // As this layer may be delayed in being added to the map, do to the ticket
+      // callback. We have to ensure that it's placed below the marker layers.
+      layer.setZIndex(-10);
+      map.addLayer(layer);
     }
 
     /**
@@ -171,39 +142,38 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   Maps resolutions.
      */
     function addMatrikelLayer(map, matrixIds, resolutions) {
-      getTicket().then(function (ticket) {
-        var projection = getProjectionEPSG25832();
+      var projection = getProjectionEPSG25832();
 
-        var layer = new ol.layer.Tile({
-          opacity: 1.0,
-          source: new ol.source.TileWMS({
-            url: 'https://services.kortforsyningen.dk/service',
-            params: {
-              VERSION: '1.3.0',
-              LAYERS: 'MatrikelSkel,OptagetVej',
-              FORMAT: 'image/png',
-              STYLES: 'hvide_skel,default',
-              TICKET: ticket,
-              SERVICE:'WMS',
-              SERVICENAME: 'mat',
-              TRANSPARENT: 'TRUE',
-              REQUEST: 'GetMap',
-              SRS: 'EPSG:25832'
-            },
-            tileGrid: new ol.tilegrid.WMTS({
-              origin: ol.extent.getTopLeft(projection.getExtent()),
-              resolutions: resolutions,
-              matrixIds: matrixIds
-            }),
-            projection: projection
-          })
-        });
-
-        // As this layer may be delayed in being added to the map, do to the ticket
-        // callback. We have to ensure that it's placed below the marker layers.
-        layer.setZIndex(-5);
-        map.addLayer(layer);
+      var layer = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.TileWMS({
+          url: 'https://services.datafordeler.dk/Matrikel/MatrikelGaeldendeOgForeloebigWMS/1.0.0/WMS',
+          params: {
+            VERSION: '1.3.0',
+            LAYERS: 'MatrikelSkel_Gaeldende,OptagetVej_Gaeldende',
+            FORMAT: 'image/png',
+            STYLES: 'Hvide_skel,default',
+            SERVICE:'WMS',
+            SERVICENAME: 'mat',
+            TRANSPARENT: 'TRUE',
+            REQUEST: 'GetMap',
+            SRS: 'EPSG:25832',
+            USERNAME: maps_username,
+            PASSWORD: maps_password
+          },
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(projection.getExtent()),
+            resolutions: resolutions,
+            matrixIds: matrixIds
+          }),
+          projection: projection
+        })
       });
+
+      // As this layer may be delayed in being added to the map, do to the ticket
+      // callback. We have to ensure that it's placed below the marker layers.
+      layer.setZIndex(-5);
+      map.addLayer(layer);
     }
 
     /**
@@ -216,40 +186,39 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      * @param {array} resolutions
      *   Maps resolutions.
      */
-    function addDagiLayer(map, matrixIds, resolutions, layer) {
-      getTicket().then(function (ticket) {
-        var projection = getProjectionEPSG25832();
+    function addDagiLayer(map, matrixIds, resolutions) {
+      var projection = getProjectionEPSG25832();
 
-        var layer = new ol.layer.Tile({
-          opacity: 1.0,
-          source: new ol.source.TileWMS({
-            url: 'https://services.kortforsyningen.dk/service',
-            params: {
-              VERSION: '1.3.0',
-              LAYERS: layer,
-              FORMAT: 'image/png',
-              STYLES: 'default',
-              TICKET: ticket,
-              SERVICE:'WMS',
-              SERVICENAME: 'dagi',
-              TRANSPARENT: 'TRUE',
-              REQUEST: 'GetMap',
-              SRS: 'EPSG:25832'
-            },
-            tileGrid: new ol.tilegrid.WMTS({
-              origin: ol.extent.getTopLeft(projection.getExtent()),
-              resolutions: resolutions,
-              matrixIds: matrixIds
-            }),
-            projection: projection
-          })
-        });
-
-        // As this layer may be delayed in being added to the map, do to the ticket
-        // callback. We have to ensure that it's placed below the marker layers.
-        layer.setZIndex(-5);
-        map.addLayer(layer);
+      var layer = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.TileWMS({
+          url: 'https://services.datafordeler.dk/DAGIM/dagi/1.0.0/WMS',
+          params: {
+            VERSION: '1.3.0',
+            LAYERS: layer,
+            FORMAT: 'image/png',
+            STYLES: 'default',
+            SERVICE:'WMS',
+            SERVICENAME: 'dagi',
+            TRANSPARENT: 'TRUE',
+            REQUEST: 'GetMap',
+            SRS: 'EPSG:25832',
+            USERNAME: maps_username,
+            PASSWORD: maps_password
+          },
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(projection.getExtent()),
+            resolutions: resolutions,
+            matrixIds: matrixIds
+          }),
+          projection: projection
+        })
       });
+
+      // As this layer may be delayed in being added to the map, do to the ticket
+      // callback. We have to ensure that it's placed below the marker layers.
+      layer.setZIndex(-5);
+      map.addLayer(layer);
     }
 
     /**
@@ -263,28 +232,26 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
      *   Maps resolutions.
      */
     function addOrtofotoLayer(map, matrixIds, resolutions) {
-      getTicket().then(function (ticket) {
-        var layer = new ol.layer.Tile({
-          opacity: 1.0,
-          source: new ol.source.WMTS({
-            url: 'https://services.kortforsyningen.dk/orto_foraar?ticket=' + ticket,
-            format: 'image/jpeg',
-            matrixSet: 'View1',
-            layer: 'orto_foraar',
-            style: 'default',
-            tileGrid: new ol.tilegrid.WMTS({
-              origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
-              resolutions: resolutions,
-              matrixIds: matrixIds
-            })
+      var layer = new ol.layer.Tile({
+        opacity: 1.0,
+        source: new ol.source.WMTS({
+          url: 'https://services.datafordeler.dk/GeoDanmarkOrto/orto_foraar_wmts/1.0.0/wmts?username='+maps_username+'&password='+maps_password,
+          format: 'image/jpeg',
+          matrixSet: 'KortforsyningTilingDK',
+          layer: 'orto_foraar_wmts',
+          style: 'default',
+          tileGrid: new ol.tilegrid.WMTS({
+            origin: ol.extent.getTopLeft(getProjectionEPSG25832().getExtent()),
+            resolutions: resolutions,
+            matrixIds: matrixIds
           })
-        });
-
-        // As this layer may be delayed in being added to the map, do to the ticket
-        // callback. We have to ensure that it's placed below the marker layers.
-        layer.setZIndex(-5);
-        map.addLayer(layer);
+        })
       });
+
+      // As this layer may be delayed in being added to the map, do to the ticket
+      // callback. We have to ensure that it's placed below the marker layers.
+      layer.setZIndex(-5);
+      map.addLayer(layer);
     }
 
     /**
@@ -923,7 +890,7 @@ angular.module('grundsalg').controller('MapController', ['$scope', '$window', '$
     }
 
     var resolutions = [1638.4,819.2,409.6,204.8,102.4,51.2,25.6,12.8,6.4,3.2,1.6,.8,.4,.2];
-    var matrixIds = ["L00","L01","L02","L03","L04","L05","L06","L07","L08","L09","L10","L11","L12","L13"];
+    var matrixIds = ['0','1','2','3','4','5','6','7','8','9','10','11','12','13'];
     var map = initOpenlayersMap();
 
     /**

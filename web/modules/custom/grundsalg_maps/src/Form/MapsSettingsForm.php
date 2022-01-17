@@ -59,6 +59,26 @@ class MapsSettingsForm extends FormBase {
       '#open' => TRUE,
     );
 
+    $default = $config->get('grundsalg_maps_username');
+    $form['maps']['username'] = array(
+      '#title' => $this->t('Username'),
+      '#description' => $this->t('Datafordeler username (service bruger as this will be exposed in the browser).'),
+      '#type' => 'textfield',
+      '#default_value' => isset($default) ? $default : '',
+      '#weight' => '1',
+      '#size' => 20,
+    );
+
+    $default = $config->get('grundsalg_maps_password');
+    $form['maps']['password'] = array(
+      '#title' => $this->t('Password'),
+      '#description' => $this->t('Datafordeler password'),
+      '#type' => 'textfield',
+      '#default_value' => isset($default) ? $default : '',
+      '#weight' => '1',
+      '#size' => 21,
+    );
+
     $default = $config->get('grundsalg_maps_areas_cache');
     $form['maps']['cache'] = array(
       '#title' => $this->t('Areas cache timeout in seconds'),
@@ -89,6 +109,8 @@ class MapsSettingsForm extends FormBase {
       'grundsalg_maps_url' => $form_state->getValue('url'),
       'grundsalg_maps_apikey' => $form_state->getValue('api-key'),
       'grundsalg_maps_areas_cache' => $form_state->getValue('cache'),
+      'grundsalg_maps_username' => $form_state->getValue('username'),
+      'grundsalg_maps_password' => $form_state->getValue('password'),
     ));
 
     drupal_flush_all_caches();
