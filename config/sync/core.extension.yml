@@ -73,7 +73,6 @@ module:
   pathauto: 1
   views: 10
   paragraphs: 11
-  itkore: 1000
 theme:
   stark: 0
   stable: 0
@@ -85,4 +84,4 @@ theme:
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 langcode: da
-profile: itkore
+profile: minimal

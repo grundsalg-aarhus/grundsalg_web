@@ -1,6 +1,7 @@
 name: Grundsalg
 type: theme
 description: 'The Grundsalg theme'
+base theme: stable
 package: Grundsalg
 
 libraries:
@@ -14,4 +15,4 @@ regions:
   footer: 'Footer'
 
 version: '1.0.0'
-core: '8.x'
+core_version_requirement: ^9

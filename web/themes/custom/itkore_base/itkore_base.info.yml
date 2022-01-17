@@ -1,0 +1,21 @@
+name: Itkore base
+type: theme
+description: 'The Itkore base theme.'
+base theme: stable
+package: Itkore
+
+libraries:
+  - itkore_base/global-styling
+  - itkore_base/global-js
+
+stylesheets-remove:
+  - normalize.css
+  - itk-admin-links.css
+
+regions:
+  hamburger: 'Hamburger menu'
+  nav_menu: 'Nav menu'
+  content: 'Content'
+
+version: '1.0.0'
+core: '8.x'

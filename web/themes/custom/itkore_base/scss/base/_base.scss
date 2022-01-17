@@ -1,0 +1,125 @@
+/**
+ *
+ * Base
+ *
+ * Contains styling and reset of basic elements
+ *
+ */
+
+
+// Make sure the user cant scroll sideways.
+body, html {
+  overflow-x: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: $white;
+  color: $gray-darker;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  position: relative;
+  width: 100%;
+}
+
+html,
+body {
+  &.is-locked {
+    overflow: hidden;
+    position: fixed;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: 1.2; /* This fixes huge spaces when a heading wraps onto two lines */
+  margin-bottom: .5em;
+  margin-top: 0;
+  text-rendering: optimizeLegibility; /* Voodoo to enable ligatures and kerning */
+}
+
+
+strong {
+  font-weight: bold;
+}
+
+
+em {
+  font-style: italic;
+
+  strong {
+    font-weight: bold;
+  }
+}
+
+fieldset {
+  border-color: $gray-lighter;
+  border-radius: .85em;
+}
+
+fieldset + fieldset {
+  margin-top: 3em;
+}
+
+legend {
+  color: $gray-darker;
+  font-size: 1.25em;
+  font-weight: 600;
+  padding-left: .5em;
+  padding-right: .5em;
+}
+
+
+/* Links
+   ================================================================================================================== */
+
+a {
+  &:link {
+    color: $link-color;
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: darken($link-color, 5%);
+  }
+
+  &:hover {
+    color: darken($link-color, 10%);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    color: darken($link-color, 10%);
+  }
+}
+
+
+/* Paragraph
+   ================================================================================================================== */
+
+p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+
+/* Image
+   ================================================================================================================== */
+
+img {
+  display: inline;
+  height: auto;
+  max-width: 100%;
+  vertical-align: bottom;
+  width: 100%;
+}
