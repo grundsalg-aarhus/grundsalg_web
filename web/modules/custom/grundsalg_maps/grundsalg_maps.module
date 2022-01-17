@@ -52,6 +52,8 @@ function grundsalg_maps_preprocess_page(&$variables) {
         'url' => $config->get('grundsalg_maps_url'),
         'cache_ttl' => isset($cache_ttl) ? $cache_ttl : 300,
         'map_type' => $type,
+        'username' => $config->get('grundsalg_maps_username'),
+        'password' => $config->get('grundsalg_maps_password'),
       );
 
       switch ($type) {
@@ -235,7 +237,7 @@ function grundsalg_maps_preprocess_page(&$variables) {
           );
 
           // Add default center if one exists. It's used to center the map
-          // correctly when no plots exists.
+          // correctly when no plots exist.
           if ($default_center) {
             $config['center'] = $default_center;
           }
