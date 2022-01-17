@@ -13,7 +13,7 @@ dependencies:
       - itk_media_entity
   module:
     - image
-    - media_entity
+    - media
     - taxonomy
     - user
 _core:

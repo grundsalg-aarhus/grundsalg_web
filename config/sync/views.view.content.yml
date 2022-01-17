@@ -32,7 +32,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Filter
+          submit_button: Filtrér
           reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -689,7 +689,7 @@ display:
             operator_list: {  }
           is_grouped: true
           group_info:
-            label: Publiceringsstatus
+            label: 'Publishing status'
             description: ''
             identifier: status
             optional: true

@@ -1,5 +1,29 @@
 # Grundsalg Aarhus web
 
+## Media migration
+
+<https://www.drupal.org/docs/8/core/modules/media/faq-transition-from-media-entity-to-media-in-core#upgrade-instructions-from-media-entity-contrib-to-media-in-core>
+
+```sh
+docker-compose up --detach
+```
+
+```sh
+composer install
+vendor/bin/drush cache:rebuild
+vendor/bin/drush media-entity-check-upgrade
+vendor/bin/drush updatedb --yes
+vendor/bin/drush config:export --yes
+```
+
+```sh
+docker-compose exec phpfpm composer install
+docker-compose exec phpfpm vendor/bin/drush cache:rebuild
+docker-compose exec phpfpm vendor/bin/drush media-entity-check-upgrade
+docker-compose exec phpfpm vendor/bin/drush updatedb --yes
+docker-compose exec phpfpm vendor/bin/drush config:export --yes
+```
+
 Site for [www.grundsalgaarhus.dk](https://www.grundsalgaarhus.dk/)
 
 ## Installation instructions for development

@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
 id: media.shown_in_teaser
 label: 'Shown in teaser'
 targetEntityType: media
