@@ -42,15 +42,16 @@
         "drupal/redirect": "^1.7",
         "drupal/role_delegation": "^1.1",
         "drupal/system_status": "^2.8",
+        "drupal/toolbar_visibility": "dev-3127402-drupal-9-readiness",
+        "drupal/view_unpublished": "^1.0",
         "drush/drush": "^10.0",
+        "itk-dev/itk_azure_video": "^1.1",
         "itk-dev/itk_media_entity": "*",
         "drupal/upgrade_status": "^2.7",
         "itk-dev/web_accessibility_statement": "^1.0",
         "drupal/media_entity": "^2",
         "drupal/media_entity_document": "1.x-dev",
         "drupal/media_entity_image": "1.3"
-    },
-    "require-dev": {
     },
     "conflict": {
         "drupal/drupal": "*"
