@@ -2,6 +2,10 @@
 
 ## Media migration
 
+```sh
+git checkout feature/media-transition
+```
+
 <https://www.drupal.org/docs/8/core/modules/media/faq-transition-from-media-entity-to-media-in-core#upgrade-instructions-from-media-entity-contrib-to-media-in-core>
 
 ```sh
