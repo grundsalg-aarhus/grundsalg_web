@@ -5,7 +5,7 @@ interface translation server pattern: modules/custom/grundsalg_setup/translation
 description: 'Contains global functionality for grundsalg'
 package: Grundsalg
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^9
 dependencies:
   - itkore_admin
   - itkore_footer

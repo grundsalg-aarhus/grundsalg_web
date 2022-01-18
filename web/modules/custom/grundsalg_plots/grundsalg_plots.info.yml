@@ -5,7 +5,7 @@ interface translation server pattern: modules/custom/grundsalg_plots/translation
 description: 'Provides plots display for subdivisions'
 package: Grundsalg
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^9
 dependencies:
   - grundsalg_angular
   - grundsalg_db_client
