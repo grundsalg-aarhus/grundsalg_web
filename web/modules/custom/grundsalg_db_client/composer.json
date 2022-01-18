@@ -1,7 +1,7 @@
 {
   "name": "drupal/grundsalg_db_client",
   "description": "Grundsalg db client",
-  "type": "drupal-module",
+  "type": "drupal-custom-module",
   "keywords": ["Drupal"],
   "license": "GPL-2.0+",
   "require": {

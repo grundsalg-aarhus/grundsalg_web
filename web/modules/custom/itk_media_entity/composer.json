@@ -1,6 +1,6 @@
 {
   "name": "itk-dev/itk_media_entity",
-  "type": "drupal-module",
+  "type": "drupal-custom-module",
   "description": "Provides a plugable configuration setup for drupal media entity",
   "keywords": ["Drupal"],
   "license": "GPL-2.0+",
