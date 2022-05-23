@@ -15,6 +15,10 @@
             "url": "web/modules/custom/itk_media_entity"
         },
         {
+            "type": "path",
+            "url": "web/modules/custom/grundsalg_db_client"
+        },
+        {
             "type": "vcs",
             "url": "https://git.drupalcode.org/issue/toolbar_visibility-3127402.git"
         },
@@ -35,6 +39,7 @@
         "drupal/core-recommended": "^9.3",
         "drupal/entityqueue": "^1.0",
         "drupal/field_group": "^3.2",
+        "drupal/grundsalg_db_client": "*",
         "drupal/maxlength": "^1.0@rc",
         "drupal/metatag": "^1.19",
         "drupal/paragraphs": "^1.12",
