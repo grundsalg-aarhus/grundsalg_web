@@ -1,4 +1,4 @@
-# itk-version: 2.0.0
+# itk-version: 2.0.1
 version: "3"
 
 networks:
@@ -21,6 +21,9 @@ services:
       - MYSQL_PASSWORD=db
       - MYSQL_DATABASE=db
       #- ENCRYPT=1 # Uncomment to enable database encryption.
+    # https://symfony.com/doc/current/setup/symfony_server.html#docker-integration
+    labels:
+      com.symfony.server.service-prefix: 'DATABASE'
 
   phpfpm:
     image: itkdev/php7.4-fpm:latest
@@ -56,6 +59,9 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=frontend"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_DOMAIN}`)"
+#      HTTPS config - uncomment to enable redirect from :80 to :443
+#      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=redirect-to-https"
+#      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   memcached:
     image: 'memcached:latest'
