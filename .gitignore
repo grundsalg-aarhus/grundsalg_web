@@ -19,6 +19,8 @@ web/sites/simpletest
 services.local.yml
 settings.local.php
 docker.settings.local.php
+.env.local
+.env.*.local
 
 /.csslintrc
 /.editorconfig
