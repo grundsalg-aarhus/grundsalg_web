@@ -15,8 +15,8 @@ plugin: itk_hamburger_menu
 settings:
   id: itk_hamburger_menu
   label: 'ITK Hamburger menu'
-  provider: itk_hamburger_menu
   label_display: '0'
+  provider: itk_hamburger_menu
   itk_hamburger_menu: hamburger-menu
   itk_hamburger_menu_depth: '3'
 visibility: {  }

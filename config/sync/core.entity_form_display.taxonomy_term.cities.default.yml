@@ -11,20 +11,27 @@ bundle: cities
 mode: default
 content:
   field_postalcode:
+    type: number
     weight: 1
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   name:
     type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 100
     region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
 hidden:
   description: true
   langcode: true

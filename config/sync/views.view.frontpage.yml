@@ -113,6 +113,7 @@ display:
           order: ASC
           expose:
             label: ''
+            field_identifier: entityqueue_relationship
           exposed: false
       arguments: {  }
       filters:

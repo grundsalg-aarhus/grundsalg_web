@@ -20,90 +20,90 @@ third_party_settings:
         - title
         - field_teaser
         - field_external_link
+      label: 'Primært indhold'
       parent_name: ''
       weight: 0
       format_type: details
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         open: true
         required_fields: false
-      label: 'Primært indhold'
     group_lokation:
       children:
         - field_coordinate
+      label: Lokation
       parent_name: ''
       weight: 3
       format_type: details
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         open: false
         required_fields: false
-      label: Lokation
 id: node.project.default
 targetEntityType: node
 bundle: project
 mode: default
 content:
   field_coordinate:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_external_link:
+    type: link_default
     weight: 3
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_teaser:
+    type: string_textarea
     weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_teaser_image:
+    type: entity_browser_entity_reference
     weight: 1
+    region: content
     settings:
       entity_browser: itk_image_browser
       field_widget_display: rendered_entity
+      field_widget_edit: false
       field_widget_remove: true
-      selection_mode: selection_append
+      open: false
       field_widget_display_settings:
         view_mode: form_display_when_referenced
-      field_widget_edit: false
-      open: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

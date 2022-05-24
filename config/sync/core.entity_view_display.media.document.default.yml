@@ -8,11 +8,11 @@ dependencies:
     - field.field.media.document.field_itk_media_size
     - field.field.media.document.field_itk_media_tag
     - media.type.document
+  module:
+    - file
   enforced:
     module:
       - itk_media_entity
-  module:
-    - file
 _core:
   default_config_hash: suvSYUIkOwkrkiNtKoeMAhd7sQb3ctQ9XfivOc54eLE
 id: media.document.default
@@ -22,37 +22,37 @@ mode: default
 content:
   created:
     type: timestamp
-    weight: 1
     label: above
     settings:
       date_format: medium
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
+    weight: 1
     region: content
   field_itk_media_file_upload:
     type: file_default
-    weight: 2
-    region: content
     label: above
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_itk_media_tag:
     type: entity_reference_label
-    weight: 3
-    region: content
     label: above
     settings:
       link: false
     third_party_settings: {  }
+    weight: 3
+    region: content
   name:
-    label: above
     type: string
-    weight: 0
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_itk_media_mime_type: true

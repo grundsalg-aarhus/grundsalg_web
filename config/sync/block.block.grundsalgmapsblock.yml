@@ -16,11 +16,11 @@ plugin: grundsalg_maps_block
 settings:
   id: grundsalg_maps_block
   label: 'Grundsalg maps block'
-  provider: grundsalg_maps
   label_display: '0'
+  provider: grundsalg_maps
 visibility:
   request_path:
     id: request_path
-    pages: "/projekter\r\n/villagrunde\r\n/storparceller\r\n/erhvervsgrunde"
     negate: false
     context_mapping: {  }
+    pages: "/projekter\r\n/villagrunde\r\n/storparceller\r\n/erhvervsgrunde"

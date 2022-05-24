@@ -11,12 +11,12 @@ pattern: '[node:field_parent:entity:field_parent:entity:title]/[node:field_paren
 selection_criteria:
   f81b3528-7909-4882-a7d6-015756ecda72:
     id: 'entity_bundle:node'
-    bundles:
-      subdivision: subdivision
     negate: false
+    uuid: f81b3528-7909-4882-a7d6-015756ecda72
     context_mapping:
       node: node
-    uuid: f81b3528-7909-4882-a7d6-015756ecda72
+    bundles:
+      subdivision: subdivision
 selection_logic: and
 weight: -5
 relationships: {  }

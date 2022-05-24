@@ -2,12 +2,12 @@ uuid: 45b8d373-ced8-409b-8b02-af3d86e015e2
 langcode: da
 status: true
 dependencies:
-  enforced:
-    module:
-      - itk_media_entity
   module:
     - media
     - node
+  enforced:
+    module:
+      - itk_media_entity
 _core:
   default_config_hash: o-IPD1HD8Rh5pufw5ihhheCLGrbNiWfi3T3xkkfpsb4
 id: node.field_media_document

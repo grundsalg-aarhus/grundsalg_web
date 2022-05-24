@@ -16,11 +16,11 @@ plugin: grundsalg_front
 settings:
   id: grundsalg_front
   label: 'Grundsalg frontpage'
-  provider: grundsalg_front
   label_display: '0'
+  provider: grundsalg_front
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
     negate: false
     context_mapping: {  }
+    pages: '<front>'

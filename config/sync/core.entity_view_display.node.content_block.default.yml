@@ -14,11 +14,11 @@ bundle: content_block
 mode: default
 content:
   field_body:
-    weight: 1
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 1
     region: content
 hidden:
   langcode: true

@@ -14,26 +14,26 @@ bundle: contact_form
 mode: default
 content:
   field_contact_subject:
-    weight: 0
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 0
     region: content
   field_phone_number:
-    weight: 2
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 2
     region: content
   message:
     type: basic_string
-    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   langcode: true
