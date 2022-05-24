@@ -4,12 +4,12 @@ status: true
 dependencies:
   config:
     - views.view.itk_media_browser
-  enforced:
-    module:
-      - itk_media_entity
   module:
     - entity_browser_entity_form
     - views
+  enforced:
+    module:
+      - itk_media_entity
 _core:
   default_config_hash: T69Ye8p4qjIBT3EU0sVLuQmVkmobZefXHa3LsIaOJTw
 name: itk_image_browser
@@ -26,22 +26,22 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   11d1e481-b183-49c7-b727-0f0e12950bfc:
+    id: view
+    uuid: 11d1e481-b183-49c7-b727-0f0e12950bfc
+    label: Overview
+    weight: 1
     settings:
-      view: itk_media_browser
-      view_display: entity_browser_2
       submit_text: 'Vælg elementer'
       auto_select: false
-    uuid: 11d1e481-b183-49c7-b727-0f0e12950bfc
-    weight: 1
-    label: Overview
-    id: view
+      view: itk_media_browser
+      view_display: entity_browser_2
   ea5ee6d6-e3f2-48b8-be8c-99ec28653c04:
+    id: entity_form
+    uuid: ea5ee6d6-e3f2-48b8-be8c-99ec28653c04
+    label: 'Upload nyt billede'
+    weight: 3
     settings:
+      submit_text: 'Upload billede til medie bibliotek'
       entity_type: media
       bundle: image
       form_mode: default
-      submit_text: 'Upload billede til medie bibliotek'
-    uuid: ea5ee6d6-e3f2-48b8-be8c-99ec28653c04
-    weight: 3
-    label: 'Upload nyt billede'
-    id: entity_form
