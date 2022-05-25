@@ -81,6 +81,19 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       ),
     );
 
+    $form['fs']['url'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('URL'),
+      '#description' => $this->t('Grundslag fagsystem end-point URL. Used for getting grund data.'),
+      '#default_value' => $config->get('grundsalg_db_client_url'),
+      '#size' => 60,
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="use_example_data"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+
     $form['fs']['api_token'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('API token'),
@@ -92,7 +105,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
     $form['fs']['public_base_path'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Public base path'),
-      '#description' => $this->t('Public base path. <strong>Must</strong> start with <code>public://</code>'),
+      '#description' => $this->t('Public base path used for storing grund data. <strong>Must</strong> start with <code>public://</code>'),
       '#default_value' => $config->get('grundsalg_db_client_public_base_path', ApiController::PUBLIC_BASE_PATH),
       '#size' => 60,
     );
@@ -126,6 +139,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
     $this->getBaseConfig()->setMultiple(array(
       'grundsalg_db_client_use_example_data' => $form_state->getValue('use_example_data'),
       'grundsalg_db_client_example_file' => $form_state->getValue('file'),
+      'grundsalg_db_client_url' => $form_state->getValue('url'),
       'grundsalg_db_client_api_token' => $form_state->getValue('api_token'),
       'grundsalg_db_client_public_base_path' => $form_state->getValue('public_base_path'),
     ));
