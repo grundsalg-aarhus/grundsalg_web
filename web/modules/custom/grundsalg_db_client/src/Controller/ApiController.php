@@ -26,7 +26,6 @@ class ApiController extends ControllerBase
   private RequestStack $requestStack;
   private BaseConfig $config;
   private ContentCreationService $contentCreationService;
-  private FileUrlGeneratorInterface $fileUrlGenerator;
   private FileSystemInterface $fileSystem;
 
   public const PUBLIC_BASE_PATH = 'public://api/udstykning';
@@ -35,14 +34,12 @@ class ApiController extends ControllerBase
     RequestStack $requestStack,
     BaseConfig $config,
     ContentCreationService $contentCreationService,
-    FileUrlGeneratorInterface $fileUrlGenerator,
     FileSystemInterface $fileSystem,
     LoggerChannelFactoryInterface $loggerChannelFactory
   ) {
     $this->requestStack = $requestStack;
     $this->config = $config;
     $this->contentCreationService = $contentCreationService;
-    $this->fileUrlGenerator = $fileUrlGenerator;
     $this->fileSystem = $fileSystem;
     $this->logger = $loggerChannelFactory->get('grundsalg_db_client');
   }
@@ -53,7 +50,6 @@ class ApiController extends ControllerBase
       $container->get('request_stack'),
       $container->get('itkore_admin.itkore_config'),
       $container->get('grundsalg.content_creation'),
-      $container->get('file_url_generator'),
       $container->get('file_system'),
       $container->get('logger.factory')
     );
