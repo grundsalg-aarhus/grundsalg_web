@@ -102,8 +102,10 @@ class ApiController extends ControllerBase
       if ('POST' === $request->getMethod()) {
         $this->checkAuthorization();
         $content = $this->writeFile($path, $request->getContent());
-        return new JsonResponse($content);
+        // We assume that the content is valid JSON.
+        return new JsonResponse($content, 200, [], true);
       } else {
+        // We assume that the content is valid JSON.
         return new JsonResponse($this->readFile($path), 200, [], true);
       }
     } catch (\Throwable $throwable) {
@@ -117,12 +119,16 @@ class ApiController extends ControllerBase
       $request = $this->requestStack->getCurrentRequest();
 
       $path = sprintf('%s/grunde.geojson', $sid);
+      $contentType = 'application/geo+json';
       if ('POST' === $request->getMethod()) {
         $this->checkAuthorization();
         $content = $this->writeFile($path, $request->getContent());
-        return new JsonResponse($content);
+        // We assume that the content is valid GeoJSON.
+        return new JsonResponse($content, 200, [
+          'content-type' => $contentType,
+        ], true);
       } else {
-        $contentType = 'application/geo+json';
+        // We assume that the content is valid GeoJSON.
         return new JsonResponse($this->readFile($path, $contentType), 200, [
           'content-type' => $contentType,
         ], true);
