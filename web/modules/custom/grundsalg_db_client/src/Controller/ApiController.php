@@ -6,14 +6,13 @@
 
 namespace Drupal\grundsalg_db_client\Controller;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Http\RequestStack;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\grundsalg_db_client\Service\ContentCreationService;
 use Drupal\itkore_admin\State\BaseConfig;
-use GuzzleHttp\Client;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -35,13 +34,15 @@ class ApiController extends ControllerBase
     BaseConfig $config,
     ContentCreationService $contentCreationService,
     FileUrlGeneratorInterface $fileUrlGenerator,
-    FileSystemInterface $fileSystem
+    FileSystemInterface $fileSystem,
+    LoggerChannelFactoryInterface $loggerChannelFactory
   ) {
     $this->requestStack = $requestStack;
     $this->config = $config;
     $this->contentCreationService = $contentCreationService;
     $this->fileUrlGenerator = $fileUrlGenerator;
     $this->fileSystem = $fileSystem;
+    $this->logger = $loggerChannelFactory->get('grundsalg_db_client');
   }
 
   public static function create(ContainerInterface $container)
@@ -51,7 +52,8 @@ class ApiController extends ControllerBase
       $container->get('itkore_admin.itkore_config'),
       $container->get('grundsalg.content_creation'),
       $container->get('file_url_generator'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('logger.factory')
     );
   }
 
@@ -88,12 +90,8 @@ class ApiController extends ControllerBase
         'message' => $operation,
         'body' => $body,
       ]);
-    } catch (\Throwable $e) {
-      return new JsonResponse([
-        'error' => true,
-        'message' => $e->getMessage(),
-        'body' => $e->getMessage(),
-      ]);
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
     }
   }
 
@@ -110,12 +108,8 @@ class ApiController extends ControllerBase
       } else {
         return new JsonResponse($this->readFile($path), 200, [], true);
       }
-    } catch (\Exception $e) {
-      return new JsonResponse([
-        'error' => true,
-        'message' => $e->getMessage(),
-        'body' => $e->getMessage(),
-      ]);
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
     }
   }
 
@@ -135,12 +129,8 @@ class ApiController extends ControllerBase
           'content-type' => $contentType,
         ], true);
       }
-    } catch (\Exception $e) {
-      return new JsonResponse([
-        'error' => true,
-        'message' => $e->getMessage(),
-        'body' => $e->getMessage(),
-      ]);
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
     }
   }
 
@@ -182,5 +172,25 @@ class ApiController extends ControllerBase
     if ($expectedToken !== $token) {
       throw new AccessDeniedHttpException('Not authorized');
     }
+  }
+
+  /**
+   * Log exception (throwable) and create JSON response.
+   *
+   * @param \Throwable $throwable
+   * @return JsonResponse
+   */
+  private function error(\Throwable $throwable)
+  {
+    $this->logger->error($throwable->getMessage(), [
+      'throwable' => $throwable,
+    ]);
+
+    return new JsonResponse([
+      'error' => true,
+      'message' => $throwable->getMessage(),
+      'body' => $throwable->getMessage(),
+    ]);
+
   }
 }
