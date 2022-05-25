@@ -2800,14 +2800,15 @@
         },
         {
             "name": "drupal/grundsalg_db_client",
-            "version": "dev-feature/drupal-9",
+            "version": "dev-feature/D9-003-handle-post",
             "dist": {
                 "type": "path",
                 "url": "web/modules/custom/grundsalg_db_client",
-                "reference": "355d0d601a6240980619366286ccd1e2f13da1d7"
+                "reference": "399691d80dec9d43ddc1a7f2deaaccc4548f0321"
             },
             "require": {
-                "guzzlehttp/guzzle": "^6.2"
+                "guzzlehttp/guzzle": "^6.2",
+                "proj4php/proj4php": "^2.0"
             },
             "type": "drupal-custom-module",
             "license": [
@@ -4236,7 +4237,7 @@
         },
         {
             "name": "itk-dev/itk_media_entity",
-            "version": "dev-feature/drupal-9",
+            "version": "dev-feature/D9-003-handle-post",
             "dist": {
                 "type": "path",
                 "url": "web/modules/custom/itk_media_entity",
@@ -5589,6 +5590,70 @@
                 "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/0.12.6"
             },
             "time": "2020-12-13T10:20:54+00:00"
+        },
+        {
+            "name": "proj4php/proj4php",
+            "version": "2.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/proj4php/proj4php.git",
+                "reference": "d213ea7938ce4ffb062dbf2a119002beb62b5eb5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/proj4php/proj4php/zipball/d213ea7938ce4ffb062dbf2a119002beb62b5eb5",
+                "reference": "d213ea7938ce4ffb062dbf2a119002beb62b5eb5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "proj4php\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "julien2512",
+                    "email": "moquet.julien@gmail.com",
+                    "homepage": "https://github.com/julien2512",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jason Judge",
+                    "email": "jason.judge@academe.co.uk",
+                    "homepage": "http://academe.co.uk",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Nick Blackwell",
+                    "email": "nickblackwell82@gmail.com",
+                    "homepage": "https://people.ok.ubc.ca/nblackwe",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP-Class for geographic coordinates transformation using proj4 definitions, thanks to a translation from Proj4JS",
+            "homepage": "https://github.com/proj4php/proj4php",
+            "keywords": [
+                "coordinates",
+                "geographic",
+                "proj4",
+                "proj4js"
+            ],
+            "support": {
+                "issues": "https://github.com/proj4php/proj4php/issues",
+                "source": "https://github.com/proj4php/proj4php/tree/2.0.12"
+            },
+            "time": "2020-04-14T20:05:29+00:00"
         },
         {
             "name": "psr/cache",

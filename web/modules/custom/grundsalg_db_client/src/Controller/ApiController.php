@@ -88,7 +88,7 @@ class ApiController extends ControllerBase
         'message' => $operation,
         'body' => $body,
       ]);
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) {
       return new JsonResponse([
         'error' => true,
         'message' => $e->getMessage(),
