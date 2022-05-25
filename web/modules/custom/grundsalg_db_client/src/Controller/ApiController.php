@@ -105,8 +105,7 @@ class ApiController extends ControllerBase
         // We assume that the content is valid JSON.
         return new JsonResponse($content, 200, [], true);
       } else {
-        // We assume that the content is valid JSON.
-        return new JsonResponse($this->readFile($path), 200, [], true);
+        $this->sendFile($path);
       }
     } catch (\Throwable $throwable) {
       return $this->error($throwable);
@@ -128,10 +127,7 @@ class ApiController extends ControllerBase
           'content-type' => $contentType,
         ], true);
       } else {
-        // We assume that the content is valid GeoJSON.
-        return new JsonResponse($this->readFile($path, $contentType), 200, [
-          'content-type' => $contentType,
-        ], true);
+        $this->sendFile($path, $contentType);
       }
     } catch (\Throwable $throwable) {
       return $this->error($throwable);
@@ -150,7 +146,10 @@ class ApiController extends ControllerBase
     return $content;
   }
 
-  private function readFile(string $path, string $contentType = 'application/json')
+  /**
+   * Send raw file content to client.
+   */
+  private function sendFile(string $path, string $contentType = 'application/json')
   {
     $path = $this->getFilePath($path);
     $path = $this->fileSystem->realpath($path);
