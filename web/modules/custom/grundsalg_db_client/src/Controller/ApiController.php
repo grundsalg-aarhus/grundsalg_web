@@ -29,6 +29,8 @@ class ApiController extends ControllerBase
   private FileUrlGeneratorInterface $fileUrlGenerator;
   private FileSystemInterface $fileSystem;
 
+  public const PUBLIC_BASE_PATH = 'public://api/udstykning';
+
   public function __construct(
     RequestStack $requestStack,
     BaseConfig $config,
@@ -100,7 +102,7 @@ class ApiController extends ControllerBase
     try {
       $request = $this->requestStack->getCurrentRequest();
 
-      $path = sprintf('public://api/udtrykning/%s/grunde.json', $sid);
+      $path = sprintf('%s/grunde.json', $sid);
       if ('POST' === $request->getMethod()) {
         $this->checkAuthorization();
         $content = $this->writeFile($path, $request->getContent());
@@ -118,7 +120,7 @@ class ApiController extends ControllerBase
     try {
       $request = $this->requestStack->getCurrentRequest();
 
-      $path = sprintf('public://api/udtrykning/%s/grunde.geojson', $sid);
+      $path = sprintf('%s/grunde.geojson', $sid);
       if ('POST' === $request->getMethod()) {
         $this->checkAuthorization();
         $content = $this->writeFile($path, $request->getContent());
@@ -136,6 +138,7 @@ class ApiController extends ControllerBase
 
   private function writeFile(string $path, string $content)
   {
+    $path = $this->getFilePath($path);
     $dirname = $this->fileSystem->dirname($path);
     if (!is_dir($dirname)) {
       $this->fileSystem->mkdir($dirname, null, true);
@@ -147,6 +150,7 @@ class ApiController extends ControllerBase
 
   private function readFile(string $path, string $contentType = 'application/json')
   {
+    $path = $this->getFilePath($path);
     $path = $this->fileSystem->realpath($path);
     if (!$path) {
       throw new NotFoundHttpException('Not found');
@@ -156,6 +160,12 @@ class ApiController extends ControllerBase
     header('content-type: ' . $contentType);
     readfile($path);
     exit;
+  }
+
+  private function getFilePath(string $path) {
+    $basePath = $this->config->get('grundsalg_db_client_public_base_path', self::PUBLIC_BASE_PATH);
+
+    return $basePath.'/'.$path;
   }
 
   private function checkAuthorization()
