@@ -15,12 +15,14 @@ use Drupal\grundsalg_db_client\Controller\ApiController;
  *
  * @package Drupal\itkore_admin\Form
  */
-class GrundsalgDbClientSettingsForm extends FormBase {
+class GrundsalgDbClientSettingsForm extends FormBase
+{
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
+  public function getFormId()
+  {
     return 'grundsalg_db_client_settings';
   }
 
@@ -29,14 +31,16 @@ class GrundsalgDbClientSettingsForm extends FormBase {
    *
    * @return object
    */
-  private function getBaseConfig() {
+  private function getBaseConfig()
+  {
     return \Drupal::getContainer()->get('itkore_admin.itkore_config');
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state)
+  {
     $config = $this->getBaseConfig();
 
     // Add front page wrapper.
@@ -44,7 +48,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#title' => $this->t('Use example data from JSON'),
       '#type' => 'fieldset',
       '#weight' => '1',
-      '#open' => TRUE,
+      '#open' => true,
     );
 
     // Add front page wrapper.
@@ -64,7 +68,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#size' => 60,
       '#states' => array(
         'visible' => array(
-          ':input[name="use_example_data"]' => array('checked' => TRUE),
+          ':input[name="use_example_data"]' => array('checked' => true),
         ),
       ),
     );
@@ -73,10 +77,10 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#title' => $this->t('Database settings (fagsystem)'),
       '#type' => 'fieldset',
       '#weight' => '1',
-      '#open' => TRUE,
+      '#open' => true,
       '#states' => array(
         'invisible' => array(
-          ':input[name="use_example_data"]' => array('checked' => TRUE),
+          ':input[name="use_example_data"]' => array('checked' => true),
         ),
       ),
     );
@@ -89,7 +93,7 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       '#size' => 60,
       '#states' => array(
         'invisible' => array(
-          ':input[name="use_example_data"]' => array('checked' => TRUE),
+          ':input[name="use_example_data"]' => array('checked' => true),
         ),
       ),
     );
@@ -132,7 +136,8 @@ class GrundsalgDbClientSettingsForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state)
+  {
     \Drupal::messenger()->addMessage('Settings saved');
 
     // Set the configuration values.

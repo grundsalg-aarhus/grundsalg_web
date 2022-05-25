@@ -162,10 +162,11 @@ class ApiController extends ControllerBase
     exit;
   }
 
-  private function getFilePath(string $path) {
+  private function getFilePath(string $path)
+  {
     $basePath = $this->config->get('grundsalg_db_client_public_base_path', self::PUBLIC_BASE_PATH);
 
-    return $basePath.'/'.$path;
+    return $basePath . '/' . $path;
   }
 
   private function checkAuthorization()
