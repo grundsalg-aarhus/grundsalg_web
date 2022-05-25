@@ -10,7 +10,7 @@ grundsalg_db_client.update_subdivision:
   path: '/api/udstykning/{sid}/updated'
   defaults:
     _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::subdivisionUpdated'
+  methods: 'POST'
   requirements:
     sid: \d+
     _permission: 'access content'
-    _method: 'POST|GET'

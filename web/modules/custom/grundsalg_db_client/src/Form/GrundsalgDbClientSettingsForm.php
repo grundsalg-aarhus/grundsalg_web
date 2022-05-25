@@ -80,17 +80,12 @@ class GrundsalgDbClientSettingsForm extends FormBase {
       ),
     );
 
-    $form['fs']['url'] = array(
+    $form['fs']['api_token'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('URL'),
-      '#description' => $this->t('Grundslag fagsystem end-point URL'),
-      '#default_value' => $config->get('grundsalg_db_client_url'),
+      '#title' => $this->t('API token'),
+      '#description' => $this->t('API token'),
+      '#default_value' => $config->get('grundsalg_db_client_api_token'),
       '#size' => 60,
-      '#states' => array(
-        'invisible' => array(
-          ':input[name="use_example_data"]' => array('checked' => TRUE),
-        ),
-      ),
     );
 
     $form['submit'] = array(
@@ -106,13 +101,13 @@ class GrundsalgDbClientSettingsForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    drupal_set_message('Settings saved');
+    \Drupal::messenger()->addMessage('Settings saved');
 
     // Set the configuration values.
     $this->getBaseConfig()->setMultiple(array(
       'grundsalg_db_client_use_example_data' => $form_state->getValue('use_example_data'),
       'grundsalg_db_client_example_file' => $form_state->getValue('file'),
-      'grundsalg_db_client_url' => $form_state->getValue('url'),
+      'grundsalg_db_client_api_token' => $form_state->getValue('api_token'),
     ));
 
     drupal_flush_all_caches();
