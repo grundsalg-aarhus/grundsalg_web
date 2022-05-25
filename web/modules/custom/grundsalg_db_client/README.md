@@ -11,7 +11,13 @@ In local settings.php file add
  $config['itkore_admin.itkore_config']['grundsalg_db_client_use_example_data'] = 1;
 ```
 
-## API endpoint
+## API endpoints
+
+Go to `/admin/site-setup/db-client` to set the API token used for `POST`'ing to the API.
+
+### Udstykning
+
+Update data on "udstykning":
 
 ```
 POST /api/udstykning/{sid}/updated`
@@ -20,37 +26,54 @@ authorization: Token hat-og-briller
 content-type: application/json
 
 {
-  "count": 3,
-  "grunde": [
-    {
-      "id": 2919,
-      "address": "Araliavej 27",
-      "status": "Solgt",
-      "area_m2": 816,
-      "minimum_price": 800000,
-      "sale_price": 800000,
-      "pdf_link": null
-    },
-    {
-      "id": 2913,
-      "address": "Araliavej 39",
-      "status": "Solgt",
-      "area_m2": 825,
-      "minimum_price": 800000,
-      "sale_price": 801000,
-      "pdf_link": null
-    },
-    {
-      "id": 2917,
-      "address": "Araliavej 41",
-      "status": "Solgt",
-      "area_m2": 825,
-      "minimum_price": 800000,
-      "sale_price": 800000,
-      "pdf_link": null
-    }
-  ]
+  "id": 301,
+  "type": "Parcelhusgrund",
+  "title": "Araliavej",
+  "vej": "Araliavej",
+  "city": "Harlev J",
+  "postalCode": 8462,
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      561650.23040898,
+      6222961.1851024
+    ]
+  },
+  "srid": null,
+  "publish": true
 }
 ```
 
-Go to `/admin/site-setup/db-client` to set the API token.
+### Grund
+
+```
+POST /api/udstykning/{sid}/grunde
+
+authorization: Token hat-og-briller
+content-type: application/json
+
+{ … }
+```
+
+Get previously posted data:
+
+```
+GET /api/udstykning/{sid}/grunde
+```
+
+### Grund (GEOJson)
+
+```
+POST /api/udstykning/{sid}/grunde/geojson
+
+authorization: Token hat-og-briller
+content-type: application/json
+
+{ … }
+```
+
+Get previously posted data:
+
+```
+GET /api/udstykning/{sid}/grunde/geojson
+```
