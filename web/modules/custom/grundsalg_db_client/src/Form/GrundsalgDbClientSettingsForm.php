@@ -88,7 +88,7 @@ class GrundsalgDbClientSettingsForm extends FormBase
     $form['fs']['url'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('URL'),
-      '#description' => $this->t('Grundslag fagsystem end-point URL. Used for getting grund data.'),
+      '#description' => $this->t('Grundslag fagsystem end-point URL. Used for getting grund data. Set to <code>/api</code> to get data from API controller.'),
       '#default_value' => $config->get('grundsalg_db_client_url'),
       '#size' => 60,
       '#states' => array(
