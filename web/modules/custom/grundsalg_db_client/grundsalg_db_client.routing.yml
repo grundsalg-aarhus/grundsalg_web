@@ -16,7 +16,7 @@ grundsalg_db_client.update_subdivision:
     _permission: 'access content'
 
 grundsalg_db_client.grunde:
-  path: '/public/api/udstykning/{sid}/grunde'
+  path: '/api/udstykning/{sid}/grunde'
   defaults:
     _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::grunde'
   methods: ['GET', 'POST']
@@ -25,7 +25,7 @@ grundsalg_db_client.grunde:
     _permission: 'access content'
 
 grundsalg_db_client.grunde_geojson:
-  path: '/public/api/udstykning/{sid}/grunde/geojson'
+  path: '/api/udstykning/{sid}/grunde/geojson'
   defaults:
     _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::grundeGeojson'
   methods: ['GET', 'POST']
