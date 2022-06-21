@@ -28,7 +28,7 @@ class ApiController extends ControllerBase
   private ContentCreationService $contentCreationService;
   private FileSystemInterface $fileSystem;
 
-  public const PUBLIC_BASE_PATH = 'public://public/api/udstykning';
+  public const PUBLIC_BASE_PATH = 'public://api/udstykning';
 
   public function __construct(
     RequestStack $requestStack,
