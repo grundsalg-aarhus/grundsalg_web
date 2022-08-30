@@ -33,11 +33,7 @@ settings:
           name: Headers
           items:
             - Format
-  plugins:
-    language:
-      language_list: un
-    stylescombo:
-      styles: ''
+  plugins: {  }
 image_upload:
   status: false
   scheme: public
