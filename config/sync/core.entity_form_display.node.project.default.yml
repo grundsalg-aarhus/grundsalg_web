@@ -21,6 +21,7 @@ third_party_settings:
         - field_teaser
         - field_external_link
       label: 'Primært indhold'
+      region: content
       parent_name: ''
       weight: 0
       format_type: details
@@ -33,6 +34,7 @@ third_party_settings:
       children:
         - field_coordinate
       label: Lokation
+      region: content
       parent_name: ''
       weight: 3
       format_type: details

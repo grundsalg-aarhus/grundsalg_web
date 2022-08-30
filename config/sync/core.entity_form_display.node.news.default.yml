@@ -21,6 +21,7 @@ third_party_settings:
         - field_teaser_image
         - field_teaser
       label: Teaser
+      region: content
       parent_name: ''
       weight: 3
       format_type: details
@@ -35,6 +36,7 @@ third_party_settings:
         - title
         - field_body
       label: 'Primært indhold'
+      region: content
       parent_name: ''
       weight: 0
       format_type: details
@@ -48,6 +50,7 @@ third_party_settings:
       children:
         - field_plot_type
       label: ''
+      region: content
       parent_name: ''
       weight: 4
       format_type: fieldset
