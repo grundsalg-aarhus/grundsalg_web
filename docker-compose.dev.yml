@@ -1,4 +1,4 @@
-# itk-version: 2.1.0
+# itk-version: 2.1.1
 version: "3"
 
 services:
@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=ITKBasicAuth@file"
 
   mailhog:
-    image: mailhog/mailhog
+    image: itkdev/mailhog
     networks:
       - app
       - frontend
