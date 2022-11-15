@@ -93,6 +93,10 @@ class ContentCreationService {
       // Load the plot_type term entity.
       $plotTypeTerm = Term::load(current($nids));
 
+      // If postalCode/city is not set, throw exception.
+      if (null === $content['postalCode'] || null === $content['city']) {
+        throw new NotFoundHttpException('Postal code and city fields cannot be empty');
+      }
       // Make sure cities term exists with postalCode, else create it.
       $query = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery('AND')
         ->condition('vid', 'cities')
