@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6efe822c767cee0fc14d569521ee745f",
+    "content-hash": "47ba23f1fff35875fec0d32262a158ef",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2283,17 +2283,17 @@
         },
         {
             "name": "drupal/ctools",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ctools.git",
-                "reference": "4.0.1"
+                "reference": "4.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ctools-4.0.1.zip",
-                "reference": "4.0.1",
-                "shasum": "ac2373c13efd7d95da7230bd5a6627f16a6a5b6e"
+                "url": "https://ftp.drupal.org/files/projects/ctools-4.0.2.zip",
+                "reference": "4.0.2",
+                "shasum": "c90325ce9a42add5ebce67a5506bbafc34edc242"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10"
@@ -2301,15 +2301,15 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.1",
-                    "datestamp": "1660252593",
+                    "version": "4.0.2",
+                    "datestamp": "1668486570",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "branch-alias": {
-                    "dev-4.x": "4.x-dev"
+                    "dev-8.x-3.x": "3.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2343,9 +2343,8 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "Joël (joelpittet)",
-                    "homepage": "https://www.drupal.org/u/joelpittet",
-                    "role": "Maintainer"
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
                 },
                 {
                     "name": "merlinofchaos",
@@ -4258,35 +4257,6 @@
             "time": "2022-02-24T12:00:21+00:00"
         },
         {
-            "name": "itk-dev/itk_media_entity",
-            "version": "2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/itk-dev/itk-media-entity.git",
-                "reference": "93f3cb315c09466f2de69c915fbc8eccb29eaf06"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/itk-dev/itk-media-entity/zipball/93f3cb315c09466f2de69c915fbc8eccb29eaf06",
-                "reference": "93f3cb315c09466f2de69c915fbc8eccb29eaf06",
-                "shasum": ""
-            },
-            "type": "drupal-module",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Provides a plugable configuration setup for drupal media entity",
-            "keywords": [
-                "drupal"
-            ],
-            "support": {
-                "issues": "https://github.com/itk-dev/itk-media-entity/issues",
-                "source": "https://github.com/itk-dev/itk-media-entity/tree/2.0.2"
-            },
-            "time": "2022-02-24T12:14:48+00:00"
-        },
-        {
             "name": "itk-dev/web_accessibility_statement",
             "version": "1.0.0",
             "source": {
@@ -5062,16 +5032,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.1",
+            "version": "v4.15.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900"
+                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
-                "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
+                "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
                 "shasum": ""
             },
             "require": {
@@ -5112,9 +5082,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.1"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.2"
             },
-            "time": "2022-09-04T07:30:47+00:00"
+            "time": "2022-11-12T15:38:23+00:00"
         },
         {
             "name": "pear/archive_tar",
