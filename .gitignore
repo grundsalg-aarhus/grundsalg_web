@@ -192,5 +192,5 @@ private-files/
 # Ignore VS-code
 .vscode
 
-# Ignore docker env 
+# Ignore docker env
 .env.docker.local
