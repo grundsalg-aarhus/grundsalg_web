@@ -1,7 +1,7 @@
 name: ITK paragraph
 description: 'Holds configuration for paragraphs'
 type: module
-core: 8.x
+core_version_requirement: ^9
 package: ITK
 dependencies:
   - paragraphs

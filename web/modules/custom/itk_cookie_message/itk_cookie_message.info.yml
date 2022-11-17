@@ -5,4 +5,4 @@ interface translation server pattern: profiles/itkore/modules/itk_cookie_message
 package: ITK
 type: module
 version: 1.0
-core: 8.x
+core_version_requirement: ^9
