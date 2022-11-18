@@ -162,21 +162,24 @@ class ContentCreationService {
       $subdivision->save();
 
       return 'updated';
-    }
-    else {
-      // Create new sub-division entity.
-      Node::create([
-        'type' => 'subdivision',
-        'title' => $content['title'],
-        'field_subdivision_id' => $content['id'],
-        'field_parent' => $area->id(),
-        'field_plot_type' => $plotTypeTerm->id(),
-        'field_city_reference' => $cityTerm->id(),
-        'field_coordinate' => $coordinates,
-        'status' => $content['publish'],
-      ])->save();
+    } else {
+      if ($content['publish']) {
+        // Create new sub-division entity.
+        Node::create([
+          'type' => 'subdivision',
+          'title' => $content['title'],
+          'field_subdivision_id' => $content['id'],
+          'field_parent' => $area->id(),
+          'field_plot_type' => $plotTypeTerm->id(),
+          'field_city_reference' => $cityTerm->id(),
+          'field_coordinate' => $coordinates,
+          'status' => $content['publish'],
+        ])->save();
 
-      return 'created';
+        return 'created';
+      } else {
+        return 'ignored';
+      }
     }
   }
 }
