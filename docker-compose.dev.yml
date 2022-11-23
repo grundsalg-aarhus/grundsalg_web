@@ -11,7 +11,7 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=ITKBasicAuth@file"
       # Disable basic auth for api path (path is protected by auth token)
       # (The rule needs to have higher priority implicit by rule length or explicit via priority label than the basic auth rule).
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}BypassBasicAuth.rule=Host((`${COMPOSE_SERVER_DOMAIN}`) && PathPrefix(/api/udstykning/))"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}BypassBasicAuth.rule=Host((`${COMPOSE_SERVER_DOMAIN}`) && PathPrefix(/api/udstykning))"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
 
   mailhog:
