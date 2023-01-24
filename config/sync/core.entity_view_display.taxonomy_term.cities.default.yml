@@ -11,13 +11,13 @@ bundle: cities
 mode: default
 content:
   field_postalcode:
-    weight: 0
+    type: number_integer
     label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    type: number_integer
+    weight: 0
     region: content
 hidden:
   description: true

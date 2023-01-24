@@ -1,7 +1,11 @@
 uuid: 38302411-07c2-44c8-a930-ed889e69afc3
 langcode: da
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - contact
+    - media
+    - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous

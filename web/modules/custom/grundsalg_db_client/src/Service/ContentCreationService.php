@@ -6,6 +6,7 @@
 
 namespace Drupal\grundsalg_db_client\Service;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use proj4php\Point;
 use proj4php\Proj;
 use proj4php\Proj4php;
@@ -19,14 +20,12 @@ use Drupal\taxonomy\Entity\Term;
  * @package Drupal\grundsalg_db_client\Service
  */
 class ContentCreationService {
-  private $entityQueryService;
   private $entityTypeManager;
 
   /**
    * Constructor.
    */
-  public function __construct($entityQueryService, $entityTypeManager) {
-    $this->entityQueryService = $entityQueryService;
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -52,7 +51,7 @@ class ContentCreationService {
    */
   public function updateSubdivision(array $content) {
     // Make sure an overview with the $type exists.
-    $query = $this->entityQueryService->get('node', 'AND')
+    $query = $this->entityTypeManager->getStorage('node')->getQuery('AND')
       ->condition('type', 'overview_page')
       ->condition('status', 1)
       ->condition('field_plot_type.entity.name', $content['type']);
@@ -65,7 +64,7 @@ class ContentCreationService {
     $overview_nid = current($nids);
 
     // Make sure an area with the postal code given exists.
-    $query = $this->entityQueryService->get('node', 'AND')
+    $query = $this->entityTypeManager->getStorage('node')->getQuery('AND')
       ->condition('type', 'area')
       ->condition('field_plot_type.entity.name', $content['type'])
       ->condition('field_city_reference.entity.field_postalcode', $content['postalCode']);
@@ -81,7 +80,7 @@ class ContentCreationService {
     }
     else {
       // Make sure plot_type term exists with type given in the $content.
-      $query = $this->entityQueryService->get('taxonomy_term', 'AND')
+      $query = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery('AND')
         ->condition('vid', 'plot_type')
         ->condition('name', $content['type']);
       $nids = $query->execute();
@@ -94,8 +93,12 @@ class ContentCreationService {
       // Load the plot_type term entity.
       $plotTypeTerm = Term::load(current($nids));
 
+      // If postalCode/city is not set, throw exception.
+      if (null === $content['postalCode'] || null === $content['city']) {
+        throw new NotFoundHttpException('Postal code and city fields cannot be empty');
+      }
       // Make sure cities term exists with postalCode, else create it.
-      $query = $this->entityQueryService->get('taxonomy_term', 'AND')
+      $query = $this->entityTypeManager->getStorage('taxonomy_term')->getQuery('AND')
         ->condition('vid', 'cities')
         ->condition('field_postalcode', $content['postalCode']);
       $nids = $query->execute();
@@ -141,7 +144,7 @@ class ContentCreationService {
     }
 
     // Try loading subdivision.
-    $query = $this->entityQueryService->get('node', 'AND')
+    $query = $this->entityTypeManager->getStorage('node')->getQuery('AND')
       ->condition('type', 'subdivision')
       ->condition('field_subdivision_id', $content['id']);
     $nids = $query->execute();
@@ -159,21 +162,24 @@ class ContentCreationService {
       $subdivision->save();
 
       return 'updated';
-    }
-    else {
-      // Create new sub-division entity.
-      Node::create([
-        'type' => 'subdivision',
-        'title' => $content['title'],
-        'field_subdivision_id' => $content['id'],
-        'field_parent' => $area->id(),
-        'field_plot_type' => $plotTypeTerm->id(),
-        'field_city_reference' => $cityTerm->id(),
-        'field_coordinate' => $coordinates,
-        'status' => $content['publish'],
-      ])->save();
+    } else {
+      if ($content['publish']) {
+        // Create new sub-division entity.
+        Node::create([
+          'type' => 'subdivision',
+          'title' => $content['title'],
+          'field_subdivision_id' => $content['id'],
+          'field_parent' => $area->id(),
+          'field_plot_type' => $plotTypeTerm->id(),
+          'field_city_reference' => $cityTerm->id(),
+          'field_coordinate' => $coordinates,
+          'status' => $content['publish'],
+        ])->save();
 
-      return 'created';
+        return 'created';
+      } else {
+        return 'ignored';
+      }
     }
   }
 }

@@ -18,15 +18,15 @@ bundle: project
 mode: fallback
 content:
   field_coordinate:
-    weight: 104
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 104
     region: content
   field_external_link:
-    weight: 103
+    type: link
     label: above
     settings:
       trim_length: null
@@ -35,28 +35,28 @@ content:
       rel: '0'
       target: '0'
     third_party_settings: {  }
-    type: link
+    weight: 103
     region: content
   field_teaser:
-    weight: 102
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 102
     region: content
   field_teaser_image:
-    weight: 101
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: shown_on_content_main_image_and_slideshow
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 101
     region: content
   links:
-    weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 100
+    region: content
 hidden:
   langcode: true

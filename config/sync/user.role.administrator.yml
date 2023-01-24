@@ -1,7 +1,28 @@
 uuid: 6cf1b0ae-49a5-4000-9df9-a04b8b332f35
 langcode: da
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.area
+    - node.type.content_block
+    - node.type.news
+    - node.type.overview_page
+    - node.type.page
+    - node.type.project
+    - node.type.subdivision
+    - taxonomy.vocabulary.cities
+    - taxonomy.vocabulary.plot_type
+  module:
+    - block
+    - entity_browser
+    - file
+    - node
+    - path
+    - redirect
+    - role_delegation
+    - system
+    - taxonomy
+    - toolbar_visibility
 id: administrator
 label: Administrator
 weight: 3

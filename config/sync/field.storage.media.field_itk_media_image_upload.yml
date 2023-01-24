@@ -2,13 +2,13 @@ uuid: be2eb5bd-2a23-426e-88e8-cf383338b208
 langcode: da
 status: true
 dependencies:
-  enforced:
-    module:
-      - itk_media_entity
   module:
     - file
     - image
-    - media_entity
+    - media
+  enforced:
+    module:
+      - itk_media_entity
 _core:
   default_config_hash: na3o8XsN9NKEW4rjTzcTucdlv9XSk4Fn8BRLyGCdr44
 id: media.field_itk_media_image_upload
@@ -16,6 +16,9 @@ field_name: field_itk_media_image_upload
 entity_type: media
 type: image
 settings:
+  target_type: file
+  display_field: false
+  display_default: false
   uri_scheme: public
   default_image:
     uuid: ''
@@ -23,9 +26,6 @@ settings:
     title: ''
     width: null
     height: null
-  target_type: file
-  display_field: false
-  display_default: false
 module: image
 locked: false
 cardinality: 1

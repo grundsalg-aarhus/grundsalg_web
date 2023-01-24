@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies:
   config:
-    - media_entity.bundle.document
+    - media.type.document
 id: media.document
 target_entity_type_id: media
 target_bundle: document

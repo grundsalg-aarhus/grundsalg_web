@@ -17,44 +17,44 @@ id: grundsalg_main_image
 label: 'Grundsalg main image'
 image_style_mappings:
   -
-    breakpoint_id: grundsalg.breakpoint-bigscreen
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: main_image_big_screen
-  -
     breakpoint_id: grundsalg.breakpoint-bigscreen
-    multiplier: 2x
+    multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: main_image_big_screen_x2
+    breakpoint_id: grundsalg.breakpoint-bigscreen
+    multiplier: 2x
   -
-    breakpoint_id: grundsalg.breakpoint-desktop
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: main_image_desktop
-  -
     breakpoint_id: grundsalg.breakpoint-desktop
-    multiplier: 2x
+    multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: main_image_desktop_x2
+    breakpoint_id: grundsalg.breakpoint-desktop
+    multiplier: 2x
   -
-    breakpoint_id: grundsalg.breakpoint-tablet
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: main_image_tablet
-  -
     breakpoint_id: grundsalg.breakpoint-tablet
-    multiplier: 2x
+    multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: main_image_tablet_x2
+    breakpoint_id: grundsalg.breakpoint-tablet
+    multiplier: 2x
   -
-    breakpoint_id: grundsalg.breakpoint-lap
-    multiplier: 1x
     image_mapping_type: image_style
     image_mapping: main_image_lap
-  -
     breakpoint_id: grundsalg.breakpoint-lap
-    multiplier: 2x
+    multiplier: 1x
+  -
     image_mapping_type: image_style
     image_mapping: main_image_lap_x2
+    breakpoint_id: grundsalg.breakpoint-lap
+    multiplier: 2x
 breakpoint_group: grundsalg
 fallback_image_style: main_image_lap

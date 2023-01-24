@@ -14,13 +14,15 @@ bundle: contact_form
 mode: default
 content:
   field_contact_subject:
+    type: options_select
     weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_phone_number:
+    type: string_textfield
     weight: 4
+    region: content
     settings:
       size: 14
       placeholder: ''
@@ -28,16 +30,15 @@ content:
       maxlength:
         maxlength_js: null
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
-    type: string_textfield
-    region: content
   mail:
     weight: 1
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   message:
     type: string_textarea
     weight: 5
+    region: content
     settings:
       rows: 12
       placeholder: ''
@@ -47,20 +48,19 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: true
         maxlength_js_truncate_html: false
-    region: content
   name:
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   subject:
     type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   copy: true
   langcode: true

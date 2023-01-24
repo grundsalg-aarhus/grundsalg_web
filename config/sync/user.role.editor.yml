@@ -1,7 +1,30 @@
 uuid: 0a999859-4025-4c4d-a682-dcf342407a6d
 langcode: da
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.filtered_html
+    - node.type.area
+    - node.type.content_block
+    - node.type.news
+    - node.type.overview_page
+    - node.type.page
+    - node.type.project
+    - node.type.subdivision
+    - taxonomy.vocabulary.media_library
+  module:
+    - entity_browser
+    - entityqueue
+    - filter
+    - itkore_admin
+    - locale
+    - media
+    - node
+    - path
+    - role_delegation
+    - system
+    - taxonomy
+    - toolbar
 _core:
   default_config_hash: ooHzQ7w5e5h7KzCiknxzfR1ytDHeAmE7O_DAZPSUkRE
 id: editor
@@ -11,8 +34,6 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
-  - 'access contextual links'
-  - 'access in-place editing'
   - 'access itk_document_browser entity browser pages'
   - 'access itk_image_browser entity browser pages'
   - 'access itkore settings'
@@ -27,8 +48,6 @@ permissions:
   - 'change own username'
   - 'create area content'
   - 'create content_block content'
-  - 'create itkore_event content'
-  - 'create itkore_resource content'
   - 'create media'
   - 'create news content'
   - 'create page content'
@@ -36,33 +55,23 @@ permissions:
   - 'create url aliases'
   - 'delete any area content'
   - 'delete any content_block content'
-  - 'delete any itkore_event content'
-  - 'delete any itkore_resource content'
   - 'delete any media'
   - 'delete any page content'
   - 'delete any project content'
-  - 'delete itkore_event revisions'
-  - 'delete itkore_resource revisions'
   - 'delete media'
   - 'delete own area content'
   - 'delete own content_block content'
-  - 'delete own itkore_event content'
-  - 'delete own itkore_resource content'
   - 'delete own page content'
   - 'delete own project content'
   - 'delete terms in media_library'
   - 'edit any area content'
   - 'edit any content_block content'
-  - 'edit any itkore_event content'
-  - 'edit any itkore_resource content'
   - 'edit any overview_page content'
   - 'edit any page content'
   - 'edit any project content'
   - 'edit any subdivision content'
   - 'edit own area content'
   - 'edit own content_block content'
-  - 'edit own itkore_event content'
-  - 'edit own itkore_resource content'
   - 'edit own overview_page content'
   - 'edit own page content'
   - 'edit own project content'

@@ -8,12 +8,12 @@ dependencies:
     - field.field.media.document.field_itk_media_mime_type
     - field.field.media.document.field_itk_media_size
     - field.field.media.document.field_itk_media_tag
-    - media_entity.bundle.document
+    - media.type.document
+  module:
+    - file
   enforced:
     module:
       - itk_media_entity
-  module:
-    - file
 _core:
   default_config_hash: suvSYUIkOwkrkiNtKoeMAhd7sQb3ctQ9XfivOc54eLE
 id: media.document.shown_in_file_list
@@ -23,19 +23,19 @@ mode: shown_in_file_list
 content:
   field_itk_media_file_upload:
     type: file_default
-    weight: 1
     label: hidden
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
+    weight: 1
     region: content
   field_itk_media_mime_type:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
 hidden:
   created: true

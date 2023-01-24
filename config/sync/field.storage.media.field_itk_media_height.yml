@@ -2,11 +2,11 @@ uuid: 7c4078d0-72f7-4e8d-abcd-474bc3a5a8cf
 langcode: da
 status: true
 dependencies:
+  module:
+    - media
   enforced:
     module:
       - itk_media_entity
-  module:
-    - media_entity
 _core:
   default_config_hash: kLz6ZRZNKtiGUiFEyk-VARyE53ZViju4qu3W7jfCsro
 id: media.field_itk_media_height
@@ -15,8 +15,8 @@ entity_type: media
 type: string
 settings:
   max_length: 255
-  is_ascii: false
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

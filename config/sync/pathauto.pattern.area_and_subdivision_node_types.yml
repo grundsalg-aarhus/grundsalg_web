@@ -10,13 +10,13 @@ type: 'canonical_entities:node'
 pattern: '[node:field_parent:entity:title]/[node:title]'
 selection_criteria:
   bce44beb-0e2f-4fb0-ab5f-6271b211f469:
-    id: node_type
-    bundles:
-      area: area
+    id: 'entity_bundle:node'
     negate: false
+    uuid: bce44beb-0e2f-4fb0-ab5f-6271b211f469
     context_mapping:
       node: node
-    uuid: bce44beb-0e2f-4fb0-ab5f-6271b211f469
+    bundles:
+      area: area
 selection_logic: and
 weight: -5
 relationships: {  }

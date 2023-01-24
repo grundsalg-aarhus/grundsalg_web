@@ -1,5 +1,41 @@
 # Grundsalg Aarhus web
 
+## Drupal 9
+
+Before upgrading to Drupal 9 you should
+
+```sh
+git checkout feature/media-transition
+```
+
+and upgrade media stuff.
+
+```sh
+docker-compose up --detach
+```
+
+```sh
+composer install
+vendor/bin/drush cache:rebuild
+vendor/bin/drush updatedb --yes
+vendor/bin/drush config:export --yes
+```
+
+```sh
+docker-compose exec phpfpm composer install
+docker-compose exec phpfpm vendor/bin/drush cache:rebuild
+docker-compose exec phpfpm vendor/bin/drush updatedb --yes
+docker-compose exec phpfpm vendor/bin/drush config:export --yes
+```
+
+```sh
+docker-compose exec phpfpm composer require drupal/profile_switcher
+docker-compose exec phpfpm vendor/bin/drush pm:enable profile_switcher
+docker-compose exec phpfpm vendor/bin/drush switch:profile minimal
+docker-compose exec phpfpm vendor/bin/drush pm:uninstall profile_switcher
+git checkout .
+```
+
 Site for [www.grundsalgaarhus.dk](https://www.grundsalgaarhus.dk/)
 
 ## Installation instructions for development

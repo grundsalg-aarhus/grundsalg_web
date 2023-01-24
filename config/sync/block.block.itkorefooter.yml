@@ -15,6 +15,6 @@ plugin: itkore_footer
 settings:
   id: itkore_footer
   label: 'ITKore footer'
-  provider: itkore_footer
   label_display: '0'
+  provider: itkore_footer
 visibility: {  }
