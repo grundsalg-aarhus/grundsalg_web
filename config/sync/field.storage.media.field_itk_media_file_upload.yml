@@ -2,12 +2,12 @@ uuid: c79c7405-7613-4e72-82b0-a672c9d0338d
 langcode: da
 status: true
 dependencies:
+  module:
+    - file
+    - media
   enforced:
     module:
       - itk_media_entity
-  module:
-    - file
-    - media_entity
 _core:
   default_config_hash: sf6zqlOPWsdoE-VjaDawWljrwH-E9BYGCivCtIDLKfM
 id: media.field_itk_media_file_upload
@@ -15,10 +15,10 @@ field_name: field_itk_media_file_upload
 entity_type: media
 type: file
 settings:
+  target_type: file
   display_field: false
   display_default: false
   uri_scheme: public
-  target_type: file
 module: file
 locked: false
 cardinality: 1

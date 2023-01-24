@@ -51,3 +51,5 @@ $settings['trusted_host_patterns'] = [
   '^127\.0\.0\.1$',
   '^grundsalg\.local\.itkdev\.dk$',
 ];
+
+$settings['skip_permissions_hardening'] = TRUE;

@@ -5,4 +5,4 @@ interface translation server pattern: modules/custom/grundsalg_reference_tree/tr
 description: 'Automates parent referencing based on slot type for area and subdivision content types'
 package: Grundsalg
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^9

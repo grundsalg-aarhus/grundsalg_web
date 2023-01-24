@@ -3,4 +3,4 @@ type: module
 description: 'Provides an angular app for all node pages'
 package: Grundsalg
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^9

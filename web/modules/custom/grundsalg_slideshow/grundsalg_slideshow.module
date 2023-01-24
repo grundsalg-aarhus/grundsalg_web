@@ -25,7 +25,7 @@ function grundsalg_slideshow_preprocess_page(&$variables) {
 
     // Provide module path to js.
     $variables['#attached']['drupalSettings']['grundsalg_slideshow'] = array(
-      'app_dir' => '/' . drupal_get_path('module', 'grundsalg_slideshow') . '/js',
+      'app_dir' => '/' . \Drupal::service('extension.list.module')->getPath('grundsalg_slideshow') . '/js',
     );
 
     // Add image urls and alt to js (if page have images).

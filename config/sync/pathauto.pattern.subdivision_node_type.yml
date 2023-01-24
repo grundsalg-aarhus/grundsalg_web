@@ -10,13 +10,13 @@ type: 'canonical_entities:node'
 pattern: '[node:field_parent:entity:field_parent:entity:title]/[node:field_parent:entity:title]/[node:title]'
 selection_criteria:
   f81b3528-7909-4882-a7d6-015756ecda72:
-    id: node_type
-    bundles:
-      subdivision: subdivision
+    id: 'entity_bundle:node'
     negate: false
+    uuid: f81b3528-7909-4882-a7d6-015756ecda72
     context_mapping:
       node: node
-    uuid: f81b3528-7909-4882-a7d6-015756ecda72
+    bundles:
+      subdivision: subdivision
 selection_logic: and
 weight: -5
 relationships: {  }

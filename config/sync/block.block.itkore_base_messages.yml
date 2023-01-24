@@ -17,8 +17,8 @@ plugin: system_messages_block
 settings:
   id: system_messages_block
   label: 'Status messages'
-  provider: system
   label_display: '0'
+  provider: system
   cache:
     max_age: -1
 visibility: {  }

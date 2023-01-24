@@ -1,0 +1,7 @@
+name: ITkore footer
+type: module
+description: 'Provides custom administration settings for footer'
+package: ITKore
+core_version_requirement: ^9
+dependencies:
+  - itkore_admin

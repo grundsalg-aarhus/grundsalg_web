@@ -7,13 +7,53 @@
 namespace Drupal\grundsalg_db_client\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use GuzzleHttp\Client;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileUrlGeneratorInterface;
+use Drupal\Core\Http\RequestStack;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\grundsalg_db_client\Service\ContentCreationService;
+use Drupal\itkore_admin\State\BaseConfig;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * ApiController.
  */
-class ApiController extends ControllerBase {
+class ApiController extends ControllerBase
+{
+  private RequestStack $requestStack;
+  private BaseConfig $config;
+  private ContentCreationService $contentCreationService;
+  private FileSystemInterface $fileSystem;
+
+  public const PUBLIC_BASE_PATH = 'public://api/udstykning';
+
+  public function __construct(
+    RequestStack $requestStack,
+    BaseConfig $config,
+    ContentCreationService $contentCreationService,
+    FileSystemInterface $fileSystem,
+    LoggerChannelFactoryInterface $loggerChannelFactory
+  ) {
+    $this->requestStack = $requestStack;
+    $this->config = $config;
+    $this->contentCreationService = $contentCreationService;
+    $this->fileSystem = $fileSystem;
+    $this->logger = $loggerChannelFactory->get('grundsalg_db_client');
+  }
+
+  public static function create(ContainerInterface $container)
+  {
+    return new static(
+      $container->get('request_stack'),
+      $container->get('itkore_admin.itkore_config'),
+      $container->get('grundsalg.content_creation'),
+      $container->get('file_system'),
+      $container->get('logger.factory')
+    );
+  }
 
   /**
    * Endpoint to notify when a subdivision has been updated in the Fagsystem.
@@ -24,19 +64,15 @@ class ApiController extends ControllerBase {
    * @return JsonResponse
    *   The result as json.
    */
-  public function subdivisionUpdated($sid) {
+  public function subdivisionUpdated($sid)
+  {
     try {
-      $config = \Drupal::getContainer()->get('itkore_admin.itkore_config');
+      $request = $this->requestStack->getCurrentRequest();
 
-      // Create client and fetch content from remote system.
-      $client = new Client();
-      $url = $config->get('grundsalg_db_client_url') . '/udstykning/' . $sid;
-      $response = $client->request('GET', $url);
-
-      // @TODO: Check for error code in $response?
+      $this->checkAuthorization();
 
       // Parse content fetched from the remote system.
-      $body = $response->getBody()->getContents();
+      $body = $request->getContent();
       $content = \GuzzleHttp\json_decode($body);
 
       // Fix content mappings.
@@ -45,21 +81,128 @@ class ApiController extends ControllerBase {
       }
 
       // Create the content.
-      $contentCreationService = \Drupal::service('grundsalg.content_creation');
-      $operation = $contentCreationService->updateSubdivision((array) $content);
+      $operation = $this->contentCreationService->updateSubdivision((array)$content);
 
       return new JsonResponse([
-        'error' => FALSE,
+        'error' => false,
         'message' => $operation,
         'body' => $body,
       ]);
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
     }
-    catch (\Exception $e) {
-      return new JsonResponse([
-        'error' => TRUE,
-        'message' => $e->getMessage(),
-        'body' => $e->getMessage(),
-      ]);
+  }
+
+  public function grunde($sid)
+  {
+    try {
+      $request = $this->requestStack->getCurrentRequest();
+
+      $path = sprintf('%s/grunde.json', $sid);
+      if ('POST' === $request->getMethod()) {
+        $this->checkAuthorization();
+        $content = $this->writeFile($path, $request->getContent());
+        // We assume that the content is valid JSON.
+        return new JsonResponse($content, 200, [], true);
+      } else {
+        $this->sendFile($path);
+      }
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
     }
+  }
+
+  public function grundeGeojson($sid)
+  {
+    try {
+      $request = $this->requestStack->getCurrentRequest();
+
+      $path = sprintf('%s/grunde.geojson', $sid);
+      $contentType = 'application/geo+json';
+      if ('POST' === $request->getMethod()) {
+        $this->checkAuthorization();
+        $content = $this->writeFile($path, $request->getContent());
+        // We assume that the content is valid GeoJSON.
+        return new JsonResponse($content, 200, [
+          'content-type' => $contentType,
+        ], true);
+      } else {
+        $this->sendFile($path, $contentType);
+      }
+    } catch (\Throwable $throwable) {
+      return $this->error($throwable);
+    }
+  }
+
+  private function writeFile(string $path, string $content)
+  {
+    $path = $this->getFilePath($path);
+    $dirname = $this->fileSystem->dirname($path);
+    if (!is_dir($dirname)) {
+      $this->fileSystem->mkdir($dirname, null, true);
+    }
+    $this->fileSystem->saveData($content, $path, FileSystemInterface::EXISTS_REPLACE);
+
+    return $content;
+  }
+
+  /**
+   * Send raw file content to client.
+   */
+  private function sendFile(string $path, string $contentType = 'application/json')
+  {
+    $path = $this->getFilePath($path);
+    $path = $this->fileSystem->realpath($path);
+    if (!$path) {
+      throw new NotFoundHttpException('Not found');
+    }
+
+    // Send the file.
+    header('content-type: ' . $contentType);
+    readfile($path);
+    exit;
+  }
+
+  private function getFilePath(string $path)
+  {
+    $basePath = $this->config->get('grundsalg_db_client_public_base_path', self::PUBLIC_BASE_PATH);
+
+    return $basePath . '/' . $path;
+  }
+
+  private function checkAuthorization()
+  {
+    $request = $this->requestStack->getCurrentRequest();
+
+    $authorization = $request->headers->get('authorization', '');
+    if (!preg_match('/^Token\s+(?P<token>.+)$/i', $authorization, $matches)) {
+      throw new AccessDeniedHttpException('Not authorized');
+    }
+
+    $token = $matches['token'];
+    $expectedToken = $this->config->get('grundsalg_db_client_api_token');
+    if ($expectedToken !== $token) {
+      throw new AccessDeniedHttpException('Not authorized');
+    }
+  }
+
+  /**
+   * Log exception (throwable) and create JSON response.
+   *
+   * @param \Throwable $throwable
+   * @return JsonResponse
+   */
+  private function error(\Throwable $throwable)
+  {
+    $this->logger->error($throwable->getMessage(), [
+      'throwable' => $throwable,
+    ]);
+
+    return new JsonResponse([
+      'error' => true,
+      'message' => $throwable->getMessage(),
+      'body' => $throwable->getMessage(),
+    ]);
+
   }
 }

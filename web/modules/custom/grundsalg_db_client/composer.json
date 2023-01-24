@@ -1,11 +1,12 @@
 {
   "name": "drupal/grundsalg_db_client",
   "description": "Grundsalg db client",
-  "type": "drupal-module",
+  "type": "drupal-custom-module",
   "keywords": ["Drupal"],
   "license": "GPL-2.0+",
   "require": {
-    "guzzlehttp/guzzle": "^6.2"
+    "guzzlehttp/guzzle": "^6.2",
+    "proj4php/proj4php": "^2.0"
   },
   "minimum-stability": "dev",
   "prefer-stable": true

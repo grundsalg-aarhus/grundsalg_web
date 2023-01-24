@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
 id: media.shown_on_content_main_image_and_slideshow
 label: 'Shown on content, main image and slideshow'
 targetEntityType: media

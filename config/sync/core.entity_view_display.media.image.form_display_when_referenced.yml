@@ -10,12 +10,12 @@ dependencies:
     - field.field.media.image.field_itk_media_tag
     - field.field.media.image.field_itk_media_width
     - image.style.thumbnail
-    - media_entity.bundle.image
+    - media.type.image
+  module:
+    - image
   enforced:
     module:
       - itk_media_entity
-  module:
-    - image
 _core:
   default_config_hash: PKSBwG0L0ToXhVptcdb1DkPu1voRsnerJi7ArbIU3sk
 id: media.image.form_display_when_referenced
@@ -24,21 +24,23 @@ bundle: image
 mode: form_display_when_referenced
 content:
   name:
-    label: hidden
     type: string
-    weight: 1
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 1
     region: content
   thumbnail:
     type: image
-    weight: 0
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true

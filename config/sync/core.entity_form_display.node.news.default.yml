@@ -20,43 +20,46 @@ third_party_settings:
       children:
         - field_teaser_image
         - field_teaser
+      label: Teaser
+      region: content
       parent_name: ''
       weight: 3
-      label: Teaser
       format_type: details
       format_settings:
         label: Teaser
-        id: ''
         classes: ''
+        id: ''
         open: false
         required_fields: false
     group_base_content:
       children:
         - title
         - field_body
+      label: 'Primært indhold'
+      region: content
       parent_name: ''
       weight: 0
       format_type: details
       format_settings:
         label: 'Primært indhold'
-        open: true
-        id: ''
         classes: ''
+        id: ''
+        open: true
         required_fields: false
-      label: 'Primært indhold'
     group_type:
       children:
         - field_plot_type
+      label: ''
+      region: content
       parent_name: ''
       weight: 4
       format_type: fieldset
       format_settings:
         label: ''
-        description: ''
-        id: ''
         classes: ''
+        id: ''
+        description: ''
         required_fields: false
-      label: ''
 _core:
   default_config_hash: SzF7cFNDbSYTho3NPoIrI1Y0Yiw3JO2_5wQ85vFUIck
 id: node.news.default
@@ -65,35 +68,37 @@ bundle: news
 mode: default
 content:
   field_body:
+    type: text_textarea
     weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_media_image:
+    type: entity_browser_entity_reference
     weight: 1
+    region: content
     settings:
       entity_browser: itk_image_browser
       field_widget_display: rendered_entity
+      field_widget_edit: false
       field_widget_remove: true
-      selection_mode: selection_append
+      open: false
       field_widget_display_settings:
         view_mode: form_display_when_referenced
-      field_widget_edit: false
-      open: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_plot_type:
+    type: options_buttons
     weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_teaser:
+    type: string_textarea
     weight: 27
+    region: content
     settings:
       rows: 5
       placeholder: ''
@@ -103,42 +108,40 @@ content:
         maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
         maxlength_js_enforce: false
         maxlength_js_truncate_html: false
-    type: string_textarea
-    region: content
   field_teaser_image:
+    type: entity_browser_entity_reference
     weight: 26
+    region: content
     settings:
       entity_browser: itk_image_browser
       field_widget_display: rendered_entity
+      field_widget_edit: false
       field_widget_remove: true
       open: true
-      selection_mode: selection_append
       field_widget_display_settings:
         view_mode: form_display_when_referenced
-      field_widget_edit: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   langcode: true

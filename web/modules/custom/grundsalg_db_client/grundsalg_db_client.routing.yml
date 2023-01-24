@@ -10,7 +10,25 @@ grundsalg_db_client.update_subdivision:
   path: '/api/udstykning/{sid}/updated'
   defaults:
     _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::subdivisionUpdated'
+  methods: 'POST'
   requirements:
     sid: \d+
     _permission: 'access content'
-    _method: 'POST|GET'
+
+grundsalg_db_client.grunde:
+  path: '/api/udstykning/{sid}/grunde'
+  defaults:
+    _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::grunde'
+  methods: ['GET', 'POST']
+  requirements:
+    sid: \d+
+    _permission: 'access content'
+
+grundsalg_db_client.grunde_geojson:
+  path: '/api/udstykning/{sid}/grunde/geojson'
+  defaults:
+    _controller: '\Drupal\grundsalg_db_client\Controller\ApiController::grundeGeojson'
+  methods: ['GET', 'POST']
+  requirements:
+    sid: \d+
+    _permission: 'access content'

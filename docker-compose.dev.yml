@@ -1,19 +1,21 @@
-# itk-version: 2.1.0
+# itk-version: 2.2.0
 version: "3"
 
 services:
   phpfpm:
     environment:
-      - PHP_MAILHOG_ENABLE=true
-      - PHP_MAILHOG_SERVER=mailhog
-      - PHP_MAILHOG_PORT=1025
+      - PHP_SENDMAIL_PATH='/usr/local/bin/mhsendmail --smtp-addr="mailhog:1025"'
 
   nginx:
     labels:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=ITKBasicAuth@file"
+      # Disable basic auth for api path (path is protected by auth token)
+      # (The rule needs to have higher priority implicit by rule length or explicit via priority label than the basic auth rule).
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}BypassBasicAuth.rule=(Host(`${COMPOSE_SERVER_DOMAIN}`) && PathPrefix(`/api/udstykning/`))"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
 
   mailhog:
-    image: mailhog/mailhog
+    image: itkdev/mailhog
     networks:
       - app
       - frontend

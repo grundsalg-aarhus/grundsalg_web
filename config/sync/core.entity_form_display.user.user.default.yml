@@ -11,9 +11,9 @@ mode: default
 content:
   account:
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   contact:
     weight: 5
     region: content
